@@ -2,6 +2,7 @@ import pygame as pg
 import sys
 from settings import *
 from player import *
+from wall import Wall
 
 class Game:
     def __init__(self):
@@ -14,7 +15,10 @@ class Game:
 
     def load_data(self):
         self.all_sprites = pg.sprite.Group()
+        self.walls = pg.sprite.Group()
         self.player = Player(self, 10, 10)
+        #Muro Prueba
+        Wall(self,25,25)
 
     def quit(self):
         pg.quit()
