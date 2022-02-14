@@ -2,7 +2,11 @@ import pygame as pg
 import sys
 from settings import *
 from player import *
+<<<<<<< HEAD
 from wall import Wall
+=======
+from bullet import *
+>>>>>>> 26f77cdf82e13ac5ebe6c50655909a0593df4605
 
 class Game:
     def __init__(self):
