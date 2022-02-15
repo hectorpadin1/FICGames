@@ -9,64 +9,63 @@ class Player(pg.sprite.Sprite):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pg.Surface((SPRITE_BOX, SPRITE_BOX))
-        self.image.fill((255,255,255))
+        self.image = game.player_img
         self.rect = self.image.get_rect()
-        self.vx, self.vy = 0, 0
-        self.x = x * SPRITE_BOX
-        self.y = y * SPRITE_BOX
+        self.hit_rect = PLAYER_HIT_RECT
+        self.hit_rect.center = self.rect.center
+        self.rect = self.image.get_rect()
+        self.vel = pg.math.Vector2(0, 0)
+        self.pos = pg.math.Vector2(x, y) * SPRITE_BOX
 
     # Dynamics of player movements
     def __get_keys(self):
-        self.vx, self.vy = 0, 0
+        self.vel = pg.math.Vector2(0, 0)
         keys = pg.key.get_pressed()
         # On-Axis movements
         if keys[pg.K_a]:
-            self.vx = -PLAYER_SPEED
+            self.vel.x = -PLAYER_SPEED
         if keys[pg.K_d]:
-            self.vx = PLAYER_SPEED
+            self.vel.x = PLAYER_SPEED
         if keys[pg.K_w]:
-            self.vy = -PLAYER_SPEED
+            self.vel.y = -PLAYER_SPEED
         if keys[pg.K_s]:
-            self.vy = PLAYER_SPEED
+            self.vel.y = PLAYER_SPEED
         # Oposite movements
         if keys[pg.K_a] and keys[pg.K_d]:
-            self.vx = 0
+            self.vel.x = 0
         if keys[pg.K_w] and keys[pg.K_s]:
-            self.vy = 0
+            self.vel.y = 0
         # Diagonal movements        
-        if self.vx!=0 and self.vy !=0:
-            self.vx *= cos(pi/4)
-            self.vy *= sin(pi/4)
+        if self.vel.x!=0 and self.vel.y !=0:
+            self.vel *= cos(pi/4)
     
     def __collide_with_walls(self, dir):
         if dir == 'x':
             hits = pg.sprite.spritecollide(self, self.game.walls, False)
             if hits:
-                if self.vx > 0:
-                    self.x = hits[0].rect.left - self.rect.width
-                if self.vx < 0:
-                    self.x = hits[0].rect.right
-                self.vx = 0
-                self.rect.x = self.x
+                if self.vel.x > 0:
+                    self.pos.x = hits[0].rect.left - self.rect.width
+                if self.vel.x < 0:
+                    self.pos.x = hits[0].rect.right
+                self.vel.x = 0
+                self.rect.x = self.pos.x
         if dir == 'y':
             hits = pg.sprite.spritecollide(self, self.game.walls, False)
             if hits:
-                if self.vy > 0:
-                    self.y = hits[0].rect.top - self.rect.height
-                if self.vy < 0:
-                    self.y = hits[0].rect.bottom
-                self.vy = 0
-                self.rect.y = self.y
+                if self.vel.y > 0:
+                    self.pos.y = hits[0].rect.top - self.rect.height
+                if self.vel.y < 0:
+                    self.pos.y = hits[0].rect.bottom
+                self.vel.y = 0
+                self.rect.y = self.pos.y
 
     def update(self):
         # Checks where it has to move
         self.__get_keys()
         # Moves in time, not in pixels, independent of our frame rate
-        self.x += self.vx * self.game.dt
-        self.y += self.vy * self.game.dt
-        self.rect.x = self.x
+        self.pos += self.vel * self.game.dt
+        self.rect.x = self.pos.x
         self.__collide_with_walls('x')
-        self.rect.y = self.y
+        self.rect.y = self.pos.y
         self.__collide_with_walls('y')
         

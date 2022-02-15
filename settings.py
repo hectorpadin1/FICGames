@@ -1,3 +1,5 @@
+from pygame import Rect
+
 # General game setings
 TITLE = "Juego Molón que mola un montón"
 WIDTH = 1024  # 16 * 64 or 32 * 32 or 64 * 16
@@ -8,7 +10,10 @@ GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
 
 # Player settings
-PLAYER_SPEED = 150
+PLAYER_SPEED = 300.0
+PLAYER_ROT_SPEED = 250.0
+PLAYER_IMG = 'assets/topdown-shooter/PNG/Hitman1/hitman1_gun.png'
+PLAYER_HIT_RECT = Rect(0, 0, 35, 35)
 
 # Settings for Shootings
 BULLET_IMG = ''
