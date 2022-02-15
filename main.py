@@ -5,7 +5,7 @@ from settings import *
 from sprites.player import *
 from sprites.wall import *
 from sprites.bullet import *
-
+from map import *
 
 class Game:
 
@@ -20,22 +20,20 @@ class Game:
 
     def load_data(self):
         game_folder = path.dirname(__file__)
-        self.map_data = []
-        with open(path.join(game_folder, 'map.txt'), 'rt') as f:
-            for line in f:
-                self.map_data.append(line)
+        self.map = Map(path.join(game_folder, 'map.txt'))
 
     def new(self):
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         #self.bullets = pg.sprite.Group()
         # Loading initial map for testing
-        for row, tiles in enumerate(self.map_data):
+        for row, tiles in enumerate(self.map.data):
             for col, tile in enumerate(tiles):
                 if tile == '1':
                     Wall(self, col, row)
                 elif tile == 'P':
                     self.player = Player(self, col, row)
+        self.camera = Camera(self.map.width, self.map.height)
 
     def quit(self):
         pg.quit()
@@ -44,6 +42,7 @@ class Game:
     def update(self):
         # update portion of the game loop
         self.all_sprites.update() #revisar que actualiza
+        self.camera.update(self.player)
 
     def draw_grid(self):
         grid_color = (125,125,12)
@@ -57,7 +56,8 @@ class Game:
     def draw(self):
         self.display.fill((0,0,0))
         self.draw_grid()
-        self.all_sprites.draw(self.display)
+        for sprite in self.all_sprites:
+            self.display.blit(sprite.image, self.camera.apply(sprite))
         pg.display.flip()
 
     def events(self):
