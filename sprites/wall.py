@@ -12,11 +12,10 @@ class Wall(pg.sprite.Sprite):
         self.image = pg.Surface((SPRITE_BOX, SPRITE_BOX))
         #Estética
         self.image.fill((255,255,220))  #Image Provisional
-        #Posiciñon
+        #Posicion
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
         self.rect.x = x * SPRITE_BOX
         self.rect.y = y * SPRITE_BOX
-
-        print("Muro creado en " , str(self.x), str(self.y))
+        #print("Muro creado en " , str(self.x), str(self.y))

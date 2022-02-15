@@ -1,12 +1,10 @@
 import pygame as pg
 import sys
+from os import path
 from settings import *
-from player import *
-<<<<<<< HEAD
-from wall import Wall
-=======
-from bullet import *
->>>>>>> 26f77cdf82e13ac5ebe6c50655909a0593df4605
+from sprites.player import *
+from sprites.wall import *
+from sprites.bullet import *
 
 class Game:
     def __init__(self):
@@ -14,15 +12,28 @@ class Game:
         self.running = True
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
-        #self.clock = pg.time.Clock() #meter FPS
+        self.clock = pg.time.Clock() #meter FPS
         pg.key.set_repeat(500, 100) #habilita el mantener pulsado -> revisar tasas de refresco
+        self.load_data()
 
     def load_data(self):
+        game_folder = path.dirname(__file__)
+        self.map_data = []
+        with open(path.join(game_folder, 'map.txt'), 'rt') as f:
+            for line in f:
+                self.map_data.append(line)
+    
+    def new(self):
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
-        self.player = Player(self, 10, 10)
-        #Muro Prueba
-        Wall(self,25,25)
+        #self.bullets = pg.sprite.Group()
+        # Loading initial map for testing
+        for row, tiles in enumerate(self.map_data):
+            for col, tile in enumerate(tiles):
+                if tile == '1':
+                    Wall(self, col, row)
+                elif tile == 'P':
+                    self.player = Player(self, col, row)
 
     def quit(self):
         pg.quit()
@@ -33,7 +44,7 @@ class Game:
         self.all_sprites.update() #revisar que actualiza
 
     def draw_grid(self):
-        grid_color =  (125,125,12)
+        grid_color = (125,125,12)
         #Horizontal
         for x in range(0, WIDTH, SPRITE_BOX):
             pg.draw.line(self.display, grid_color, (x, 0), (x, HEIGHT))
@@ -55,18 +66,18 @@ class Game:
             #Pulsaciones Teclas
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
-                    self.running=False
+                    self.quit()
                 if event.key == pg.K_a:
-                    print("left")
+                    #print("left")
                     self.player.move(dx=-1)
                 if event.key == pg.K_d:
-                    print("right")
+                    #print("right")
                     self.player.move(dx=1)
                 if event.key == pg.K_w:
-                    print("up")
+                    #print("up")
                     self.player.move(dy=-1)
                 if event.key == pg.K_s:
-                    print("down")
+                    #print("down")
                     self.player.move(dy=1)
 
     def show_start_screen(self):
@@ -76,16 +87,17 @@ class Game:
         pass
 
     def run(self):
-        while self.running:
+        self.playing = True
+        while self.playing:
+            self.dt = self.clock.tick(FPS) / 1000
             self.events()
             self.update()
             self.draw()
-        self.quit()
 
-#Ciclo del juego
+
 g = Game()
 g.show_start_screen()
 while True:
-    g.load_data()
+    g.new()
     g.run()
-    #g.show_end_screen()
+    g.show_go_screen()
