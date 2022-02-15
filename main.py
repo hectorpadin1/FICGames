@@ -6,7 +6,9 @@ from sprites.player import *
 from sprites.wall import *
 from sprites.bullet import *
 
+
 class Game:
+
     def __init__(self):
         pg.init()
         self.running = True
@@ -22,7 +24,7 @@ class Game:
         with open(path.join(game_folder, 'map.txt'), 'rt') as f:
             for line in f:
                 self.map_data.append(line)
-    
+
     def new(self):
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
@@ -67,18 +69,6 @@ class Game:
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     self.quit()
-                if event.key == pg.K_a:
-                    #print("left")
-                    self.player.move(dx=-1)
-                if event.key == pg.K_d:
-                    #print("right")
-                    self.player.move(dx=1)
-                if event.key == pg.K_w:
-                    #print("up")
-                    self.player.move(dy=-1)
-                if event.key == pg.K_s:
-                    #print("down")
-                    self.player.move(dy=1)
 
     def show_start_screen(self):
         pass

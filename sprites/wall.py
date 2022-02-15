@@ -4,6 +4,7 @@ from settings import *
 #Revisar tema de los grupos porque me da la sensacion de que acopla mucho el código
 
 class Wall(pg.sprite.Sprite):
+    
     def __init__(self, game, x, y):
         #Establecemos otros sprites con los que pueda iteracionar
         self.groups = game.all_sprites, game.walls
