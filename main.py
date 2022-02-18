@@ -8,10 +8,12 @@ from sprites.bullet import *
 from map import *
 
 # Revisar:
-#   -Clock()
-#   -sprite flip?
-#   -display blit
+#   - dudas don draw()
+#       -display.update vs display flip ??
+#       -display blit -> for sprites?
 
+# Dudas: 
+#   -acoplamiento de sprites al juego
 
 class Game:
     #Inicializamos Juego
@@ -74,6 +76,7 @@ class Game:
         #Sprites
         for sprite in self.all_sprites:
             self.display.blit(sprite.image, self.camera.apply(sprite)) #revisar
+        #Actualizamos Pantalla
         pg.display.flip()
 
     def events(self):
@@ -96,7 +99,7 @@ class Game:
     def run(self):
         self.playing = True
         while self.playing:
-            self.dt = self.clock.tick(FPS) / 1000 #revisar esto
+            self.dt = self.clock.tick(FPS) / 1000 #diferencia de tiempo
             self.events()
             self.update()
             self.draw()
