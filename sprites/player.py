@@ -25,7 +25,7 @@ class Player(pg.sprite.Sprite):
         self.rot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()
-
+    
     # Dynamics of player movements
     def __get_keys(self):
         self.rot_speed = 0
@@ -33,13 +33,13 @@ class Player(pg.sprite.Sprite):
         keys = pg.key.get_pressed()
         # On-Axis movements
         if keys[pg.K_a]:
-            self.vel = -Vector2(PLAYER_SPEED, 0).rotate(90-self.rot)
+            self.vel.x = -PLAYER_SPEED
         if keys[pg.K_d]:
-            self.vel = Vector2(PLAYER_SPEED, 0).rotate(90-self.rot)
+            self.vel.x = PLAYER_SPEED
         if keys[pg.K_w]:
-            self.vel = Vector2(PLAYER_SPEED, 0).rotate(-self.rot)
+            self.vel.y = -PLAYER_SPEED
         if keys[pg.K_s]:
-            self.vel = Vector2(-PLAYER_SPEED, 0).rotate(-self.rot)
+            self.vel.y = PLAYER_SPEED
         # Oposite movements
         if keys[pg.K_a] and keys[pg.K_d]:
             self.vel.x = 0
@@ -48,7 +48,7 @@ class Player(pg.sprite.Sprite):
         # Diagonal movements        
         if self.vel.x!=0 and self.vel.y !=0:
             self.vel *= cos(pi/4)
-    
+
     def __collide_with_walls(self, dir):
         if dir == 'x':
             hits = pg.sprite.spritecollide(self, self.game.walls, False, collide_hit_rect)
@@ -70,26 +70,18 @@ class Player(pg.sprite.Sprite):
                 self.hit_rect.centery = self.pos.y
     
     def __rotate(self):
-        self.mouse = pg.mouse.get_pos()
-        self.rot = -atan2(self.mouse[1] - self.pos.y, self.mouse[0] - self.pos.x) * 180 / pi
-
-        #print(self.rot)
-        '''
-        coger coordenadas relativas del personaje en la pantalla
-        self.pos, WIDTH, HEIGHT self.mouse
-        módulo
-        '''
-        
-    def update(self):
-        # Checks where it has to move
-        #if self.mouse != pg.mouse.get_pos():
-        self.__rotate()
-        self.__get_keys()
-        #print(self.mouse, self.pos)
-        self.rot = (self.rot + self.rot_speed * self.game.dt) % 360
+        print(pg.mouse.get_pos(), Vector2(self.game.camera.camera.topleft), self.pos)
+        direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
+        self.rot = direction.angle_to(Vector2(1, 0))
+        # el problema de la rotación que mueve la cámara está aqui
         self.image = pg.transform.rotate(self.game.player_img, self.rot)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
+        
+    def update(self):
+        # Checks where it has to move
+        self.__rotate()
+        self.__get_keys()
         # Moves in time, not in pixels, independent of our frame rate
         self.pos += self.vel * self.game.dt
         self.hit_rect.centerx = self.pos.x
