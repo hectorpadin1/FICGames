@@ -70,26 +70,18 @@ class Player(pg.sprite.Sprite):
                 self.hit_rect.centery = self.pos.y
     
     def __rotate(self):
-        self.mouse = pg.mouse.get_pos()
-        self.rot = -atan2(self.mouse[1] - self.pos.y, self.mouse[0] - self.pos.x) * 180 / pi
-
-        #print(self.rot)
-        '''
-        coger coordenadas relativas del personaje en la pantalla
-        self.pos, WIDTH, HEIGHT self.mouse
-        módulo
-        '''
-        
-    def update(self):
-        # Checks where it has to move
-        #if self.mouse != pg.mouse.get_pos():
-        self.__rotate()
-        self.__get_keys()
-        #print(self.mouse, self.pos)
-        self.rot = (self.rot + self.rot_speed * self.game.dt) % 360
+        print(pg.mouse.get_pos(), Vector2(self.game.camera.camera.topleft), self.pos)
+        direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
+        self.rot = direction.angle_to(Vector2(1, 0))
+        # el problema de la rotación que mueve la cámara está aqui
         self.image = pg.transform.rotate(self.game.player_img, self.rot)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
+        
+    def update(self):
+        # Checks where it has to move
+        self.__rotate()
+        self.__get_keys()
         # Moves in time, not in pixels, independent of our frame rate
         self.pos += self.vel * self.game.dt
         self.hit_rect.centerx = self.pos.x

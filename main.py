@@ -13,7 +13,17 @@ from map import *
 #       -display blit -> for sprites?
 
 # Dudas: 
-#   -acoplamiento de sprites al juego
+#   - acoplamiento de sprites al juego
+#   - Grupos -> sprite añade a los grupos que se le pasan, pero es necesario pasarle el juego ¿?
+#   - Acoplamiento del juego en los sprites
+#
+#
+#
+#
+#
+#
+#
+
 
 class Game:
     #Inicializamos Juego
