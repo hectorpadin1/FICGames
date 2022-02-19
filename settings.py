@@ -20,3 +20,13 @@ BULLET_IMG = ''
 BULLET_SPEED = 500
 BULLET_LIFETIME = 1000
 BULLET_RATE = 150
+
+# Gui Assets
+LOGO_IMG = 'assets/logo.png'
+BTN_BG = 'assets/btn_bg.png'
+BOX_BG = 'assets/box_bg.png'
+
+# Gui Sizes
+GUI_BOX_SIZE = (384,448)
+
+GUI_COLOR = (18,17,16)
