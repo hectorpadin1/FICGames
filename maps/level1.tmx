@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="10" nextobjectid="67">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="961" columns="31">
-  <image source="../assets/tileset.png" width="2000" height="2000"/>
+  <image source="../assets/Paquete Militar/tileset.png" width="2000" height="2000"/>
  </tileset>
  <tileset firstgid="962" name="tileset2" tilewidth="64" tileheight="64" tilecount="70" columns="10">
-  <image source="../assets/tileset2.png" width="700" height="500"/>
+  <image source="../assets/Paquete Militar/tileset2.png" width="700" height="500"/>
  </tileset>
  <layer id="1" name="Ground" width="30" height="30">
   <data encoding="csv">
