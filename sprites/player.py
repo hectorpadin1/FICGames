@@ -25,7 +25,7 @@ class Player(pg.sprite.Sprite):
         self.rot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()
-
+    
     # Dynamics of player movements
     def __get_keys(self):
         self.rot_speed = 0
@@ -33,13 +33,13 @@ class Player(pg.sprite.Sprite):
         keys = pg.key.get_pressed()
         # On-Axis movements
         if keys[pg.K_a]:
-            self.vel = -Vector2(PLAYER_SPEED, 0).rotate(90-self.rot)
+            self.vel.x = -PLAYER_SPEED
         if keys[pg.K_d]:
-            self.vel = Vector2(PLAYER_SPEED, 0).rotate(90-self.rot)
+            self.vel.x = PLAYER_SPEED
         if keys[pg.K_w]:
-            self.vel = Vector2(PLAYER_SPEED, 0).rotate(-self.rot)
+            self.vel.y = -PLAYER_SPEED
         if keys[pg.K_s]:
-            self.vel = Vector2(-PLAYER_SPEED, 0).rotate(-self.rot)
+            self.vel.y = PLAYER_SPEED
         # Oposite movements
         if keys[pg.K_a] and keys[pg.K_d]:
             self.vel.x = 0
@@ -48,7 +48,7 @@ class Player(pg.sprite.Sprite):
         # Diagonal movements        
         if self.vel.x!=0 and self.vel.y !=0:
             self.vel *= cos(pi/4)
-    
+
     def __collide_with_walls(self, dir):
         if dir == 'x':
             hits = pg.sprite.spritecollide(self, self.game.walls, False, collide_hit_rect)
