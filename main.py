@@ -5,6 +5,7 @@ from settings import *
 from sprites.player import *
 from sprites.wall import *
 from sprites.bullet import *
+from ui import *
 from map import *
 
 # Revisar:
@@ -17,6 +18,7 @@ from map import *
 #   - acoplamiento de sprites al juego
 #   - Grupos -> sprite añade a los grupos que se le pasan, pero es necesario pasarle el juego ¿?
 #   - Acoplamiento del juego en los sprites
+#   - Para el ratón en la UI, usamos eventos o raton get pos??
 #   
 #
 
@@ -24,8 +26,8 @@ from map import *
 #
 # Idea:
 #   - mapa para el fondo de la pantalla de carga -> un helicóptero y cosas -> si no lo ponemos color cesped
-#
-#
+#   - poner subtexto debajo del título en menu de inicio
+#   - cambiar captions en menus
 
 
 class Game:
@@ -35,7 +37,8 @@ class Game:
         self.running = True
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
-        self.clock = pg.time.Clock() #revisar
+        self.clock = pg.time.Clock()
+        self.ui = Ui(self.display)
         self.load_data()
 
     #Cargamos Recursos
@@ -113,68 +116,11 @@ class Game:
             self.draw()
 
 
-    #
-    #   ESTO SE DEBERÏA MOVERE A UNA CLASE UI
-    # 
-    def draw_text(self, text, size, x, y ):
-        font = pg.font.Font("ModernDOS9x16.ttf",size)
-        text_surface = font.render(text, True, (255,255,255))
-        text_rect = text_surface.get_rect()
-        text_rect.center = (x,y)
-        self.display.blit(text_surface,text_rect)
-
-    def draw_button(self, text, size, x, y ):
-        #Bg Btn
-        bg = pg.image.load(BTN_BG)
-        rect = bg.get_rect()
-        rect.center = (x,y)
-        self.display.blit(bg, rect) 
-
-        #Text
-        font = pg.font.Font("ModernDOS9x16.ttf",size)
-        text_surface = font.render(text, True, (255,255,255))
-        text_rect = text_surface.get_rect()
-        text_rect.center = (x,y)
-        self.display.blit(text_surface,text_rect)
-
-    def draw_box(self):
-
-        bg = pg.image.load(BOX_BG)
-        rect = bg.get_rect()
-        rect.center = (WIDTH/2,HEIGHT/2)
-        self.display.blit(bg, rect) 
-
-        #Version que cargaba caja como rectangulo
-        #sx,sy = GUI_BOX_SIZE
-        #pg.draw.rect(self.display, GUI_COLOR, ((WIDTH/2-sx/2),(HEIGHT/2-sy/2),sx,sy), 0)
-
-    def draw_logo(self):
-        logo = pg.image.load(LOGO_IMG)
-        rect = logo.get_rect()
-        rect.center = (WIDTH/2, HEIGHT/2-128) #harcodeado meter de alguna forma mas elegante las distancias
-        self.display.blit(logo, rect) #Bua es que esta piche func no me queda claro lo que hace
-    #
-    #   AQUI ACABA LO QUE NO DEBERÏA ESTAR AQUÍ
-    #   
-
-
     def start_screen(self):
-        while True:
-            #Mouse
-            self.events() #sin esto no va wtf -> diferencia de pillarlo con pg.mouse o eventos
-            pos = pg.mouse.get_pos()
-            print(pos)
-      
-            #DRAWING
-            self.display.fill((66,82,58)) #BG
-            self.draw_box() 
-            self.draw_logo()
-
-            self.draw_button("culo",20,WIDTH/2, HEIGHT/2)
-
-            pg.display.update() #diferencia conflip?
-        return 1
-
+        return self.ui.start_screen_loop()
+        # POSIBILIDAD -> reflexional una vez acabado
+        # Orientado a hacer más sencillos los menus de pausa y la ui
+        #Este bucle podría ser interesante combinarlo con el run, de forma que solo haya un bucle infinito que printee algo -> ej run( print_fn() ), pudiendo ser la print_fn de la start screen o del juego
 
     def show_end_screen(self):
         pass

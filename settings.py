@@ -4,7 +4,7 @@ from pygame import Rect
 TITLE = "Juego Molón que mola un montón"
 WIDTH = 1024  # 16 * 64 or 32 * 32 or 64 * 16
 HEIGHT = 768 # 16 * 48 or 32 * 24 or 64 * 12
-FPS = 60
+FPS = 30
 SPRITE_BOX = 32
 GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
@@ -28,5 +28,5 @@ BOX_BG = 'assets/box_bg.png'
 
 # Gui Sizes
 GUI_BOX_SIZE = (384,448)
-
+GUI_FONT_SIZE = 20
 GUI_COLOR = (18,17,16)
