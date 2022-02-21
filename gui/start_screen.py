@@ -1,14 +1,14 @@
 import pygame as pg
 import sys
 from settings import *
-from button import Button
+from gui.button import Button
 
-class Ui:
+class StartScreen:
 
     def __init__(self,display):
         self.display = display #Esto No se yo si estará bien aquí -> revisar patrones
         self.click = False
-        self.loop = True
+        self.running = True
 
     #Eventos Para Cerrar Ventana -> (Está Repetido)
     def events(self):
@@ -36,8 +36,8 @@ class Ui:
         rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
         self.display.blit(logo, rect) 
 
-    def start_screen_loop(self):
-        while self.loop:
+    def loop(self):
+        while self.running:
            
             self.events() 
 
@@ -63,10 +63,11 @@ class Ui:
                 self.click=False
 
             pg.display.update() #diferencia conflip?
+        return 1
     
     def go_play(self):
         print("play")
-        self.loop=False
+        self.running=False
 
     def go_settings(self):
         print("settings")
