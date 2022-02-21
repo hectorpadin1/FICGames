@@ -3,7 +3,7 @@ from settings import *
 
 #Revisar tema de los grupos porque me da la sensacion de que acopla mucho el código
 
-class Wall(pg.sprite.Sprite):
+"""class Wall(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         #Establecemos otros sprites con los que pueda iteracionar
         self.groups = game.all_sprites, game.walls
@@ -18,7 +18,7 @@ class Wall(pg.sprite.Sprite):
         self.y = y
         self.rect.x = x * SPRITE_BOX
         self.rect.y = y * SPRITE_BOX
-        #print("Muro creado en " , str(self.x), str(self.y))
+        #print("Muro creado en " , str(self.x), str(self.y))"""
 
 class Obstacle(pg.sprite.Sprite):
     def __init__(self, game, x, y, w, h):
