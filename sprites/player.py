@@ -2,8 +2,18 @@ import pygame as pg
 from pygame.math import Vector2
 from math import cos, pi, atan2
 from settings import *
-from map import collide_hit_rect
+from sprites.bullet import *
 
+def collide_hit_rect(one, two):
+    return one.hit_rect.colliderect(two.rect)
+
+BULLET_IMG = 'bullet.png'
+BULLET_SPEED = 500
+BULLET_LIFETIME = 1000
+BULLET_RATE = 150
+KICKBACK = 200
+GUN_SPREAD = 5
+BARREL_OFFSET = Vector2(30, 10)
 
 class Player(pg.sprite.Sprite):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
@@ -19,6 +29,7 @@ class Player(pg.sprite.Sprite):
         self.vel = Vector2(0, 0)
         self.pos = Vector2(x, y)
         self.rot = 0
+        self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()
     
@@ -44,6 +55,14 @@ class Player(pg.sprite.Sprite):
         # Diagonal movements        
         if self.vel.x!=0 and self.vel.y !=0:
             self.vel *= cos(pi/4)
+        if keys[pg.K_SPACE]:
+            now = pg.time.get_ticks()
+            if now - self.last_shot > BULLET_RATE:
+                self.last_shot = now
+                dir = Vector2(1, 0).rotate(-self.rot)
+                pos = self.pos + BARREL_OFFSET.rotate(-self.rot)
+                Bullet(self.game, pos, dir)
+                self.vel = Vector2(-KICKBACK, 0).rotate(-self.rot)
 
     def __collide_with_walls(self, dir):
         if dir == 'x':
