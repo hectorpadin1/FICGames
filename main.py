@@ -5,7 +5,7 @@ from settings import *
 from sprites.player import *
 from sprites.wall import *
 from sprites.bullet import *
-from ui import *
+from gui.start_screen import *
 from map import *
 
 # Revisar:
@@ -38,7 +38,7 @@ class Game:
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
-        self.ui = Ui(self.display)
+        self.start_screen = StartScreen(self.display)
         self.load_data()
 
     #Cargamos Recursos
@@ -136,8 +136,8 @@ class Game:
             self.draw()
 
 
-    def start_screen(self):
-        return self.ui.start_screen_loop()
+    def show_start_screen(self):
+        return self.start_screen.loop()
         # POSIBILIDAD -> reflexional una vez acabado
         # Orientado a hacer más sencillos los menus de pausa y la ui
         #Este bucle podría ser interesante combinarlo con el run, de forma que solo haya un bucle infinito que printee algo -> ej run( print_fn() ), pudiendo ser la print_fn de la start screen o del juego
@@ -149,7 +149,7 @@ class Game:
 #Ciclo Juego
 if (__name__ == "__main__"):    
     g = Game()
-    level = g.start_screen()
+    level = g.show_start_screen()
     while True:
         g.new() #load level
         g.run()
