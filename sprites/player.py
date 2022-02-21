@@ -54,7 +54,6 @@ class Player(pg.sprite.Sprite):
                 dir = Vector2(1, 0).rotate(-self.rot)
                 pos = self.pos + BARREL_OFFSET.rotate(-self.rot)
                 Bullet(self.game, pos, dir)
-                self.vel = Vector2(-KICKBACK, 0).rotate(-self.rot)
 
     def __collide_with_walls(self, dir):
         if dir == 'x':
