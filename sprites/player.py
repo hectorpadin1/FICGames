@@ -4,11 +4,6 @@ from math import cos, pi, atan2
 from settings import *
 from map import collide_hit_rect
 
-'''
-    meter grupos en entidades
-    entity = Entity((320, 240))
-    all_sprites = pg.sprite.Group(entity)
-'''
 
 class Player(pg.sprite.Sprite):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
@@ -21,8 +16,6 @@ class Player(pg.sprite.Sprite):
         self.rect.center = (x, y)
         self.hit_rect = PLAYER_HIT_RECT
         self.hit_rect.center = self.rect.center
-        print(self.hit_rect.center, self.rect.center, self.rect)
-        print(self.hit_rect)
         self.vel = Vector2(0, 0)
         self.pos = Vector2(x, y)
         self.rot = 0
