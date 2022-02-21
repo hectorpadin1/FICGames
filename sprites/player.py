@@ -7,14 +7,6 @@ from sprites.bullet import *
 def collide_hit_rect(one, two):
     return one.hit_rect.colliderect(two.rect)
 
-BULLET_IMG = 'bullet.png'
-BULLET_SPEED = 500
-BULLET_LIFETIME = 1000
-BULLET_RATE = 150
-KICKBACK = 200
-GUN_SPREAD = 5
-BARREL_OFFSET = Vector2(30, 10)
-
 class Player(pg.sprite.Sprite):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
     def __init__(self, game, x, y):

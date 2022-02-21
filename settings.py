@@ -1,4 +1,5 @@
 from pygame import Rect
+from pygame.math import Vector2
 
 # General game setings
 TITLE = "Juego Molón que mola un montón"
@@ -22,10 +23,13 @@ PLAYER_IMG = 'soldier.png'
 PLAYER_HIT_RECT = Rect(0, 0, 35, 35)
 
 # Settings for Shootings
-BULLET_IMG = ''
+BULLET_IMG = 'bullet.png'
 BULLET_SPEED = 500
 BULLET_LIFETIME = 1000
 BULLET_RATE = 150
+KICKBACK = 200
+GUN_SPREAD = 5
+BARREL_OFFSET = Vector2(30, 10)
 
 # Gui Assets
 LOGO_IMG = 'assets/logo.png'
