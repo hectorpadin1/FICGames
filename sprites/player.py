@@ -21,7 +21,7 @@ class Player(pg.sprite.Sprite):
         self.hit_rect = PLAYER_HIT_RECT
         self.hit_rect.center = self.rect.center
         self.vel = Vector2(0, 0)
-        self.pos = Vector2(x, y) * SPRITE_BOX
+        self.pos = Vector2(x, y)
         self.rot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()

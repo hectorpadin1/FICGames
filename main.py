@@ -44,8 +44,12 @@ class Game:
     #Cargamos Recursos
     def load_data(self):
         game_folder = path.dirname(__file__)
+        map_folder = path.join(game_folder, 'maps')
         #Mapa
-        self.map = Map(path.join(game_folder, 'map.txt'))
+        self.map = TiledMap(path.join(map_folder, 'level1.tmx'))
+        #Render del mapa
+        self.map_img = self.map.make_map()
+        self.map_rect = self.map_img.get_rect()
         #Assets
         self.player_img = pg.image.load(path.join(game_folder, PLAYER_IMG)).convert_alpha()
         #falta tileset, menus...
@@ -56,12 +60,19 @@ class Game:
         self.walls = pg.sprite.Group()
         #self.bullets = pg.sprite.Group()
         # Loading initial map for testing
-        for row, tiles in enumerate(self.map.data):
-            for col, tile in enumerate(tiles):
-                if tile == '1':
-                    Wall(self, col, row)
-                elif tile == 'P':
-                    self.player = Player(self, col, row)
+        #for row, tiles in enumerate(self.map.data):
+        #    for col, tile in enumerate(tiles):
+        #        if tile == '1':
+        #            Wall(self, col, row)
+        #        elif tile == 'P':
+        #            self.player = Player(self, col, row)
+        # Initial pos of player and collisions
+        for tile_object in self.map.tmxdata.objects:
+            if tile_object.name == 'player':
+                self.player = Player(self, tile_object.x, tile_object.y)
+            #if tile_object.name == 'Wall':
+            #    Obstacle(self, tile_object.x, tile_object.y, 
+            #            tile_object.width, tile_object.height)
         self.camera = Camera(self.map.width, self.map.height)
 
     #Salir
@@ -87,8 +98,9 @@ class Game:
 
     #Pinta
     def draw(self):
-        self.display.fill((0,0,0)) #Fondo
-        self.draw_grid()#tmp
+        #self.display.fill((0,0,0)) #Fondo
+        #self.draw_grid()#tmp
+        self.display.blit(self.map_img, self.camera.apply_rect(self.map_rect))
         #Sprites
         for sprite in self.all_sprites:
             self.display.blit(sprite.image, self.camera.apply(sprite)) #revisar
