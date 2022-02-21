@@ -70,10 +70,11 @@ class Game:
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
                 self.player = Player(self, tile_object.x, tile_object.y)
-            #if tile_object.name == 'Wall':
-            #    Obstacle(self, tile_object.x, tile_object.y, 
-            #            tile_object.width, tile_object.height)
+            if tile_object.name == 'Wall':
+                Obstacle(self, tile_object.x, tile_object.y, 
+                        tile_object.width, tile_object.height)
         self.camera = Camera(self.map.width, self.map.height)
+        self.draw_debug = False
 
     #Salir
     def quit(self):
@@ -104,6 +105,11 @@ class Game:
         #Sprites
         for sprite in self.all_sprites:
             self.display.blit(sprite.image, self.camera.apply(sprite)) #revisar
+            if self.draw_debug:
+                pg.draw.rect(self.display, (0, 255, 255), self.camera.apply_rect(sprite.hit_rect), 1)
+        if self.draw_debug:
+            for wall in self.walls:
+                pg.draw.rect(self.display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
         #Actualizamos Pantalla
         pg.display.flip()
 
@@ -117,7 +123,8 @@ class Game:
                 #tendremos que cambiarlo para el menu de pausa
                 if event.key == pg.K_ESCAPE:
                     self.quit()
-
+                if event.key == pg.K_h:
+                    self.draw_debug = not self.draw_debug
     #Bucle de Partida
     def run(self):
         self.playing = True

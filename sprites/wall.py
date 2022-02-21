@@ -20,10 +20,10 @@ class Wall(pg.sprite.Sprite):
         self.rect.y = y * SPRITE_BOX
         #print("Muro creado en " , str(self.x), str(self.y))
 
-"""class Obstacle(pg.sprite.Sprite):
+class Obstacle(pg.sprite.Sprite):
     def __init__(self, game, x, y, w, h):
         #Establecemos otros sprites con los que pueda iteracionar
-        self.groups = game.all_sprites, game.walls
+        self.groups = game.walls
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         #Posicion
@@ -31,4 +31,4 @@ class Wall(pg.sprite.Sprite):
         self.x = x
         self.y = y
         self.rect.x = x
-        self.rect.y = y"""
+        self.rect.y = y
