@@ -6,13 +6,17 @@ from sprites.player import *
 from sprites.wall import *
 from sprites.bullet import *
 from gui.start_screen import *
-from map import *
+from tiledmap import *
+from camera import *
 
 # Revisar:
 #   - dudas don draw()
 #       -display.update vs display flip ??
 #       -display blit -> for sprites? -> printea en superficie, pero sobre el center o klk???
 
+#diccionario nivel-fichero -> inyeccion dependencias (patrón factoría)
+#gestor de recursos -> sigleton creo que era como un decoradors
+#gui última llamada y fuera
 
 # Dudas: 
 #   - acoplamiento de sprites al juego

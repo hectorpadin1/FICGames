@@ -9,8 +9,11 @@ SPRITE_BOX = 64
 GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
 
-#
+# MAPS
 LEVEL1 = 'level1.tmx'
+
+#FONTS
+MAIN_FONT = "assets/ModernDOS9x16.ttf"
 
 # Player settings
 PLAYER_SPEED = 300.0

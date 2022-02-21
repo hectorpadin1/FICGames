@@ -18,7 +18,7 @@ class Button:
         self.hover = self.rect.collidepoint(mouse_pos)
 
         #Text
-        font = pg.font.Font("ModernDOS9x16.ttf",GUI_FONT_SIZE)
+        font = pg.font.Font(MAIN_FONT,GUI_FONT_SIZE)
         color = (255,255,255)
         if self.hover:
             color = (154,122,37)
