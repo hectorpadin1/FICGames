@@ -1,11 +1,17 @@
 import pygame as pg
 import pytmx
 from settings import *
+import sys
+
 
 
 class TiledMap:
-    def __init__(self, filename):
-        tm = pytmx.load_pygame(filename, pixelalpha=True)
+    def __init__(self, level):
+        if level==1:
+            tm = pytmx.load_pygame(LEVEL1, pixelalpha=True)
+        else:
+            print("El mapa no existe")
+            sys.exit()
         self.width = tm.width * tm.tilewidth
         self.height = tm.height * tm.tileheight
         self.tmxdata = tm
