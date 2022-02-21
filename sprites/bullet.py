@@ -3,13 +3,6 @@ from settings import *
 from pygame.math import Vector2
 from random import uniform
 
-BULLET_IMG = 'bullet.png'
-BULLET_SPEED = 500
-BULLET_LIFETIME = 1000
-BULLET_RATE = 150
-KICKBACK = 200
-GUN_SPREAD = 5
-
 
 class Bullet(pg.sprite.Sprite):
     def __init__(self, game, pos, dir):

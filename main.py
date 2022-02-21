@@ -57,13 +57,14 @@ class Game:
         self.map_rect = self.map_img.get_rect()
         #Assets
         self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
+        self.bullet_img = pg.image.load(path.join(img_folder, BULLET_IMG)).convert_alpha()
         #falta tileset, menus...
 
     #Creamos partida: inicializamos sprites 
     def new(self):
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
-        #self.bullets = pg.sprite.Group()
+        self.bullets = pg.sprite.Group()
         # Loading initial map for testing
         #for row, tiles in enumerate(self.map.data):
         #    for col, tile in enumerate(tiles):
