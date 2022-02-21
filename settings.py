@@ -9,10 +9,13 @@ SPRITE_BOX = 64
 GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
 
+#
+LEVEL1 = 'level1.tmx'
+
 # Player settings
 PLAYER_SPEED = 300.0
 PLAYER_ROT_SPEED = 250.0
-PLAYER_IMG = 'topdown-shooter/PNG/Hitman 1/hitman1_gun.png'
+PLAYER_IMG = 'soldier.png'
 PLAYER_HIT_RECT = Rect(0, 0, 35, 35)
 
 # Settings for Shootings
