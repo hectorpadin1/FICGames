@@ -2,8 +2,10 @@ import pygame as pg
 from pygame.math import Vector2
 from math import cos, pi, atan2
 from settings import *
-from map import collide_hit_rect
 
+#Mirar Donde Ponerlo
+def collide_hit_rect(one, two):
+    return one.hit_rect.colliderect(two.rect)
 
 class Player(pg.sprite.Sprite):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
