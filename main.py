@@ -44,6 +44,7 @@ class Game:
     #Cargamos Recursos
     def load_data(self):
         game_folder = path.dirname(__file__)
+        img_folder = path.join(game_folder, 'assets')
         map_folder = path.join(game_folder, 'maps')
         #Mapa
         self.map = TiledMap(path.join(map_folder, 'level1.tmx'))
@@ -51,7 +52,7 @@ class Game:
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
         #Assets
-        self.player_img = pg.image.load(path.join(game_folder, PLAYER_IMG)).convert_alpha()
+        self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
         #falta tileset, menus...
 
     #Creamos partida: inicializamos sprites 

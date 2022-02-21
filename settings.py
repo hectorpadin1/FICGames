@@ -12,7 +12,7 @@ GRIDHEIGHT = HEIGHT / SPRITE_BOX
 # Player settings
 PLAYER_SPEED = 300.0
 PLAYER_ROT_SPEED = 250.0
-PLAYER_IMG = 'assets/topdown-shooter/PNG/Hitman 1/hitman1_gun.png'
+PLAYER_IMG = 'topdown-shooter/PNG/Hitman 1/hitman1_gun.png'
 PLAYER_HIT_RECT = Rect(0, 0, 35, 35)
 
 # Settings for Shootings
