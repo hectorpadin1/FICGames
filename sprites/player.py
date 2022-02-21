@@ -18,8 +18,11 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.image = game.player_img
         self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
         self.hit_rect = PLAYER_HIT_RECT
         self.hit_rect.center = self.rect.center
+        print(self.hit_rect.center, self.rect.center, self.rect)
+        print(self.hit_rect)
         self.vel = Vector2(0, 0)
         self.pos = Vector2(x, y)
         self.rot = 0
@@ -68,16 +71,14 @@ class Player(pg.sprite.Sprite):
                     self.pos.y = hits[0].rect.bottom + self.hit_rect.height / 2.0
                 self.vel.y = 0
                 self.hit_rect.centery = self.pos.y
-    
+        
     def __rotate(self):
-        print(pg.mouse.get_pos(), Vector2(self.game.camera.camera.topleft), self.pos)
         direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))
-        # el problema de la rotación que mueve la cámara está aqui
         self.image = pg.transform.rotate(self.game.player_img, self.rot)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
-        
+
     def update(self):
         # Checks where it has to move
         self.__rotate()
