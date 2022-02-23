@@ -1,6 +1,6 @@
 import pygame as pg
 from pygame.math import Vector2
-from math import cos, pi, atan2
+from math import cos, pi
 from settings import *
 from sprites.bullet import *
 from sprites.common import collide_with_walls
@@ -42,7 +42,7 @@ class Player(pg.sprite.Sprite):
         # Oposite movements
         if keys[pg.K_a] and keys[pg.K_d]:
             self.vel.x = 0
-        if keys[pg.K_w] and keys[pg.K_s]:
+        if keys[pg.K_w] and keys[pg.K_s]:   
             self.vel.y = 0
         # Diagonal movements        
         if self.vel.x!=0 and self.vel.y !=0:
@@ -59,6 +59,23 @@ class Player(pg.sprite.Sprite):
         self.image = pg.transform.rotate(self.game.player_img, self.rot)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
+    
+    def draw_health(self, display, x, y, pct):
+        if pct < 0:
+            pct = 0
+        BAR_LENGTH = 100
+        BAR_HEIGHT = 20
+        fill = pct * BAR_LENGTH
+        outline_rect = pg.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
+        fill_rect = pg.Rect(x, y, fill, BAR_HEIGHT)
+        if pct > 0.6:
+            col = GREEN
+        elif pct > 0.3:
+            col = YELLOW
+        else:
+            col = RED
+        pg.draw.rect(display, col, fill_rect)
+        pg.draw.rect(display, WHITE, outline_rect, 2)
 
     def update(self):
         # Checks where it has to move

@@ -1,11 +1,17 @@
 from pygame import Rect
 from pygame.math import Vector2
 
+# Colors
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+
 # General game setings
 TITLE = "Juego Molón que mola un montón"
 WIDTH = 1024  # 16 * 64 or 32 * 32 or 64 * 16
 HEIGHT = 768 # 16 * 48 or 32 * 24 or 64 * 12
-FPS = 30
+FPS = 60
 SPRITE_BOX = 64
 GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
@@ -17,7 +23,7 @@ LEVEL1 = 'maps/level1.tmx'
 MAIN_FONT = "assets/ModernDOS9x16.ttf"
 
 # Player settings
-PLAYER_HEALTH = 100
+PLAYER_HEALTH = 1000000000
 PLAYER_SPEED = 300.0
 PLAYER_ROT_SPEED = 250.0
 PLAYER_IMG = 'assets/soldier.png'
@@ -27,9 +33,9 @@ BARREL_OFFSET = Vector2(20, 3)
 # Settings for Shootings
 BULLET_IMG = 'assets/bullet.png'
 EXPLOSION_IMAGE = 'assets/explode_bullet.png'
-BULLET_SPEED = 1000
+BULLET_SPEED = 1500
 BULLET_LIFETIME = 2000
-BULLET_RATE = 150
+BULLET_RATE = 10
 KICKBACK = 200
 GUN_SPREAD = 5
 EXPLOSION_LIFETIME = 100

@@ -5,12 +5,12 @@ from pygame.math import Vector2
 
 class Explosion(pg.sprite.Sprite):
 
-    def __init__(self, groups, pos) -> None:
+    def __init__(self, groups, pos, sx, sy) -> None:
         self.groups = groups
         pg.sprite.Sprite.__init__(self, self.groups)
         self.pos = pos
         self.image = pg.image.load(EXPLOSION_IMAGE)
-        self.image = pg.transform.scale(self.image, (0.2 * SPRITE_BOX, 0.2 * SPRITE_BOX))
+        self.image = pg.transform.scale(self.image, (sx * SPRITE_BOX, sy * SPRITE_BOX))
         self.rect = self.image.get_rect()
         self.pos = Vector2(pos)
         self.rect.center = pos

@@ -6,6 +6,7 @@ from sprites.player import *
 from sprites.wall import *
 from sprites.bullet import *
 from sprites.mob import *
+from sprites.common import collide_hit_rect
 from gui.start_screen import *
 from tiledmap import *
 from camera import *
@@ -69,6 +70,7 @@ class Game:
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
                 self.player = Player(self, tile_object.x, tile_object.y)
+                #Mob(self, tile_object.x+10, tile_object.y)
             if tile_object.name == 'Wall':
                 Wall(self, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
@@ -76,7 +78,13 @@ class Game:
                 Obstacle(self, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
             if tile_object.name == 'mob':
+                # dd cojones se spawnea esto xdddd
                 Mob(self, tile_object.x, tile_object.y)
+        Mob(self, 700, 1560)
+        Mob(self, 700, 1560)
+        Mob(self, 700, 1560)
+        Mob(self, 700, 1560)
+        Mob(self, 700, 1560)
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
@@ -85,10 +93,26 @@ class Game:
         pg.quit()
         sys.exit()
 
+    def bullet_hits(self):
+        hits = pg.sprite.spritecollide(self.player, self.mobs, False, collide_hit_rect)
+        for hit in hits:
+            self.player.health -= MOB_DAMAGE
+            hit.vel = Vector2(0, 0)
+            if self.player.health <= 0:
+                self.playing = False
+        if hits:
+            self.player.pos += Vector2(MOB_KNOCKBACK, 0).rotate(-hits[0].rot)
+        # bullets hit mobs
+        hits = pg.sprite.groupcollide(self.mobs, self.bullets, False, True)
+        for hit in hits:
+            hit.health -= BULLET_DAMAGE
+            hit.vel = Vector2(0, 0)
+
     #Actualiza Sprites (muros no) y Camara
     def update(self):
         self.all_sprites.update()
         self.camera.update(self.player)
+        self.bullet_hits()
 
 
     ###TEMPORAL###
@@ -109,11 +133,14 @@ class Game:
         #Sprites
         for sprite in self.all_sprites:
             self.display.blit(sprite.image, self.camera.apply(sprite)) #revisar
+            if isinstance(sprite, Mob):
+                sprite.draw_health()
             if self.draw_debug:
                 pg.draw.rect(self.display, (0, 255, 255), self.camera.apply_rect(sprite.hit_rect), 1)
         if self.draw_debug:
             for wall in self.walls:
                 pg.draw.rect(self.display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
+        self.player.draw_health(self.display, 10, 10, self.player.health / PLAYER_HEALTH)
         #Actualizamos Pantalla
         pg.display.flip()
 

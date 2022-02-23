@@ -22,11 +22,14 @@ class Bullet(pg.sprite.Sprite):
         self.vel = dir.rotate(spread) * BULLET_SPEED
         self.spawn_time = pg.time.get_ticks()
 
+    def kill(self,):
+        Explosion(self.game.all_sprites, self.pos, 0.1, 0.1)
+        super().kill()
+
     def update(self):
         self.pos += self.vel * self.game.dt
         self.rect.center = self.pos
         if pg.sprite.spritecollideany(self, self.game.walls):
-            Explosion(self.game.all_sprites, self.pos)
             self.kill()
         if pg.time.get_ticks() - self.spawn_time > BULLET_LIFETIME:
             self.kill()
