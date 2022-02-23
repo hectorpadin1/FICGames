@@ -16,6 +16,9 @@ SPRITE_BOX = 64
 GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
 
+#Music
+MUSIC = 'music/baby.ogg'
+
 # MAPS
 LEVEL1 = 'maps/level1.tmx'
 

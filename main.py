@@ -45,6 +45,8 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.start_screen = StartScreen(self.display)
+        music = pg.mixer.music.load(MUSIC)
+        pg.mixer.music.play(-1)
         self.load_data()
 
     #Cargamos Recursos
