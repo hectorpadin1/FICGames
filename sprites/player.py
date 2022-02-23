@@ -7,6 +7,26 @@ from sprites.bullet import *
 def collide_hit_rect(one, two):
     return one.hit_rect.colliderect(two.rect)
 
+def collide_with_walls(self, dir):
+    if dir == 'x':
+        hits = pg.sprite.spritecollide(self, self.game.walls, False, collide_hit_rect)
+        if hits:
+            if self.vel.x > 0:
+                self.pos.x = hits[0].rect.left - self.hit_rect.width / 2.0
+            if self.vel.x < 0:
+                self.pos.x = hits[0].rect.right + self.hit_rect.width / 2.0
+            self.vel.x = 0
+            self.hit_rect.centerx = self.pos.x
+    if dir == 'y':
+        hits = pg.sprite.spritecollide(self, self.game.walls, False, collide_hit_rect)
+        if hits:
+            if self.vel.y > 0:
+                self.pos.y = hits[0].rect.top - self.hit_rect.height / 2.0
+            if self.vel.y < 0:
+                self.pos.y = hits[0].rect.bottom + self.hit_rect.height / 2.0
+            self.vel.y = 0
+            self.hit_rect.centery = self.pos.y
+
 class Player(pg.sprite.Sprite):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
     def __init__(self, game, x, y):

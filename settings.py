@@ -32,9 +32,15 @@ KICKBACK = 200
 GUN_SPREAD = 5
 BARREL_OFFSET = Vector2(20, 3)
 EXPLOSION_LIFETIME = 100
+BULLET_DAMAGE = 10
 
 # Mob Settings
 MOB_IMAGE = 'assets/soldier.png'
+MOB_SPEED = 150
+MOB_HIT_RECT = Rect(0, 0, 30, 30)
+MOB_HEALTH = 100
+MOB_DAMAGE = 10
+MOB_KNOCKBACK = 20
 
 # Gui Assets
 LOGO_IMG = 'assets/logo.png'
