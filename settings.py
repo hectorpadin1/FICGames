@@ -26,7 +26,7 @@ LEVEL1 = 'maps/level1.tmx'
 MAIN_FONT = "assets/ModernDOS9x16.ttf"
 
 # Player settings
-PLAYER_HEALTH = 1000000000
+PLAYER_HEALTH = 100
 PLAYER_SPEED = 300.0
 PLAYER_ROT_SPEED = 250.0
 PLAYER_IMG = 'assets/soldier.png'

@@ -174,7 +174,7 @@ class Game:
         # Orientado a hacer más sencillos los menus de pausa y la ui
         #Este bucle podría ser interesante combinarlo con el run, de forma que solo haya un bucle infinito que printee algo -> ej run( print_fn() ), pudiendo ser la print_fn de la start screen o del juego
 
-    def show_end_screen(self):
+    def show_gameover(self):
         pass
 
 
@@ -185,4 +185,4 @@ if (__name__ == "__main__"):
     while True:
         g.new() #load level
         g.run()
-        g.show_go_screen()
+        g.show_gameover()
