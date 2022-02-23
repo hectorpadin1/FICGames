@@ -62,6 +62,7 @@ class Game:
     def new(self):
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
+        self.obstacle = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
         self.mobs = pg.sprite.Group()
         # Initial pos of player and collisions
@@ -69,6 +70,9 @@ class Game:
             if tile_object.name == 'player':
                 self.player = Player(self, tile_object.x, tile_object.y)
             if tile_object.name == 'Wall':
+                Wall(self, tile_object.x, tile_object.y, 
+                        tile_object.width, tile_object.height)
+            if tile_object.name == 'Object':
                 Obstacle(self, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
             if tile_object.name == 'mob':
