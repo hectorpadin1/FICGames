@@ -6,6 +6,7 @@ from sprites.explosion import *
 
 
 class Bullet(pg.sprite.Sprite):
+    
     def __init__(self, game, pos, rot):
         self.groups = game.all_sprites, game.bullets
         pg.sprite.Sprite.__init__(self, self.groups)

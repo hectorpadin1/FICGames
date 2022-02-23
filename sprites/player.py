@@ -68,7 +68,9 @@ class Player(pg.sprite.Sprite):
         self.pos += self.vel * self.game.dt
         self.hit_rect.centerx = self.pos.x
         collide_with_walls(self, self.game.walls, 'x')
+        #collide_with_walls(self, self.game.object, 'x')
         self.hit_rect.centery = self.pos.y
         collide_with_walls(self, self.game.walls, 'y')
+        #collide_with_walls(self, self.game.object, 'y')
         self.rect.center = self.hit_rect.center
         
