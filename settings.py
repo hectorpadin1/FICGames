@@ -11,7 +11,7 @@ GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
 
 # MAPS
-LEVEL1 = 'level1.tmx'
+LEVEL1 = 'maps/level1.tmx'
 
 #FONTS
 MAIN_FONT = "assets/ModernDOS9x16.ttf"
@@ -19,11 +19,11 @@ MAIN_FONT = "assets/ModernDOS9x16.ttf"
 # Player settings
 PLAYER_SPEED = 300.0
 PLAYER_ROT_SPEED = 250.0
-PLAYER_IMG = 'soldier.png'
+PLAYER_IMG = 'assets/soldier.png'
 PLAYER_HIT_RECT = Rect(0, 0, 35, 35)
 
 # Settings for Shootings
-BULLET_IMG = 'bullet.png'
+BULLET_IMG = 'assets/bullet.png'
 BULLET_SPEED = 1000
 BULLET_LIFETIME = 2000
 BULLET_RATE = 150
