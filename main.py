@@ -55,6 +55,7 @@ class Game:
         self.map_rect = self.map_img.get_rect()
         #Assets
         self.player_img = pg.image.load(PLAYER_IMG).convert_alpha()
+        self.mob_img = pg.image.load(MOB_IMAGE).convert_alpha()
         #falta tileset, menus...
 
     #Creamos partida: inicializamos sprites 
@@ -62,11 +63,11 @@ class Game:
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
+        self.mobs = pg.sprite.Group()
         # Initial pos of player and collisions
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
                 self.player = Player(self, tile_object.x, tile_object.y)
-                Mob(self, tile_object.x+10*SPRITE_BOX, tile_object.y)
             if tile_object.name == 'Wall':
                 Obstacle(self, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
