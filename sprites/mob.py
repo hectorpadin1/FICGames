@@ -1,7 +1,8 @@
 import pygame as pg
 from settings import *
 from pygame.math import Vector2
-from sprites.player import collide_with_walls
+from sprites.common import collide_with_walls
+
 
 class Mob(pg.sprite.Sprite):
 
@@ -21,7 +22,7 @@ class Mob(pg.sprite.Sprite):
         self.health = MOB_HEALTH
 
     def update(self):
-        self.rot = (self.game.player.pos - self.pos).angle_to(vec(1, 0))
+        self.rot = (self.game.player.pos - self.pos).angle_to(Vector2(1, 0))
         self.image = pg.transform.rotate(self.game.mob_img, self.rot)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos

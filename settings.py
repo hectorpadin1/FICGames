@@ -17,10 +17,12 @@ LEVEL1 = 'maps/level1.tmx'
 MAIN_FONT = "assets/ModernDOS9x16.ttf"
 
 # Player settings
+PLAYER_HEALTH = 100
 PLAYER_SPEED = 300.0
 PLAYER_ROT_SPEED = 250.0
 PLAYER_IMG = 'assets/soldier.png'
 PLAYER_HIT_RECT = Rect(0, 0, 35, 35)
+BARREL_OFFSET = Vector2(20, 3)
 
 # Settings for Shootings
 BULLET_IMG = 'assets/bullet.png'
@@ -30,7 +32,6 @@ BULLET_LIFETIME = 2000
 BULLET_RATE = 150
 KICKBACK = 200
 GUN_SPREAD = 5
-BARREL_OFFSET = Vector2(20, 3)
 EXPLOSION_LIFETIME = 100
 BULLET_DAMAGE = 10
 

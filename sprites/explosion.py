@@ -2,6 +2,7 @@ import pygame as pg
 from settings import *
 from pygame.math import Vector2
 
+
 class Explosion(pg.sprite.Sprite):
 
     def __init__(self, groups, pos) -> None:
