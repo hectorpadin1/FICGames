@@ -12,7 +12,8 @@ class Bullet(pg.sprite.Sprite):
         self.game = game
         dir = Vector2(1, 0).rotate(-rot)
         pos = pos + BARREL_OFFSET.rotate(-rot)
-        self.image = pg.transform.rotate(game.bullet_img, rot-90)
+        self.image = pg.image.load(BULLET_IMG).convert_alpha()
+        self.image = pg.transform.rotate(self.image, rot-90)
         self.rect = self.image.get_rect()
         self.pos = Vector2(pos)
         self.rect.center = pos

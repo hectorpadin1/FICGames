@@ -5,6 +5,7 @@ from settings import *
 from sprites.player import *
 from sprites.wall import *
 from sprites.bullet import *
+from sprites.mob import *
 from gui.start_screen import *
 from tiledmap import *
 from camera import *
@@ -54,7 +55,6 @@ class Game:
         self.map_rect = self.map_img.get_rect()
         #Assets
         self.player_img = pg.image.load(PLAYER_IMG).convert_alpha()
-        self.bullet_img = pg.image.load(BULLET_IMG).convert_alpha()
         #falta tileset, menus...
 
     #Creamos partida: inicializamos sprites 
@@ -62,13 +62,6 @@ class Game:
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
-        # Loading initial map for testing
-        #for row, tiles in enumerate(self.map.data):
-        #    for col, tile in enumerate(tiles):
-        #        if tile == '1':
-        #            Wall(self, col, row)
-        #        elif tile == 'P':
-        #            self.player = Player(self, col, row)
         # Initial pos of player and collisions
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
@@ -76,6 +69,8 @@ class Game:
             if tile_object.name == 'Wall':
                 Obstacle(self, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
+            if tile_object.name == 'mob':
+                Mob(self, self.game, tile_object.x, tile_object.y)
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 

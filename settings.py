@@ -24,6 +24,7 @@ PLAYER_HIT_RECT = Rect(0, 0, 35, 35)
 
 # Settings for Shootings
 BULLET_IMG = 'assets/bullet.png'
+EXPLOSION_IMAGE = 'assets/explode_bullet.png'
 BULLET_SPEED = 1000
 BULLET_LIFETIME = 2000
 BULLET_RATE = 150
@@ -31,6 +32,9 @@ KICKBACK = 200
 GUN_SPREAD = 5
 BARREL_OFFSET = Vector2(20, 3)
 EXPLOSION_LIFETIME = 100
+
+# Mob Settings
+MOB_IMAGE = 'assets/soldier.png'
 
 # Gui Assets
 LOGO_IMG = 'assets/logo.png'

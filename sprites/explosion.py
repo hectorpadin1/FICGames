@@ -8,7 +8,7 @@ class Explosion(pg.sprite.Sprite):
         self.groups = groups
         pg.sprite.Sprite.__init__(self, self.groups)
         self.pos = pos
-        self.image = pg.image.load('assets/explode_bullet.png')
+        self.image = pg.image.load(EXPLOSION_IMAGE)
         self.image = pg.transform.scale(self.image, (0.2 * SPRITE_BOX, 0.2 * SPRITE_BOX))
         self.rect = self.image.get_rect()
         self.pos = Vector2(pos)
