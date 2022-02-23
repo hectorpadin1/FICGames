@@ -11,7 +11,7 @@ YELLOW = (255, 255, 0)
 TITLE = "Juego Molón que mola un montón"
 WIDTH = 1024  # 16 * 64 or 32 * 32 or 64 * 16
 HEIGHT = 768 # 16 * 48 or 32 * 24 or 64 * 12
-FPS = 60
+FPS = 120
 SPRITE_BOX = 64
 GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
@@ -51,6 +51,8 @@ MOB_HIT_RECT = Rect(0, 0, 30, 30)
 MOB_HEALTH = 100
 MOB_DAMAGE = 10
 MOB_KNOCKBACK = 20
+BLOOD_LIFETIME = 10000
+BLOOD_IMAGE = 'assets/blood.png'
 
 # Gui Assets
 LOGO_IMG = 'assets/logo.png'

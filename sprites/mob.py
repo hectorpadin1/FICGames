@@ -2,7 +2,7 @@ import pygame as pg
 from settings import *
 from pygame.math import Vector2
 from sprites.common import collide_with_walls
-from sprites.explosion import Explosion
+from sprites.blood import Blood
 
 
 class Mob(pg.sprite.Sprite):
@@ -52,5 +52,5 @@ class Mob(pg.sprite.Sprite):
             pg.draw.rect(self.image, col, self.health_bar)
     
     def kill(self):
-        Explosion(self.game.all_sprites, self.pos, 1, 1)
+        Blood(self.game.all_sprites, self.pos, 0.5, 0.5, -self.rot-110)
         super().kill()

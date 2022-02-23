@@ -113,8 +113,8 @@ class Game:
     #Actualiza Sprites (muros no) y Camara
     def update(self):
         self.all_sprites.update()
-        self.camera.update(self.player)
         self.bullet_hits()
+        self.camera.update(self.player)
 
 
     ###TEMPORAL###
