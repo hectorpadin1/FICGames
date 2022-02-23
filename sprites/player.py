@@ -51,9 +51,7 @@ class Player(pg.sprite.Sprite):
             now = pg.time.get_ticks()
             if now - self.last_shot > BULLET_RATE:
                 self.last_shot = now
-                dir = Vector2(1, 0).rotate(-self.rot)
-                pos = self.pos + BARREL_OFFSET.rotate(-self.rot)
-                Bullet(self.game, pos, dir)
+                Bullet(self.game, self.pos, self.rot)
 
     def __collide_with_walls(self, dir):
         if dir == 'x':
