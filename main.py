@@ -66,11 +66,12 @@ class Game:
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
                 self.player = Player(self, tile_object.x, tile_object.y)
+                Mob(self, tile_object.x+10*SPRITE_BOX, tile_object.y)
             if tile_object.name == 'Wall':
                 Obstacle(self, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
             if tile_object.name == 'mob':
-                Mob(self, self.game, tile_object.x, tile_object.y)
+                Mob(self, tile_object.x, tile_object.y)
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
