@@ -10,6 +10,7 @@ from sprites.common import collide_hit_rect
 from gui.start_screen import *
 from tiledmap import *
 from camera import *
+import sounds
 
 # Revisar:
 #   - dudas don draw()
@@ -39,15 +40,14 @@ from camera import *
 class Game:
     #Inicializamos Juego
     def __init__(self):
-        pg.mixer.pre_init(44100,-16,2, 3072)
+        sounds.start()
         pg.init()
         self.running = True
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.start_screen = StartScreen(self.display)
-        pg.mixer.music.load(START_MUSIC)
-        pg.mixer.music.play(-1)
+        sounds.play_menu()
         self.load_data()
 
     #Cargamos Recursos
@@ -64,8 +64,7 @@ class Game:
 
     #Creamos partida: inicializamos sprites 
     def new(self):
-        pg.mixer.music.load(MAIN_MUSIC)
-        pg.mixer.music.play(-1)
+        sounds.play_main()
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.obstacle = pg.sprite.Group()

@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+import sounds
 from settings import *
 from gui.button import Button
 
@@ -67,16 +68,12 @@ class StartScreen:
     
     def go_play(self):
         print("play")
-        selection_sound = pg.mixer.Sound(SELECTION)
-        pg.mixer.music.pause()
-        pg.mixer.Sound.play(selection_sound)
+        sounds.play_selection()
         self.running=False
 
     def go_settings(self):
-        selection_sound = pg.mixer.Sound(SELECTION)
-        pg.mixer.music.pause()
-        pg.mixer.Sound.play(selection_sound)
         print("settings")
+        sounds.play_selection()
 
     def go_exit(self):
         pg.quit()
