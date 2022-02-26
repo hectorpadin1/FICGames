@@ -45,7 +45,7 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.start_screen = StartScreen(self.display)
-        music = pg.mixer.music.load(MUSIC)
+        pg.mixer.music.load(START_MUSIC)
         pg.mixer.music.play(-1)
         self.load_data()
 
@@ -63,6 +63,8 @@ class Game:
 
     #Creamos partida: inicializamos sprites 
     def new(self):
+        pg.mixer.music.load(MAIN_MUSIC)
+        pg.mixer.music.play(-1)
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.obstacle = pg.sprite.Group()

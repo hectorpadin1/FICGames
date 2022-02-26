@@ -17,7 +17,9 @@ GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
 
 #Music
-MUSIC = 'music/background.mp3'
+START_MUSIC = 'music/start_background.mp3'
+MAIN_MUSIC = 'music/main_background.ogg'
+SELECTION = 'sound_effects/selection.mp3'
 
 # MAPS
 LEVEL1 = 'maps/level1.tmx'

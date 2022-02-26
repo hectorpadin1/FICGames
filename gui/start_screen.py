@@ -67,9 +67,14 @@ class StartScreen:
     
     def go_play(self):
         print("play")
+        selection_sound = pg.mixer.Sound(SELECTION)
+        pg.mixer.music.pause()
+        pg.mixer.Sound.play(selection_sound)
         self.running=False
 
     def go_settings(self):
+        pg.mixer.music.stop()
+        pg.mixer.Sound.play(selection_sound)
         print("settings")
 
     def go_exit(self):
