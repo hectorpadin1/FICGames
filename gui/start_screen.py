@@ -67,13 +67,13 @@ class StartScreen:
         return 1
     
     def go_play(self):
-        print("play")
         sounds.play_selection()
         self.running=False
+        print("play")
 
     def go_settings(self):
-        print("settings")
         sounds.play_selection()
+        print("settings")
 
     def go_exit(self):
         pg.quit()
