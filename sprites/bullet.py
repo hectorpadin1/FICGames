@@ -2,20 +2,29 @@ import pygame as pg
 from settings import *
 from pygame.math import Vector2
 from random import uniform
+from sprites.explosion import *
 
 
 class Bullet(pg.sprite.Sprite):
-    def __init__(self, game, pos, dir):
+    
+    def __init__(self, game, pos, rot):
         self.groups = game.all_sprites, game.bullets
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = game.bullet_img
+        dir = Vector2(1, 0).rotate(-rot)
+        pos = pos + BARREL_OFFSET.rotate(-rot)
+        self.image = pg.image.load(BULLET_IMG).convert_alpha()
+        self.image = pg.transform.rotate(self.image, rot-90)
         self.rect = self.image.get_rect()
         self.pos = Vector2(pos)
         self.rect.center = pos
         spread = uniform(-GUN_SPREAD, GUN_SPREAD)
         self.vel = dir.rotate(spread) * BULLET_SPEED
         self.spawn_time = pg.time.get_ticks()
+
+    def kill(self,):
+        Explosion(self.game.all_sprites, self.pos, 0.1, 0.1)
+        super().kill()
 
     def update(self):
         self.pos += self.vel * self.game.dt
