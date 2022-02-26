@@ -49,6 +49,8 @@ class Game:
         self.start_screen = StartScreen(self.display)
         sounds.play_menu()
         self.load_data()
+        pg.mouse.set_cursor(*pg.cursors.broken_x)
+
 
     #Cargamos Recursos
     def load_data(self):
