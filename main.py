@@ -49,6 +49,8 @@ class Game:
         pg.mixer.music.load(START_MUSIC)
         pg.mixer.music.play(-1)
         self.load_data()
+        pg.mouse.set_cursor(*pg.cursors.broken_x)
+
 
     #Cargamos Recursos
     def load_data(self):
