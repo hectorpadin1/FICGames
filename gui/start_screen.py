@@ -73,7 +73,8 @@ class StartScreen:
         self.running=False
 
     def go_settings(self):
-        pg.mixer.music.stop()
+        selection_sound = pg.mixer.Sound(SELECTION)
+        pg.mixer.music.pause()
         pg.mixer.Sound.play(selection_sound)
         print("settings")
 

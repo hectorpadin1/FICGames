@@ -16,10 +16,11 @@ SPRITE_BOX = 64
 GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
 
-#Music
+#SOUNDS
 START_MUSIC = 'music/start_background.mp3'
 MAIN_MUSIC = 'music/main_background.ogg'
 SELECTION = 'sound_effects/selection.mp3'
+METRALLETA = 'sound_effects/metralleta.mp3'
 
 # MAPS
 LEVEL1 = 'maps/level1.tmx'

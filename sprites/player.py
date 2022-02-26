@@ -48,6 +48,8 @@ class Player(pg.sprite.Sprite):
         if self.vel.x!=0 and self.vel.y !=0:
             self.vel *= cos(pi/4)
         if keys[pg.K_SPACE]:
+            bullet_sound = pg.mixer.Sound(METRALLETA)
+            pg.mixer.Sound.play(bullet_sound)
             now = pg.time.get_ticks()
             if now - self.last_shot > BULLET_RATE:
                 self.last_shot = now

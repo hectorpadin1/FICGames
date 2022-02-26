@@ -39,6 +39,7 @@ from camera import *
 class Game:
     #Inicializamos Juego
     def __init__(self):
+        pg.mixer.pre_init(44100,-16,2, 3072)
         pg.init()
         self.running = True
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
