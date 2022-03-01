@@ -2,13 +2,14 @@ import pygame as pg
 import pytmx
 from settings import *
 import sys
+from gestorrecursos import GestorRecursos as GR
 
 
 
 class TiledMap:
     def __init__(self, level):
         if level==1:
-            tm = pytmx.load_pygame(LEVEL1, pixelalpha=True)
+            tm = GR.load_map(GR.LEVEL1)
         else:
             print("El mapa no existe")
             sys.exit()

@@ -10,12 +10,10 @@ from sprites.common import collide_hit_rect
 from gui.start_screen import *
 from tiledmap import *
 from camera import *
-import sounds
+from gestorrecursos import GestorRecursos as GR
 
 # Revisar:
-#   - dudas don draw()
-#       -display.update vs display flip ??
-#       -display blit -> for sprites? -> printea en superficie, pero sobre el center o klk???
+#   audio esta como el ojete, cargarse todos los pg.mixer.music -> y usar sounds.py
 
 #diccionario nivel-fichero -> inyeccion dependencias (patrón factoría)
 #gestor de recursos -> sigleton creo que era como un decoradors
@@ -26,8 +24,6 @@ import sounds
 #   - Grupos -> sprite añade a los grupos que se le pasan, pero es necesario pasarle el juego ¿?
 #   - Acoplamiento del juego en los sprites
 #   - Para el ratón en la UI, usamos eventos o raton get pos??
-#   
-#
 
 
 #
@@ -40,14 +36,15 @@ import sounds
 class Game:
     #Inicializamos Juego
     def __init__(self):
-        sounds.start()
+        pg.mixer.pre_init(44100,-16,2, 3072)
         pg.init()
         self.running = True
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.start_screen = StartScreen(self.display)
-        sounds.play_menu()
+        pg.mixer.music.load(START_MUSIC)
+        pg.mixer.music.play(-1)
         self.load_data()
         pg.mouse.set_cursor(*pg.cursors.broken_x)
 
@@ -60,13 +57,14 @@ class Game:
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
         #Assets
-        self.player_img = pg.image.load(PLAYER_IMG).convert_alpha()
-        self.mob_img = pg.image.load(MOB_IMAGE).convert_alpha()
+        self.player_img = GR.load_image(GR.PLAYER_IMG)
+        self.mob_img = GR.load_image(GR.MOB_IMAGE)
         #falta tileset, menus...
 
-    #Creamos partida: inicializamos sprites 
+    #Creamos partida: inicializamos sprites -> esto está mal aqui
     def new(self):
-        sounds.play_main()
+        pg.mixer.music.load(MAIN_MUSIC) #BRO POR DIOS USA sounds.py y hazlo orientado a objetos
+        pg.mixer.music.play(-1)
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.obstacle = pg.sprite.Group()

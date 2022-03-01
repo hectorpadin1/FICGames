@@ -1,6 +1,7 @@
 import pygame as pg
 import sys
 from settings import *
+from gestorrecursos import GestorRecursos as GR
 
 class Button:
     #Inicializamos el botón mostrándolo en pantalla
@@ -9,7 +10,7 @@ class Button:
         self.callback = callback
 
         #Bg Btn
-        bg = pg.image.load(BTN_BG)
+        bg = GR.load_image(GR.BTN_BG)
         self.rect = bg.get_rect()
         self.rect.center = (WIDTH/2+dx,HEIGHT/2+dy)
         self.display.blit(bg, self.rect) 
@@ -18,7 +19,7 @@ class Button:
         self.hover = self.rect.collidepoint(mouse_pos)
 
         #Text
-        font = pg.font.Font(MAIN_FONT,GUI_FONT_SIZE)
+        font = GR.load_font(GR.MAIN_FONT,GUI_FONT_SIZE)
         color = (255,255,255)
         if self.hover:
             color = (154,122,37)
