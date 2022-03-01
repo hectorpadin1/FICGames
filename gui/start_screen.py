@@ -1,9 +1,9 @@
 import pygame as pg
 import sys
-import sounds
 from settings import *
 from gui.button import Button
 from gestorrecursos import GestorRecursos as GR
+from soundcontroller import SoundController as SC
 
 class StartScreen:
 
@@ -68,12 +68,12 @@ class StartScreen:
         return 1
     
     def go_play(self):
-        sounds.play_selection()
+        SC.play_selection()
         self.running=False
         print("play")
 
     def go_settings(self):
-        sounds.play_selection()
+        SC.play_selection()
         print("settings")
 
     def go_exit(self):

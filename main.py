@@ -11,6 +11,7 @@ from gui.start_screen import *
 from tiledmap import *
 from camera import *
 from gestorrecursos import GestorRecursos as GR
+from soundcontroller import SoundController as SC
 
 # Revisar:
 #   audio esta como el ojete, cargarse todos los pg.mixer.music -> y usar sounds.py
@@ -36,15 +37,13 @@ from gestorrecursos import GestorRecursos as GR
 class Game:
     #Inicializamos Juego
     def __init__(self):
-        pg.mixer.pre_init(44100,-16,2, 3072)
-        pg.init()
+        SC.init()
+        SC.play_menu() #que lo pondría mas bien a la hora de cargar el menú
         self.running = True
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.start_screen = StartScreen(self.display)
-        pg.mixer.music.load(START_MUSIC)
-        pg.mixer.music.play(-1)
         self.load_data()
         pg.mouse.set_cursor(*pg.cursors.broken_x)
 

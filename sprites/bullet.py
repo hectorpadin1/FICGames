@@ -4,7 +4,7 @@ from pygame.math import Vector2
 from random import uniform
 from sprites.explosion import *
 from gestorrecursos import GestorRecursos as GR
-from sounds import play_metralleta
+from soundcontroller import SoundController as SC
 
 
 class Bullet(pg.sprite.Sprite):
@@ -23,7 +23,7 @@ class Bullet(pg.sprite.Sprite):
         spread = uniform(-GUN_SPREAD, GUN_SPREAD)
         self.vel = dir.rotate(spread) * BULLET_SPEED
         self.spawn_time = pg.time.get_ticks()
-        play_metralleta()
+        SC.play_metralleta()
 
     def kill(self,):
         Explosion(self.game.all_sprites, self.pos, 0.1, 0.1)

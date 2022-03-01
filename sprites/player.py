@@ -6,6 +6,7 @@ from sprites.bullet import *
 from sprites.common import collide_with_walls
 
 
+
 class Player(pg.sprite.Sprite):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
     def __init__(self, game, x, y):
