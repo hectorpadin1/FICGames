@@ -7,7 +7,7 @@ class SoundController:
     @classmethod
     def init(self):
         pg.mixer.pre_init(44100,-16,2, 3072)
-        pg.init()
+        pg.mixer.init()
 
     @classmethod
     def play_menu(self):
