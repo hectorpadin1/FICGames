@@ -10,7 +10,6 @@ from sprites.common import collide_hit_rect
 from gui.start_screen import *
 from tiledmap import *
 from camera import *
-from gestorrecursos import GestorRecursos as GR
 from soundcontroller import SoundController as SC
 
 # Revisar:
@@ -35,40 +34,46 @@ from soundcontroller import SoundController as SC
 
 
 class Game:
-    #Inicializamos Juego
+    
     def __init__(self):
-        SC.init()
-        SC.play_menu() #que lo pondría mas bien a la hora de cargar el menú
-        self.running = True
-        self.display = pg.display.set_mode((WIDTH, HEIGHT))
+        #Inicializamos
+        pg.init()
         pg.display.set_caption(TITLE)
+        pg.mouse.set_cursor(*pg.cursors.broken_x)
+        self.display = pg.display.set_mode((WIDTH, HEIGHT))
         self.clock = pg.time.Clock()
+
+        #Sonido
+        SC.init()
+        SC.play_menu() # -> ponerlo donde se carga el menú?
+
+        self.running = True
         self.start_screen = StartScreen(self.display)
         self.load_data()
-        pg.mouse.set_cursor(*pg.cursors.broken_x)
 
 
-    #Cargamos Recursos
+    #Cargamos Recursos -> Borrarlo en un futuro
     def load_data(self):
         #Mapa
         self.map = TiledMap(1)
         #Render del mapa
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
-        #Assets
-        self.player_img = GR.load_image(GR.PLAYER_IMG)
-        self.mob_img = GR.load_image(GR.MOB_IMAGE)
-        #falta tileset, menus...
 
-    #Creamos partida: inicializamos sprites -> esto está mal aqui
+    
+
+    #Creamos partida: inicializamos sprites -> esto está mal aqui, tendrá que ir a la fase correspondiente
     def new(self):
-        pg.mixer.music.load(MAIN_MUSIC) #BRO POR DIOS USA sounds.py y hazlo orientado a objetos
-        pg.mixer.music.play(-1)
+        #Música
+        SC.play_main()
+
+        #Grupos
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.obstacle = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
         self.mobs = pg.sprite.Group()
+
         # Initial pos of player and collisions
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
@@ -118,20 +123,8 @@ class Game:
         self.camera.update(self.player)
 
 
-    ###TEMPORAL###
-    def draw_grid(self):
-        grid_color = (125,125,12)
-        #Horizontal
-        for x in range(0, WIDTH, SPRITE_BOX):
-            pg.draw.line(self.display, grid_color, (x, 0), (x, HEIGHT))
-        #Vertical
-        for y in range(0, HEIGHT, SPRITE_BOX):
-            pg.draw.line(self.display, grid_color, (0, y), (WIDTH, y))
-
-    #Pinta
     def draw(self):
-        #self.display.fill((0,0,0)) #Fondo
-        #self.draw_grid()#tmp
+        
         self.display.blit(self.map_img, self.camera.apply_rect(self.map_rect))
         #Sprites
         for sprite in self.all_sprites:

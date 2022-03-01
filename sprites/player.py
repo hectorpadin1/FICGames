@@ -4,16 +4,19 @@ from math import cos, pi
 from settings import *
 from sprites.bullet import *
 from sprites.common import collide_with_walls
+from soundcontroller import SoundController as SC
 
 
+#NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
+
+#ESTA FATAL, ACOPLADÏSIMO
 
 class Player(pg.sprite.Sprite):
-    #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
-    def __init__(self, game, x, y):
+    def __init__(self, game,x, y):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = game.player_img
+        self.image = GR.load_image(GR.PLAYER_IMG)
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.hit_rect = PLAYER_HIT_RECT
@@ -57,7 +60,7 @@ class Player(pg.sprite.Sprite):
     def __rotate(self):
         direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))
-        self.image = pg.transform.rotate(self.game.player_img, self.rot)
+        self.image = pg.transform.rotate(GR.load_image(GR.PLAYER_IMG), self.rot)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
     

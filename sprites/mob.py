@@ -3,6 +3,7 @@ from settings import *
 from pygame.math import Vector2
 from sprites.common import collide_with_walls
 from sprites.blood import Blood
+from gestorrecursos import GestorRecursos as GR
 
 
 class Mob(pg.sprite.Sprite):
@@ -11,7 +12,7 @@ class Mob(pg.sprite.Sprite):
         self.groups = game.all_sprites, game.mobs
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = game.mob_img
+        self.image = GR.load_image(GR.MOB_IMAGE)
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.hit_rect = MOB_HIT_RECT.copy()
@@ -24,7 +25,7 @@ class Mob(pg.sprite.Sprite):
 
     def update(self):
         self.rot = (self.game.player.pos - self.pos).angle_to(Vector2(1, 0))
-        self.image = pg.transform.rotate(self.game.mob_img, self.rot)
+        self.image = pg.transform.rotate(GR.load_image(GR.MOB_IMAGE), self.rot)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
         self.acc = Vector2(MOB_SPEED, 0).rotate(-self.rot)
