@@ -1,5 +1,7 @@
 import pygame as pg
 
+#Esto debe de estar dentro de sprite
+
 def collide_hit_rect(one, two):
     return one.hit_rect.colliderect(two.rect)
 
