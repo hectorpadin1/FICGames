@@ -6,7 +6,6 @@ from sprites.player import *
 from sprites.wall import *
 from sprites.bullet import *
 from sprites.mob import *
-from sprites.common import collide_hit_rect
 from gui.start_screen import *
 from tiledmap import *
 from camera import *
@@ -32,6 +31,8 @@ from soundcontroller import SoundController as SC
 #   - poner subtexto debajo del título en menu de inicio
 #   - cambiar captions en menus
 
+def collide_hit_rect(one, two):
+        return one.hit_rect.colliderect(two.rect)
 
 class Game:
     
@@ -77,7 +78,7 @@ class Game:
         # Initial pos of player and collisions
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
-                self.player = Player(self, tile_object.x, tile_object.y)
+                self.player = Player(self, tile_object.x, tile_object.y, [self.walls, self.obstacle])
                 #Mob(self, tile_object.x+10, tile_object.y)
             if tile_object.name == 'Wall':
                 Wall(self, tile_object.x, tile_object.y, 
@@ -87,12 +88,12 @@ class Game:
                         tile_object.width, tile_object.height)
             if tile_object.name == 'mob':
                 # dd cojones se spawnea esto xdddd
-                Mob(self, tile_object.x, tile_object.y)
-        Mob(self, 700, 1560)
-        Mob(self, 700, 1560)
-        Mob(self, 700, 1560)
-        Mob(self, 700, 1560)
-        Mob(self, 700, 1560)
+                Mob(self, tile_object.x, tile_object.y, [self.walls, self.obstacle])
+        Mob(self, 700, 1560, [self.walls, self.obstacle])
+        Mob(self, 700, 1560, [self.walls, self.obstacle])
+        Mob(self, 700, 1560, [self.walls, self.obstacle])
+        Mob(self, 700, 1560, [self.walls, self.obstacle])
+        Mob(self, 700, 1560, [self.walls, self.obstacle])
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
@@ -101,6 +102,11 @@ class Game:
         pg.quit()
         sys.exit()
 
+    '''
+    CAMBIAR DE SITIO, a bullet por ejemplo¿?
+    o que sea el jugador elq lo compruebe ¿?
+    '''
+    
     def bullet_hits(self):
         hits = pg.sprite.spritecollide(self.player, self.mobs, False, collide_hit_rect)
         for hit in hits:

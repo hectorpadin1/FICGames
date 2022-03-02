@@ -4,14 +4,14 @@ from pygame.math import Vector2
 from math import cos, pi
 from settings import *
 from sprites.bullet import *
-from sprites.common import collide_with_walls
+from gestorrecursos import GestorRecursos as GR
 from soundcontroller import SoundController as SC
 
 
 class Player(Character):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
-    def __init__(self, game, x, y):
-        super().__init__(game.all_sprites, game.player_img, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH)
+    def __init__(self, game, x, y, collide_groups):
+        super().__init__(game.all_sprites, GR.load_image(GR.PLAYER_IMG), PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
         self.game = game
         self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
@@ -43,14 +43,7 @@ class Player(Character):
             now = pg.time.get_ticks()
             if now - self.last_shot > BULLET_RATE:
                 self.last_shot = now
-                Bullet(self.game, self.pos, self.rot)
-        
-    def __rotate(self):
-        direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
-        self.rot = direction.angle_to(Vector2(1, 0))
-        self.image = pg.transform.rotate(GR.load_image(GR.PLAYER_IMG), self.rot)
-        self.rect = self.image.get_rect()
-        self.rect.center = self.pos
+                Bullet(self.game, self.pos, self.rot)        
     
     def draw_health(self, display, x, y, pct):
         if pct < 0:
@@ -71,15 +64,11 @@ class Player(Character):
 
     def update(self):
         # Checks where it has to move
-        self.__rotate()
+        direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
+        self.rot = direction.angle_to(Vector2(1, 0))
+        self.image = pg.transform.rotate(GR.load_image(GR.PLAYER_IMG), self.rot)
         self.__get_keys()
         # Moves in time, not in pixels, independent of our frame rate
         self.pos += self.vel * self.game.dt
-        self.hit_rect.centerx = self.pos.x
-        collide_with_walls(self, self.game.walls, 'x')
-        collide_with_walls(self, self.game.obstacle, 'x')
-        self.hit_rect.centery = self.pos.y
-        collide_with_walls(self, self.game.walls, 'y')
-        collide_with_walls(self, self.game.obstacle, 'y')
-        self.rect.center = self.hit_rect.center
+        super().update()
         
