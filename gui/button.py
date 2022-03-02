@@ -3,35 +3,43 @@ import sys
 from settings import *
 from gestorrecursos import GestorRecursos as GR
 
-class Button:
+# ESTO DEBERÍA PONERLO COMO SPRITE
+
+class Button():
     #Inicializamos el botón mostrándolo en pantalla
-    def __init__(self, display, text, mouse_pos, callback, dx=0, dy=0):
-        self.display = display #Esto No se yo si estará bien aquí -> revisar patrones
+    def __init__(self, text, callback, dx=0, dy=0):
         self.callback = callback
 
         #Bg Btn
-        bg = GR.load_image(GR.BTN_BG)
-        self.rect = bg.get_rect()
+        self.bg = GR.load_image(GR.BTN_BG)
+        self.rect = self.bg.get_rect()
         self.rect.center = (WIDTH/2+dx,HEIGHT/2+dy)
-        self.display.blit(bg, self.rect) 
-
+        
         #Hovered
-        self.hover = self.rect.collidepoint(mouse_pos)
+        self.hover = False
 
         #Text
         font = GR.load_font(GR.MAIN_FONT,GUI_FONT_SIZE)
-        color = (255,255,255)
+    
+        self.text_surface = font.render(text, True, (255,255,255))
+        self.text_surface_hover = font.render(text, True, (154,122,37)) # poner color viejo que me cargué
+
+        self.text_rect = self.text_surface.get_rect()
+        self.text_rect.center = (WIDTH/2+dx,HEIGHT/2+dy)
+        
+
+    def update(self, mouse_pos, click):
+        self.hover = self.rect.collidepoint(mouse_pos)
+        if self.hover and click:
+            self.callback()
+        
+    def draw(self, display):
+        display.blit(self.bg, self.rect) 
+        text = self.text_surface
         if self.hover:
-            color = (154,122,37)
-        text_surface = font.render(text, True, color)
-        text_rect = text_surface.get_rect()
-        text_rect.center = (WIDTH/2+dx,HEIGHT/2+dy)
-        self.display.blit(text_surface,text_rect)
+            text = self.text_surface_hover
+
+        display.blit(text,self.text_rect)   
 
     def get_size(self):
         return self.rect.size
-
-    def exec_callback(self):
-        if self.hover:
-            self.callback()
-        return self.hover

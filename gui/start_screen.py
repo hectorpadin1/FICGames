@@ -1,10 +1,13 @@
 import pygame as pg
 import sys
 from settings import *
-from gui.button import Button
+from gui.buttonviejo import Button
 from gestorrecursos import GestorRecursos as GR
 from soundcontroller import SoundController as SC
 
+#########################################################
+#   ESTO SE TIENE QUE BORRAR
+########################################################
 class StartScreen:
 
     def __init__(self,display):
