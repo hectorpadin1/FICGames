@@ -1,11 +1,11 @@
 import pygame as pg
 from sprites.character import Character
-import sounds
 from pygame.math import Vector2
 from math import cos, pi
 from settings import *
 from sprites.bullet import *
 from sprites.common import collide_with_walls
+from soundcontroller import SoundController as SC
 
 
 class Player(Character):
@@ -40,7 +40,6 @@ class Player(Character):
         if self.vel.x!=0 and self.vel.y !=0:
             self.vel *= cos(pi/4)
         if keys[pg.K_SPACE]:
-            sounds.play_metralleta()
             now = pg.time.get_ticks()
             if now - self.last_shot > BULLET_RATE:
                 self.last_shot = now
@@ -49,7 +48,7 @@ class Player(Character):
     def __rotate(self):
         direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))
-        self.image = pg.transform.rotate(self.game.player_img, self.rot)
+        self.image = pg.transform.rotate(GR.load_image(GR.PLAYER_IMG), self.rot)
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
     

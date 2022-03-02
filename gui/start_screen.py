@@ -1,8 +1,9 @@
 import pygame as pg
 import sys
-import sounds
 from settings import *
 from gui.button import Button
+from gestorrecursos import GestorRecursos as GR
+from soundcontroller import SoundController as SC
 
 class StartScreen:
 
@@ -24,7 +25,7 @@ class StartScreen:
 
     #Dibuja Caja Centrada y Devuelve su tamaño
     def draw_box(self):
-        bg = pg.image.load(BOX_BG)
+        bg = GR.load_image(GR.BOX_BG) 
         rect = bg.get_rect()
         rect.center = (WIDTH/2,HEIGHT/2)
         self.display.blit(bg, rect) 
@@ -32,7 +33,7 @@ class StartScreen:
     
     #Dibuja Logo Centrado con la posibilidad de añadirle un desplazamiento
     def draw_logo(self, dx=0, dy=0):
-        logo = pg.image.load(LOGO_IMG)
+        logo = GR.load_image(GR.LOGO_IMG)
         rect = logo.get_rect()
         rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
         self.display.blit(logo, rect) 
@@ -67,12 +68,12 @@ class StartScreen:
         return 1
     
     def go_play(self):
-        sounds.play_selection()
+        SC.play_selection()
         self.running=False
         print("play")
 
     def go_settings(self):
-        sounds.play_selection()
+        SC.play_selection()
         print("settings")
 
     def go_exit(self):

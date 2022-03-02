@@ -10,12 +10,10 @@ from sprites.common import collide_hit_rect
 from gui.start_screen import *
 from tiledmap import *
 from camera import *
-import sounds
+from soundcontroller import SoundController as SC
 
 # Revisar:
-#   - dudas don draw()
-#       -display.update vs display flip ??
-#       -display blit -> for sprites? -> printea en superficie, pero sobre el center o klk???
+#   audio esta como el ojete, cargarse todos los pg.mixer.music -> y usar sounds.py
 
 #diccionario nivel-fichero -> inyeccion dependencias (patrón factoría)
 #gestor de recursos -> sigleton creo que era como un decoradors
@@ -26,8 +24,6 @@ import sounds
 #   - Grupos -> sprite añade a los grupos que se le pasan, pero es necesario pasarle el juego ¿?
 #   - Acoplamiento del juego en los sprites
 #   - Para el ratón en la UI, usamos eventos o raton get pos??
-#   
-#
 
 
 #
@@ -38,40 +34,46 @@ import sounds
 
 
 class Game:
-    #Inicializamos Juego
+    
     def __init__(self):
-        sounds.start()
+        #Inicializamos
         pg.init()
-        self.running = True
-        self.display = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
-        self.clock = pg.time.Clock()
-        self.start_screen = StartScreen(self.display)
-        sounds.play_menu()
-        self.load_data()
         pg.mouse.set_cursor(*pg.cursors.broken_x)
+        self.display = pg.display.set_mode((WIDTH, HEIGHT))
+        self.clock = pg.time.Clock()
+
+        #Sonido
+        SC.init()
+        SC.play_menu() # -> ponerlo donde se carga el menú?
+
+        self.running = True
+        self.start_screen = StartScreen(self.display)
+        self.load_data()
 
 
-    #Cargamos Recursos
+    #Cargamos Recursos -> Borrarlo en un futuro
     def load_data(self):
         #Mapa
         self.map = TiledMap(1)
         #Render del mapa
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
-        #Assets
-        self.player_img = pg.image.load(PLAYER_IMG).convert_alpha()
-        self.mob_img = pg.image.load(MOB_IMAGE).convert_alpha()
-        #falta tileset, menus...
 
-    #Creamos partida: inicializamos sprites 
+    
+
+    #Creamos partida: inicializamos sprites -> esto está mal aqui, tendrá que ir a la fase correspondiente
     def new(self):
-        sounds.play_main()
+        #Música
+        SC.play_main()
+
+        #Grupos
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.obstacle = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
         self.mobs = pg.sprite.Group()
+
         # Initial pos of player and collisions
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
@@ -121,20 +123,8 @@ class Game:
         self.camera.update(self.player)
 
 
-    ###TEMPORAL###
-    def draw_grid(self):
-        grid_color = (125,125,12)
-        #Horizontal
-        for x in range(0, WIDTH, SPRITE_BOX):
-            pg.draw.line(self.display, grid_color, (x, 0), (x, HEIGHT))
-        #Vertical
-        for y in range(0, HEIGHT, SPRITE_BOX):
-            pg.draw.line(self.display, grid_color, (0, y), (WIDTH, y))
-
-    #Pinta
     def draw(self):
-        #self.display.fill((0,0,0)) #Fondo
-        #self.draw_grid()#tmp
+        
         self.display.blit(self.map_img, self.camera.apply_rect(self.map_rect))
         #Sprites
         for sprite in self.all_sprites:
