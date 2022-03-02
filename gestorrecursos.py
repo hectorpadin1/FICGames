@@ -16,7 +16,7 @@ class GestorRecursos:
     EXPLOSION_IMAGE = 'images-sprites/explode_bullet.png'
     MOB_IMAGE       = 'images-sprites/soldier.png'
     BLOOD_IMAGE     = 'images-sprites/blood.png'
-
+    
     # GUI IMAGES
     LOGO_IMG = 'images-gui/logo.png'
     BTN_BG   = 'images-gui/btn_bg.png'

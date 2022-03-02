@@ -3,10 +3,10 @@ import pygame as pg
 class Control:
 
     #abstracta control? -> yo creo k no hace falta
-
+    
     #algo de este rollo
-    def arriba(self,events):
-        return pg.K_a in events
+    def arriba(self):
+        return
 
     def abajo(self):
         pass
@@ -18,4 +18,4 @@ class Control:
         pass    
 
     def disparo(self):
-        pass    
+        pass

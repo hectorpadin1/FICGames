@@ -11,7 +11,7 @@ from soundcontroller import SoundController as SC
 class Player(Character):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
     def __init__(self, game, x, y, collide_groups):
-        super().__init__(game.all_sprites, GR.load_image(GR.PLAYER_IMG), PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
+        super().__init__(game.all_sprites, GR.PLAYER_IMG, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
         self.game = game
         self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
@@ -34,7 +34,7 @@ class Player(Character):
         # Oposite movements
         if keys[pg.K_a] and keys[pg.K_d]:
             self.vel.x = 0
-        if keys[pg.K_w] and keys[pg.K_s]:   
+        if keys[pg.K_w] and keys[pg.K_s]:
             self.vel.y = 0
         # Diagonal movements        
         if self.vel.x!=0 and self.vel.y !=0:
@@ -43,7 +43,7 @@ class Player(Character):
             now = pg.time.get_ticks()
             if now - self.last_shot > BULLET_RATE:
                 self.last_shot = now
-                Bullet(self.game, self.pos, self.rot)        
+                Bullet(self.game, self.pos, self.rot, [self.game.walls])        
     
     def draw_health(self, display, x, y, pct):
         if pct < 0:
@@ -66,7 +66,6 @@ class Player(Character):
         # Checks where it has to move
         direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))
-        self.image = pg.transform.rotate(GR.load_image(GR.PLAYER_IMG), self.rot)
         self.__get_keys()
         # Moves in time, not in pixels, independent of our frame rate
         self.pos += self.vel * self.game.dt

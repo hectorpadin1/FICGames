@@ -69,6 +69,10 @@ class Game:
         SC.play_main()
 
         #Grupos
+        '''
+        Idea -> desacoplar los grupos y ponerlos en un fichero aparte donde puedan acceder todas las clases
+        y asi no necesitar la clase juego para spawnearlos 
+        '''
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.obstacle = pg.sprite.Group()

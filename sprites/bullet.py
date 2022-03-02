@@ -9,8 +9,9 @@ from soundcontroller import SoundController as SC
 
 class Bullet(pg.sprite.Sprite):
     
-    def __init__(self, game, pos, rot):
+    def __init__(self, game, pos, rot, collide_groups):
         self.groups = game.all_sprites, game.bullets
+        self.collision_groups = collide_groups
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         dir = Vector2(1, 0).rotate(-rot)
@@ -32,8 +33,9 @@ class Bullet(pg.sprite.Sprite):
     def update(self):
         self.pos += self.vel * self.game.dt
         self.rect.center = self.pos
-        if pg.sprite.spritecollideany(self, self.game.walls):
-            self.kill()
+        for group in self.collision_groups:
+            if pg.sprite.spritecollideany(self, group):
+                self.kill()
         if pg.time.get_ticks() - self.spawn_time > BULLET_LIFETIME:
             self.kill()
     

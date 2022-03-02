@@ -10,13 +10,12 @@ class Mob(Character):
 
     def __init__(self, game, x, y, collide_groups):
         groups = game.all_sprites, game.mobs
-        super().__init__(groups, GR.load_image(GR.MOB_IMAGE), MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups)
+        super().__init__(groups, GR.MOB_IMAGE, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups)
         self.game = game
         self.acc = Vector2(0, 0)
 
     def update(self):
         self.rot = (self.game.player.pos - self.pos).angle_to(Vector2(1, 0))
-        self.image = pg.transform.rotate(GR.load_image(GR.MOB_IMAGE), self.rot)
         self.acc = Vector2(MOB_SPEED, 0).rotate(-self.rot)
         self.acc += self.vel * -1
         self.vel += self.acc * self.game.dt

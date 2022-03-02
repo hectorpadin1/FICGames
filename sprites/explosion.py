@@ -7,8 +7,7 @@ from gestorrecursos import GestorRecursos as GR
 class Explosion(pg.sprite.Sprite):
 
     def __init__(self, groups, pos, sx, sy) -> None:
-        self.groups = groups
-        pg.sprite.Sprite.__init__(self, self.groups)
+        pg.sprite.Sprite.__init__(self, groups)
         self.pos = pos
         self.image = GR.load_image(GR.EXPLOSION_IMAGE)
         self.image = pg.transform.scale(self.image, (sx * SPRITE_BOX, sy * SPRITE_BOX))

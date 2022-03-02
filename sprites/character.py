@@ -1,12 +1,14 @@
 import pygame as pg
 from pygame.math import Vector2
+from gestorrecursos import GestorRecursos as GR
 
 
 class Character(pg.sprite.Sprite):
     def __init__(self, groups, img, hit_rect, x, y, health, collide_groups):
         super().__init__(groups)
-        self.image = img
-        self.rect = img.get_rect()
+        self.image_path = img
+        self.image = GR.load_image(img)
+        self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.hit_rect = hit_rect
         self.hit_rect.center = self.rect.center
@@ -42,6 +44,7 @@ class Character(pg.sprite.Sprite):
     def update(self):
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
+        self.image = pg.transform.rotate(GR.load_image(self.image_path), self.rot)
         self.hit_rect.centerx = self.pos.x
         for group in self.collision_groups:
             self.__collide_with_walls(self, group, 'x')
