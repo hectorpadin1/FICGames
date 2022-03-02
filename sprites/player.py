@@ -1,4 +1,5 @@
 import pygame as pg
+from sprites.character import Character
 import sounds
 from pygame.math import Vector2
 from math import cos, pi
@@ -7,24 +8,14 @@ from sprites.bullet import *
 from sprites.common import collide_with_walls
 
 
-class Player(pg.sprite.Sprite):
+class Player(Character):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
     def __init__(self, game, x, y):
-        self.groups = game.all_sprites
-        pg.sprite.Sprite.__init__(self, self.groups)
+        super().__init__(game.all_sprites, game.player_img, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH)
         self.game = game
-        self.image = game.player_img
-        self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
-        self.hit_rect = PLAYER_HIT_RECT
-        self.hit_rect.center = self.rect.center
-        self.vel = Vector2(0, 0)
-        self.pos = Vector2(x, y)
-        self.rot = 0
         self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()
-        self.health = PLAYER_HEALTH
     
     # Dynamics of player movements
     def __get_keys(self):

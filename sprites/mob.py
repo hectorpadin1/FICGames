@@ -8,19 +8,10 @@ from sprites.blood import Blood
 class Mob(pg.sprite.Sprite):
 
     def __init__(self, game, x, y):
-        self.groups = game.all_sprites, game.mobs
-        pg.sprite.Sprite.__init__(self, self.groups)
+        groups = game.all_sprites, game.mobs
+        super().__init__(groups, game.mob_img, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH)
         self.game = game
-        self.image = game.mob_img
-        self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
-        self.hit_rect = MOB_HIT_RECT.copy()
-        self.hit_rect.center = self.rect.center
-        self.vel = Vector2(0, 0)
-        self.pos = Vector2(x, y)
         self.acc = Vector2(0, 0)
-        self.rot = 0
-        self.health = MOB_HEALTH
 
     def update(self):
         self.rot = (self.game.player.pos - self.pos).angle_to(Vector2(1, 0))
