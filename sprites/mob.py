@@ -14,12 +14,12 @@ class Mob(Character):
         self.game = game
         self.acc = Vector2(0, 0)
 
-    def update(self):
+    def update(self, dt):
         self.rot = (self.game.player.pos - self.pos).angle_to(Vector2(1, 0))
         self.acc = Vector2(MOB_SPEED, 0).rotate(-self.rot)
         self.acc += self.vel * -1
-        self.vel += self.acc * self.game.dt
-        self.pos += self.vel * self.game.dt + 0.5 * self.acc * self.game.dt ** 2
+        self.vel += self.acc * (dt/1000)
+        self.pos += self.vel * (dt/1000) + 0.5 * self.acc * (dt/1000) ** 2
         if self.health <= 0:
             self.kill()
         super().update()

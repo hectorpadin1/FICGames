@@ -62,12 +62,12 @@ class Player(Character):
         pg.draw.rect(display, col, fill_rect)
         pg.draw.rect(display, WHITE, outline_rect, 2)
 
-    def update(self):
+    def update(self, dt):
         # Checks where it has to move
         direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))
         self.__get_keys()
         # Moves in time, not in pixels, independent of our frame rate
-        self.pos += self.vel * self.game.dt
+        self.pos += self.vel * (dt/1000)
         super().update()
         

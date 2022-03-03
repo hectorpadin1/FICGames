@@ -30,8 +30,8 @@ class Bullet(pg.sprite.Sprite):
         Explosion(self.game.all_sprites, self.pos, 0.1, 0.1)
         super().kill()
 
-    def update(self):
-        self.pos += self.vel * self.game.dt
+    def update(self, dt):
+        self.pos += self.vel * (dt/1000)
         self.rect.center = self.pos
         for group in self.collision_groups:
             if pg.sprite.spritecollideany(self, group):

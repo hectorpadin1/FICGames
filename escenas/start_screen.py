@@ -5,6 +5,7 @@ from gui.button import Button
 from gestorrecursos import GestorRecursos as GR
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
+from escenas.partida import Partida
 
 class StartScreen(Escena):
 
@@ -60,8 +61,8 @@ class StartScreen(Escena):
     
     def go_play(self):
         SC.play_selection()
-        self.running=False
-        print("play")
+        partida = Partida(self.director)
+        self.director.pushEscena(partida)
 
     def go_settings(self):
         SC.play_selection()

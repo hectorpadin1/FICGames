@@ -3,6 +3,10 @@ from settings import *
 from pygame.math import Vector2
 from gestorrecursos import GestorRecursos as GR
 
+#
+#   NO DESAPARECEN PORQUE NO SE EJECUTA EL UPDATE -> hector gestiona los grupos bien y mételo
+#
+
 
 class Explosion(pg.sprite.Sprite):
 
@@ -16,6 +20,6 @@ class Explosion(pg.sprite.Sprite):
         self.rect.center = pos
         self.spawn_time = pg.time.get_ticks()
     
-    def update(self):
+    def update(self, _dt):
         if pg.time.get_ticks() - self.spawn_time > EXPLOSION_LIFETIME:
             self.kill()

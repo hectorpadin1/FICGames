@@ -17,6 +17,6 @@ class Blood(pg.sprite.Sprite):
         self.rect.center = pos
         self.spawn_time = pg.time.get_ticks()
     
-    def update(self):
+    def update(self, _dt):
         if pg.time.get_ticks() - self.spawn_time > BLOOD_LIFETIME:
             self.kill()
