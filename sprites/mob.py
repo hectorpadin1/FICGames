@@ -12,6 +12,7 @@ class Mob(Character):
         super().__init__(mob_group, GR.MOB_IMAGE, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups)
         self.acc = Vector2(0, 0)
         self.follow = False
+        self.last_shot = pg.time.get_ticks()
 
     def update(self, player_pos, dt):
         distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))

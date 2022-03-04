@@ -1,5 +1,4 @@
 import pygame as pg
-import sys
 from os import path
 from math import cos, pi
 from settings import *
@@ -65,7 +64,8 @@ class Partida(Escena):
         #self.all_sprites = pg.sprite.Group() #ESTO ES ALJO JODIAMENTE INUTIL -> BORRAR
         self.walls = pg.sprite.Group()
         self.obstacle = pg.sprite.Group()
-        self.bullets = pg.sprite.Group()
+        self.bullets_player = pg.sprite.Group()
+        self.bullets_mobs = pg.sprite.Group()
         self.mobs = pg.sprite.Group()
         self.explosions = pg.sprite.Group()
         self.blood = pg.sprite.Group()
@@ -102,18 +102,17 @@ class Partida(Escena):
 
     def __bullet_hits(self):
         collide_hit_rect = lambda a, b : a.hit_rect.colliderect(b.rect)
-        # mobs hit player -> tienen que disparar por eso pongo aqui esto
-        hits = pg.sprite.spritecollide(self.player, self.mobs, False, collide_hit_rect)
+        # bullets hit player
+        hits = pg.sprite.spritecollide(self.player, self.bullets_mobs, True, collide_hit_rect)
         for hit in hits:
-            hit.vel = Vector2(0, 0)
-            if (self.player.health - MOB_DAMAGE) > 0:
-                self.player.health -= MOB_DAMAGE
+            if (self.player.health - MOB_BULLET_DAMAGE) > 0:
+                self.player.health -= MOB_BULLET_DAMAGE
+                Hit(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-30)
+                self.player.vel = Vector2(0, 0)
             else:
                 self.player.health = 0
-        if hits:
-            self.player.pos += Vector2(MOB_KNOCKBACK, 0).rotate(-hits[0].rot)
         # bullets hit mobs
-        hits = pg.sprite.groupcollide(self.mobs, self.bullets, False, True)
+        hits = pg.sprite.groupcollide(self.mobs, self.bullets_player, False, True)
         for hit in hits:
             if (hit.health - BULLET_DAMAGE) > 0:
                 hit.health -= BULLET_DAMAGE
@@ -123,7 +122,10 @@ class Partida(Escena):
                 Blood(self.blood, hit.pos, 0.5, 0.5, -hit.rot-110)
                 hit.kill()
         # bullet hit walls
-        hits = pg.sprite.groupcollide(self.bullets, self.walls, True, False)
+        hits = pg.sprite.groupcollide(self.bullets_mobs, self.walls, True, False)
+        for hit in hits:
+            Explosion(self.explosions, hit.pos, 0.1, 0.1)
+        hits = pg.sprite.groupcollide(self.bullets_player, self.walls, True, False)
         for hit in hits:
             Explosion(self.explosions, hit.pos, 0.1, 0.1)
 
@@ -136,8 +138,16 @@ class Partida(Escena):
             now = pg.time.get_ticks()
             if now - self.player.last_shot > BULLET_RATE:
                 self.player.last_shot = now
-                Bullet(self.bullets, self.player.pos, self.player.rot)
-        self.bullets.update(dt)
+                Bullet(self.bullets_player, self.player.pos, self.player.rot)
+        
+        for mob in self.mobs:
+            if mob.follow:
+                now = pg.time.get_ticks()
+                if now - mob.last_shot > MOB_BULLET_RATE:
+                    mob.last_shot = now
+                    Bullet(self.bullets_mobs, mob.pos, mob.rot)
+        self.bullets_player.update(dt)
+        self.bullets_mobs.update(dt)
         self.mobs.update(self.player.pos, dt)
         self.explosions.update()
         self.blood.update()
@@ -146,6 +156,8 @@ class Partida(Escena):
         self.__bullet_hits()
         # Miramos si seguimos vivos
         if self.player.health <= 0:
+            Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
+            self.player.kill()
             self.director.exitEscena()
         # Posición de la cámara
         self.camera.update(self.player)
@@ -161,7 +173,9 @@ class Partida(Escena):
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.explosions:
             display.blit(sprite.image, self.camera.apply(sprite))
-        for sprite in self.bullets:
+        for sprite in self.bullets_mobs:
+            display.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.bullets_player:
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.hits:
             display.blit(sprite.image, self.camera.apply(sprite))
@@ -175,9 +189,9 @@ class Partida(Escena):
         #        sprite.draw_health()
         #    if self.draw_debug:
         #        pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(sprite.hit_rect), 1)
-        #if self.draw_debug:
-        #    for wall in self.walls:
-        #        pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
+        if self.draw_debug:
+            for wall in self.walls:
+                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
         self.player.draw_health(display, 10, 10, self.player.health / PLAYER_HEALTH)
 
 
