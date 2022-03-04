@@ -8,6 +8,7 @@ from sprites.bullet import Bullet
 from sprites.mob import Mob
 from sprites.blood import Blood
 from sprites.explosion import Explosion
+from sprites.hit import Hit
 from gui.start_screen import *
 from tiledmap import TiledMap
 from camera import Camera
@@ -67,6 +68,7 @@ class Partida(Escena):
         self.mobs = pg.sprite.Group()
         self.explosions = pg.sprite.Group()
         self.blood = pg.sprite.Group()
+        self.hits = pg.sprite.Group()
 
         #########################################################################################################################
         #                                                                                                                       #
@@ -114,6 +116,7 @@ class Partida(Escena):
         for hit in hits:
             if (hit.health - BULLET_DAMAGE) > 0:
                 hit.health -= BULLET_DAMAGE
+                Hit(self.blood, hit.pos, 0.5, 0.5, -hit.rot-30)
                 hit.vel = Vector2(0, 0)
             else:
                 Blood(self.blood, hit.pos, 0.5, 0.5, -hit.rot-110)
@@ -137,6 +140,7 @@ class Partida(Escena):
         self.mobs.update(self.player.pos, dt)
         self.explosions.update()
         self.blood.update()
+        self.hits.update()
         # Colisiones
         self.__bullet_hits()
         # Miramos si seguimos vivos
@@ -157,6 +161,8 @@ class Partida(Escena):
         for sprite in self.explosions:
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.bullets:
+            display.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.hits:
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.mobs:
             display.blit(sprite.image, self.camera.apply(sprite))
