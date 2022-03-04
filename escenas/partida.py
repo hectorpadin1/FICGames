@@ -14,6 +14,7 @@ from tiledmap import TiledMap
 from camera import Camera
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
+from escenas.gameover import GameOver
 
 
 # Revisar:
@@ -158,7 +159,9 @@ class Partida(Escena):
         if self.player.health <= 0:
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
             self.player.kill()
-            self.director.exitEscena()
+            gameover = GameOver(self.director)
+            self.director.pushEscena(gameover)
+            #self.director.exitEscena()
         # Posición de la cámara
         self.camera.update(self.player)
 

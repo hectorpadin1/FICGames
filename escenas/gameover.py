@@ -61,7 +61,7 @@ class GameOver(Escena):
     
     def go_exit(self):
         SC.play_selection()
-        self.director.exitEscena()
+        self.director.firstEscena()
     
     def play_music(self):
         SC.play_gameover()
