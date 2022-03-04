@@ -10,8 +10,8 @@ from gestorrecursos import GestorRecursos as GR
 
 class Explosion(pg.sprite.Sprite):
 
-    def __init__(self, groups, pos, sx, sy) -> None:
-        pg.sprite.Sprite.__init__(self, groups)
+    def __init__(self, explosion_group, pos, sx, sy) -> None:
+        pg.sprite.Sprite.__init__(self, explosion_group)
         self.pos = pos
         self.image = GR.load_image(GR.EXPLOSION_IMAGE)
         self.image = pg.transform.scale(self.image, (sx * SPRITE_BOX, sy * SPRITE_BOX))
@@ -20,6 +20,6 @@ class Explosion(pg.sprite.Sprite):
         self.rect.center = pos
         self.spawn_time = pg.time.get_ticks()
     
-    def update(self, _dt):
+    def update(self):
         if pg.time.get_ticks() - self.spawn_time > EXPLOSION_LIFETIME:
             self.kill()

@@ -9,11 +9,8 @@ from soundcontroller import SoundController as SC
 
 class Bullet(pg.sprite.Sprite):
     
-    def __init__(self, game, pos, rot, collide_groups):
-        self.groups = game.all_sprites, game.bullets
-        self.collision_groups = collide_groups
-        pg.sprite.Sprite.__init__(self, self.groups)
-        self.game = game
+    def __init__(self, bullet_group, pos, rot):
+        pg.sprite.Sprite.__init__(self, bullet_group)
         dir = Vector2(1, 0).rotate(-rot)
         pos = pos + BARREL_OFFSET.rotate(-rot)
         self.image = GR.load_image(GR.BULLET_IMG)
@@ -26,16 +23,9 @@ class Bullet(pg.sprite.Sprite):
         self.spawn_time = pg.time.get_ticks()
         SC.play_metralleta()
 
-    def kill(self,):
-        Explosion(self.game.all_sprites, self.pos, 0.1, 0.1)
-        super().kill()
-
     def update(self, dt):
         self.pos += self.vel * (dt/1000)
         self.rect.center = self.pos
-        for group in self.collision_groups:
-            if pg.sprite.spritecollideany(self, group):
-                self.kill()
         if pg.time.get_ticks() - self.spawn_time > BULLET_LIFETIME:
             self.kill()
     

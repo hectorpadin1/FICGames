@@ -11,14 +11,16 @@ class SoundController:
 
     @classmethod
     def play_menu(self):
-        pg.mixer.music.load(START_MUSIC)
-        pg.mixer.music.play(-1)
+        #pg.mixer.music.load(START_MUSIC)
+        #pg.mixer.music.play(-1)
+        pass
 
     @classmethod
     def play_main(self):
-        pg.mixer.music.load(MAIN_MUSIC)
-        pg.mixer.music.play(-1)
-    
+        #pg.mixer.music.load(MAIN_MUSIC)
+        #pg.mixer.music.play(-1)
+        pass
+
     @classmethod
     def play_metralleta(self):
         pg.mixer.Sound.play(GR.load_sound(GR.METRALLETA))

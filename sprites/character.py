@@ -5,7 +5,10 @@ from gestorrecursos import GestorRecursos as GR
 
 class Character(pg.sprite.Sprite):
     def __init__(self, groups, img, hit_rect, x, y, health, collide_groups):
-        super().__init__(groups)
+        if groups is None:
+            super().__init__()
+        else:
+            super().__init__(groups)
         self.image_path = img
         self.image = GR.load_image(img)
         self.rect = self.image.get_rect()

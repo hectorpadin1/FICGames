@@ -3,19 +3,18 @@ from sprites.character import Character
 from pygame.math import Vector2
 from math import cos, pi
 from settings import *
-from sprites.bullet import *
 from gestorrecursos import GestorRecursos as GR
 from soundcontroller import SoundController as SC
 
 
 class Player(Character):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
-    def __init__(self, game, x, y, collide_groups):
-        super().__init__(game.all_sprites, GR.PLAYER_IMG, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
-        self.game = game
+    def __init__(self, x, y, collide_groups):
+        super().__init__(None, GR.PLAYER_IMG, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
         self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()
+        self.shooting = False
     
     # Dynamics of player movements
     def __get_keys(self):
@@ -39,11 +38,11 @@ class Player(Character):
         # Diagonal movements        
         if self.vel.x!=0 and self.vel.y !=0:
             self.vel *= cos(pi/4)
+        # Mirar de cambiar esto
         if keys[pg.K_SPACE]:
-            now = pg.time.get_ticks()
-            if now - self.last_shot > BULLET_RATE:
-                self.last_shot = now
-                Bullet(self.game, self.pos, self.rot, [self.game.walls])        
+            self.shooting = True
+        else:
+            self.shooting = False
     
     def draw_health(self, display, x, y, pct):
         if pct < 0:
@@ -62,9 +61,9 @@ class Player(Character):
         pg.draw.rect(display, col, fill_rect)
         pg.draw.rect(display, WHITE, outline_rect, 2)
 
-    def update(self, dt):
+    def update(self, camera_pos,dt):
         # Checks where it has to move
-        direction = pg.mouse.get_pos() - Vector2(self.game.camera.camera.topleft) - self.pos
+        direction = pg.mouse.get_pos() - Vector2(camera_pos) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))
         self.__get_keys()
         # Moves in time, not in pixels, independent of our frame rate

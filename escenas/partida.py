@@ -2,13 +2,15 @@ import pygame as pg
 import sys
 from os import path
 from settings import *
-from sprites.player import *
-from sprites.wall import *
-from sprites.bullet import *
-from sprites.mob import *
+from sprites.player import Player
+from sprites.wall import Wall, Obstacle
+from sprites.bullet import Bullet
+from sprites.mob import Mob
+from sprites.blood import Blood
+from sprites.explosion import Explosion
 from gui.start_screen import *
-from tiledmap import *
-from camera import *
+from tiledmap import TiledMap
+from camera import Camera
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
 
@@ -58,88 +60,117 @@ class Partida(Escena):
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
 
-        self.all_sprites = pg.sprite.Group() #ESTO ES ALJO JODIAMENTE INUTIL -> BORRAR
+        #self.all_sprites = pg.sprite.Group() #ESTO ES ALJO JODIAMENTE INUTIL -> BORRAR
         self.walls = pg.sprite.Group()
         self.obstacle = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
         self.mobs = pg.sprite.Group()
-    
+        self.explosions = pg.sprite.Group()
+        self.blood = pg.sprite.Group()
+
         #########################################################################################################################
         #                                                                                                                       #
         #  ESTO VA A TOCAR PONERLO EN EL MAPA CREO YO -> que te debuelva grupos y listo -> y luego con un update/draw ya llega  #
         #                                                                                                                       #
         #########################################################################################################################
-        
+
         # Initial pos of player and collisions
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
-                self.player = Player(self, tile_object.x, tile_object.y, [self.walls, self.obstacle])
+                self.player = Player(tile_object.x, tile_object.y, [self.walls, self.obstacle])
                 #Mob(self, tile_object.x+10, tile_object.y)
             if tile_object.name == 'Wall':
-                Wall(self, tile_object.x, tile_object.y, 
+                Wall(self.walls, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
             if tile_object.name == 'Object':
-                Obstacle(self, tile_object.x, tile_object.y, 
+                Obstacle(self.obstacle, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
             if tile_object.name == 'mob':
                 # dd cojones se spawnea esto xdddd
-                Mob(self, tile_object.x, tile_object.y, [self.walls, self.obstacle])
-        Mob(self, 700, 1560, [self.walls, self.obstacle])
-        Mob(self, 700, 1560, [self.walls, self.obstacle])
-        Mob(self, 700, 1560, [self.walls, self.obstacle])
-        Mob(self, 700, 1560, [self.walls, self.obstacle])
-        Mob(self, 700, 1560, [self.walls, self.obstacle])
+                Mob(self.mobs, tile_object.x, tile_object.y, [self.walls, self.obstacle])
+        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
+        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
+        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
+        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
+        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
-    '''
-    CAMBIAR DE SITIO, a bullet por ejemplo¿?
-    o que sea el jugador elq lo compruebe ¿?
-    
-    REVISAR ESTA FUNCIÓN
-    
-    '''
+
     def __bullet_hits(self):
         collide_hit_rect = lambda a, b : a.hit_rect.colliderect(b.rect)
-
+        # mobs hit player -> tienen que disparar por eso pongo aqui esto
         hits = pg.sprite.spritecollide(self.player, self.mobs, False, collide_hit_rect)
         for hit in hits:
-            self.player.health -= MOB_DAMAGE
             hit.vel = Vector2(0, 0)
-            if self.player.health <= 0:
-                self.playing = False
+            if (self.player.health - MOB_DAMAGE) > 0:
+                self.player.health -= MOB_DAMAGE
+            else:
+                self.player.health = 0
         if hits:
             self.player.pos += Vector2(MOB_KNOCKBACK, 0).rotate(-hits[0].rot)
         # bullets hit mobs
         hits = pg.sprite.groupcollide(self.mobs, self.bullets, False, True)
         for hit in hits:
-            hit.health -= BULLET_DAMAGE
-            hit.vel = Vector2(0, 0)
+            if (hit.health - BULLET_DAMAGE) > 0:
+                hit.health -= BULLET_DAMAGE
+                hit.vel = Vector2(0, 0)
+            else:
+                Blood(self.blood, hit.pos, 0.5, 0.5, -hit.rot-110)
+                hit.kill()
+        # bullet hit walls
+        hits = pg.sprite.groupcollide(self.bullets, self.walls, True, False)
+        for hit in hits:
+            Explosion(self.explosions, hit.pos, 0.1, 0.1)
+
 
     def update(self, dt):
-        self.walls.update() #NO NECESARIO
-        self.obstacle.update() #NO NECESARIO
-        self.player.update(dt)
+        # Actualizamos grupos de sprites
+        self.player.update(self.camera.camera.topleft, dt)
+        # Esto no mg
+        if self.player.shooting:
+            now = pg.time.get_ticks()
+            if now - self.player.last_shot > BULLET_RATE:
+                self.player.last_shot = now
+                Bullet(self.bullets, self.player.pos, self.player.rot)
         self.bullets.update(dt)
-        self.mobs.update(dt)
-
+        self.mobs.update(self.player.pos, dt)
+        self.explosions.update()
+        self.blood.update()
+        # Colisiones
         self.__bullet_hits()
+        # Miramos si seguimos vivos
+        if self.player.health <= 0:
+            self.director.exitEscena()
+        # Posición de la cámara
         self.camera.update(self.player)
 
 
     def draw(self, display):
         
         display.blit(self.map_img, self.camera.apply_rect(self.map_rect))
-        #Sprites
-        for sprite in self.all_sprites:
-            display.blit(sprite.image, self.camera.apply(sprite)) #revisar
-            if isinstance(sprite, Mob):
-                sprite.draw_health()
-            if self.draw_debug:
-                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(sprite.hit_rect), 1)
-        if self.draw_debug:
-            for wall in self.walls:
-                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
+        
+        # Cambiar este codigo espaguetti :)
+
+        for sprite in self.blood:
+            display.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.explosions:
+            display.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.bullets:
+            display.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.mobs:
+            display.blit(sprite.image, self.camera.apply(sprite))
+        display.blit(self.player.image, self.camera.apply(self.player))
+
+        #for sprite in self.all_sprites:
+        #    display.blit(sprite.image, self.camera.apply(sprite)) #revisar
+        #    if isinstance(sprite, Mob):
+        #        sprite.draw_health()
+        #    if self.draw_debug:
+        #        pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(sprite.hit_rect), 1)
+        #if self.draw_debug:
+        #    for wall in self.walls:
+        #        pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
         self.player.draw_health(display, 10, 10, self.player.health / PLAYER_HEALTH)
 
 
