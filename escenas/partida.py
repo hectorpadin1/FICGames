@@ -1,6 +1,7 @@
 import pygame as pg
 import sys
 from os import path
+from math import cos, pi
 from settings import *
 from sprites.player import Player
 from sprites.wall import Wall, Obstacle
@@ -190,8 +191,33 @@ class Partida(Escena):
                 if event.key == pg.K_ESCAPE: #Menu Pausa
                     print("Menú Pausa")
                     self.director.exitEscena()
-
                 #PROVISIONAL    
                 if event.key == pg.K_h:
                     self.draw_debug = not self.draw_debug
+        # Player dynamics
+        self.player.rot_speed = 0
+        self.player.vel = Vector2(0, 0)
+        keys = pg.key.get_pressed()
+        # On-Axis movements
+        if keys[pg.K_a]:
+            self.player.vel.x = -PLAYER_SPEED
+        if keys[pg.K_d]:
+            self.player.vel.x = PLAYER_SPEED
+        if keys[pg.K_w]:
+            self.player.vel.y = -PLAYER_SPEED
+        if keys[pg.K_s]:
+            self.player.vel.y = PLAYER_SPEED
+        # Oposite movements
+        if keys[pg.K_a] and keys[pg.K_d]:
+            self.player.vel.x = 0
+        if keys[pg.K_w] and keys[pg.K_s]:
+            self.player.vel.y = 0
+        # Diagonal movements        
+        if self.player.vel.x!=0 and self.player.vel.y !=0:
+            self.player.vel *= cos(pi/4)
+        # Mirar de cambiar esto
+        if keys[pg.K_SPACE]:
+            self.player.shooting = True
+        else:
+            self.player.shooting = False
 
