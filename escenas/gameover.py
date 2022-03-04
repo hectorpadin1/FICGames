@@ -10,6 +10,7 @@ class GameOver(Escena):
 
     def __init__(self, director):
         Escena.__init__(self, director)
+        SC.play_gameover()
         self.click = False
         #Buttons
         self.retry_btn = Button("Reintentar", self.go_retry, dy = 35)
@@ -61,3 +62,6 @@ class GameOver(Escena):
     def go_exit(self):
         SC.play_selection()
         self.director.exitEscena()
+    
+    def play_music(self):
+        SC.play_gameover()

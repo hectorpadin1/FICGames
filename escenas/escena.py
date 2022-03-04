@@ -15,3 +15,6 @@ class Escena:
 
     def draw(self, pantalla):
         raise NotImplemented("Tiene que implementar el metodo dibujar.")
+    
+    def play_music(self):
+        raise NotImplemented("Tiene que implementar el metodo reproducir musica.")

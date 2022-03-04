@@ -38,6 +38,8 @@ class Director():
         # Popeamos Escena
         if (len(self.pila)>0):
             self.pila.pop()
+            escena = self.pila[len(self.pila)-1]
+            escena.play_music()
 
     def exitProgram(self):
         # Vaciamos pila

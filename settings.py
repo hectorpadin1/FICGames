@@ -18,8 +18,9 @@ GRIDHEIGHT = HEIGHT / SPRITE_BOX
 
 
 # MUSIC    
-START_MUSIC = 'resources/music/start_background.mp3'
-MAIN_MUSIC  = 'resources/music/main_background.ogg'
+START_MUSIC    = 'resources/music/start_background.ogg'
+MAIN_MUSIC     = 'resources/music/main_background.ogg'
+GAMEOVER_MUSIC = 'resources/music/gameover.ogg'
 
 # Player settings
 PLAYER_HEALTH = 100

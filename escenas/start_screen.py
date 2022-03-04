@@ -12,6 +12,7 @@ class StartScreen(Escena):
 
     def __init__(self,director):
         Escena.__init__(self, director)
+        SC.play_menu()
         self.click = False
         #Butones 
         self.play_btn  = Button("Jugar",self.go_play)
@@ -74,3 +75,6 @@ class StartScreen(Escena):
     def go_exit(self):
         pg.quit()
         sys.exit()      
+    
+    def play_music(self):
+        SC.play_menu()

@@ -220,4 +220,7 @@ class Partida(Escena):
             self.player.shooting = True
         else:
             self.player.shooting = False
+    
+    def play_music(self):
+        SC.play_main()
 

@@ -11,14 +11,20 @@ class SoundController:
 
     @classmethod
     def play_menu(self):
-        #pg.mixer.music.load(START_MUSIC)
-        #pg.mixer.music.play(-1)
+        pg.mixer.music.load(START_MUSIC)
+        pg.mixer.music.play(-1)
         pass
 
     @classmethod
     def play_main(self):
         #pg.mixer.music.load(MAIN_MUSIC)
         #pg.mixer.music.play(-1)
+        pass
+    
+    @classmethod
+    def play_gameover(self):
+        pg.mixer.music.load(GAMEOVER_MUSIC)
+        pg.mixer.music.play(-1)
         pass
 
     @classmethod
