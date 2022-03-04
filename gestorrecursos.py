@@ -19,9 +19,11 @@ class GestorRecursos:
     HIT_IMAGE     = 'images-sprites/blood-splatter.png'
     
     # GUI IMAGES
-    LOGO_IMG = 'images-gui/logo.png'
-    BTN_BG   = 'images-gui/btn_bg.png'
-    BOX_BG   = 'images-gui/box_bg.png'
+    LOGO_IMG     = 'images-gui/logo.png'
+    BTN_BG       = 'images-gui/btn_bg.png'
+    BOX_BG       = 'images-gui/box_bg.png'
+    BOX_GO       = 'images-gui/go_box.png'
+    GAMEOVER_IMG = 'images-gui/gameover.png'
 
     # FONTS
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"
@@ -39,6 +41,7 @@ class GestorRecursos:
     LEVEL6 = 'maps/level6.tmx'
     LEVEL7 = 'maps/level7.tmx'
     LEVEL8 = 'maps/level8.tmx'
+    LEVEL9 = 'maps/level9.tmx'
 
     # PATHS
     RESOURCE_PATH = "resources"
