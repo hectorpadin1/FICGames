@@ -6,7 +6,6 @@ from gestorrecursos import GestorRecursos as GR
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
 from escenas.partida import Partida
-from escenas.gameover import GameOver
 
 class StartScreen(Escena):
 
@@ -65,13 +64,11 @@ class StartScreen(Escena):
         SC.play_selection()
         partida = Partida(self.director)
         self.director.pushEscena(partida)
-#########################ES UNA PRUEBA##########################
+        
     def go_settings(self):
         SC.play_selection()
-        gameover = GameOver(self.director)
-        self.director.pushEscena(gameover)
         print("settings")
-################################################################
+
     def go_exit(self):
         pg.quit()
         sys.exit()      

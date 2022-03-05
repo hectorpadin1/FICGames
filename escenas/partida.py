@@ -54,6 +54,9 @@ class Partida(Escena):
     
     def __init__(self,director):
         Escena.__init__(self, director)
+        self.init_game()
+
+    def init_game(self):
         #Musica
         SC.play_main()
         #Mapa
@@ -158,13 +161,15 @@ class Partida(Escena):
         # Miramos si seguimos vivos
         if self.player.health <= 0:
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
-            self.player.kill()
-            gameover = GameOver(self.director)
-            self.director.changeEscena(gameover)
-            #self.director.exitEscena()
+            self.gameover()
+            
         # Posición de la cámara
         self.camera.update(self.player)
 
+    def gameover(self):
+        self.init_game() #cambiar ese __init__ por un initializegame y que init lo k haga sea llamar a lo mismo
+        gameover = GameOver(self.director)
+        self.director.pushEscena(gameover)
 
     def draw(self, display):
         
