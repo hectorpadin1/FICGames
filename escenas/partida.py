@@ -200,6 +200,8 @@ class Partida(Escena):
         if self.draw_debug:
             for wall in self.walls:
                 pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
+            for obstacle in self.obstacle:
+                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
         self.player.draw_health(display, 10, 10, self.player.health / PLAYER_HEALTH)
 
 
