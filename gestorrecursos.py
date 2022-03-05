@@ -43,6 +43,7 @@ class GestorRecursos:
     LEVEL8 = 'maps/level8.tmx'
     LEVEL9 = 'maps/level9.tmx'
     LEVEL10 = 'maps/level10.tmx'
+    LEVEL11 = 'maps/level11.tmx'
 
     # PATHS
     RESOURCE_PATH = "resources"
