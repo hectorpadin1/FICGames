@@ -12,6 +12,7 @@ class Blood(pg.sprite.Sprite):
         self.image = pg.transform.scale(self.image, (sx * SPRITE_BOX, sy * SPRITE_BOX))
         self.image = pg.transform.rotate(self.image, rot-90)
         self.rect = self.image.get_rect()
+        self.mask = pg.mask.from_surface(self.image)
         self.pos = Vector2(pos)
         self.rect.center = pos
         self.spawn_time = pg.time.get_ticks()

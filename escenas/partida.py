@@ -107,7 +107,7 @@ class Partida(Escena):
     def __bullet_hits(self):
         collide_hit_rect = lambda a, b : a.hit_rect.colliderect(b.rect)
         # bullets hit player
-        hits = pg.sprite.spritecollide(self.player, self.bullets_mobs, True, collide_hit_rect)
+        hits = pg.sprite.spritecollide(self.player, self.bullets_mobs, True, pg.sprite.collide_mask)
         for hit in hits:
             if (self.player.health - MOB_BULLET_DAMAGE) > 0:
                 self.player.health -= MOB_BULLET_DAMAGE
@@ -116,7 +116,7 @@ class Partida(Escena):
             else:
                 self.player.health = 0
         # bullets hit mobs
-        hits = pg.sprite.groupcollide(self.mobs, self.bullets_player, False, True)
+        hits = pg.sprite.groupcollide(self.mobs, self.bullets_player, False, True, pg.sprite.collide_mask)
         for hit in hits:
             if (hit.health - BULLET_DAMAGE) > 0:
                 hit.health -= BULLET_DAMAGE

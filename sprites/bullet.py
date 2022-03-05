@@ -17,6 +17,7 @@ class Bullet(pg.sprite.Sprite):
         self.image = pg.transform.rotate(self.image, rot-90)
         self.rect = self.image.get_rect()
         self.pos = Vector2(pos)
+        self.mask = pg.mask.from_surface(self.image)
         self.rect.center = pos
         spread = uniform(-GUN_SPREAD, GUN_SPREAD)
         self.vel = dir.rotate(spread) * BULLET_SPEED

@@ -14,6 +14,7 @@ class Character(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.hit_rect = hit_rect
+        self.mask = pg.mask.from_surface(self.image)
         self.hit_rect.center = self.rect.center
         self.vel = Vector2(0, 0)
         self.pos = Vector2(x, y)
