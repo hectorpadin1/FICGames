@@ -4,7 +4,10 @@ from settings import *
 from gui.button import Button
 from gestorrecursos import GestorRecursos as GR
 from soundcontroller import SoundController as SC
+from escenas.partida import Partida
 from escenas.escena import Escena
+
+
 
 class GameOver(Escena):
 
@@ -57,11 +60,12 @@ class GameOver(Escena):
     
     def go_retry(self):
         SC.play_selection()
-        self.director.exitEscena()
+        partida = Partida(self.director)
+        self.director.changeEscena()
     
     def go_exit(self):
         SC.play_selection()
-        self.director.firstEscena()
+        self.director.exitEscena()
     
     def play_music(self):
         SC.play_gameover()

@@ -160,7 +160,7 @@ class Partida(Escena):
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
             self.player.kill()
             gameover = GameOver(self.director)
-            self.director.pushEscena(gameover)
+            self.director.changeEscena(gameover)
             #self.director.exitEscena()
         # Posición de la cámara
         self.camera.update(self.player)

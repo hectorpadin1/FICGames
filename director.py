@@ -40,26 +40,17 @@ class Director():
             self.pila.pop()
             escena = self.pila[len(self.pila)-1]
             escena.play_music()
-    
-    def firstEscena(self):
-        self.salir_escena = True
-        if (len(self.pila)>0):
-            escena = self.pila[0]
-            self.pila = []
-            self.pila.append(escena)
-            escena.play_music()
 
     def exitProgram(self):
         # Vaciamos pila
         self.pila = [] 
         self.salir_escena = True
 
-    """
+    
     def changeEscena(self, escena):
-        self.salirEscena()
+        self.exitEscena()
         # Ponemos la escena pasada en la cima de la pila
         self.pila.append(escena)
-    """
 
     def pushEscena(self, escena):
         self.salir_escena = True
