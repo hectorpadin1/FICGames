@@ -24,8 +24,9 @@ class Mob(Character):
                 return
         self.follow = True
         self.rot = (player_pos - self.pos).angle_to(Vector2(1, 0))
-        self.acc = Vector2(MOB_SPEED, 0).rotate(-self.rot)
-        self.acc += self.vel * -1
-        self.vel += self.acc * (dt/1000)
-        self.pos += self.vel * (dt/1000) + 0.5 * self.acc * (dt/1000) ** 2
+        if distance > MOB_ATTK_DISTANCE/2:
+            self.acc = Vector2(MOB_SPEED, 0).rotate(-self.rot)
+            self.acc += self.vel * -1
+            self.vel += self.acc * (dt/1000)
+            self.pos += self.vel * (dt/1000) + 0.5 * self.acc * (dt/1000) ** 2
         super().update()

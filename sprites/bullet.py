@@ -12,15 +12,16 @@ class Bullet(pg.sprite.Sprite):
     def __init__(self, bullet_group, pos, rot):
         pg.sprite.Sprite.__init__(self, bullet_group)
         dir = Vector2(1, 0).rotate(-rot)
-        pos = pos + BARREL_OFFSET.rotate(-rot)
+        #pos = pos + BARREL_OFFSET.rotate(-rot)
         self.image = GR.load_image(GR.BULLET_IMG)
         self.image = pg.transform.rotate(self.image, rot-90)
         self.rect = self.image.get_rect()
         self.pos = Vector2(pos)
         self.mask = pg.mask.from_surface(self.image)
         self.rect.center = pos
-        spread = uniform(-GUN_SPREAD, GUN_SPREAD)
-        self.vel = dir.rotate(spread) * BULLET_SPEED
+        #spread = uniform(-GUN_SPREAD, GUN_SPREAD)
+        #self.vel = dir.rotate(spread) * BULLET_SPEED
+        self.vel = dir * BULLET_SPEED
         self.spawn_time = pg.time.get_ticks()
         SC.play_metralleta()
 

@@ -1,5 +1,6 @@
 import pygame as pg
 from os import path
+import random
 from math import cos, pi
 from settings import *
 from sprites.player import Player
@@ -57,6 +58,7 @@ class Partida(Escena):
         self.init_game()
 
     def init_game(self):
+        random.seed()
         #Musica
         SC.play_main()
         #Mapa
@@ -85,7 +87,6 @@ class Partida(Escena):
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
                 self.player = Player(tile_object.x, tile_object.y, [self.walls, self.obstacle])
-                #Mob(self, tile_object.x+10, tile_object.y)
             if tile_object.name == 'Wall':
                 Wall(self.walls, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
@@ -93,13 +94,11 @@ class Partida(Escena):
                 Obstacle(self.obstacle, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
             if tile_object.name == 'mob':
-                # dd cojones se spawnea esto xdddd
+                if (random.randint(0, 1))==1:
+                    x = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
+                    y = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
+                    Mob(self.mobs, tile_object.x +x, tile_object.y + y, [self.walls, self.obstacle])
                 Mob(self.mobs, tile_object.x, tile_object.y, [self.walls, self.obstacle])
-        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
-        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
-        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
-        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
-        Mob(self.mobs, 700, 1560, [self.walls, self.obstacle])
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
@@ -191,12 +190,6 @@ class Partida(Escena):
             display.blit(sprite.image, self.camera.apply(sprite))
         display.blit(self.player.image, self.camera.apply(self.player))
 
-        #for sprite in self.all_sprites:
-        #    display.blit(sprite.image, self.camera.apply(sprite)) #revisar
-        #    if isinstance(sprite, Mob):
-        #        sprite.draw_health()
-        #    if self.draw_debug:
-        #        pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(sprite.hit_rect), 1)
         if self.draw_debug:
             for wall in self.walls:
                 pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
