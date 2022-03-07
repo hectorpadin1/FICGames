@@ -14,6 +14,12 @@ class Mob(Character):
         self.follow = False
         self.last_shot = pg.time.get_ticks()
 
+    #def update(self, distance):
+    #    super.update()
+
+
+class MobBasico(Mob):
+    
     def update(self, player_pos, dt):
         distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))
         if distance > MOB_ATTK_DISTANCE:

@@ -6,7 +6,7 @@ from settings import *
 from sprites.player import Player
 from sprites.wall import Wall, Obstacle
 from sprites.bullet import Bullet
-from sprites.mob import Mob
+from sprites.mob import MobBasico
 from sprites.blood import Blood
 from sprites.explosion import Explosion
 from sprites.hit import Hit
@@ -97,8 +97,8 @@ class Partida(Escena):
                 if (random.randint(0, 1))==1:
                     x = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
                     y = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
-                    Mob(self.mobs, tile_object.x +x, tile_object.y + y, [self.walls, self.obstacle])
-                Mob(self.mobs, tile_object.x, tile_object.y, [self.walls, self.obstacle])
+                    MobBasico(self.mobs, tile_object.x +x, tile_object.y + y, [self.walls, self.obstacle])
+                MobBasico(self.mobs, tile_object.x, tile_object.y, [self.walls, self.obstacle])
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
