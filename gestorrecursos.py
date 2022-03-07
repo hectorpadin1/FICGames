@@ -35,15 +35,15 @@ class GestorRecursos:
     # MAPS
     LEVEL1 = 'maps/level1.tmx'
     LEVEL2 = 'maps/level2.tmx'
-    LEVEL3 = 'maps/level3.tmx'
-    LEVEL4 = 'maps/level4.tmx'
-    LEVEL5 = 'maps/level5.tmx'
-    LEVEL6 = 'maps/level6.tmx'
-    LEVEL7 = 'maps/level7.tmx'
-    LEVEL8 = 'maps/level8.tmx'
-    LEVEL9 = 'maps/level9.tmx'
-    LEVEL10 = 'maps/level10.tmx'
-    LEVEL11 = 'maps/level11.tmx'
+    #LEVEL3 = 'maps/level3.tmx'
+    #LEVEL4 = 'maps/level4.tmx'
+    #LEVEL5 = 'maps/level5.tmx'
+    #LEVEL6 = 'maps/level6.tmx'
+    #LEVEL7 = 'maps/level7.tmx'
+    #LEVEL8 = 'maps/level8.tmx'
+    #LEVEL9 = 'maps/level9.tmx'
+    #LEVEL10 = 'maps/level10.tmx'
+    #LEVEL11 = 'maps/level11.tmx'
 
     # PATHS
     RESOURCE_PATH = "resources"
