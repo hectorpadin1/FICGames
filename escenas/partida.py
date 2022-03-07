@@ -10,7 +10,6 @@ from sprites.mob import Mob
 from sprites.blood import Blood
 from sprites.explosion import Explosion
 from sprites.hit import Hit
-from gui.start_screen import *
 from tiledmap import TiledMap
 from camera import Camera
 from soundcontroller import SoundController as SC
