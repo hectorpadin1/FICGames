@@ -24,6 +24,7 @@ class GestorRecursos:
     BOX_BG       = 'images-gui/box_bg.png'
     BOX_GO       = 'images-gui/go_box.png'
     GAMEOVER_IMG = 'images-gui/gameover.png'
+    PAUSE_IMG    = 'images-gui/pause.png'
 
     # FONTS
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"
