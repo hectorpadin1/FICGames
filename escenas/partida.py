@@ -121,6 +121,7 @@ class Partida(Escena):
                 hit.health -= BULLET_DAMAGE
                 Hit(self.blood, hit.pos, 0.5, 0.5, -hit.rot-30)
                 hit.vel = Vector2(0, 0)
+                hit.follow = True
             else:
                 Blood(self.blood, hit.pos, 0.5, 0.5, -hit.rot-110)
                 hit.kill()
@@ -135,23 +136,10 @@ class Partida(Escena):
 
     def update(self, dt):
         # Actualizamos grupos de sprites
-        self.player.update(self.camera.camera.topleft, dt)
-        # Esto no mg
-        if self.player.shooting:
-            now = pg.time.get_ticks()
-            if now - self.player.last_shot > BULLET_RATE:
-                self.player.last_shot = now
-                Bullet(self.bullets_player, self.player.pos, self.player.rot)
-        
-        for mob in self.mobs:
-            if mob.follow:
-                now = pg.time.get_ticks()
-                if now - mob.last_shot > MOB_BULLET_RATE:
-                    mob.last_shot = now
-                    Bullet(self.bullets_mobs, mob.pos, mob.rot)
+        self.player.update(self.camera.camera.topleft, self.bullets_player, dt)
         self.bullets_player.update(dt)
         self.bullets_mobs.update(dt)
-        self.mobs.update(self.player.pos, dt)
+        self.mobs.update(self.player.pos, self.bullets_mobs, dt)
         self.explosions.update()
         self.blood.update()
         self.hits.update()
@@ -161,7 +149,7 @@ class Partida(Escena):
         if self.player.health <= 0:
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
             self.gameover()
-            
+
         # Posición de la cámara
         self.camera.update(self.player)
 

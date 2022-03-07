@@ -3,6 +3,7 @@ from sprites.character import Character
 from settings import *
 from math import pow, sqrt
 from pygame.math import Vector2
+from sprites.bullet import Bullet
 from gestorrecursos import GestorRecursos as GR
 
 
@@ -14,13 +15,19 @@ class Mob(Character):
         self.follow = False
         self.last_shot = pg.time.get_ticks()
 
-    #def update(self, distance):
-    #    super.update()
+    def update(self, bullets, rate):
+        # Shooting
+        if self.follow:
+            now = pg.time.get_ticks()
+            if now - self.last_shot > rate:
+                self.last_shot = now
+                Bullet(bullets, self.pos, self.rot)
+        super().update()
 
 
 class MobBasico(Mob):
     
-    def update(self, player_pos, dt):
+    def update(self, player_pos, bullet, dt):
         distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))
         if distance > MOB_ATTK_DISTANCE:
             if not self.follow:
@@ -35,4 +42,4 @@ class MobBasico(Mob):
             self.acc += self.vel * -1
             self.vel += self.acc * (dt/1000)
             self.pos += self.vel * (dt/1000) + 0.5 * self.acc * (dt/1000) ** 2
-        super().update()
+        super().update(bullet, MOB_BULLET_RATE)

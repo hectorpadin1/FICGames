@@ -2,6 +2,7 @@ import pygame as pg
 from sprites.character import Character
 from pygame.math import Vector2
 from settings import *
+from sprites.bullet import Bullet
 from gestorrecursos import GestorRecursos as GR
 
 
@@ -31,11 +32,18 @@ class Player(Character):
         pg.draw.rect(display, col, fill_rect)
         pg.draw.rect(display, WHITE, outline_rect, 2)
 
-    def update(self, camera_pos, dt):
+
+    def update(self, camera_pos, bullets, dt):
         # Checks where it has to move
         direction = pg.mouse.get_pos() - Vector2(camera_pos) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))
         # Moves in time, not in pixels, independent of our frame rate
         self.pos += self.vel * (dt/1000)
         super().update()
+        # Shooting
+        if self.shooting:
+            now = pg.time.get_ticks()
+            if now - self.last_shot > BULLET_RATE:
+                self.last_shot = now
+                Bullet(bullets, self.pos, self.rot)
         
