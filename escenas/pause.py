@@ -6,15 +6,14 @@ from gestorrecursos import GestorRecursos as GR
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
 
-
-class GameOver(Escena):
+class Pause(Escena):
 
     def __init__(self, director):
         Escena.__init__(self, director)
         SC.play_gameover()
         self.click = False
         #Buttons
-        self.retry_btn = Button("Reintentar", self.go_retry, dy = 35)
+        self.retry_btn = Button("Continuar", self.go_continue, dy = 35)
         margin = self.retry_btn.get_size()[1]/2
         self.exit_btn = Button("Menu Principal", self.go_exit, dy=margin*4.5)
     
@@ -23,6 +22,10 @@ class GameOver(Escena):
         for event in events:
             if event.type == pg.QUIT:
                 SC.play_selection()
+            #Pulsaciones Teclas
+            elif event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE or event.key == pg.K_p:
+                    self.go_continue()
             elif event.type == pg.MOUSEBUTTONDOWN:
                 self.click = True
     
@@ -33,14 +36,14 @@ class GameOver(Escena):
         rect.center = (WIDTH/2,HEIGHT/2)
         display.blit(bg, rect) 
         return rect.size
-
+    
     #Dibuja Logo Centrado con la posibilidad de añadirle un desplazamiento
     def draw_logo(self, display, dx=0, dy=0):
-        logo = GR.load_image(GR.GAMEOVER_IMG)
+        logo = GR.load_image(GR.PAUSE_IMG)
         rect = logo.get_rect()
         rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
         display.blit(logo, rect) 
-
+    
     def update(self, _dt):
         mouse_pos = pg.mouse.get_pos()
         self.retry_btn.update(mouse_pos,self.click)
@@ -55,14 +58,13 @@ class GameOver(Escena):
         self.retry_btn.draw(display)
         self.exit_btn.draw(display)
     
-    def go_retry(self):
-        SC.play_selection()
+    def go_continue(self):
         self.director.exitEscena()
-    
+        
     def go_exit(self):
         SC.play_selection()
         self.director.exitEscena()
         self.director.exitEscena()
     
     def play_music(self):
-        SC.play_gameover()
+        pass

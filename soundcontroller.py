@@ -12,13 +12,15 @@ class SoundController:
     @classmethod
     def play_menu(self):
         pg.mixer.music.load(START_MUSIC)
+        pg.mixer.music.set_volume(0.4)
         pg.mixer.music.play(-1)
         pass
 
     @classmethod
     def play_main(self):
-        #pg.mixer.music.load(MAIN_MUSIC)
-        #pg.mixer.music.play(-1)
+        pg.mixer.music.load(MAIN_MUSIC)
+        pg.mixer.music.set_volume(0.2)
+        pg.mixer.music.play(-1)
         pass
     
     @classmethod
@@ -35,3 +37,11 @@ class SoundController:
     def play_selection(self):
         pg.mixer.music.pause()
         pg.mixer.Sound.play(GR.load_sound(GR.SELECTION))
+    
+    @classmethod
+    def pause(self):
+        pg.mixer.music.pause()
+    
+    @classmethod
+    def unpause(self):
+        pg.mixer.music.unpause()

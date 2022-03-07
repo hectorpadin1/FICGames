@@ -16,6 +16,7 @@ from camera import Camera
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
 from escenas.gameover import GameOver
+from escenas.pause import Pause
 
 
 # Revisar:
@@ -205,9 +206,9 @@ class Partida(Escena):
                 self.director.exitProgram()
             #Pulsaciones Teclas
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE: #Menu Pausa
-                    print("Menú Pausa")
-                    self.director.exitEscena()
+                if event.key == pg.K_ESCAPE or event.key == pg.K_p: #Menu Pausa
+                    pause = Pause(self.director)
+                    self.director.pushEscena(pause)
                 #PROVISIONAL    
                 if event.key == pg.K_h:
                     self.draw_debug = not self.draw_debug
