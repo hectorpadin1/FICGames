@@ -5,6 +5,7 @@ from gui.button import Button
 from gestorrecursos import GestorRecursos as GR
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
+import escenas.partida
 
 class Pause(Escena):
 
@@ -13,9 +14,10 @@ class Pause(Escena):
         SC.play_gameover()
         self.click = False
         #Buttons
-        self.retry_btn = Button("Continuar", self.go_continue, dy = 35)
-        margin = self.retry_btn.get_size()[1]/2
-        self.exit_btn = Button("Menu Principal", self.go_exit, dy=margin*4.5)
+        self.continue_btn = Button("Continuar", self.go_continue, dy = 5)
+        margin = self.continue_btn.get_size()[1]/2
+        self.retry_btn = Button("Reintentar", self.go_retry, dy = margin*3.22)
+        self.exit_btn = Button("Menu Principal", self.go_exit, dy=margin*6)
     
     def events(self, events):
         self.click = False
@@ -46,6 +48,7 @@ class Pause(Escena):
     
     def update(self, _dt):
         mouse_pos = pg.mouse.get_pos()
+        self.continue_btn.update(mouse_pos,self.click)
         self.retry_btn.update(mouse_pos,self.click)
         self.exit_btn.update(mouse_pos,self.click)
 
@@ -55,11 +58,19 @@ class Pause(Escena):
         _,box_y = self.draw_box(display)
         self.draw_logo(display,dy=-((box_y/4)))
 
+        self.continue_btn.draw(display)
         self.retry_btn.draw(display)
         self.exit_btn.draw(display)
     
     def go_continue(self):
         self.director.exitEscena()
+    
+    def go_retry(self):
+        SC.play_selection()
+        partida = escenas.partida.Partida(self.director)
+        self.director.exitEscena()
+        self.director.exitEscena()
+        self.director.pushEscena(partida)
         
     def go_exit(self):
         SC.play_selection()
