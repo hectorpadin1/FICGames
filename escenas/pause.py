@@ -50,7 +50,7 @@ class Pause(Escena):
         self.exit_btn.update(mouse_pos,self.click)
 
     def draw(self,display):
-        display.fill((66,82,58)) # fondo provisional
+        #display.fill((66,82,58)) # fondo provisional
 
         _,box_y = self.draw_box(display)
         self.draw_logo(display,dy=-((box_y/4)))

@@ -17,7 +17,7 @@ class LevelSelector(Escena):
         #Butones 
         self.lvl_btns = []
         for i in range(0,1):
-            self.lvl_btns + [LevelButton(str(i),lamb)]
+            self.lvl_btns + [LevelButton(str(i),self.go_play)]
         self.play_btn  = Button("Volver",self.go_play)
 
     def events(self, events):
@@ -61,9 +61,11 @@ class LevelSelector(Escena):
         self.stngs_btn.draw(display)
         self.exit_btn.draw(display)
     
+    #Callbacks
+
     def go_play(self,lvl):
         SC.play_selection()
-        partida = Partida(self.director)
+        partida = Partida(self.director,lvl)
         self.director.pushEscena(partida)
 
     def go_back(self):

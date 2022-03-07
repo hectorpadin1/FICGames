@@ -9,6 +9,7 @@ class LevelButton():
     #Inicializamos el botón mostrándolo en pantalla
     def __init__(self, text, callback, dx=0, dy=0):
         self.callback = callback
+        self.lvl = text
 
         #Bg Btn
         self.bg = GR.load_image(GR.LVL_BTN)
@@ -31,7 +32,7 @@ class LevelButton():
     def update(self, mouse_pos, click):
         self.hover = self.rect.collidepoint(mouse_pos)
         if self.hover and click:
-            self.callback()
+            self.callback(self.lvl)
         
     def draw(self, display):
         display.blit(self.bg, self.rect) 
