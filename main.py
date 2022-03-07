@@ -6,6 +6,7 @@ from soundcontroller import SoundController as SC
 
 #Inicializamos PyGame
 pg.init()
+pg.mouse.set_cursor(pg.cursors.broken_x)
 #Sonido
 SC.init()
 SC.play_menu() # -> ponerlo donde se carga el menú?
