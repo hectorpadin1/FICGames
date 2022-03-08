@@ -74,6 +74,7 @@ class Partida(Escena):
         self.explosions = pg.sprite.Group()
         self.blood = pg.sprite.Group()
         self.hits = pg.sprite.Group()
+        self.mob_count = 0
 
         #########################################################################################################################
         #                                                                                                                       #
@@ -96,7 +97,9 @@ class Partida(Escena):
                     x = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
                     y = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
                     MobBasico(self.mobs, tile_object.x +x, tile_object.y + y, self.bullets_mobs, [self.walls, self.obstacle])
+                    self.mob_count += 1
                 MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle])
+                self.mob_count += 1
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
@@ -121,7 +124,11 @@ class Partida(Escena):
                 hit.follow = True
             else:
                 Blood(self.blood, hit.pos, 0.5, 0.5, -hit.rot-110)
+                self.mob_count -= 1
                 hit.kill()
+                if self.mob_count == 0: 
+                    pause = Pause(self.director)
+                    self.director.pushEscena(pause)
         # bullet hit walls
         hits = pg.sprite.groupcollide(self.bullets_mobs, self.walls, True, False)
         for hit in hits:
