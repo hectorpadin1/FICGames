@@ -3,21 +3,20 @@ from sprites.character import Character
 from pygame.math import Vector2
 from settings import *
 from math import cos, pi
-from sprites.bullet import Bullet
 from control import Controler
-from sprites.gun import AbstractGun
+from sprites.gun import MachineGun, Pistol, Rifle
 from gestorrecursos import GestorRecursos as GR
 
 
 class Player(Character):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
     def __init__(self, x, y, bullets, collide_groups):
-        super().__init__(None, GR.PLAYER_IMG, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
+        super().__init__(None, GR.PLAYER_PISTOL, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
         self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()
         self.controler = Controler()
-        self.guns = [AbstractGun(bullets, 30, GR.BULLET_IMG, 10*FPS)]
+        self.guns = [Pistol(bullets), Rifle(bullets), MachineGun(bullets)]
         self.gunSelector = 0
         self.shooting = False
     
@@ -61,23 +60,39 @@ class Player(Character):
         # Diagonal movements        
         if self.vel.x!=0 and self.vel.y!=0:
             self.vel *= cos(pi/4)
+        # Switch guns
+        if self.controler.switchPistol():
+            self.guns[self.gunSelector].reload = False # si estamos cargando la dejamos descargada
+            self.gunSelector = 0
+        if self.controler.switchRiffle():
+            self.guns[self.gunSelector].reload = False # si estamos cargando la dejamos descargada
+            self.gunSelector = 1
+        if self.controler.switchMachineGun():
+            self.guns[self.gunSelector].reload = False # si estamos cargando la dejamos descargada
+            self.gunSelector = 2
+        # Reload
+        if (self.controler.reload()):
+            self.guns[self.gunSelector].reload = True
         # Shooting
         if (self.controler.isShooting()):
-            self.guns[self.gunSelector].shoot()
+            self.guns[self.gunSelector].shoot(self.pos, self.rot)
 
 
-    def update(self, camera_pos, bullets, dt):
+    def update(self, camera_pos, dt):
         self.__callControler()
         # Checks where it has to move
         direction = pg.mouse.get_pos() - Vector2(camera_pos) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))
         # Moves in time, not in pixels, independent of our frame rate
         self.pos += self.vel * (dt/1000)
+        self.guns[self.gunSelector].update()
+        if self.guns[self.gunSelector].reload:
+            self.updateImage(GR.PLAYER_RELOAD)
+        elif self.gunSelector == 0:
+            self.updateImage(GR.PLAYER_PISTOL)
+        elif self.gunSelector == 1:
+            self.updateImage(GR.PLAYER_RIFFLE)
+        elif self.gunSelector == 2:
+            self.updateImage(GR.PLAYER_MACHINEGUN)
         super().update()
-        # Shooting
-        #if self.shooting:
-        #    now = pg.time.get_ticks()
-        #    if now - self.last_shot > BULLET_RATE:
-        #        self.last_shot = now
-        #        Bullet(bullets, self.pos, self.rot)
         

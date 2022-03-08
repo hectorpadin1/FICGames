@@ -1,4 +1,5 @@
 import pygame as pg
+from settings import FPS
 
 class AbstractControler:
 
@@ -17,6 +18,9 @@ class AbstractControler:
     def left(self):
         pass    
 
+    def reload(self):
+        pass
+
     def isShooting(self):
         pass
 
@@ -34,6 +38,18 @@ class Controler(AbstractControler):
 
     def left(self):
         return pg.key.get_pressed()[pg.K_a]    
+
+    def reload(self):
+        return pg.key.get_pressed()[pg.K_r]  
+
+    def switchPistol(self):
+        return pg.key.get_pressed()[pg.K_c]
+
+    def switchRiffle(self):
+        return pg.key.get_pressed()[pg.K_v]
+
+    def switchMachineGun(self):
+        return pg.key.get_pressed()[pg.K_b]
 
     def isShooting(self):
         return pg.mouse.get_pressed()[0]

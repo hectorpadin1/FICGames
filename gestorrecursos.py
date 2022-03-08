@@ -11,7 +11,10 @@ class GestorRecursos:
     sound_resources = {}
 
     # SPRITE IMAGES 
-    PLAYER_IMG      = 'images-sprites/hero.png'
+    PLAYER_RIFFLE   = 'images-sprites/Hero_Rifle.png'
+    PLAYER_PISTOL   = 'images-sprites/Hero_Pistol.png'
+    PLAYER_MACHINEGUN   = 'images-sprites/Hero_MachineGun.png'
+    PLAYER_RELOAD   = 'images-sprites/Hero_Reload.png'
     BULLET_IMG      = 'images-sprites/bullet.png'
     EXPLOSION_IMAGE = 'images-sprites/explode_bullet.png'
     MOB_IMAGE       = 'images-sprites/soldier.png'

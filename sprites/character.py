@@ -45,6 +45,9 @@ class Character(pg.sprite.Sprite):
                 sprite.vel.y = 0
                 sprite.hit_rect.centery = sprite.pos.y
 
+    def updateImage(self, img):
+        self.image_path = img
+
     def update(self):
         self.rect = self.image.get_rect()
         self.rect.center = self.pos

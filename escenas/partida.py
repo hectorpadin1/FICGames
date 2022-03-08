@@ -97,14 +97,13 @@ class Partida(Escena):
                 if (random.randint(0, 1))==1:
                     x = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
                     y = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
-                    MobBasico(self.mobs, tile_object.x +x, tile_object.y + y, [self.walls, self.obstacle])
-                MobBasico(self.mobs, tile_object.x, tile_object.y, [self.walls, self.obstacle])
+                    MobBasico(self.mobs, tile_object.x +x, tile_object.y + y, self.bullets_mobs, [self.walls, self.obstacle])
+                MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle])
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
 
     def __bullet_hits(self):
-        collide_hit_rect = lambda a, b : a.hit_rect.colliderect(b.rect)
         # bullets hit player
         hits = pg.sprite.spritecollide(self.player, self.bullets_mobs, True, pg.sprite.collide_mask)
         for hit in hits:
@@ -136,10 +135,10 @@ class Partida(Escena):
 
     def update(self, dt):
         # Actualizamos grupos de sprites
-        self.player.update(self.camera.camera.topleft, self.bullets_player, dt)
+        self.player.update(self.camera.camera.topleft, dt)
         self.bullets_player.update(dt)
         self.bullets_mobs.update(dt)
-        self.mobs.update(self.player.pos, self.bullets_mobs, dt)
+        self.mobs.update(self.player.pos, dt)
         self.explosions.update()
         self.blood.update()
         self.hits.update()
