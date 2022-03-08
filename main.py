@@ -1,7 +1,6 @@
 import pygame as pg
 from director import Director
 from escenas.start_screen import StartScreen
-from escenas.gameover import GameOver
 from soundcontroller import SoundController as SC
 
 #Inicializamos PyGame

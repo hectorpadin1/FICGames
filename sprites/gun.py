@@ -1,6 +1,6 @@
 import pygame as pg
 from settings import *
-from gestorrecursos import GestorRecursos as GR
+from resourcemanager import ResourceManager as GR
 from sprites.bullet import Bullet
 from soundcontroller import SoundController as SC
 

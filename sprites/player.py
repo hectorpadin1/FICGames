@@ -5,7 +5,7 @@ from settings import *
 from math import cos, pi
 from control import Controler
 from sprites.gun import MachineGun, Pistol, Rifle
-from gestorrecursos import GestorRecursos as GR
+from resourcemanager import ResourceManager as GR
 
 
 class Player(Character):

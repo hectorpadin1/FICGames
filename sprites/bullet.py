@@ -1,9 +1,8 @@
 import pygame as pg
 from settings import *
 from pygame.math import Vector2
-from random import uniform
 from sprites.explosion import *
-from gestorrecursos import GestorRecursos as GR
+from resourcemanager import ResourceManager as GR
 
 
 class Bullet(pg.sprite.Sprite):

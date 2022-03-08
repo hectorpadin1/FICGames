@@ -4,7 +4,7 @@ import pytmx
 
 #DEBUGUEAR PARA COMPROBAR QUE SE ACTUALIZAN LAS LISTAS SIENDO ESTATICO
 
-class GestorRecursos:
+class ResourceManager:
     image_resources = {}
     map_resources   = {}
     font_resources  = {}

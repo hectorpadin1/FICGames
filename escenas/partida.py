@@ -1,8 +1,6 @@
 import pygame as pg
-from os import path
 import random
-
-#from sqlalchemy import true
+from pygame.math import Vector2
 from settings import *
 from sprites.player import Player
 from sprites.wall import Wall, Obstacle

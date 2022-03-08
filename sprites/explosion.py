@@ -1,7 +1,7 @@
 import pygame as pg
 from settings import *
 from pygame.math import Vector2
-from gestorrecursos import GestorRecursos as GR
+from resourcemanager import ResourceManager as GR
 
 #
 #   NO DESAPARECEN PORQUE NO SE EJECUTA EL UPDATE -> hector gestiona los grupos bien y mételo

@@ -1,5 +1,4 @@
 from pygame import Rect
-from pygame.math import Vector2
 
 # Colors
 WHITE = (255, 255, 255)
