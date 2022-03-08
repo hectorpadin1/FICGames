@@ -9,11 +9,11 @@ from soundcontroller import SoundController as SC
 
 class Bullet(pg.sprite.Sprite):
     
-    def __init__(self, bullet_group, pos, rot):
+    def __init__(self, bullet_group, pos, rot, img):
         pg.sprite.Sprite.__init__(self, bullet_group)
         dir = Vector2(1, 0).rotate(-rot)
         #pos = pos + BARREL_OFFSET.rotate(-rot)
-        self.image = GR.load_image(GR.BULLET_IMG)
+        self.image = GR.load_image(img)
         self.image = pg.transform.rotate(self.image, rot-90)
         self.rect = self.image.get_rect()
         self.pos = Vector2(pos)

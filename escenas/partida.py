@@ -86,7 +86,7 @@ class Partida(Escena):
         # Initial pos of player and collisions
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
-                self.player = Player(tile_object.x, tile_object.y, [self.walls, self.obstacle])
+                self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle])
             if tile_object.name == 'Wall':
                 Wall(self.walls, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
