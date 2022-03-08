@@ -40,7 +40,7 @@ class ResourceManager:
     # MAPS
     LEVEL1 = 'maps/level1.tmx'
     LEVEL2 = 'maps/level2.tmx'
-    #LEVEL3 = 'maps/level3.tmx'
+    LEVEL3 = 'maps/level3.tmx'
     #LEVEL4 = 'maps/level4.tmx'
     #LEVEL5 = 'maps/level5.tmx'
     #LEVEL6 = 'maps/level6.tmx'

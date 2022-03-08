@@ -9,7 +9,7 @@ from resourcemanager import ResourceManager as GR
 class TiledMap:
     def __init__(self, level):
         if level==1:
-            tm = GR.load_map(GR.LEVEL1)
+            tm = GR.load_map(GR.LEVEL3)
         else:
             print("El mapa no existe")
             sys.exit()
