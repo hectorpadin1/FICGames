@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="132">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="133">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="961" columns="31">
   <image source="../images-sprites/tileset.png" width="2000" height="2000"/>
  </tileset>
@@ -311,7 +311,7 @@
  </layer>
  <objectgroup id="10" name="Obstacles">
   <object id="1" name="Wall" x="-0.848485" y="0.0151515" width="7.61364" height="1920.65"/>
-  <object id="3" name="Wall" x="1908.69" y="0.00833333" width="12.7803" height="1920.65"/>
+  <object id="3" name="Wall" x="1910.44" y="0.00833333" width="11.0303" height="1920.65"/>
   <object id="4" name="Wall" x="6.76692" y="1915.76" width="1899.41" height="5.9"/>
   <object id="5" name="Wall" x="6.96167" y="0.216667" width="1900.73" height="5.9"/>
   <object id="6" name="Wall" x="75.1667" y="1482.5" width="123.243" height="115.4"/>
@@ -352,36 +352,35 @@
   <object id="43" name="Wall" x="387.212" y="519.467" width="63.243" height="27.7334"/>
   <object id="44" name="Wall" x="135.878" y="514.133" width="49.9097" height="62.0667"/>
   <object id="45" name="Wall" x="54.8785" y="225.467" width="85.5764" height="87.0667"/>
-  <object id="46" name="Wall" x="392.878" y="1520.74" width="310.243" height="12.4"/>
-  <object id="47" name="Wall" x="406.212" y="1265.13" width="298.243" height="12.4"/>
-  <object id="48" name="Wall" x="393.545" y="963.133" width="757.743" height="12.4"/>
-  <object id="49" name="Wall" x="831.045" y="1521.13" width="320.243" height="12.4"/>
-  <object id="50" name="Wall" x="903.962" y="1265.05" width="120.576" height="12.4"/>
-  <object id="51" name="Wall" x="1087.38" y="1264.72" width="51.743" height="12.4"/>
-  <object id="52" name="Wall" x="1141.48" y="977.8" width="10.0006" height="541.885"/>
+  <object id="46" name="Wall" x="392.878" y="1523.37" width="306.266" height="7.4"/>
+  <object id="47" name="Wall" x="404.712" y="1266.63" width="298.243" height="8.65"/>
+  <object id="48" name="Wall" x="393.545" y="964.466" width="756.305" height="8.73333"/>
+  <object id="49" name="Wall" x="838.007" y="1522.95" width="312.19" height="7.30909"/>
+  <object id="50" name="Wall" x="905.417" y="1266.32" width="114.212" height="8.58182"/>
+  <object id="51" name="Wall" x="1090.11" y="1266.36" width="50.2885" height="9.49091"/>
+  <object id="52" name="Wall" x="1142.57" y="974.737" width="7.45515" height="547.322"/>
   <object id="53" name="Wall" x="393.041" y="976.633" width="10.0006" height="542.976"/>
-  <object id="54" name="Wall" x="904.818" y="1344.06" width="10.0006" height="175.521"/>
-  <object id="55" name="Wall" x="904.545" y="977.963" width="10.0006" height="286.021"/>
-  <object id="56" name="Wall" x="693" y="1151.99" width="10.0006" height="111.021"/>
-  <object id="57" name="Wall" x="693" y="977.156" width="10.0006" height="111.021"/>
-  <object id="58" name="Wall" x="1544.67" y="1471.99" width="10.0006" height="316.188"/>
-  <object id="59" name="Wall" x="1545" y="963.906" width="10.0006" height="379.688"/>
-  <object id="60" name="Wall" x="1556.33" y="963.823" width="350.001" height="11.0213"/>
-  <object id="61" name="Wall" x="1556" y="1777.49" width="350.001" height="11.0213"/>
-  <object id="62" name="Wall" x="1555.64" y="1539.81" width="172.728" height="11.0213"/>
-  <object id="63" name="Wall" x="1791.39" y="1539.49" width="114.978" height="11.0213"/>
-  <object id="64" name="Wall" x="1736.51" y="976.489" width="10.978" height="427.771"/>
-  <object id="65" name="Wall" x="1748.97" y="1393.67" width="42.7962" height="11.0213"/>
-  <object id="66" name="Wall" x="1855.69" y="1393.4" width="52.4326" height="11.0213"/>
-  <object id="67" name="Wall" x="775.999" y="817.489" width="887.001" height="11.0213"/>
-  <object id="68" name="Wall" x="1343.77" y="515.398" width="319.546" height="11.0213"/>
-  <object id="69" name="Wall" x="777.56" y="515.156" width="439.546" height="11.0213"/>
-  <object id="70" name="Wall" x="776.227" y="527.739" width="11.296" height="287.771"/>
-  <object id="71" name="Wall" x="1012.02" y="529.448" width="11.296" height="238.438"/>
-  <object id="72" name="Wall" x="1652.35" y="527.539" width="11.296" height="288.438"/>
-  <object id="73" name="Wall" x="1416.66" y="527.599" width="10.5687" height="177.408"/>
-  <object id="74" name="Wall" x="1416.72" y="768.046" width="10.5687" height="48.783"/>
-  <object id="75" name="Wall" x="1416.72" y="768.046" width="10.5687" height="48.783"/>
+  <object id="54" name="Wall" x="904.818" y="1351.4" width="10.0006" height="168.18"/>
+  <object id="55" name="Wall" x="905.636" y="974.963" width="8.90969" height="290.385"/>
+  <object id="56" name="Wall" x="693" y="1157.99" width="10.0006" height="105.021"/>
+  <object id="57" name="Wall" x="693" y="977.156" width="10.0006" height="104.294"/>
+  <object id="58" name="Wall" x="1546.34" y="1475.99" width="7.39643" height="310.84"/>
+  <object id="59" name="Wall" x="1546.04" y="965.406" width="8.08756" height="373.097"/>
+  <object id="60" name="Wall" x="1555.33" y="965.459" width="353.001" height="6.74857"/>
+  <object id="61" name="Wall" x="1554.87" y="1778.62" width="353.881" height="8.1463"/>
+  <object id="62" name="Wall" x="1554.89" y="1541.26" width="167.978" height="7.47585"/>
+  <object id="63" name="Wall" x="1797.27" y="1541.74" width="110.853" height="6.6463"/>
+  <object id="64" name="Wall" x="1736.51" y="974.216" width="10.978" height="428.739"/>
+  <object id="65" name="Wall" x="1748.23" y="1395.02" width="39.5978" height="7.89087"/>
+  <object id="66" name="Wall" x="1860.19" y="1394.9" width="47.9326" height="8.1463"/>
+  <object id="67" name="Wall" x="778.454" y="819.554" width="883.671" height="7.01587"/>
+  <object id="68" name="Wall" x="1348.13" y="517.398" width="314.042" height="7.0213"/>
+  <object id="69" name="Wall" x="777.56" y="517.531" width="433.984" height="6.8963"/>
+  <object id="70" name="Wall" x="777.914" y="527.739" width="8.171" height="290.226"/>
+  <object id="71" name="Wall" x="1014.14" y="527.448" width="7.671" height="235.063"/>
+  <object id="72" name="Wall" x="1653.83" y="525.266" width="8.33948" height="292.961"/>
+  <object id="73" name="Wall" x="1418.39" y="527.599" width="7.20506" height="173.863"/>
+  <object id="75" name="Wall" x="1418.27" y="770.682" width="7.65961" height="46.8739"/>
   <object id="76" name="Wall" x="1574.67" y="1797.33" width="88" height="110.667"/>
   <object id="77" name="Object" x="46.2117" y="1591.47" width="24.2433" height="17.0667"/>
   <object id="78" name="Object" x="465.697" y="1427.74" width="27.6978" height="26.3394"/>
@@ -436,5 +435,6 @@
   <object id="129" name="mob" x="1737.33" y="1628" width="42.6667" height="37.3333"/>
   <object id="130" name="mob" x="868" y="661.333" width="42.6667" height="37.3333"/>
   <object id="131" name="mob" x="1513.33" y="688" width="42.6667" height="37.3333"/>
+  <object id="132" name="Object" x="1809.31" y="982.444" width="91.1978" height="31.8394"/>
  </objectgroup>
 </map>
