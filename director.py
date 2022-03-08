@@ -38,6 +38,9 @@ class Director():
         # Popeamos Escena
         if (len(self.pila)>0):
             self.pila.pop()
+            if len(self.pila)==0: 
+                self.salir_escena = True
+                return
             escena = self.pila[len(self.pila)-1]
             escena.play_music()
 

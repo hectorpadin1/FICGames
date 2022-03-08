@@ -51,7 +51,7 @@ from escenas.pause import Pause
 
 class Partida(Escena):
     
-    def __init__(self,director):
+    def __init__(self,director,lvl):
         Escena.__init__(self, director)
         self.init_game()
 

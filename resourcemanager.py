@@ -29,6 +29,7 @@ class ResourceManager:
     BOX_GO       = 'images-gui/go_box.png'
     GAMEOVER_IMG = 'images-gui/gameover.png'
     PAUSE_IMG    = 'images-gui/pause.png'
+    LVL_BTN      = 'images-gui/lvl_btn.png'
 
     # FONTS
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"
