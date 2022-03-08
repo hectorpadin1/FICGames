@@ -2,7 +2,7 @@ import pygame as pg
 import pytmx
 from settings import *
 import sys
-from gestorrecursos import GestorRecursos as GR
+from resourcemanager import ResourceManager as GR
 
 
 

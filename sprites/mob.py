@@ -3,16 +3,32 @@ from sprites.character import Character
 from settings import *
 from math import pow, sqrt
 from pygame.math import Vector2
-from gestorrecursos import GestorRecursos as GR
+from sprites.gun import Pistol
+from resourcemanager import ResourceManager as GR
 
 
 class Mob(Character):
 
-    def __init__(self, mob_group, x, y, collide_groups):
+    def __init__(self, mob_group, x, y, bullets, gun, collide_groups):
         super().__init__(mob_group, GR.MOB_IMAGE, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups)
         self.acc = Vector2(0, 0)
         self.follow = False
+        self.gun = gun
         self.last_shot = pg.time.get_ticks()
+
+    def update(self):
+        # Shooting
+        if self.follow:
+            self.gun.shoot(self.pos, self.rot)
+        self.gun.update()
+        super().update()
+
+
+class MobBasico(Mob):
+    
+    def __init__(self, mob_group, x, y, bullets, collide_groups):
+        gun = Pistol(bullets)
+        super().__init__(mob_group, x, y, bullets, gun, collide_groups)
 
     def update(self, player_pos, dt):
         distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))

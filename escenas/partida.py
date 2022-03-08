@@ -1,12 +1,10 @@
 import pygame as pg
-from os import path
 import random
-from math import cos, pi
+from pygame.math import Vector2
 from settings import *
 from sprites.player import Player
 from sprites.wall import Wall, Obstacle
-from sprites.bullet import Bullet
-from sprites.mob import Mob
+from sprites.mob import MobBasico
 from sprites.blood import Blood
 from sprites.explosion import Explosion
 from sprites.hit import Hit
@@ -86,7 +84,7 @@ class Partida(Escena):
         # Initial pos of player and collisions
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
-                self.player = Player(tile_object.x, tile_object.y, [self.walls, self.obstacle])
+                self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle])
             if tile_object.name == 'Wall':
                 Wall(self.walls, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
@@ -97,14 +95,13 @@ class Partida(Escena):
                 if (random.randint(0, 1))==1:
                     x = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
                     y = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
-                    Mob(self.mobs, tile_object.x +x, tile_object.y + y, [self.walls, self.obstacle])
-                Mob(self.mobs, tile_object.x, tile_object.y, [self.walls, self.obstacle])
+                    MobBasico(self.mobs, tile_object.x +x, tile_object.y + y, self.bullets_mobs, [self.walls, self.obstacle])
+                MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle])
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
 
     def __bullet_hits(self):
-        collide_hit_rect = lambda a, b : a.hit_rect.colliderect(b.rect)
         # bullets hit player
         hits = pg.sprite.spritecollide(self.player, self.bullets_mobs, True, pg.sprite.collide_mask)
         for hit in hits:
@@ -121,6 +118,7 @@ class Partida(Escena):
                 hit.health -= BULLET_DAMAGE
                 Hit(self.blood, hit.pos, 0.5, 0.5, -hit.rot-30)
                 hit.vel = Vector2(0, 0)
+                hit.follow = True
             else:
                 Blood(self.blood, hit.pos, 0.5, 0.5, -hit.rot-110)
                 hit.kill()
@@ -136,19 +134,6 @@ class Partida(Escena):
     def update(self, dt):
         # Actualizamos grupos de sprites
         self.player.update(self.camera.camera.topleft, dt)
-        # Esto no mg
-        if self.player.shooting:
-            now = pg.time.get_ticks()
-            if now - self.player.last_shot > BULLET_RATE:
-                self.player.last_shot = now
-                Bullet(self.bullets_player, self.player.pos, self.player.rot)
-        
-        for mob in self.mobs:
-            if mob.follow:
-                now = pg.time.get_ticks()
-                if now - mob.last_shot > MOB_BULLET_RATE:
-                    mob.last_shot = now
-                    Bullet(self.bullets_mobs, mob.pos, mob.rot)
         self.bullets_player.update(dt)
         self.bullets_mobs.update(dt)
         self.mobs.update(self.player.pos, dt)
@@ -161,14 +146,16 @@ class Partida(Escena):
         if self.player.health <= 0:
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
             self.gameover()
-            
+
         # Posición de la cámara
         self.camera.update(self.player)
+
 
     def gameover(self):
         self.init_game() #cambiar ese __init__ por un initializegame y que init lo k haga sea llamar a lo mismo
         gameover = GameOver(self.director)
         self.director.pushEscena(gameover)
+
 
     def draw(self, display):
         
@@ -194,7 +181,7 @@ class Partida(Escena):
             for wall in self.walls:
                 pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
             for obstacle in self.obstacle:
-                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
+                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(obstacle.rect), 1)
         self.player.draw_health(display, 10, 10, self.player.health / PLAYER_HEALTH)
 
 
@@ -211,33 +198,8 @@ class Partida(Escena):
                 #PROVISIONAL    
                 if event.key == pg.K_h:
                     self.draw_debug = not self.draw_debug
-        # Player dynamics
-        self.player.rot_speed = 0
-        self.player.vel = Vector2(0, 0)
-        keys = pg.key.get_pressed()
-        # On-Axis movements
-        if keys[pg.K_a]:
-            self.player.vel.x = -PLAYER_SPEED
-        if keys[pg.K_d]:
-            self.player.vel.x = PLAYER_SPEED
-        if keys[pg.K_w]:
-            self.player.vel.y = -PLAYER_SPEED
-        if keys[pg.K_s]:
-            self.player.vel.y = PLAYER_SPEED
-        # Oposite movements
-        if keys[pg.K_a] and keys[pg.K_d]:
-            self.player.vel.x = 0
-        if keys[pg.K_w] and keys[pg.K_s]:
-            self.player.vel.y = 0
-        # Diagonal movements        
-        if self.player.vel.x!=0 and self.player.vel.y !=0:
-            self.player.vel *= cos(pi/4)
-        # Mirar de cambiar esto
-        if keys[pg.K_SPACE]:
-            self.player.shooting = True
-        else:
-            self.player.shooting = False
-    
+
+
     def play_music(self):
         SC.play_main()
 

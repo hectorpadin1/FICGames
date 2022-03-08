@@ -2,7 +2,7 @@ import pygame as pg
 import sys
 from settings import *
 from gui.button import Button
-from gestorrecursos import GestorRecursos as GR
+from resourcemanager import ResourceManager as GR
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
 from escenas.partida import Partida

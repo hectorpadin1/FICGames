@@ -1,7 +1,7 @@
 import pygame as pg
 import sys
 from settings import *
-from gestorrecursos import GestorRecursos as GR
+from resourcemanager import ResourceManager as GR
 
 # ESTO DEBERÍA PONERLO COMO SPRITE
 

@@ -1,6 +1,6 @@
 import pygame as pg
 from pygame.math import Vector2
-from gestorrecursos import GestorRecursos as GR
+from resourcemanager import ResourceManager as GR
 
 
 class Character(pg.sprite.Sprite):
@@ -44,6 +44,9 @@ class Character(pg.sprite.Sprite):
                     sprite.pos.y = hits[0].rect.bottom + sprite.hit_rect.height / 2
                 sprite.vel.y = 0
                 sprite.hit_rect.centery = sprite.pos.y
+
+    def updateImage(self, img):
+        self.image_path = img
 
     def update(self):
         self.rect = self.image.get_rect()

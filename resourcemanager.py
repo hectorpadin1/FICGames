@@ -4,14 +4,17 @@ import pytmx
 
 #DEBUGUEAR PARA COMPROBAR QUE SE ACTUALIZAN LAS LISTAS SIENDO ESTATICO
 
-class GestorRecursos:
+class ResourceManager:
     image_resources = {}
     map_resources   = {}
     font_resources  = {}
     sound_resources = {}
 
     # SPRITE IMAGES 
-    PLAYER_IMG      = 'images-sprites/hero.png'
+    PLAYER_RIFFLE   = 'images-sprites/Hero_Rifle.png'
+    PLAYER_PISTOL   = 'images-sprites/Hero_Pistol.png'
+    PLAYER_MACHINEGUN   = 'images-sprites/Hero_MachineGun.png'
+    PLAYER_RELOAD   = 'images-sprites/Hero_Reload.png'
     BULLET_IMG      = 'images-sprites/bullet.png'
     EXPLOSION_IMAGE = 'images-sprites/explode_bullet.png'
     MOB_IMAGE       = 'images-sprites/soldier.png'

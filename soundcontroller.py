@@ -1,6 +1,6 @@
 import pygame as pg
 from settings import *
-from gestorrecursos import GestorRecursos as GR
+from resourcemanager import ResourceManager as GR
 
 class SoundController:
     
