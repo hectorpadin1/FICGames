@@ -67,7 +67,7 @@ class Pause(Escena):
     
     def go_retry(self):
         SC.play_selection()
-        partida = escenas.partida.Partida(self.director)
+        partida = escenas.partida.Partida(self.director,"polla")
         self.director.exitEscena()
         self.director.exitEscena()
         self.director.pushEscena(partida)

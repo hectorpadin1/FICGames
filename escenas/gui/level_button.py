@@ -22,8 +22,8 @@ class LevelButton():
         #Text
         font = GR.load_font(GR.MAIN_FONT,GUI_FONT_SIZE)
     
-        self.text_surface = font.render(text, True, (154,122,37))
-        self.text_surface_hover = font.render(text, True, (255,255,255)) # poner color viejo que me cargué
+        self.text_surface = font.render(text, True, (255,255,255))
+        self.text_surface_hover = font.render(text, True, (154,122,37))
 
         self.text_rect = self.text_surface.get_rect()
         self.text_rect.center = (WIDTH/2+dx,HEIGHT/2+dy)

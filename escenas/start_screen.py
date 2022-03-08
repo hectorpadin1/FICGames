@@ -67,7 +67,7 @@ class StartScreen(Escena):
     
     def go_play(self):
         SC.play_selection()
-        partida = Partida(self.director)
+        partida = Partida(self.director,"polla")
         self.director.pushEscena(partida)
         
     def go_settings(self):
