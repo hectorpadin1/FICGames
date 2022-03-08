@@ -1,21 +1,39 @@
 import pygame as pg
 
-class Control:
+class AbstractControler:
 
     #abstracta control? -> yo creo k no hace falta
     
     #algo de este rollo
-    def arriba(self):
+    def up(self):
         return
 
-    def abajo(self):
+    def down(self):
         pass
 
-    def derecha(self):
+    def right(self):
         pass   
 
-    def izquierda(self):
+    def left(self):
         pass    
 
-    def disparo(self):
+    def isShooting(self):
         pass
+
+
+class Controler(AbstractControler):
+
+    def up(self):
+        return pg.key.get_pressed()[pg.K_w]
+
+    def down(self):
+        return pg.key.get_pressed()[pg.K_s]
+
+    def right(self):
+        return pg.key.get_pressed()[pg.K_d]   
+
+    def left(self):
+        return pg.key.get_pressed()[pg.K_a]    
+
+    def isShooting(self):
+        return pg.mouse.get_pressed()[0]

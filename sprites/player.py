@@ -2,7 +2,9 @@ import pygame as pg
 from sprites.character import Character
 from pygame.math import Vector2
 from settings import *
+from math import cos, pi
 from sprites.bullet import Bullet
+from control import Controler
 from gestorrecursos import GestorRecursos as GR
 
 
@@ -13,6 +15,7 @@ class Player(Character):
         self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()
+        self.controler = Controler()
         self.shooting = False
     
     def draw_health(self, display, x, y, pct):
@@ -33,7 +36,36 @@ class Player(Character):
         pg.draw.rect(display, WHITE, outline_rect, 2)
 
 
+    def __callControler(self):
+        # Player dynamics
+        self.rot_speed = 0
+        self.vel = Vector2(0, 0)
+        # On-Axis movements
+        if self.controler.left():
+            self.vel.x = -PLAYER_SPEED
+        if self.controler.right():
+            self.vel.x = PLAYER_SPEED
+        if self.controler.up():
+            self.vel.y = -PLAYER_SPEED
+        if self.controler.down():
+            self.vel.y = PLAYER_SPEED
+        # Oposite movements
+        if self.controler.left() and self.controler.right():
+            self.vel.x = 0
+        if self.controler.up() and self.controler.down():
+            self.vel.y = 0
+        # Diagonal movements        
+        if self.vel.x!=0 and self.vel.y!=0:
+            self.vel *= cos(pi/4)
+        # Shooting
+        if (self.controler.isShooting()):
+            self.shooting = True
+        else:
+            self.shooting = False
+
+
     def update(self, camera_pos, bullets, dt):
+        self.__callControler()
         # Checks where it has to move
         direction = pg.mouse.get_pos() - Vector2(camera_pos) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))

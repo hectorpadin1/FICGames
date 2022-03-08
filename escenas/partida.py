@@ -1,13 +1,11 @@
 import pygame as pg
 from os import path
 import random
-from math import cos, pi
 
-from sqlalchemy import true
+#from sqlalchemy import true
 from settings import *
 from sprites.player import Player
 from sprites.wall import Wall, Obstacle
-from sprites.bullet import Bullet
 from sprites.mob import MobBasico
 from sprites.blood import Blood
 from sprites.explosion import Explosion
@@ -155,10 +153,12 @@ class Partida(Escena):
         # Posición de la cámara
         self.camera.update(self.player)
 
+
     def gameover(self):
         self.init_game() #cambiar ese __init__ por un initializegame y que init lo k haga sea llamar a lo mismo
         gameover = GameOver(self.director)
         self.director.pushEscena(gameover)
+
 
     def draw(self, display):
         
@@ -184,7 +184,7 @@ class Partida(Escena):
             for wall in self.walls:
                 pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
             for obstacle in self.obstacle:
-                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
+                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(obstacle.rect), 1)
         self.player.draw_health(display, 10, 10, self.player.health / PLAYER_HEALTH)
 
 
@@ -202,40 +202,6 @@ class Partida(Escena):
                 if event.key == pg.K_h:
                     self.draw_debug = not self.draw_debug
 
-        #Clicks
-        clicked = pg.mouse.get_pressed()
-        if (clicked[0]):
-            self.player.shooting = True
-        else:
-            self.player.shooting = False
-                
-
-        # Player dynamics
-        self.player.rot_speed = 0
-        self.player.vel = Vector2(0, 0)
-        keys = pg.key.get_pressed()
-        # On-Axis movements
-        if keys[pg.K_a]:
-            self.player.vel.x = -PLAYER_SPEED
-        if keys[pg.K_d]:
-            self.player.vel.x = PLAYER_SPEED
-        if keys[pg.K_w]:
-            self.player.vel.y = -PLAYER_SPEED
-        if keys[pg.K_s]:
-            self.player.vel.y = PLAYER_SPEED
-        # Oposite movements
-        if keys[pg.K_a] and keys[pg.K_d]:
-            self.player.vel.x = 0
-        if keys[pg.K_w] and keys[pg.K_s]:
-            self.player.vel.y = 0
-        # Diagonal movements        
-        if self.player.vel.x!=0 and self.player.vel.y !=0:
-            self.player.vel *= cos(pi/4)
-        # Mirar de cambiar esto
-        #if keys[pg.K_SPACE]:
-            #self.player.shooting = True
-        #else:
-            #self.player.shooting = False
 
     def play_music(self):
         SC.play_main()
