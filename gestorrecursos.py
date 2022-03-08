@@ -20,6 +20,7 @@ class GestorRecursos:
     
     # GUI IMAGES
     LOGO_IMG     = 'images-gui/logo.png'
+    START_IMG    = 'images-gui/inicio.png'
     BTN_BG       = 'images-gui/btn_bg.png'
     BOX_BG       = 'images-gui/box_bg.png'
     BOX_GO       = 'images-gui/go_box.png'

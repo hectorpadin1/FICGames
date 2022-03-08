@@ -43,6 +43,11 @@ class StartScreen(Escena):
         rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
         display.blit(logo, rect) 
 
+    def draw_back(self, display, dx=0, dy=0):
+        logo = GR.load_image(GR.START_IMG)
+        rect = logo.get_rect()
+        rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
+        display.blit(logo, rect) 
 
     def update(self, _dt):
         mouse_pos = pg.mouse.get_pos()
@@ -51,7 +56,7 @@ class StartScreen(Escena):
         self.exit_btn.update(mouse_pos,self.click)
 
     def draw(self,display):
-        display.fill((66,82,58)) # fondo provisional
+        self.draw_back(display, dx = 30, dy=50)
 
         _,box_y = self.draw_box(display)
         self.draw_logo(display,dy=-((box_y/4)))
