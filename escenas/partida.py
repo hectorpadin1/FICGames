@@ -2,6 +2,8 @@ import pygame as pg
 from os import path
 import random
 from math import cos, pi
+
+from sqlalchemy import true
 from settings import *
 from sprites.player import Player
 from sprites.wall import Wall, Obstacle
@@ -199,6 +201,15 @@ class Partida(Escena):
                 #PROVISIONAL    
                 if event.key == pg.K_h:
                     self.draw_debug = not self.draw_debug
+
+        #Clicks
+        clicked = pg.mouse.get_pressed()
+        if (clicked[0]):
+            self.player.shooting = True
+        else:
+            self.player.shooting = False
+                
+
         # Player dynamics
         self.player.rot_speed = 0
         self.player.vel = Vector2(0, 0)
@@ -221,11 +232,11 @@ class Partida(Escena):
         if self.player.vel.x!=0 and self.player.vel.y !=0:
             self.player.vel *= cos(pi/4)
         # Mirar de cambiar esto
-        if keys[pg.K_SPACE]:
-            self.player.shooting = True
-        else:
-            self.player.shooting = False
-    
+        #if keys[pg.K_SPACE]:
+            #self.player.shooting = True
+        #else:
+            #self.player.shooting = False
+
     def play_music(self):
         SC.play_main()
 
