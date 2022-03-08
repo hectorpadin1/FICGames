@@ -1,8 +1,8 @@
 import pygame as pg
 import sys
 from settings import *
-from gui.button import Button
-from gui.button import LevelButton
+from escenas.gui.button import Button
+from escenas.gui.button import LevelButton
 from resourcemanager import ResourceManager as GR
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena

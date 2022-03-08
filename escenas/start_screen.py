@@ -1,7 +1,7 @@
 import pygame as pg
 import sys
 from settings import *
-from gui.button import Button
+from escenas.gui.button import Button
 from resourcemanager import ResourceManager as GR
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
