@@ -12,16 +12,15 @@ class LevelSelector(Escena):
 
     def __init__(self,director):
         Escena.__init__(self, director)
-        SC.play_menu()
         self.click = False
         #Butones 
         self.lvl_btns = []
-        margin = -80
-        for i in range(0,1):
-            self.lvl_btns.append(LevelButton(str(i),self.go_play,dx=margin))
-            margin=margin+1
+        margin = -52*3
+        for i in range(0,5):
+            self.lvl_btns.append(LevelButton(str(i),self.go_play,dx=margin, dy=26))
+            margin=margin+52*1.5
 
-        self.back_btn  = Button("Volver",self.go_back, dy=80)
+        self.back_btn  = Button("Volver",self.go_back, dy=80+26)
 
     def events(self, events):
         self.click = False
@@ -31,26 +30,40 @@ class LevelSelector(Escena):
             elif event.type == pg.MOUSEBUTTONDOWN:
                 self.click = True
 
-
-    #Dibuja Caja Centrada y Devuelve su tamaño 
-    def draw_box(self, display):
-        bg = GR.load_image(GR.BOX_GO) 
-        rect = bg.get_rect()
-        rect.center = (WIDTH/2,HEIGHT/2)
-        display.blit(bg, rect) 
-        return rect.size
-    
     def update(self, _dt):
         mouse_pos = pg.mouse.get_pos()
         for btn in self.lvl_btns:
             btn.update(mouse_pos,self.click)
         self.back_btn.update(mouse_pos,self.click)
 
+    #Dibuja Caja Centrada y Devuelve su tamaño 
+    def draw_box(self, display):
+        bg = GR.load_image(GR.BOX_BG) 
+        rect = bg.get_rect()
+        rect.center = (WIDTH/2,HEIGHT/2)
+        display.blit(bg, rect) 
+        return rect.size
+
+    def draw_logo(self, display, dx=0, dy=0):
+        logo = GR.load_image(GR.SELECT_LOGO)
+        rect = logo.get_rect()
+        rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
+        display.blit(logo, rect) 
+            
+    def draw_back(self, display, dx=0, dy=0):
+        logo = GR.load_image(GR.START_IMG)
+        rect = logo.get_rect()
+        rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
+        display.blit(logo, rect) 
+
     def draw(self,display):
-        display.fill((66,82,58)) # fondo provisional
+        self.draw_back(display, dx = 30, dy=50)
 
         _,box_y = self.draw_box(display)
         
+        self.draw_logo(display,dy=-((box_y/5)))
+
+
         for btn in self.lvl_btns:
             btn.draw(display)
 

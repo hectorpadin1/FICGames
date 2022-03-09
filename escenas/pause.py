@@ -33,7 +33,7 @@ class Pause(Escena):
     
     #Dibuja Caja Centrada y Devuelve su tamaño 
     def draw_box(self, display):
-        bg = GR.load_image(GR.BOX_GO) 
+        bg = GR.load_image(GR.BOX_BG) 
         rect = bg.get_rect()
         rect.center = (WIDTH/2,HEIGHT/2)
         display.blit(bg, rect) 

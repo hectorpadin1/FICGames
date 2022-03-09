@@ -6,6 +6,7 @@ from resourcemanager import ResourceManager as GR
 from soundcontroller import SoundController as SC
 from escenas.escena import Escena
 from escenas.partida import Partida
+from escenas.level_selector import LevelSelector
 
 class StartScreen(Escena):
 
@@ -67,8 +68,8 @@ class StartScreen(Escena):
     
     def go_play(self):
         SC.play_selection()
-        partida = Partida(self.director,"polla")
-        self.director.pushEscena(partida)
+        lvl_selector = LevelSelector(self.director)
+        self.director.pushEscena(lvl_selector)
         
     def go_settings(self):
         SC.play_selection()
