@@ -57,3 +57,6 @@ class Menu(Escena):
 
         for btn in self.btn_group:
             btn.draw(display)
+    
+    def play_music(self):
+        pass

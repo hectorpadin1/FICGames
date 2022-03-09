@@ -26,9 +26,11 @@ class LevelSelector(Menu):
     def go_play(self,lvl):
         SC.play_selection()
         partida = Partida(self.director,lvl)
-        self.director.pushEscena(partida)
+        self.director.pushEscena(partida,)
 
     def go_back(self):
         SC.play_selection()
-        self.director.exitEscena()
-
+        self.director.exitEscena(updateMusic = False)
+    
+    def play_music(self):
+        SC.play_menu()

@@ -34,16 +34,15 @@ class SoundController:
         pg.mixer.Sound.play(GR.load_sound(GR.METRALLETA))
     
     @classmethod
+    def play_pistola(self):
+        pg.mixer.Sound.play(GR.load_sound(GR.PISTOLA))
+        
+    @classmethod
     def play_ametralladora(self):
         pg.mixer.Sound.play(GR.load_sound(GR.AMETRALLADORA))
     
     @classmethod
-    def play_pistola(self):
-        pg.mixer.Sound.play(GR.load_sound(GR.PISTOLA))
-    
-    @classmethod
     def play_selection(self):
-        pg.mixer.music.pause()
         pg.mixer.Sound.play(GR.load_sound(GR.SELECTION))
     
     @classmethod

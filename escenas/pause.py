@@ -48,4 +48,4 @@ class Pause(Menu):
         self.director.exitEscena()
     
     def play_music(self):
-        pass
+        SC.play_gameover()

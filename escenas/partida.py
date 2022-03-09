@@ -59,8 +59,6 @@ class Partida(Escena):
 
     def init_game(self):
         random.seed()
-        #Musica
-        SC.play_main()
         #Mapa
         self.map = TiledMap(self.lvl)
         #Render del mapa -> REVISAR ESTO PEDRO

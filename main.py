@@ -8,7 +8,7 @@ pg.init()
 pg.mouse.set_cursor(pg.cursors.broken_x)
 #Sonido
 SC.init()
-SC.play_menu() # -> ponerlo donde se carga el menú?
+#SC.play_menu() # -> ponerlo donde se carga el menú?
 #Inicializamos el direcor y cargamos el menú principal
 director = Director()
 menu_principal = StartScreen(director)
