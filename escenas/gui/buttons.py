@@ -9,9 +9,9 @@ class ClasicButton(Button):
         Button.__init__(self,GR.BTN_BG, text, callback, dx=dx, dy=dy)
 
 class LevelButton(Button):
-    def __init__(self, text, callback, dx=0, dy=0):
-        Button.__init__(self,GR.LVL_BTN, text, callback, dx=dx, dy=dy)
-        self.lvl=text
+    def __init__(self, lvl, callback, dx=0, dy=0):
+        Button.__init__(self,GR.LVL_BTN, str(lvl), callback, dx=dx, dy=dy)
+        self.lvl=lvl
         
     def update(self, mouse_pos, click):
         self.hover = self.rect.collidepoint(mouse_pos)

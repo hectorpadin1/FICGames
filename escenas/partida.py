@@ -53,6 +53,7 @@ class Partida(Escena):
     
     def __init__(self,director,lvl):
         Escena.__init__(self, director)
+        self.lvl = lvl
         self.init_game()
 
     def init_game(self):
@@ -60,7 +61,7 @@ class Partida(Escena):
         #Musica
         SC.play_main()
         #Mapa
-        self.map = TiledMap(1)
+        self.map = TiledMap(self.lvl)
         #Render del mapa -> REVISAR ESTO PEDRO
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()

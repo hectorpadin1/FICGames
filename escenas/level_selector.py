@@ -13,7 +13,7 @@ class LevelSelector(Menu):
         lvl_btns = []
         margin = -52*3
         for i in range(0,5):
-            lvl_btns.append(LevelButton(str(i),self.go_play,dx=margin, dy=26))
+            lvl_btns.append(LevelButton(i,self.go_play,dx=margin, dy=26))
             margin=margin+52*1.5
 
         lvl_btns.append(ClasicButton("Volver",self.go_back, dy=80+26))
