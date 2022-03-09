@@ -35,8 +35,10 @@ class ResourceManager:
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"
 
     # SOUNDS
-    SELECTION   = 'sound_effects/selection.mp3'
-    METRALLETA  = 'sound_effects/metralleta.mp3'
+    SELECTION     = 'sound_effects/selection.mp3'
+    METRALLETA    = 'sound_effects/metralleta.mp3'
+    AMETRALLADORA = 'sound_effects/ametralladora.mp3'
+    PISTOLA       = 'sound_effects/pistola.mp3'
 
     # MAPS
     LEVEL1 = 'maps/level1.tmx'
