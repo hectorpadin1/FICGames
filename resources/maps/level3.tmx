@@ -402,9 +402,9 @@
   <object id="23" name="Wall" x="822.712" y="205.139" width="6.63636" height="301.388"/>
   <object id="24" name="Wall" x="394.636" y="205.261" width="6.63636" height="293.638"/>
   <object id="25" name="Wall" x="466.914" y="773.257" width="418.297" height="6.98664"/>
-  <object id="26" name="Wall" x="1577.52" y="481.173" width="82.297" height="22.9866"/>
-  <object id="27" name="Wall" x="1706.35" y="480.84" width="81.9637" height="22.9866"/>
-  <object id="28" name="Wall" x="1545.02" y="298.173" width="20.6304" height="81.6533"/>
+  <object id="26" name="Object" x="1577.52" y="481.173" width="82.297" height="22.9866"/>
+  <object id="27" name="Object" x="1706.35" y="480.84" width="81.9637" height="22.9866"/>
+  <object id="28" name="Object" x="1545.02" y="298.173" width="20.6304" height="81.6533"/>
   <object id="29" name="Wall" x="79.0182" y="820.507" width="110.964" height="103.987"/>
   <object id="30" name="Wall" x="15.518" y="533.006" width="115.964" height="103.987"/>
   <object id="31" name="Wall" x="77.518" y="306.006" width="110.964" height="103.987"/>
