@@ -6,6 +6,7 @@ class Director():
     def __init__(self):
         # Inicializamos la pantalla
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
+        
         pg.display.set_caption(TITLE)
         # Inicializamos Atributos
         self.pila = []
@@ -16,7 +17,7 @@ class Director():
 
     def loop(self, escena):
         self.salir_escena = False
-        pg.event.clear()   # Eliminamos eventos producidos -> Esto Pa k es ?????????? que podría venir que nos perjudique?
+        pg.event.clear() 
         
         while not self.salir_escena:
             dt = self.reloj.tick(60)
