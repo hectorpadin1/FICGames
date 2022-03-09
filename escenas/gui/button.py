@@ -3,16 +3,16 @@ import sys
 from settings import *
 from resourcemanager import ResourceManager as GR
 
-# ESTO DEBERÍA PONERLO COMO SPRITE
-
-class Button():
+class Button(pg.sprite.Sprite):
     #Inicializamos el botón mostrándolo en pantalla
-    def __init__(self, text, callback, dx=0, dy=0):
+    def __init__(self, bg, text, callback, dx=0, dy=0):
+        pg.sprite.Sprite.__init__(self)
+
         self.callback = callback
 
         #Bg Btn
-        self.bg = GR.load_image(GR.BTN_BG)
-        self.rect = self.bg.get_rect()
+        self.image = GR.load_image(bg)
+        self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2+dx,HEIGHT/2+dy)
         
         #Hovered
@@ -34,7 +34,7 @@ class Button():
             self.callback()
         
     def draw(self, display):
-        display.blit(self.bg, self.rect) 
+        display.blit(self.image, self.rect) 
         text = self.text_surface
         if self.hover:
             text = self.text_surface_hover
