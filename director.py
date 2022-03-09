@@ -10,6 +10,7 @@ class Director():
         # Inicializamos Atributos
         self.pila = []
         self.salir_escena = False
+        self.music = True
         self.reloj = pg.time.Clock()
 
 
@@ -30,10 +31,14 @@ class Director():
         #Ejecutamos Escenas De la Pila
         while (len(self.pila)>0):
             escena = self.pila[len(self.pila)-1]
+            if self.music:
+                escena.play_music()
+                escena.music = False
             self.loop(escena)
 
 
-    def exitEscena(self):
+    def exitEscena(self, updateMusic = True):
+        self.music = updateMusic
         self.salir_escena = True
         # Popeamos Escena
         if (len(self.pila)>0):
@@ -41,8 +46,6 @@ class Director():
             if len(self.pila)==0: 
                 self.salir_escena = True
                 return
-            escena = self.pila[len(self.pila)-1]
-            escena.play_music()
 
     def exitProgram(self):
         # Vaciamos pila
@@ -50,12 +53,14 @@ class Director():
         self.salir_escena = True
 
     
-    def changeEscena(self, escena):
+    def changeEscena(self, escena, updateMusic = True):
+        self.music = updateMusic
         self.exitEscena()
         # Ponemos la escena pasada en la cima de la pila
         self.pila.append(escena)
 
-    def pushEscena(self, escena):
+    def pushEscena(self, escena, updateMusic = True):
+        self.music = updateMusic
         self.salir_escena = True
         self.pila.append(escena)
 

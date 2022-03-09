@@ -10,9 +10,7 @@ from escenas.level_selector import LevelSelector
 
 class StartScreen(Menu):
 
-    def __init__(self,director):
-        SC.play_menu() #mover esto de aquí
-       
+    def __init__(self,director):       
         #Butones 
         play_btn  = ClasicButton("Jugar",self.go_play)
         margin    = play_btn.get_size()[1]/2 #apañar esto
@@ -24,7 +22,7 @@ class StartScreen(Menu):
     def go_play(self):
         SC.play_selection()
         lvl_selector = LevelSelector(self.director)
-        self.director.pushEscena(lvl_selector)
+        self.director.pushEscena(lvl_selector, updateMusic = False)
         
     def go_settings(self):
         SC.play_selection()
