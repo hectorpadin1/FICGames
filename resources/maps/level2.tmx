@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="126">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="138">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="961" columns="31">
   <image source="../images-sprites/tileset.png" width="2000" height="2000"/>
  </tileset>
@@ -502,5 +502,17 @@
   <object id="123" name="mob" x="1257.5" y="144" width="29" height="22"/>
   <object id="124" name="mob" x="1248.5" y="358" width="29" height="22"/>
   <object id="125" name="mob" x="795.5" y="1007" width="29" height="22"/>
+  <object id="126" name="met_ammo" x="1821" y="1814.67" width="32.6667" height="20"/>
+  <object id="127" name="ame_ammo" x="1767" y="1810.67" width="32.6667" height="33.3333"/>
+  <object id="128" name="pis_ammo" x="1713.67" y="1816" width="32.6667" height="20"/>
+  <object id="129" name="met_ammo" x="588.332" y="1326.33" width="32.6667" height="20"/>
+  <object id="130" name="ame_ammo" x="189.665" y="839" width="32.6667" height="33.3333"/>
+  <object id="131" name="pis_ammo" x="849.002" y="1730.66" width="32.6667" height="20"/>
+  <object id="132" name="health" x="187.333" y="915.333" width="33.3333" height="25.3333"/>
+  <object id="133" name="health" x="579.333" y="1831.33" width="33.3333" height="25.3333"/>
+  <object id="134" name="met_ammo" x="561" y="747.333" width="32.6667" height="20"/>
+  <object id="135" name="health" x="430" y="776.667" width="33.3333" height="25.3333"/>
+  <object id="136" name="pis_ammo" x="1783.67" y="826" width="32.6667" height="20"/>
+  <object id="137" name="health" x="1784.67" y="879.333" width="33.3333" height="25.3333"/>
  </objectgroup>
 </map>
