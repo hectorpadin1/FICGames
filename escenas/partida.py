@@ -14,6 +14,7 @@ from soundcontroller import SoundController as SC
 from escenas.escena import Escena
 from escenas.gameover import GameOver
 from escenas.pause import Pause
+from escenas.gui.hud import Hud
 
 
 # Revisar:
@@ -63,6 +64,8 @@ class Partida(Escena):
         #Render del mapa -> REVISAR ESTO PEDRO
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
+        #Hud
+        self.hud = Hud()
 
         #self.all_sprites = pg.sprite.Group() #ESTO ES ALJO JODIAMENTE INUTIL -> BORRAR
         self.walls = pg.sprite.Group()
@@ -73,6 +76,7 @@ class Partida(Escena):
         self.explosions = pg.sprite.Group()
         self.blood = pg.sprite.Group()
         self.hits = pg.sprite.Group()
+        self.mob_count = 0
 
         #########################################################################################################################
         #                                                                                                                       #
@@ -95,7 +99,9 @@ class Partida(Escena):
                     x = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
                     y = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
                     MobBasico(self.mobs, tile_object.x +x, tile_object.y + y, self.bullets_mobs, [self.walls, self.obstacle])
+                    self.mob_count += 1
                 MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle])
+                self.mob_count += 1
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
@@ -120,7 +126,11 @@ class Partida(Escena):
                 hit.follow = True
             else:
                 Blood(self.blood, hit.pos, 0.5, 0.5, -hit.rot-110)
+                self.mob_count -= 1
                 hit.kill()
+                if self.mob_count == 0: 
+                    pause = Pause(self.director)
+                    self.director.pushEscena(pause)
         # bullet hit walls
         hits = pg.sprite.groupcollide(self.bullets_mobs, self.walls, True, False)
         for hit in hits:
@@ -182,6 +192,8 @@ class Partida(Escena):
             for obstacle in self.obstacle:
                 pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(obstacle.rect), 1)
         self.player.draw_health(display, 10, 10, self.player.health / PLAYER_HEALTH)
+
+        self.hud.draw(display)
 
 
     def events(self, events):

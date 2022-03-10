@@ -30,6 +30,7 @@ class ResourceManager:
     PAUSE_IMG    = 'images-gui/pause.png'
     LVL_BTN      = 'images-gui/lvl_btn.png'
     SELECT_LOGO  = 'images-gui/select_level_logo.png'
+    HUD          = 'images-gui/hud.png'
 
     # FONTS
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"
