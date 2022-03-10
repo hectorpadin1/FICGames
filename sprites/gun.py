@@ -42,7 +42,7 @@ class AbstractGun():
 class Pistol(AbstractGun):
 
     def __init__(self, bullet_group):
-        super().__init__(bullet_group, 7, GR.BULLET_IMG, 20*FPS, 4*FPS, 34, 1500, 2*FPS, SC.play_metralleta)
+        super().__init__(bullet_group, 7, GR.BULLET_IMG, 20*FPS, 4*FPS, 34, 1500, 2*FPS, SC.play_pistola)
 
 
 class Rifle(AbstractGun):
@@ -54,6 +54,6 @@ class Rifle(AbstractGun):
 class MachineGun(AbstractGun):
 
     def __init__(self, bullet_group):
-        super().__init__(bullet_group, 100, GR.BULLET_IMG, 100*FPS, 30, 30, 2000, 3*FPS, SC.play_metralleta)
+        super().__init__(bullet_group, 100, GR.BULLET_IMG, 100*FPS, 30, 30, 2000, 3*FPS, SC.play_ametralladora)
     
 

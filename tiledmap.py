@@ -7,12 +7,13 @@ from resourcemanager import ResourceManager as GR
 
 
 class TiledMap:
-    def __init__(self, level):
-        if level==1:
-            tm = GR.load_map(GR.LEVEL1)
-        else:
+    def __init__(self, lvl):
+        try:
+            tm = GR.load_map(GR.LEVEL[lvl])
+        except:
             print("El mapa no existe")
             sys.exit()
+
         self.width = tm.width * tm.tilewidth
         self.height = tm.height * tm.tileheight
         self.tmxdata = tm

@@ -6,16 +6,18 @@ class Director():
     def __init__(self):
         # Inicializamos la pantalla
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
+        
         pg.display.set_caption(TITLE)
         # Inicializamos Atributos
         self.pila = []
         self.salir_escena = False
+        self.music = True
         self.reloj = pg.time.Clock()
 
 
     def loop(self, escena):
         self.salir_escena = False
-        pg.event.clear()   # Eliminamos eventos producidos -> Esto Pa k es ?????????? que podría venir que nos perjudique?
+        pg.event.clear() 
         
         while not self.salir_escena:
             dt = self.reloj.tick(60)
@@ -30,16 +32,21 @@ class Director():
         #Ejecutamos Escenas De la Pila
         while (len(self.pila)>0):
             escena = self.pila[len(self.pila)-1]
+            if self.music:
+                escena.play_music()
+                escena.music = False
             self.loop(escena)
 
 
-    def exitEscena(self):
+    def exitEscena(self, updateMusic = True):
+        self.music = updateMusic
         self.salir_escena = True
         # Popeamos Escena
         if (len(self.pila)>0):
             self.pila.pop()
-            escena = self.pila[len(self.pila)-1]
-            escena.play_music()
+            if len(self.pila)==0: 
+                self.salir_escena = True
+                return
 
     def exitProgram(self):
         # Vaciamos pila
@@ -47,12 +54,14 @@ class Director():
         self.salir_escena = True
 
     
-    def changeEscena(self, escena):
+    def changeEscena(self, escena, updateMusic = True):
+        self.music = updateMusic
         self.exitEscena()
         # Ponemos la escena pasada en la cima de la pila
         self.pila.append(escena)
 
-    def pushEscena(self, escena):
+    def pushEscena(self, escena, updateMusic = True):
+        self.music = updateMusic
         self.salir_escena = True
         self.pila.append(escena)
 

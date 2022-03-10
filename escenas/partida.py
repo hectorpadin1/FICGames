@@ -14,6 +14,7 @@ from soundcontroller import SoundController as SC
 from escenas.escena import Escena
 from escenas.gameover import GameOver
 from escenas.pause import Pause
+from escenas.gui.hud import Hud
 
 
 # Revisar:
@@ -51,19 +52,20 @@ from escenas.pause import Pause
 
 class Partida(Escena):
     
-    def __init__(self,director):
+    def __init__(self,director,lvl):
         Escena.__init__(self, director)
+        self.lvl = lvl
         self.init_game()
 
     def init_game(self):
         random.seed()
-        #Musica
-        SC.play_main()
         #Mapa
-        self.map = TiledMap(1)
+        self.map = TiledMap(self.lvl)
         #Render del mapa -> REVISAR ESTO PEDRO
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
+        #Hud
+        self.hud = Hud()
 
         #self.all_sprites = pg.sprite.Group() #ESTO ES ALJO JODIAMENTE INUTIL -> BORRAR
         self.walls = pg.sprite.Group()
@@ -190,6 +192,8 @@ class Partida(Escena):
             for obstacle in self.obstacle:
                 pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(obstacle.rect), 1)
         self.player.draw_health(display, 10, 10, self.player.health / PLAYER_HEALTH)
+
+        self.hud.draw(display)
 
 
     def events(self, events):

@@ -1,77 +1,36 @@
 import pygame as pg
 import sys
 from settings import *
-from escenas.gui.button import Button
-from escenas.gui.button import LevelButton
+from escenas.gui.buttons import ClasicButton, LevelButton
 from resourcemanager import ResourceManager as GR
 from soundcontroller import SoundController as SC
-from escenas.escena import Escena
+from escenas.menu import Menu
 from escenas.partida import Partida
 
-class LevelSelector(Escena):
+class LevelSelector(Menu):
 
     def __init__(self,director):
-        Escena.__init__(self, director)
-        SC.play_menu()
-        self.click = False
-        #Butones 
-        self.lvl_btns = []
-        for i in range(0,1):
-            self.lvl_btns + [LevelButton(str(i),self.go_play)]
-        self.play_btn  = Button("Volver",self.go_play)
+        lvl_btns = []
+        margin = -52*3
+        for i in range(0,5):
+            lvl_btns.append(LevelButton(i,self.go_play,dx=margin, dy=26))
+            margin=margin+52*1.5
 
-    def events(self, events):
-        self.click = False
-        for event in events:
-            if event.type == pg.QUIT:
-                self.director.exitProgram()
-            elif event.type == pg.MOUSEBUTTONDOWN:
-                self.click = True
+        lvl_btns.append(ClasicButton("Volver",self.go_back, dy=80+26))
+
+        Menu.__init__(self, director, lvl_btns, True, logo=GR.LOGO_IMG)
 
 
-    #Dibuja Caja Centrada y Devuelve su tamaño 
-    def draw_box(self, display):
-        bg = GR.load_image(GR.BOX_BG) 
-        rect = bg.get_rect()
-        rect.center = (WIDTH/2,HEIGHT/2)
-        display.blit(bg, rect) 
-        return rect.size
-    
-    #Dibuja Logo Centrado con la posibilidad de añadirle un desplazamiento
-    def draw_logo(self, display, dx=0, dy=0):
-        logo = GR.load_image(GR.LOGO_IMG)
-        rect = logo.get_rect()
-        rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
-        display.blit(logo, rect) 
-
-
-    def update(self, _dt):
-        mouse_pos = pg.mouse.get_pos()
-        self.play_btn.update(mouse_pos,self.click)
-        self.stngs_btn.update(mouse_pos,self.click)
-        self.exit_btn.update(mouse_pos,self.click)
-
-    def draw(self,display):
-        display.fill((66,82,58)) # fondo provisional
-
-        _,box_y = self.draw_box(display)
-        self.draw_logo(display,dy=-((box_y/4)))
-
-        self.play_btn.draw(display)
-        self.stngs_btn.draw(display)
-        self.exit_btn.draw(display)
-    
     #Callbacks
 
     def go_play(self,lvl):
         SC.play_selection()
         partida = Partida(self.director,lvl)
-        self.director.pushEscena(partida)
+        self.director.pushEscena(partida,)
 
     def go_back(self):
         SC.play_selection()
-        self.director.exitEscena()
-
-
+        self.director.exitEscena(updateMusic = False)
+    
     def play_music(self):
         SC.play_menu()

@@ -26,29 +26,23 @@ class ResourceManager:
     START_IMG    = 'images-gui/inicio.png'
     BTN_BG       = 'images-gui/btn_bg.png'
     BOX_BG       = 'images-gui/box_bg.png'
-    BOX_GO       = 'images-gui/go_box.png'
     GAMEOVER_IMG = 'images-gui/gameover.png'
     PAUSE_IMG    = 'images-gui/pause.png'
+    LVL_BTN      = 'images-gui/lvl_btn.png'
+    SELECT_LOGO  = 'images-gui/select_level_logo.png'
+    HUD          = 'images-gui/hud.png'
 
     # FONTS
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"
 
     # SOUNDS
-    SELECTION   = 'sound_effects/selection.mp3'
-    METRALLETA  = 'sound_effects/metralleta.mp3'
+    SELECTION     = 'sound_effects/selection.mp3'
+    METRALLETA    = 'sound_effects/metralleta.mp3'
+    AMETRALLADORA = 'sound_effects/ametralladora.mp3'
+    PISTOLA       = 'sound_effects/pistola.mp3'
 
     # MAPS
-    LEVEL1 = 'maps/level1.tmx'
-    LEVEL2 = 'maps/level2.tmx'
-    #LEVEL3 = 'maps/level3.tmx'
-    #LEVEL4 = 'maps/level4.tmx'
-    #LEVEL5 = 'maps/level5.tmx'
-    #LEVEL6 = 'maps/level6.tmx'
-    #LEVEL7 = 'maps/level7.tmx'
-    #LEVEL8 = 'maps/level8.tmx'
-    #LEVEL9 = 'maps/level9.tmx'
-    #LEVEL10 = 'maps/level10.tmx'
-    #LEVEL11 = 'maps/level11.tmx'
+    LEVEL = ['maps/level0.tmx','maps/level1.tmx','maps/level2.tmx','maps/level3.tmx','maps/level4.tmx']
 
     # PATHS
     RESOURCE_PATH = "resources"
