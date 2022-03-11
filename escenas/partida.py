@@ -126,9 +126,8 @@ class Partida(Escena):
 
 
     def gameover(self):
-        self.init_game() #cambiar ese __init__ por un initializegame y que init lo k haga sea llamar a lo mismo
-        gameover = GameOver(self.director)
-        self.director.pushEscena(gameover)
+        gameover = GameOver(self.director, self.lvl)
+        self.director.changeEscena(gameover)
 
 
     def draw(self, display):
@@ -164,7 +163,7 @@ class Partida(Escena):
             #Pulsaciones Teclas
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE or event.key == pg.K_p: #Menu Pausa
-                    pause = Pause(self.director)
+                    pause = Pause(self.director, self.lvl)
                     self.director.pushEscena(pause)
 
 

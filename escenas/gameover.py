@@ -5,11 +5,12 @@ from escenas.gui.buttons import ClasicButton
 from resourcemanager import ResourceManager as GR
 from soundcontroller import SoundController as SC
 from escenas.menu import Menu
+import escenas.partida
 
 class GameOver(Menu):
 
-    def __init__(self, director):
-
+    def __init__(self, director, lvl):
+        self.lvl = lvl
         retry_btn = ClasicButton("Reintentar", self.go_retry, dy = 35)
         margin = retry_btn.get_size()[1]/2
         exit_btn = ClasicButton("Menu Principal", self.go_exit, dy=margin*4.5)
@@ -19,11 +20,11 @@ class GameOver(Menu):
 
     def go_retry(self):
         SC.play_selection()
-        self.director.exitEscena()
+        partida = escenas.partida.Partida(self.director,self.lvl)
+        self.director.changeEscena(partida)
     
     def go_exit(self):
         SC.play_selection()
-        self.director.exitEscena()
         self.director.exitEscena()
     
     def play_music(self):

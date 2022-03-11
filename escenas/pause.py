@@ -9,8 +9,8 @@ import escenas.partida
 
 class Pause(Menu):
 
-    def __init__(self, director):
-
+    def __init__(self, director, lvl):
+        self.lvl = lvl
         continue_btn = ClasicButton("Continuar", self.go_continue, dy = 5)
         margin = continue_btn.get_size()[1]/2
         retry_btn = ClasicButton("Reintentar", self.go_retry, dy = margin*3.22)
@@ -37,7 +37,7 @@ class Pause(Menu):
     
     def go_retry(self):
         SC.play_selection()
-        partida = escenas.partida.Partida(self.director,"polla")
+        partida = escenas.partida.Partida(self.director,self.lvl)
         self.director.exitEscena()
         self.director.exitEscena()
         self.director.pushEscena(partida)
