@@ -16,38 +16,6 @@ from escenas.gameover import GameOver
 from escenas.pause import Pause
 from escenas.gui.hud import Hud
 
-
-# Revisar:
-#   audio esta como el ojete, cargarse todos los pg.mixer.music -> y usar sounds.py
-
-#diccionario nivel-fichero -> inyeccion dependencias (patrón factoría)
-#gestor de recursos -> sigleton creo que era como un decoradors
-#gui última llamada y fuera
-
-# Dudas: 
-#   - acoplamiento de sprites al juego
-#   - Grupos -> sprite añade a los grupos que se le pasan, pero es necesario pasarle el juego ¿?
-#   - Acoplamiento del juego en los sprites
-#   - Para el ratón en la UI, usamos eventos o raton get pos??
-
-
-#
-# Idea:
-#   - mapa para el fondo de la pantalla de carga -> un helicóptero y cosas -> si no lo ponemos color cesped
-#   - poner subtexto debajo del título en menu de inicio
-#   - cambiar captions en menus
-
-
-
-
-# self.dt = self.clock.tick(FPS) / 1000 # -> esto lo implemeta director de escena, hay que cambiarlo
-
-    
-#########################################################################################################################
-#                                                                                                                       #
-#  ESTO ESTÄ JODIDAMENTE MAL, INTEGRAR TILEDMAP EN ESTA MISMA CLASE                                                     #
-#                                                                                                                       #
-#########################################################################################################################
         
 
 class Partida(Escena):
@@ -78,16 +46,13 @@ class Partida(Escena):
         self.hits = pg.sprite.Group()
         self.mob_count = 0
 
-        #########################################################################################################################
-        #                                                                                                                       #
-        #  ESTO VA A TOCAR PONERLO EN EL MAPA CREO YO -> que te debuelva grupos y listo -> y luego con un update/draw ya llega  #
-        #                                                                                                                       #
-        #########################################################################################################################
-
-        # Initial pos of player and collisions
+        ########################################
+        #   Inicializamos cargando tiledmap    #
+        ########################################
+        
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
-                self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle])
+                self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle],[self.hud])
             if tile_object.name == 'Wall':
                 Wall(self.walls, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
@@ -110,12 +75,9 @@ class Partida(Escena):
         # bullets hit player
         hits = pg.sprite.spritecollide(self.player, self.bullets_mobs, True, pg.sprite.collide_mask)
         for hit in hits:
-            if (self.player.health - MOB_BULLET_DAMAGE) > 0:
-                self.player.health -= MOB_BULLET_DAMAGE
-                Hit(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-30)
-                self.player.vel = Vector2(0, 0)
-            else:
-                self.player.health = 0
+            self.player.update_health(self.player.health - MOB_BULLET_DAMAGE)
+            Hit(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-30)
+            self.player.vel = Vector2(0, 0)
         # bullets hit mobs
         hits = pg.sprite.groupcollide(self.mobs, self.bullets_player, False, True, pg.sprite.collide_mask)
         for hit in hits:
@@ -129,7 +91,7 @@ class Partida(Escena):
                 self.mob_count -= 1
                 hit.kill()
                 if self.mob_count == 0: 
-                    pause = Pause(self.director)
+                    pause = Pause(self.director, self.lvl)
                     self.director.pushEscena(pause)
         # bullet hit walls
         hits = pg.sprite.groupcollide(self.bullets_mobs, self.walls, True, False)
@@ -141,6 +103,10 @@ class Partida(Escena):
 
 
     def update(self, dt):
+        # Miramos si seguimos vivos
+        if self.player.health <= 0:
+            Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
+            self.gameover()
         # Actualizamos grupos de sprites
         self.player.update(self.camera.camera.topleft, dt)
         self.bullets_player.update(dt)
@@ -151,19 +117,14 @@ class Partida(Escena):
         self.hits.update()
         # Colisiones
         self.__bullet_hits()
-        # Miramos si seguimos vivos
-        if self.player.health <= 0:
-            Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
-            self.gameover()
 
         # Posición de la cámara
         self.camera.update(self.player)
 
 
     def gameover(self):
-        self.init_game() #cambiar ese __init__ por un initializegame y que init lo k haga sea llamar a lo mismo
-        gameover = GameOver(self.director)
-        self.director.pushEscena(gameover)
+        gameover = GameOver(self.director, self.lvl)
+        self.director.changeEscena(gameover)
 
 
     def draw(self, display):
@@ -171,6 +132,8 @@ class Partida(Escena):
         display.blit(self.map_img, self.camera.apply_rect(self.map_rect))
         
         # Cambiar este codigo espaguetti :)
+
+        # CaESE CAMERA APPLY QUE HACE?
 
         for sprite in self.blood:
             display.blit(sprite.image, self.camera.apply(sprite))
@@ -186,13 +149,6 @@ class Partida(Escena):
             display.blit(sprite.image, self.camera.apply(sprite))
         display.blit(self.player.image, self.camera.apply(self.player))
 
-        if self.draw_debug:
-            for wall in self.walls:
-                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(wall.rect), 1)
-            for obstacle in self.obstacle:
-                pg.draw.rect(display, (0, 255, 255), self.camera.apply_rect(obstacle.rect), 1)
-        self.player.draw_health(display, 10, 10, self.player.health / PLAYER_HEALTH)
-
         self.hud.draw(display)
 
 
@@ -204,11 +160,8 @@ class Partida(Escena):
             #Pulsaciones Teclas
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE or event.key == pg.K_p: #Menu Pausa
-                    pause = Pause(self.director)
+                    pause = Pause(self.director, self.lvl)
                     self.director.pushEscena(pause)
-                #PROVISIONAL    
-                if event.key == pg.K_h:
-                    self.draw_debug = not self.draw_debug
 
 
     def play_music(self):

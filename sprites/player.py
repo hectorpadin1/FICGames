@@ -6,12 +6,14 @@ from math import cos, pi
 from control import Controler
 from sprites.gun import MachineGun, Pistol, Rifle
 from resourcemanager import ResourceManager as GR
+from utils.observable import Observable
 
 
-class Player(Character):
+class Player(Character, Observable):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
-    def __init__(self, x, y, bullets, collide_groups):
-        super().__init__(None, GR.PLAYER_PISTOL, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
+    def __init__(self, x, y, bullets, collide_groups, observers):
+        Character.__init__(self, None, GR.PLAYER_PISTOL, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
+        Observable.__init__(self, observers)
         self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()
@@ -19,24 +21,21 @@ class Player(Character):
         self.guns = [Pistol(bullets), Rifle(bullets), MachineGun(bullets)]
         self.gunSelector = 0
         self.shooting = False
-    
-    # Esto no tiene que estar aquí 
-    def draw_health(self, display, x, y, pct):
-        if pct < 0:
-            pct = 0
-        BAR_LENGTH = 100
-        BAR_HEIGHT = 20
-        fill = pct * BAR_LENGTH
-        outline_rect = pg.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
-        fill_rect = pg.Rect(x, y, fill, BAR_HEIGHT)
-        if pct > 0.6:
-            col = GREEN
-        elif pct > 0.3:
-            col = YELLOW
+        self.reloading = False
+        #Notificamos a observadores inicialización
+        self.notify("health", self.health)
+        self.notify("gun", self.gunSelector)
+        self.notify("ammo", self.guns[self.gunSelector].current_mag)
+        self.notify("bullets", self.guns[self.gunSelector].bullets)
+
+
+    def update_health(self, health):
+        if health <= 0:
+            self.updateImage(GR.PLAYER_DIE)
+            self.health = 0
         else:
-            col = RED
-        pg.draw.rect(display, col, fill_rect)
-        pg.draw.rect(display, WHITE, outline_rect, 2)
+            self.health = health
+        self.notify("health", health)
 
 
     def __callControler(self):
@@ -62,20 +61,38 @@ class Player(Character):
             self.vel *= cos(pi/4)
         # Switch guns
         if self.controler.switchPistol():
-            self.guns[self.gunSelector].reload = False # si estamos cargando la dejamos descargada
+            self.guns[self.gunSelector].cancel_reload()
             self.gunSelector = 0
+            self.notify("gun",0)
+            self.notify("ammo", self.guns[self.gunSelector].current_mag)
+            self.notify("bullets",self.guns[self.gunSelector].bullets)
+
         if self.controler.switchRiffle():
-            self.guns[self.gunSelector].reload = False # si estamos cargando la dejamos descargada
+            self.guns[self.gunSelector].cancel_reload()
             self.gunSelector = 1
+            self.notify("gun",1)
+            self.notify("ammo", self.guns[self.gunSelector].current_mag)
+            self.notify("bullets",self.guns[self.gunSelector].bullets)
+
         if self.controler.switchMachineGun():
-            self.guns[self.gunSelector].reload = False # si estamos cargando la dejamos descargada
+            self.guns[self.gunSelector].cancel_reload()
             self.gunSelector = 2
+            self.notify("gun",2)
+            self.notify("ammo", self.guns[self.gunSelector].current_mag)
+            self.notify("bullets",self.guns[self.gunSelector].bullets)
+
         # Reload
         if (self.controler.reload()):
-            self.guns[self.gunSelector].reload = True
+            self.guns[self.gunSelector].do_reload()
+            self.reloading = True
+            self.notify("ammo",-1)
+
         # Shooting
         if (self.controler.isShooting()):
             self.guns[self.gunSelector].shoot(self.pos, self.rot)
+            self.notify("ammo",self.guns[self.gunSelector].current_mag)
+            self.notify("bullets",self.guns[self.gunSelector].bullets)
+
 
 
     def update(self, camera_pos, dt):
@@ -86,8 +103,18 @@ class Player(Character):
         # Moves in time, not in pixels, independent of our frame rate
         self.pos += self.vel * (dt/1000)
         self.guns[self.gunSelector].update()
-        if self.guns[self.gunSelector].reload:
+
+        if self.reloading:
             self.updateImage(GR.PLAYER_RELOAD)
+            if self.guns[self.gunSelector].reload == False:
+                self.notify("ammo",self.guns[self.gunSelector].current_mag)
+                self.notify("bullets",self.guns[self.gunSelector].bullets)
+                self.reloading = False
+
+        if self.health <= 0:
+            super().update()
+            return
+
         elif self.gunSelector == 0:
             self.updateImage(GR.PLAYER_PISTOL)
         elif self.gunSelector == 1:

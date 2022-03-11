@@ -15,6 +15,7 @@ class ResourceManager:
     PLAYER_PISTOL   = 'images-sprites/Hero_Pistol.png'
     PLAYER_MACHINEGUN   = 'images-sprites/Hero_MachineGun.png'
     PLAYER_RELOAD   = 'images-sprites/Hero_Reload.png'
+    PLAYER_DIE      = 'images-sprites/Hero_Die.png'
     BULLET_IMG      = 'images-sprites/bullet.png'
     EXPLOSION_IMAGE = 'images-sprites/explode_bullet.png'
     MOB_IMAGE       = 'images-sprites/soldier.png'
@@ -31,6 +32,9 @@ class ResourceManager:
     LVL_BTN      = 'images-gui/lvl_btn.png'
     SELECT_LOGO  = 'images-gui/select_level_logo.png'
     HUD          = 'images-gui/hud.png'
+    PISTOLHUD    = 'images-gui/pistolhud.png'
+    SMGHUD       = 'images-gui/smghud.png'
+    MGHUD        = 'images-gui/mghud.png'
 
     # FONTS
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"

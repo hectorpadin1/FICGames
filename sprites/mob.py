@@ -15,10 +15,16 @@ class Mob(Character):
         self.follow = False
         self.gun = gun
         self.last_shot = pg.time.get_ticks()
+        self.reloading = False
 
     def update(self):
         # Shooting
-        if self.follow:
+        # provisional
+        if not self.reloading and self.gun.current_mag == 0:
+            self.gun.do_reload()
+            self.reloading = True
+        elif self.follow and self.gun.current_mag != 0:
+            self.reloading = False
             self.gun.shoot(self.pos, self.rot)
         self.gun.update()
         super().update()

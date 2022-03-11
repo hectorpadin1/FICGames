@@ -1,13 +1,10 @@
 from pygame import Rect
 
 # Colors
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-YELLOW = (255, 255, 0)
+USER_CONFIG_FILE = "config.json"
 
 # General game setings
-TITLE = "Juego Molón que mola un montón"
+TITLE = "The Code"
 WIDTH = 1024  # 16 * 64 or 32 * 32 or 64 * 16
 HEIGHT = 768 # 16 * 48 or 32 * 24 or 64 * 12
 FPS = 120
