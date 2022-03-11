@@ -9,7 +9,7 @@ class AbstractGun():
     
     def __init__(self, bullet_group, ammo, bullet_img, reload_time, rate, damage, speed, lifetime, soundFunction):
         self.bullet_group = bullet_group
-        self.MAX_AMMO = ammo
+        self.MAG_SIZE = ammo
         self.ammo = ammo
         self.reload_time = reload_time
         self.bullet_img = bullet_img
@@ -22,7 +22,7 @@ class AbstractGun():
         self.reload=False
     
     def do_reload(self):
-        if not self.reload or self.ammo != self.MAX_AMMO:
+        if not self.reload or self.ammo != self.MAG_SIZE:
             self.reload=True
             self.reload_moment = pg.time.get_ticks()
 
@@ -42,7 +42,7 @@ class AbstractGun():
         if self.reload:
             now = pg.time.get_ticks()
             if now - self.reload_moment > self.reload_time:
-                self.ammo = self.MAX_AMMO
+                self.ammo = self.MAG_SIZE
                 self.reload=False
 
 
