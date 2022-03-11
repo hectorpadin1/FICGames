@@ -20,10 +20,10 @@ class Mob(Character):
     def update(self):
         # Shooting
         # provisional
-        if not self.reloading and self.gun.ammo == 0:
+        if not self.reloading and self.gun.current_mag == 0:
             self.gun.do_reload()
             self.reloading = True
-        elif self.follow and self.gun.ammo != 0:
+        elif self.follow and self.gun.current_mag != 0:
             self.reloading = False
             self.gun.shoot(self.pos, self.rot)
         self.gun.update()

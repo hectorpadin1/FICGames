@@ -8,9 +8,9 @@ class Hud(Observer):
     #Inicializamos el botón mostrándolo en pantalla
     def __init__(self):
         self.gun_number = 0
-        self.health= 100
+        self.health= PLAYER_HEALTH
         self.ammo = 0
-        self.totalammo = 9999
+        self.totalammo = 0
 
         #Load BG
         self.image = GR.load_image(GR.HUD)
@@ -64,6 +64,11 @@ class Hud(Observer):
         elif tipo == "ammo":
             if self.ammo != cambio:
                 self.ammo = cambio
+                self.__load_ammo()
+        
+        elif tipo == "bullets":
+            if self.totalammo != cambio:
+                self.totalammo = cambio
                 self.__load_ammo()
 
     def draw(self, display):

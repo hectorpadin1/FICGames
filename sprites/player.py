@@ -25,7 +25,8 @@ class Player(Character, Observable):
         #Notificamos a observadores inicialización
         self.notify("health", self.health)
         self.notify("gun", self.gunSelector)
-        self.notify("ammo", self.guns[self.gunSelector].ammo)
+        self.notify("ammo", self.guns[self.gunSelector].current_mag)
+        self.notify("bullets", self.guns[self.gunSelector].bullets)
 
 
     def update_health(self, health):
@@ -59,19 +60,22 @@ class Player(Character, Observable):
             self.guns[self.gunSelector].cancel_reload()
             self.gunSelector = 0
             self.notify("gun",0)
-            self.notify("ammo", self.guns[self.gunSelector].ammo)
+            self.notify("ammo", self.guns[self.gunSelector].current_mag)
+            self.notify("bullets",self.guns[self.gunSelector].bullets)
 
         if self.controler.switchRiffle():
             self.guns[self.gunSelector].cancel_reload()
             self.gunSelector = 1
             self.notify("gun",1)
-            self.notify("ammo", self.guns[self.gunSelector].ammo)
+            self.notify("ammo", self.guns[self.gunSelector].current_mag)
+            self.notify("bullets",self.guns[self.gunSelector].bullets)
 
         if self.controler.switchMachineGun():
             self.guns[self.gunSelector].cancel_reload()
             self.gunSelector = 2
             self.notify("gun",2)
-            self.notify("ammo", self.guns[self.gunSelector].ammo)
+            self.notify("ammo", self.guns[self.gunSelector].current_mag)
+            self.notify("bullets",self.guns[self.gunSelector].bullets)
 
         # Reload
         if (self.controler.reload()):
@@ -82,7 +86,8 @@ class Player(Character, Observable):
         # Shooting
         if (self.controler.isShooting()):
             self.guns[self.gunSelector].shoot(self.pos, self.rot)
-            self.notify("ammo",self.guns[self.gunSelector].ammo)
+            self.notify("ammo",self.guns[self.gunSelector].current_mag)
+            self.notify("bullets",self.guns[self.gunSelector].bullets)
 
 
 
@@ -98,7 +103,8 @@ class Player(Character, Observable):
         if self.reloading:
             self.updateImage(GR.PLAYER_RELOAD)
             if self.guns[self.gunSelector].reload == False:
-                self.notify("ammo",self.guns[self.gunSelector].ammo)
+                self.notify("ammo",self.guns[self.gunSelector].current_mag)
+                self.notify("bullets",self.guns[self.gunSelector].bullets)
                 self.reloading = False
 
 
