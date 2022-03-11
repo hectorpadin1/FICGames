@@ -30,7 +30,11 @@ class Player(Character, Observable):
 
 
     def update_health(self, health):
-        self.health = health
+        if health <= 0:
+            self.updateImage(GR.PLAYER_DIE)
+            self.health = 0
+        else:
+            self.health = health
         self.notify("health", health)
 
 
@@ -107,7 +111,9 @@ class Player(Character, Observable):
                 self.notify("bullets",self.guns[self.gunSelector].bullets)
                 self.reloading = False
 
-
+        if self.health <= 0:
+            super().update()
+            return
 
         elif self.gunSelector == 0:
             self.updateImage(GR.PLAYER_PISTOL)

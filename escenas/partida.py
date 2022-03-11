@@ -75,12 +75,9 @@ class Partida(Escena):
         # bullets hit player
         hits = pg.sprite.spritecollide(self.player, self.bullets_mobs, True, pg.sprite.collide_mask)
         for hit in hits:
-            if (self.player.health - MOB_BULLET_DAMAGE) > 0:
-                self.player.update_health(self.player.health - MOB_BULLET_DAMAGE)
-                Hit(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-30)
-                self.player.vel = Vector2(0, 0)
-            else:
-                self.player.update_health(0)
+            self.player.update_health(self.player.health - MOB_BULLET_DAMAGE)
+            Hit(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-30)
+            self.player.vel = Vector2(0, 0)
         # bullets hit mobs
         hits = pg.sprite.groupcollide(self.mobs, self.bullets_player, False, True, pg.sprite.collide_mask)
         for hit in hits:
@@ -94,7 +91,7 @@ class Partida(Escena):
                 self.mob_count -= 1
                 hit.kill()
                 if self.mob_count == 0: 
-                    pause = Pause(self.director)
+                    pause = Pause(self.director, self.lvl)
                     self.director.pushEscena(pause)
         # bullet hit walls
         hits = pg.sprite.groupcollide(self.bullets_mobs, self.walls, True, False)
@@ -106,6 +103,10 @@ class Partida(Escena):
 
 
     def update(self, dt):
+        # Miramos si seguimos vivos
+        if self.player.health <= 0:
+            Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
+            self.gameover()
         # Actualizamos grupos de sprites
         self.player.update(self.camera.camera.topleft, dt)
         self.bullets_player.update(dt)
@@ -116,10 +117,6 @@ class Partida(Escena):
         self.hits.update()
         # Colisiones
         self.__bullet_hits()
-        # Miramos si seguimos vivos
-        if self.player.health <= 0:
-            Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
-            self.gameover()
 
         # Posición de la cámara
         self.camera.update(self.player)
