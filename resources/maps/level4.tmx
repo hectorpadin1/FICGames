@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="195">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="198">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="961" columns="31">
   <image source="../images-sprites/tileset.png" width="2000" height="2000"/>
  </tileset>
@@ -353,16 +353,8 @@
   <object id="7" name="mob" x="289.333" y="118" width="18.6667" height="36"/>
   <object id="8" name="mob" x="305.333" y="208" width="23.3333" height="35.3333"/>
   <object id="9" name="mob" x="302.667" y="344.667" width="28" height="34"/>
-  <object id="10" name="met_ammo" x="443.332" y="1668.67" width="32.6667" height="20"/>
-  <object id="11" name="ame_ammo" x="442.665" y="1716" width="32.6667" height="33.3333"/>
-  <object id="12" name="pis_ammo" x="442.668" y="1776.33" width="32.6667" height="20"/>
   <object id="13" name="health" x="963.333" y="1132.83" width="33.3333" height="25.3333"/>
-  <object id="14" name="ame_ammo" x="962.667" y="1185.33" width="32.6667" height="33.3333"/>
-  <object id="15" name="met_ammo" x="962.667" y="1244" width="32.6667" height="20"/>
   <object id="16" name="health" x="1417" y="309.667" width="33.3333" height="25.3333"/>
-  <object id="17" name="met_ammo" x="1470.83" y="275.507" width="32.6667" height="20"/>
-  <object id="18" name="ame_ammo" x="1089.66" y="276.993" width="32.6667" height="21"/>
-  <object id="19" name="pis_ammo" x="1366" y="278.993" width="32.6667" height="20"/>
   <object id="20" name="Wall" x="842.848" y="1093.87" width="6.66667" height="308.611"/>
   <object id="21" name="Wall" x="1142.67" y="1093.93" width="6.66667" height="115.55"/>
   <object id="22" name="Wall" x="1142.67" y="1348.21" width="6.66667" height="54.2705"/>
@@ -536,5 +528,8 @@
   <object id="192" name="Wall" x="149.077" y="1897.66" width="90.1791" height="16.6862"/>
   <object id="193" name="Object" x="533.6" y="1883.53" width="30.013" height="31.2463"/>
   <object id="194" name="Wall" x="7.67333" y="-3.854" width="1907.32" height="6.708"/>
+  <object id="195" name="ammo" x="463.167" y="1742.5" width="32.6667" height="20"/>
+  <object id="196" name="ammo" x="974.333" y="1196" width="32.6667" height="20"/>
+  <object id="197" name="ammo" x="1467" y="291.333" width="32.6667" height="20"/>
  </objectgroup>
 </map>
