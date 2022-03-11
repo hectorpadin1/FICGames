@@ -6,14 +6,24 @@ from resourcemanager import ResourceManager as GR
 from soundcontroller import SoundController as SC
 from escenas.menu import Menu
 from escenas.partida import Partida
+import json
 
 class LevelSelector(Menu):
 
     def __init__(self,director):
+        #Read Config
+        last_level = 0
+        try:
+            with open(USER_CONFIG_FILE) as json_file:
+                data = json.load(json_file)
+                last_level = int(data["last_level"])
+                print(data)
+        except:
+            pass
         lvl_btns = []
         margin = -52*3
         for i in range(0,5):
-            lvl_btns.append(LevelButton(i,self.go_play,dx=margin, dy=26))
+            lvl_btns.append(LevelButton(i,self.go_play,dx=margin, dy=26, locked=(i>last_level)))
             margin=margin+52*1.5
 
         lvl_btns.append(ClasicButton("Volver",self.go_back, dy=80+26))
