@@ -19,12 +19,18 @@ class AbstractGun():
         self.last_shot = pg.time.get_ticks()
         self.damage = damage
         self.soundFunction = soundFunction
-        self.reload = False
+        self.reload=False
     
+    def do_reload(self):
+        if not self.reload or self.ammo != self.MAX_AMMO:
+            self.reload=True
+            self.reload_moment = pg.time.get_ticks()
+
+    def cancel_reload(self):
+        self.reload=False
+
     def shoot(self, pos, rot):
-        if self.ammo == 0:
-            self.reload = True
-        if not self.reload:
+        if not self.reload and self.ammo != 0:
             now = pg.time.get_ticks()
             if now - self.last_shot > self.rate:
                 self.last_shot = now
@@ -33,10 +39,11 @@ class AbstractGun():
                 self.soundFunction()
     
     def update(self):
-        now = pg.time.get_ticks()
-        if now - self.last_shot > self.reload_time:
-            self.ammo = self.MAX_AMMO
-            self.reload = False
+        if self.reload:
+            now = pg.time.get_ticks()
+            if now - self.reload_moment > self.reload_time:
+                self.ammo = self.MAX_AMMO
+                self.reload=False
 
 
 class Pistol(AbstractGun):

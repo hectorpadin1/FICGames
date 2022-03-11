@@ -31,6 +31,9 @@ class ResourceManager:
     LVL_BTN      = 'images-gui/lvl_btn.png'
     SELECT_LOGO  = 'images-gui/select_level_logo.png'
     HUD          = 'images-gui/hud.png'
+    PISTOLHUD    = 'images-gui/pistolhud.png'
+    SMGHUD       = 'images-gui/smghud.png'
+    MGHUD    = 'images-gui/mghud.png'
 
     # FONTS
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"
