@@ -8,6 +8,8 @@ from sprites.mob import MobBasico
 from sprites.blood import Blood
 from sprites.explosion import Explosion
 from sprites.hit import Hit
+from sprites.ammo import Ammo
+from sprites.health import HP
 from tiledmap import TiledMap
 from camera import Camera
 from managers.user_config import UserConfig as UC
@@ -46,6 +48,8 @@ class Partida(Escena):
         self.explosions = pg.sprite.Group()
         self.blood = pg.sprite.Group()
         self.hits = pg.sprite.Group()
+        self.ammo = pg.sprite.Group()
+        self.health = pg.sprite.Group()
         self.mob_count = 0
 
         ########################################
@@ -54,13 +58,17 @@ class Partida(Escena):
         
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
-                self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle],[self.hud])
+                self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle],[self.hud, self.ammo, self.health])
             if tile_object.name == 'Wall':
                 Wall(self.walls, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
             if tile_object.name == 'Object':
                 Obstacle(self.obstacle, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
+            if tile_object.name == 'ammo':
+                Ammo(self.ammo, tile_object.x, tile_object.y)
+            if tile_object.name == 'health':
+                HP(self.health, tile_object.x, tile_object.y)
             if tile_object.name == 'mob':
                 if (random.randint(0, 1))==1:
                     x = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
@@ -156,6 +164,10 @@ class Partida(Escena):
         for sprite in self.hits:
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.mobs:
+            display.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.ammo:
+            display.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.health:
             display.blit(sprite.image, self.camera.apply(sprite))
         display.blit(self.player.image, self.camera.apply(self.player))
 
