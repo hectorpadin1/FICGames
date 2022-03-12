@@ -105,7 +105,14 @@ class Partida(Escena):
         hits = pg.sprite.groupcollide(self.bullets_player, self.walls, True, False)
         for hit in hits:
             Explosion(self.explosions, hit.pos, 0.1, 0.1)
+    
+    def __ammo_collision(self):
+        hit = pg.sprite.spritecollide(self.player, self.ammo, True)
+        self.player.update_ammo(1) #A topisimo de municion
 
+    def __hp_collision(self):
+        hit = pg.sprite.spritecollide(self.player, self.health, True)
+        self.player.update_health(100) #A topisimo de vida
 
     def update(self, dt):
         # Miramos si seguimos vivos
@@ -122,6 +129,8 @@ class Partida(Escena):
         self.hits.update()
         # Colisiones
         self.__bullet_hits()
+        #self.__ammo_collision()
+        #self.__hp_collision()
 
         # Posición de la cámara
         self.camera.update(self.player)

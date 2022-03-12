@@ -10,3 +10,5 @@ class Ammo(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
+    def update(self):
+        self.kill()
