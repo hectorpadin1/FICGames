@@ -10,8 +10,7 @@ class Bullet(pg.sprite.Sprite):
     def __init__(self, bullet_group, pos, rot, img, speed, lifetime):
         pg.sprite.Sprite.__init__(self, bullet_group)
         dir = Vector2(1, 0).rotate(-rot)
-        self.image = GR.load_image(img,-1)
-        self.image = pg.transform.rotate(self.image, rot-90)
+        self.hoja = GR.load_image(img,-1)
         self.rect = pg.Rect((0,0), (19, 5))
         self.pos = Vector2(pos)
 
@@ -29,6 +28,8 @@ class Bullet(pg.sprite.Sprite):
                 tmp.append(pg.Rect((int(data[cont]), int(data[cont+1])), (int(data[cont+2]), int(data[cont+3]))))
                 cont += 4
         print(self.coordenadasHoja[0][0])
+        self.rect = pg.Rect(self.pos.x,self.pos.y,self.coordenadasHoja[self.numPostura][self.numImagenPostura][2],self.coordenadasHoja[self.numPostura][self.numImagenPostura][3])
+        self.image = pg.transform.rotate(self.image, rot-90)
         self.mask = pg.mask.from_surface(self.image)
         self.rect.center = pos
         self.vel = dir * speed
