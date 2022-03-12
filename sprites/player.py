@@ -104,16 +104,16 @@ class Player(Character, Observable):
         self.pos += self.vel * (dt/1000)
         self.guns[self.gunSelector].update()
 
+        if self.health <= 0:
+            super().update()
+            return
+
         if self.reloading:
             self.updateImage(GR.PLAYER_RELOAD)
             if self.guns[self.gunSelector].reload == False:
                 self.notify("ammo",self.guns[self.gunSelector].current_mag)
                 self.notify("bullets",self.guns[self.gunSelector].bullets)
                 self.reloading = False
-
-        if self.health <= 0:
-            super().update()
-            return
 
         elif self.gunSelector == 0:
             self.updateImage(GR.PLAYER_PISTOL)

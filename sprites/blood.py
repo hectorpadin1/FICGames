@@ -15,8 +15,3 @@ class Blood(pg.sprite.Sprite):
         self.mask = pg.mask.from_surface(self.image)
         self.pos = Vector2(pos)
         self.rect.center = pos
-        self.spawn_time = pg.time.get_ticks()
-
-    def update(self):
-        if pg.time.get_ticks() - self.spawn_time > BLOOD_LIFETIME:
-            self.kill()

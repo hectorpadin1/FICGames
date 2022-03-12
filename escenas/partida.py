@@ -87,9 +87,11 @@ class Partida(Escena):
                 hit.vel = Vector2(0, 0)
                 hit.follow = True
             else:
+                Hit(self.blood, hit.pos, 0.5, 0.5, -hit.rot-30)
                 Blood(self.blood, hit.pos, 0.5, 0.5, -hit.rot-110)
-                self.mob_count -= 1
-                hit.kill()
+                if not hit.dead:
+                    self.mob_count -= 1
+                    hit.die()
                 if self.mob_count == 0: 
                     pause = Pause(self.director, self.lvl)
                     self.director.pushEscena(pause)
