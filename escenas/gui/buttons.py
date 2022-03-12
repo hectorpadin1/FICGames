@@ -23,3 +23,34 @@ class LevelButton(Button):
         if self.hover and click:
             self.callback(self.lvl)
         
+
+class ToogleButton(Button):
+    def __init__(self, state, callback1, dx=0, dy=0):
+        Button.__init__(self,GR.BTN_BG, "ON", callback1, dx=dx, dy=dy)
+        
+        self.state = state
+
+        # Text 2
+        font = GR.load_font(GR.MAIN_FONT,GUI_FONT_SIZE)
+        self.text2_surface = font.render("OFF", True, (255,255,255))
+        self.text2_surface_hover = font.render("OFF", True, (154,122,37))
+        
+    def draw(self, display):
+        display.blit(self.image, self.rect) 
+        text = self.text_surface
+        if self.hover:
+            text = self.text_surface_hover
+
+        if not self.state:
+            text = self.text2_surface
+            if self.hover:
+                text = self.text2_surface_hover
+
+        display.blit(text,self.text_rect)   
+    
+
+    def update(self, mouse_pos, click):
+        self.hover = self.rect.collidepoint(mouse_pos)
+        if self.hover and click:
+            self.state = not self.state
+            self.callback()

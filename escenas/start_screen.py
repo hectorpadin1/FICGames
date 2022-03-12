@@ -5,8 +5,8 @@ from resourcemanager import ResourceManager as GR
 from soundcontroller import SoundController as SC
 from escenas.gui.buttons import ClasicButton
 from escenas.menu import Menu
-from escenas.partida import Partida
 from escenas.level_selector import LevelSelector
+from escenas.settings import Settings
 
 class StartScreen(Menu):
 
@@ -26,7 +26,8 @@ class StartScreen(Menu):
         
     def go_settings(self):
         SC.play_selection()
-        print("settings")
+        stg = Settings(self.director)
+        self.director.pushEscena(stg, updateMusic = False)
 
     def go_exit(self):
         pg.quit()

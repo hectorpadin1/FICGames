@@ -6,7 +6,7 @@ from resourcemanager import ResourceManager as GR
 from soundcontroller import SoundController as SC
 from escenas.menu import Menu
 from escenas.partida import Partida
-import json
+from user_config import UserConfig as UC
 
 class LevelSelector(Menu):
 
@@ -14,10 +14,7 @@ class LevelSelector(Menu):
         #Read Config
         last_level = 0
         try:
-            with open(USER_CONFIG_FILE) as json_file:
-                data = json.load(json_file)
-                last_level = int(data["last_level"])
-                print(data)
+            last_level = UC.get("last_level")
         except:
             pass
         lvl_btns = []

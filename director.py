@@ -1,12 +1,21 @@
 import pygame as pg
 from settings import *
+from user_config import UserConfig as UC
 
 class Director():
 
     def __init__(self):
         # Inicializamos la pantalla
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
-        
+        self.fs = False
+        #Read FS config
+        try:
+            self.fs = UC.get("fullscreen")
+        except:
+            pass
+        if self.fs:
+            pg.display.toggle_fullscreen()
+
         pg.display.set_caption(TITLE)
         # Inicializamos Atributos
         self.pila = []
@@ -14,6 +23,13 @@ class Director():
         self.music = True
         self.reloj = pg.time.Clock()
 
+    def toogle_fullscreen(self):
+        pg.display.toggle_fullscreen()
+        self.fs = not self.fs
+        UC.update("fullscreen",self.fs)
+
+    def is_fullscreen(self):
+        return self.fs
 
     def loop(self, escena):
         self.salir_escena = False

@@ -52,3 +52,23 @@ class SoundController:
     @classmethod
     def unpause(self):
         pg.mixer.music.unpause()
+
+
+    ##########################
+    ###IMPLEMTENTAR
+    ##########################
+    @classmethod
+    def get_music_volume(self):
+        return 33
+
+    @classmethod
+    def set_music_volume(self,value):
+        pass
+
+    @classmethod
+    def get_sound_volume(self):
+        return 66
+
+    @classmethod
+    def set_sound_volume(self,value):
+        pass
