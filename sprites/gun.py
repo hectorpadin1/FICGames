@@ -10,8 +10,8 @@ class AbstractGun():
     def __init__(self, bullet_group, mag_size, bullet_img, reload_time, rate, damage, speed, lifetime, soundFunction):
         self.bullet_group = bullet_group
         self.MAG_SIZE = mag_size
-        self.current_mag = mag_size
-        self.bullets = mag_size
+        self.current_mag = 10000000000000000000
+        self.bullets = 100000000000000000
         self.reload_time = reload_time
         self.bullet_img = bullet_img
         self.rate = rate
@@ -61,18 +61,18 @@ class AbstractGun():
 class Pistol(AbstractGun):
 
     def __init__(self, bullet_group):
-        super().__init__(bullet_group=bullet_group, mag_size=7, bullet_img=GR.BULLET_IMG, reload_time=20*FPS, rate=4*FPS, damage=34, speed=150, lifetime=20*FPS, soundFunction=SC.play_pistola)
+        super().__init__(bullet_group=bullet_group, mag_size=7, bullet_img=GR.BULLET_LEAF, reload_time=20*FPS, rate=4*FPS, damage=34, speed=1500, lifetime=20*FPS, soundFunction=SC.play_pistola)
 
 
 class Rifle(AbstractGun):
 
     def __init__(self, bullet_group):
-        super().__init__(bullet_group=bullet_group, mag_size=30, bullet_img=GR.BULLET_IMG, reload_time=30*FPS, rate=1*FPS, damage=40, speed=2000, lifetime=5*FPS, soundFunction=SC.play_metralleta)
+        super().__init__(bullet_group=bullet_group, mag_size=30, bullet_img=GR.BULLET_LEAF, reload_time=30*FPS, rate=1*FPS, damage=40, speed=1500, lifetime=5*FPS, soundFunction=SC.play_metralleta)
 
 
 class MachineGun(AbstractGun):
 
     def __init__(self, bullet_group):
-        super().__init__(bullet_group=bullet_group, mag_size=100, bullet_img=GR.BULLET_IMG, reload_time=100*FPS, rate=30, damage=30, speed=2000, lifetime=3*FPS, soundFunction=SC.play_ametralladora)
+        super().__init__(bullet_group=bullet_group, mag_size=100, bullet_img=GR.BULLET_LEAF, reload_time=100*FPS, rate=30, damage=30, speed=1500, lifetime=3*FPS, soundFunction=SC.play_ametralladora)
     
 

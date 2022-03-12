@@ -149,10 +149,11 @@ class Partida(Escena):
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.explosions:
             display.blit(sprite.image, self.camera.apply(sprite))
+        #self.bullets_mobs.draw(display)
+        #self.bullets_player.draw(display)
         for sprite in self.bullets_mobs:
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.bullets_player:
-            print(sprite.numPostura, sprite.numImagenPostura)
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.hits:
             display.blit(sprite.image, self.camera.apply(sprite))
