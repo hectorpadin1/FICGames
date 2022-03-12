@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="202">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="208">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="961" columns="31">
   <image source="../images-sprites/tileset.png" width="2000" height="2000"/>
  </tileset>
@@ -563,11 +563,17 @@
   <object id="184" name="mob" x="572.75" y="332.75" width="37.5" height="34.5"/>
   <object id="185" name="mob" x="1576.25" y="388.25" width="37.5" height="34.5"/>
   <object id="186" name="mob" x="1742.25" y="397.75" width="37.5" height="34.5"/>
-  <object id="187" name="mob" x="1041.25" y="1170.08" width="37.5" height="34.5"/>
+  <object id="187" name="mob" x="985.25" y="1146.08" width="37.5" height="34.5"/>
   <object id="191" name="health" x="512.667" y="1388" width="33.3333" height="25.3333"/>
   <object id="198" name="health" x="1720.33" y="326.333" width="33.3333" height="25.3333"/>
   <object id="199" name="ammo" x="914.667" y="1803" width="32.6667" height="20"/>
   <object id="200" name="ammo" x="693.667" y="830" width="32.6667" height="20"/>
   <object id="201" name="ammo" x="1666.67" y="335" width="32.6667" height="20"/>
+  <object id="202" name="area" x="707.667" y="1104" width="321.667" height="414"/>
+  <object id="203" name="area" x="1045.67" y="1295" width="284.667" height="224"/>
+  <object id="204" name="area" x="469.667" y="1232" width="221.667" height="286"/>
+  <object id="205" name="area" x="470.667" y="785" width="415.667" height="220"/>
+  <object id="206" name="area" x="405.667" y="208.667" width="413.334" height="286"/>
+  <object id="207" name="area" x="1339.67" y="142" width="555.667" height="634"/>
  </objectgroup>
 </map>

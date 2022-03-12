@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="149">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="160">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="961" columns="31">
   <image source="../images-sprites/tileset.png" width="2000" height="2000"/>
  </tileset>
@@ -427,9 +427,9 @@
   <object id="120" name="Object" x="448" y="181.308" width="47.0006" height="51.3848"/>
   <object id="121" name="Object" x="449.25" y="52.4326" width="42.5006" height="51.1348"/>
   <object id="122" name="mob" x="556" y="1366.67" width="42.6667" height="37.3333"/>
-  <object id="124" name="mob" x="604" y="1089.33" width="42.6667" height="37.3333"/>
-  <object id="125" name="mob" x="1012" y="1153.33" width="42.6667" height="37.3333"/>
-  <object id="126" name="mob" x="1034.67" y="1344" width="42.6667" height="37.3333"/>
+  <object id="124" name="mob" x="568" y="1206.66" width="42.6667" height="37.3333"/>
+  <object id="125" name="mob" x="938.667" y="1159.33" width="42.6667" height="37.3333"/>
+  <object id="126" name="mob" x="1025.34" y="1416" width="42.6667" height="37.3333"/>
   <object id="127" name="mob" x="1629.33" y="1126.67" width="42.6667" height="37.3333"/>
   <object id="128" name="mob" x="1813.33" y="1184" width="42.6667" height="37.3333"/>
   <object id="129" name="mob" x="1737.33" y="1628" width="42.6667" height="37.3333"/>
@@ -443,5 +443,15 @@
   <object id="146" name="ammo" x="1842.33" y="1127.33" width="32.6667" height="20"/>
   <object id="147" name="ammo" x="1826.33" y="682" width="32.6667" height="20"/>
   <object id="148" name="ammo" x="159.667" y="1631.34" width="32.6667" height="20"/>
+  <object id="149" name="area" x="413.333" y="985.333" width="272.667" height="270"/>
+  <object id="151" name="area" x="923" y="985.667" width="216" height="277.333"/>
+  <object id="152" name="area" x="919.333" y="1282.67" width="217.333" height="236.666"/>
+  <object id="153" name="area" x="406.667" y="1280" width="493.333" height="230"/>
+  <object id="154" name="area" x="1560" y="1554" width="344.667" height="220"/>
+  <object id="155" name="area" x="1753" y="978.667" width="152" height="412"/>
+  <object id="156" name="area" x="1559" y="978.667" width="173.334" height="559.333"/>
+  <object id="157" name="area" x="1428.17" y="529" width="222.167" height="286.5"/>
+  <object id="158" name="area" x="789.167" y="527.5" width="222.167" height="288"/>
+  <object id="159" name="area" x="1025.67" y="529.333" width="388.667" height="286"/>
  </objectgroup>
 </map>
