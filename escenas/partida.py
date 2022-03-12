@@ -1,5 +1,4 @@
 import pygame as pg
-import random
 from pygame.math import Vector2
 from settings import *
 from sprites.player import Player
@@ -30,7 +29,6 @@ class Partida(Escena):
         self.init_game()
 
     def init_game(self):
-        random.seed()
         #Mapa
         self.map = TiledMap(self.lvl)
         #Render del mapa -> REVISAR ESTO PEDRO
@@ -70,11 +68,6 @@ class Partida(Escena):
             if tile_object.name == 'health':
                 HP(self.health, tile_object.x, tile_object.y)
             if tile_object.name == 'mob':
-                if (random.randint(0, 1))==1:
-                    x = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
-                    y = random.randint(-50,-20) if random.randint(0,1)==1 else random.randint(20,50)
-                    MobBasico(self.mobs, tile_object.x +x, tile_object.y + y, self.bullets_mobs, [self.walls, self.obstacle])
-                    self.mob_count += 1
                 MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle])
                 self.mob_count += 1
         self.camera = Camera(self.map.width, self.map.height)
