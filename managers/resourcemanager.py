@@ -72,7 +72,7 @@ class ResourceManager:
             except (pg.error):
                 print('Cannot load image: ', fullname)
                 raise SystemExit
-            imagen = imagen.convert_alpha() # o convert_alpha??
+            imagen = imagen.convert() # o convert_alpha??
             if colorkey is not None:
                 if colorkey == -1:
                     colorkey = imagen.get_at((0,0))
