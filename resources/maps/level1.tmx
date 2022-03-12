@@ -442,6 +442,6 @@
   <object id="138" name="health" x="861.333" y="560.333" width="33.3333" height="25.3333"/>
   <object id="146" name="ammo" x="1842.33" y="1127.33" width="32.6667" height="20"/>
   <object id="147" name="ammo" x="1826.33" y="682" width="32.6667" height="20"/>
-  <object id="148" name="ammo" x="227.667" y="1848.67" width="32.6667" height="20"/>
+  <object id="148" name="ammo" x="159.667" y="1631.34" width="32.6667" height="20"/>
  </objectgroup>
 </map>

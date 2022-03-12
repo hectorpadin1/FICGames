@@ -24,6 +24,8 @@ class ResourceManager:
     MOB_DIE             = 'images-sprites/soldier_die.png'
     BLOOD_IMAGE         = 'images-sprites/blood.png'
     HIT_IMAGE           = 'images-sprites/blood-splatter.png'
+    AMMO_IMAGE          = 'images-sprites/ammo.png'
+    HP_IMAGE            = 'images-sprites/HP.png'
     
     # GUI IMAGES
     LOGO_IMG     = 'images-gui/logo.png'
