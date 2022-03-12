@@ -32,12 +32,8 @@ class LevelSelector(Menu):
     def update(self, _dt):
         Menu.update(self,_dt)
         now =  pg.time.get_ticks()
-        if now - self.last_check > 10000: #Cada 10s
-            try:
-                last_level = UC.get("last_level")
-            except:
-                pass
-            self.last_check = pg.time.get_ticks()
+        if now - self.last_check > 10000: #Cada 10s actualizamos niveles
+            self.__init__(self.director)
 
     #Callbacks
 
