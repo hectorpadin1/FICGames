@@ -36,7 +36,15 @@ class Player(Character, Observable):
         else:
             self.health = health
         self.notify("health", health)
+    
+    def update_ammo(self, ammo):
+        pass
 
+    def collide_with_ammo(self):
+        self.notify("ammo", self.pos)
+    
+    def collide_with_health(self):
+        self.notify("ammo", self.pos)
 
     def __callControler(self):
         # Player dynamics
