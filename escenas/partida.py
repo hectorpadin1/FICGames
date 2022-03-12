@@ -10,10 +10,11 @@ from sprites.explosion import Explosion
 from sprites.hit import Hit
 from tiledmap import TiledMap
 from camera import Camera
-from soundcontroller import SoundController as SC
+from managers.soundcontroller import SoundController as SC
 from escenas.escena import Escena
 from escenas.gameover import GameOver
 from escenas.pause import Pause
+from escenas.win import Win
 from escenas.gui.hud import Hud
 
         
@@ -93,8 +94,8 @@ class Partida(Escena):
                     self.mob_count -= 1
                     hit.die()
                 if self.mob_count == 0: 
-                    pause = Pause(self.director, self.lvl)
-                    self.director.pushEscena(pause)
+                    self.win()
+
         # bullet hit walls
         hits = pg.sprite.groupcollide(self.bullets_mobs, self.walls, True, False)
         for hit in hits:
@@ -128,6 +129,9 @@ class Partida(Escena):
         gameover = GameOver(self.director, self.lvl)
         self.director.changeEscena(gameover)
 
+    def win(self):
+        win = Win(self.director)
+        self.director.changeEscena(win)
 
     def draw(self, display):
         

@@ -42,6 +42,7 @@ class ResourceManager:
     PISTOLHUD    = 'images-gui/pistolhud.png'
     SMGHUD       = 'images-gui/smghud.png'
     MGHUD        = 'images-gui/mghud.png'
+    VICTORY        = 'images-gui/victoria.png'
 
     # FONTS
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"

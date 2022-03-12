@@ -1,8 +1,8 @@
 import pygame as pg
 import sys
 from settings import *
-from resourcemanager import ResourceManager as GR
-from soundcontroller import SoundController as SC
+from managers.resourcemanager import ResourceManager as GR
+from managers.soundcontroller import SoundController as SC
 from escenas.gui.buttons import ToogleButton, LevelButton, ClasicButton
 from escenas.menu import Menu
 

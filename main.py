@@ -1,8 +1,8 @@
 import pygame as pg
 from director import Director
 from escenas.start_screen import StartScreen
-from soundcontroller import SoundController as SC
-from user_config import UserConfig as UC
+from managers.soundcontroller import SoundController as SC
+from managers.user_config import UserConfig as UC
 
 #Inicializamos PyGame
 pg.init()

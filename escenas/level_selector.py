@@ -2,11 +2,11 @@ import pygame as pg
 import sys
 from settings import *
 from escenas.gui.buttons import ClasicButton, LevelButton
-from resourcemanager import ResourceManager as GR
-from soundcontroller import SoundController as SC
+from managers.resourcemanager import ResourceManager as GR
+from managers.soundcontroller import SoundController as SC
 from escenas.menu import Menu
 from escenas.partida import Partida
-from user_config import UserConfig as UC
+from managers.user_config import UserConfig as UC
 
 class LevelSelector(Menu):
 

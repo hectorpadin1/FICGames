@@ -2,7 +2,7 @@ import pygame as pg
 from settings import *
 from pygame.math import Vector2
 from sprites.explosion import *
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 
 
 class Bullet(pg.sprite.Sprite):

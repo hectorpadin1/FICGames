@@ -1,6 +1,6 @@
 import pygame as pg
 from settings import *
-from user_config import UserConfig as UC
+from managers.user_config import UserConfig as UC
 
 class Director():
 

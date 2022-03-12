@@ -1,7 +1,7 @@
 import pygame as pg
 import sys
 from settings import *
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 from escenas.gui.button import Button
 
 class ClasicButton(Button):

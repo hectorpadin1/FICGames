@@ -2,8 +2,8 @@ import pygame as pg
 import sys
 from settings import *
 from escenas.gui.buttons import ClasicButton
-from resourcemanager import ResourceManager as GR
-from soundcontroller import SoundController as SC
+from managers.resourcemanager import ResourceManager as GR
+from managers.soundcontroller import SoundController as SC
 from escenas.menu import Menu
 import escenas.partida
 

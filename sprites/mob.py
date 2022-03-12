@@ -4,7 +4,7 @@ from settings import *
 from math import pow, sqrt
 from pygame.math import Vector2
 from sprites.gun import Pistol
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 
 
 class Mob(Character):
