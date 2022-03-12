@@ -1,6 +1,6 @@
 import pygame as pg
 from pygame.math import Vector2
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 
 
 class Character(pg.sprite.Sprite):

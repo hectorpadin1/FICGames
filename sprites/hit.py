@@ -1,7 +1,7 @@
 import pygame as pg
 from settings import *
 from pygame.math import Vector2
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 
 class Hit(pg.sprite.Sprite):
 
