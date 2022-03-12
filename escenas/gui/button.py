@@ -1,7 +1,7 @@
 import pygame as pg
 import sys
 from settings import *
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 
 class Button(pg.sprite.Sprite):
     #Inicializamos el botón mostrándolo en pantalla

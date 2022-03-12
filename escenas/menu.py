@@ -1,17 +1,18 @@
 import pygame as pg
 import sys
 from settings import *
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 from escenas.escena import Escena
 
 class Menu(Escena):
 
-    def __init__(self,director, btns, back, logo=None):
+    def __init__(self,director, btns, back, logo=None, logoy=0):
         Escena.__init__(self, director)
         self.click = False
         self.btn_group = pg.sprite.Group(*btns)
         self.back = back
         self.logo = logo
+        self.logoy=logoy
 
     def events(self, events):
         self.click = False
@@ -53,7 +54,7 @@ class Menu(Escena):
         _,box_y = self.draw_box(display)
 
         if self.logo is not None:
-            self.draw_logo(display,dy=-((box_y/4)))
+            self.draw_logo(display,dy=-((box_y/4))+self.logoy)
 
         for btn in self.btn_group:
             btn.draw(display)

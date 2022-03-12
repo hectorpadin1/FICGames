@@ -1,7 +1,7 @@
 import pygame as pg
 import sys
 from settings import *
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 from utils.observer import Observer
 
 class Hud(Observer):

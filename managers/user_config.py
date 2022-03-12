@@ -23,7 +23,6 @@ class UserConfig:
             json.dump(self.config, outfile)
 
 
-
     @classmethod
     def get(self, key):
         return self.config[key]

@@ -19,6 +19,7 @@ class ResourceManager:
     PLAYER_RELOAD       = 'images-sprites/Hero_Reload.png'
     PLAYER_DIE          = 'images-sprites/Hero_Die.png'
     BULLET_IMG          = 'images-sprites/bullet.png'
+    BULLET_LEAF         = 'images-sprites/bullet_anim.png'
     EXPLOSION_IMAGE     = 'images-sprites/explode_bullet.png'
     MOB_IMAGE           = 'images-sprites/soldier.png'
     MOB_DIE             = 'images-sprites/soldier_die.png'
@@ -27,6 +28,9 @@ class ResourceManager:
     AMMO_IMAGE          = 'images-sprites/ammo.png'
     HP_IMAGE            = 'images-sprites/HP.png'
     
+    # SPRITE POSITIONS
+    BULLET_POSITIONS = 'positions/coordBullets.txt'
+
     # GUI IMAGES
     LOGO_IMG     = 'images-gui/logo.png'
     START_IMG    = 'images-gui/inicio.png'
@@ -80,7 +84,7 @@ class ResourceManager:
         if name in self.coord_resources:
             return self.coord_resources[name]
         else:
-            fullname = os.path.join(self.RESOURCE_PATH + '/images-sprites/', name)
+            fullname = os.path.join(self.RESOURCE_PATH, name)
             pfile = open(fullname,'r')
             datos = pfile.read()
             pfile.close()

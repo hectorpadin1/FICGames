@@ -1,8 +1,8 @@
 import pygame as pg
 from settings import *
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 from sprites.bullet import Bullet
-from soundcontroller import SoundController as SC
+from managers.soundcontroller import SoundController as SC
 
 
 class AbstractGun():
@@ -61,7 +61,7 @@ class AbstractGun():
 class Pistol(AbstractGun):
 
     def __init__(self, bullet_group):
-        super().__init__(bullet_group=bullet_group, mag_size=7, bullet_img=GR.BULLET_IMG, reload_time=20*FPS, rate=4*FPS, damage=34, speed=1500, lifetime=2*FPS, soundFunction=SC.play_pistola)
+        super().__init__(bullet_group=bullet_group, mag_size=7, bullet_img=GR.BULLET_IMG, reload_time=20*FPS, rate=4*FPS, damage=34, speed=150, lifetime=20*FPS, soundFunction=SC.play_pistola)
 
 
 class Rifle(AbstractGun):
