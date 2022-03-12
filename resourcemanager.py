@@ -1,6 +1,7 @@
 import os
 import pygame as pg
 import pytmx
+from pygame.locals import RLEACCEL
 
 #DEBUGUEAR PARA COMPROBAR QUE SE ACTUALIZAN LAS LISTAS SIENDO ESTATICO
 
@@ -9,19 +10,20 @@ class ResourceManager:
     map_resources   = {}
     font_resources  = {}
     sound_resources = {}
+    coord_resources = {}
 
     # SPRITE IMAGES 
-    PLAYER_RIFFLE   = 'images-sprites/Hero_Rifle.png'
-    PLAYER_PISTOL   = 'images-sprites/Hero_Pistol.png'
+    PLAYER_RIFFLE       = 'images-sprites/Hero_Rifle.png'
+    PLAYER_PISTOL       = 'images-sprites/Hero_Pistol.png'
     PLAYER_MACHINEGUN   = 'images-sprites/Hero_MachineGun.png'
-    PLAYER_RELOAD   = 'images-sprites/Hero_Reload.png'
-    PLAYER_DIE      = 'images-sprites/Hero_Die.png'
-    BULLET_IMG      = 'images-sprites/bullet.png'
-    EXPLOSION_IMAGE = 'images-sprites/explode_bullet.png'
-    MOB_IMAGE       = 'images-sprites/soldier.png'
-    MOB_DIE       = 'images-sprites/soldier_die.png'
-    BLOOD_IMAGE     = 'images-sprites/blood.png'
-    HIT_IMAGE     = 'images-sprites/blood-splatter.png'
+    PLAYER_RELOAD       = 'images-sprites/Hero_Reload.png'
+    PLAYER_DIE          = 'images-sprites/Hero_Die.png'
+    BULLET_IMG          = 'images-sprites/bullet.png'
+    EXPLOSION_IMAGE     = 'images-sprites/explode_bullet.png'
+    MOB_IMAGE           = 'images-sprites/soldier.png'
+    MOB_DIE             = 'images-sprites/soldier_die.png'
+    BLOOD_IMAGE         = 'images-sprites/blood.png'
+    HIT_IMAGE           = 'images-sprites/blood-splatter.png'
     
     # GUI IMAGES
     LOGO_IMG     = 'images-gui/logo.png'
@@ -53,7 +55,7 @@ class ResourceManager:
     RESOURCE_PATH = "resources"
 
     @classmethod
-    def load_image(self, nombre):
+    def load_image(self, nombre, colorkey=None):
         if nombre in self.image_resources:
             return self.image_resources[nombre]
         else:
@@ -63,12 +65,25 @@ class ResourceManager:
             except (pg.error):
                 print('Cannot load image: ', fullname)
                 raise SystemExit
-
             imagen = imagen.convert_alpha() # o convert_alpha??
-            
+            if colorkey is not None:
+                if colorkey == -1:
+                    colorkey = imagen.get_at((0,0))
+                imagen.set_colorkey(colorkey, RLEACCEL)
             self.image_resources[nombre] = imagen
-            
             return imagen
+
+    @classmethod
+    def load_coord(self, name):
+        if name in self.coord_resources:
+            return self.coord_resources[name]
+        else:
+            fullname = os.path.join(self.RESOURCE_PATH + '/images-sprites/', name)
+            pfile = open(fullname,'r')
+            datos = pfile.read()
+            pfile.close()
+            self.coord_resources[name] = datos
+            return datos
 
     @classmethod
     def load_map(self, nombre):
