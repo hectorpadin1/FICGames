@@ -10,6 +10,7 @@ from sprites.explosion import Explosion
 from sprites.hit import Hit
 from tiledmap import TiledMap
 from camera import Camera
+from managers.user_config import UserConfig as UC
 from managers.soundcontroller import SoundController as SC
 from escenas.escena import Escena
 from escenas.gameover import GameOver
@@ -132,6 +133,8 @@ class Partida(Escena):
     def win(self):
         win = Win(self.director)
         self.director.changeEscena(win)
+        if UC.get("last_level")==self.lvl:
+           UC.update("last_level",self.lvl+1)
 
     def draw(self, display):
         
