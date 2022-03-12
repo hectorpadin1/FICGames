@@ -1,0 +1,59 @@
+Anacleto:
+
+¡Ahh!... Buah dios, qué pesadilla, pensé que tenía que volver a hacer AXO.
+
+...Estoy muy agobiado por el proyecto, espero terminarlo pronto que estoy hecho polvo...
+
+...Bueno será mejor que me prepare y vaya a clase para acabar cuanto antes...
+
+Usa 'WASD' para moverte: 'W' arriba, 'A' izquierda, 'S' abajo, 'D' derecha
+
+/////////////////////////////////////////////////////////////////////////////////
+Anacleto(En china):
+
+Maldito Jiang-Yang, no puedo permitir que roben mi código así.
+
+Debo recuperar el código antes de que los chinos consigan descifrarlo.
+
+Click izquierdo para disparar, apunta a los soldados para salir al paso y no te quedes sin munición.
+
+Ten cuidado y acaba con ellos antes de que ellos acaben contigo, vigila tu barra de salud
+
+
+/////////////////////////////////////////////////////////////////////////////////
+Esos son los principales
+
+
+Esto es añadido opcional |
+						 V
+/////////////////////////////////////////////////////////////////////////////////
+Anacleto:
+
+¡Por fin!, ¡Es increíble!, ¿te das cuenta de lo que significa esto Jiang-Yang? ¿Cómo que no...?
+
+Iré a contárselo al profesor espérame aqui Jiang, ¡no toques nada!
+
+/////////////////////////////////////////////////////////////////////////////////
+Jiang-Yang:
+
+Anacleto es increíble! cuando le cuente este descubrimiento a mi padre...
+Seguro que por fin se sentirá orgulloso de mí
+
+...Sí padre, lo haré...
+
+Anacleto, ¿Cuándo puedas me pasas, a este enlace, el proyecto?
+
+/////////////////////////////////////////////////////////////////////////////////
+Profesor:
+
+¡ANACLETO! ¡¿QUE HAS HECHO QUÉ?!
+
+No es posible, ¿Has resuelto un problema NP-completo en tiempo polinómico?
+
+No me lo puedo creer. Felicidades Anacleto eres todo un prodigio.
+
+¿Como que los chinos se han hecho con tu código?
+
+¿Jiang-Yang? No te preocupes nos encargaremos de el personalmente.
+
+Anacleto, no queda tiempo, debes dirigirte a China inmediatamente. Mucha suerte.
