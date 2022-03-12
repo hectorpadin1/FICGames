@@ -1,6 +1,6 @@
 import pygame as pg
 from settings import *
-from resourcemanager import ResourceManager as GR
+from managers.resourcemanager import ResourceManager as GR
 
 class HP(pg.sprite.Sprite):
 
