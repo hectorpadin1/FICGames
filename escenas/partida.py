@@ -108,10 +108,6 @@ class Partida(Escena):
 
 
     def update(self, dt):
-        # Miramos si seguimos vivos
-        if self.player.health <= 0:
-            Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
-            self.gameover()
         # Actualizamos grupos de sprites
         self.player.update(self.camera.camera.topleft, dt)
         self.bullets_player.update(dt)
@@ -122,7 +118,10 @@ class Partida(Escena):
         self.hits.update()
         # Colisiones
         self.__bullet_hits()
-
+        # Miramos si seguimos vivos
+        if self.player.health <= 0:
+            Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
+            self.gameover()
         # Posición de la cámara
         self.camera.update(self.player)
 
