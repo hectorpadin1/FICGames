@@ -40,12 +40,6 @@ class Player(Character, Observable):
     def update_ammo(self, ammo):
         pass
 
-    def collide_with_ammo(self):
-        self.notify("ammo", self.pos)
-    
-    def collide_with_health(self):
-        self.notify("ammo", self.pos)
-
     def __callControler(self):
         # Player dynamics
         self.rot_speed = 0

@@ -129,8 +129,8 @@ class Partida(Escena):
         self.hits.update()
         # Colisiones
         self.__bullet_hits()
-        #self.__ammo_collision()
-        #self.__hp_collision()
+        self.__ammo_collision()
+        self.__hp_collision()
 
         # Posición de la cámara
         self.camera.update(self.player)
