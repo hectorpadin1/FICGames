@@ -9,10 +9,9 @@ from managers.resourcemanager import ResourceManager as GR
 
 class Mob(Character):
 
-    def __init__(self, mob_group, x, y, image, gun, collide_groups):
-        super().__init__(mob_group, image, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups)
+    def __init__(self, mob_group, x, y, image, gun, collide_groups, row):
+        super().__init__(mob_group, image, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups, GR.MOB_POSITIONS, row)
         self.acc = Vector2(0, 0)
-        self.follow = False
         self.gun = gun
         self.last_shot = pg.time.get_ticks()
         self.reloading = False
@@ -25,7 +24,7 @@ class Mob(Character):
             if not self.reloading and self.gun.current_mag == 0:
                 self.gun.do_reload()
                 self.reloading = True
-            elif self.follow and self.gun.current_mag != 0:
+            elif self.moving and self.gun.current_mag != 0:
                 self.reloading = False
                 self.gun.shoot(self.pos, self.rot)
             self.gun.update()
@@ -36,7 +35,7 @@ class MobBasico(Mob):
     
     def __init__(self, mob_group, x, y, bullets, collide_groups):
         gun = Pistol(bullets)
-        super().__init__(mob_group, x, y, GR.MOB_IMAGE, gun, collide_groups)
+        super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 1)
 
     def die(self):
         self.updateImage(GR.MOB_DIE)
@@ -46,12 +45,15 @@ class MobBasico(Mob):
         if not self.dead:
             distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))
             if distance > MOB_ATTK_DISTANCE:
-                if not self.follow:
+                if not self.moving:
+                    self.numImagenPostura = 0
                     return
                 elif distance > MOB_ATTK_DISTANCE*4:
-                    self.follow = False
+                    self.moving = False
+                    self.numImagenPostura = 0
                     return
-            self.follow = True
+            self.numImagenPostura = (self.numImagenPostura + 1)%8
+            self.moving = True
             self.rot = (player_pos - self.pos).angle_to(Vector2(1, 0))
             if distance > MOB_ATTK_DISTANCE/2:
                 self.acc = Vector2(MOB_SPEED, 0).rotate(-self.rot)

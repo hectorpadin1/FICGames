@@ -53,15 +53,20 @@ class Settings(Menu):
 
     def do_up_music(self,_):
         SC.play_selection()
+        SC.update_music_volume(5)
 
     def do_down_music(self,_):
         SC.play_selection()
+        SC.update_music_volume(-5)
+
 
     def do_up_sound(self,_):
         SC.play_selection()
+        SC.update_sound_volume(5)
 
     def do_down_sound(self,_):
         SC.play_selection()
+        SC.update_sound_volume(-5)
         
         
     def go_back(self):

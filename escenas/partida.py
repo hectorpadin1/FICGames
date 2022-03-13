@@ -18,6 +18,7 @@ from escenas.gameover import GameOver
 from escenas.pause import Pause
 from escenas.win import Win
 from escenas.gui.hud import Hud
+from escenas.gui.dialog import Dialog
 
         
 
@@ -29,6 +30,17 @@ class Partida(Escena):
         self.init_game()
 
     def init_game(self):
+        #DIALOG TEMPORAL
+        #DIALOG TEMPORAL
+        #DIALOG TEMPORAL
+        #DIALOG TEMPORAL
+        #DIALOG TEMPORAL
+        self.dialog = Dialog(1)
+
+
+
+
+
         #Mapa
         self.map = TiledMap(self.lvl)
         #Render del mapa -> REVISAR ESTO PEDRO
@@ -115,10 +127,6 @@ class Partida(Escena):
         self.player.update_health(100) #A topisimo de vida
 
     def update(self, dt):
-        # Miramos si seguimos vivos
-        if self.player.health <= 0:
-            Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
-            self.gameover()
         # Actualizamos grupos de sprites
         self.player.update(self.camera.camera.topleft, dt)
         self.bullets_player.update(dt)
@@ -135,6 +143,8 @@ class Partida(Escena):
         # Posición de la cámara
         self.camera.update(self.player)
 
+        #REVISAR
+        self.dialog.update(dt)
 
     def gameover(self):
         gameover = GameOver(self.director, self.lvl)
@@ -149,10 +159,6 @@ class Partida(Escena):
     def draw(self, display):
         
         display.blit(self.map_img, self.camera.apply_rect(self.map_rect))
-        
-        # Cambiar este codigo espaguetti :)
-
-        # CaESE CAMERA APPLY QUE HACE?
 
         for sprite in self.blood:
             display.blit(sprite.image, self.camera.apply(sprite))
@@ -175,6 +181,7 @@ class Partida(Escena):
         display.blit(self.player.image, self.camera.apply(self.player))
 
         self.hud.draw(display)
+        self.dialog.draw(display)
 
 
     def events(self, events):

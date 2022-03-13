@@ -12,7 +12,7 @@ from utils.observable import Observable
 class Player(Character, Observable):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
     def __init__(self, x, y, bullets, collide_groups, observers):
-        Character.__init__(self, None, GR.PLAYER_PISTOL, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups)
+        Character.__init__(self, None, GR.PLAYER, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups, GR.HERO_POSITIONS, 4)
         Observable.__init__(self, observers)
         self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
@@ -35,7 +35,7 @@ class Player(Character, Observable):
             self.health = 0
         else:
             self.health = health
-        self.notify("health", health)
+        self.notify("health", self.health)
     
     def update_ammo(self, ammo):
         pass
@@ -44,6 +44,7 @@ class Player(Character, Observable):
         # Player dynamics
         self.rot_speed = 0
         self.vel = Vector2(0, 0)
+        speed = self.vel.copy()
         # On-Axis movements
         if self.controler.left():
             self.vel.x = -PLAYER_SPEED
@@ -61,6 +62,11 @@ class Player(Character, Observable):
         # Diagonal movements        
         if self.vel.x!=0 and self.vel.y!=0:
             self.vel *= cos(pi/4)
+        
+        if speed != self.vel:
+            self.numImagenPostura = (self.numImagenPostura + 1)%8
+        else:
+            self.numImagenPostura = 0
         # Switch guns
         if self.controler.switchPistol():
             self.guns[self.gunSelector].cancel_reload()
@@ -111,17 +117,17 @@ class Player(Character, Observable):
             return
 
         if self.reloading:
-            self.updateImage(GR.PLAYER_RELOAD)
+            self.numPostura = 3
             if self.guns[self.gunSelector].reload == False:
                 self.notify("ammo",self.guns[self.gunSelector].current_mag)
                 self.notify("bullets",self.guns[self.gunSelector].bullets)
                 self.reloading = False
 
         elif self.gunSelector == 0:
-            self.updateImage(GR.PLAYER_PISTOL)
+            self.numPostura = 1
         elif self.gunSelector == 1:
-            self.updateImage(GR.PLAYER_RIFFLE)
+            self.numPostura = 0
         elif self.gunSelector == 2:
-            self.updateImage(GR.PLAYER_MACHINEGUN)
+            self.numPostura = 2
         super().update()
         
