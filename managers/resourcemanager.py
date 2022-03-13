@@ -45,6 +45,7 @@ class ResourceManager:
     SMGHUD       = 'images-gui/smghud.png'
     MGHUD        = 'images-gui/mghud.png'
     VICTORY      = 'images-gui/victoria.png'
+    DIALOG_BG      = 'images-gui/dialog_bg.png'
 
     # FONTS
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"

@@ -22,6 +22,7 @@ class Character(pg.sprite.Sprite):
         self.health = health
         self.collision_groups = collide_groups
         
+    #Al final no se usan máscaras de colisión...
     def __collide_hit_rect(self, one, two):
         return one.hit_rect.colliderect(two.rect)
 

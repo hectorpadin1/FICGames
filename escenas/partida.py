@@ -18,6 +18,7 @@ from escenas.gameover import GameOver
 from escenas.pause import Pause
 from escenas.win import Win
 from escenas.gui.hud import Hud
+from escenas.gui.dialog import Dialog
 
         
 
@@ -29,6 +30,17 @@ class Partida(Escena):
         self.init_game()
 
     def init_game(self):
+        #DIALOG TEMPORAL
+        #DIALOG TEMPORAL
+        #DIALOG TEMPORAL
+        #DIALOG TEMPORAL
+        #DIALOG TEMPORAL
+        self.dialog = Dialog(1)
+
+
+
+
+
         #Mapa
         self.map = TiledMap(self.lvl)
         #Render del mapa -> REVISAR ESTO PEDRO
@@ -125,6 +137,8 @@ class Partida(Escena):
         # Posición de la cámara
         self.camera.update(self.player)
 
+        #REVISAR
+        self.dialog.update(dt)
 
     def gameover(self):
         gameover = GameOver(self.director, self.lvl)
@@ -161,6 +175,7 @@ class Partida(Escena):
         display.blit(self.player.image, self.camera.apply(self.player))
 
         self.hud.draw(display)
+        self.dialog.draw(display)
 
 
     def events(self, events):
