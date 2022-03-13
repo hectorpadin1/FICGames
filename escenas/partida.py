@@ -139,10 +139,6 @@ class Partida(Escena):
     def draw(self, display):
         
         display.blit(self.map_img, self.camera.apply_rect(self.map_rect))
-        
-        # Cambiar este codigo espaguetti :)
-
-        # CaESE CAMERA APPLY QUE HACE?
 
         for sprite in self.blood:
             display.blit(sprite.image, self.camera.apply(sprite))

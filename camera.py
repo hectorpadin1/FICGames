@@ -8,6 +8,7 @@ class Camera:
         self.width = width
         self.height = height
 
+    #Obtener coordeneadas relativas a la posición de la cámara
     def apply(self, entity):
         return entity.rect.move(self.camera.topleft)
 
