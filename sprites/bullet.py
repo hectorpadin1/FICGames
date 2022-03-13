@@ -10,51 +10,20 @@ class Bullet(pg.sprite.Sprite):
     def __init__(self, bullet_group, pos, rot, img, speed, lifetime):
         pg.sprite.Sprite.__init__(self, bullet_group)
         dir = Vector2(1, 0).rotate(-rot)
-        self.hoja = GR.load_image(GR.BULLET_LEAF, colorkey=-1)
-        
-        data = GR.load_coord(GR.BULLET_POSITIONS)
-        data = data.split()
-        self.numPostura = 0
-        self.numImagenPostura = 0
-        cont = 0
-        numImagenes = [3]
-        self.coordenadasHoja = []
-        for linea in range(0, 1):
-            self.coordenadasHoja.append([])
-            tmp = self.coordenadasHoja[linea]
-            for postura in range(1, numImagenes[linea]+1):
-                tmp.append(pg.Rect((int(data[cont]), int(data[cont+1])), (int(data[cont+2]), int(data[cont+3]))))
-                cont += 4
-        
+        #pos = pos + BARREL_OFFSET.rotate(-rot)
+        self.image = GR.load_image(img)
+        self.image = pg.transform.rotate(self.image, rot-90)
+        self.rect = self.image.get_rect()
         self.pos = Vector2(pos)
-        self.rot = rot
-        self.rect = pg.Rect(self.pos.x, self.pos.y, self.coordenadasHoja[self.numPostura][self.numImagenPostura][2],self.coordenadasHoja[self.numPostura][self.numImagenPostura][3])
-        self.rect.left = self.pos.x
-        self.rect.bottom = self.pos.y
-        
-        self.images = []
-        for i in range(0,3):
-            self.images.append(pg.transform.rotate(pg.transform.scale(self.hoja.subsurface(self.coordenadasHoja[self.numPostura][i]), (0.25 * SPRITE_BOX, 0.075 * SPRITE_BOX)), self.rot))
-        
-        self.image = self.images[0]
         self.mask = pg.mask.from_surface(self.image)
+        self.rect.center = pos
         self.vel = dir * speed
         self.lifetime = lifetime
         self.spawn_time = pg.time.get_ticks()
 
-
     def update(self, dt):
         self.pos += self.vel * (dt/1000)
         self.rect.center = self.pos
-        now = pg.time.get_ticks() - self.spawn_time
-        if now > 2*self.lifetime/3 and self.numImagenPostura==1:
-            self.numImagenPostura += 1
-            self.image = self.images[self.numImagenPostura]
-            self.mask = pg.mask.from_surface(self.image)
-        elif now > self.lifetime/3 and self.numImagenPostura==0:
-            self.numImagenPostura += 1
-            self.image = self.images[self.numImagenPostura]
-            self.mask = pg.mask.from_surface(self.image)
-        if now > self.lifetime:
+        if pg.time.get_ticks() - self.spawn_time > self.lifetime:
             self.kill()
     
