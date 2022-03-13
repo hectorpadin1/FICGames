@@ -36,9 +36,11 @@ class Player(Character, Observable):
         else:
             self.health = health
         self.notify("health", self.health)
-    
-    def update_ammo(self, ammo):
-        pass
+
+    def update_ammo(self):
+        for gun in self.guns:
+                gun.bullets = gun.MAG_SIZE 
+        self.notify("bullets", self.guns[self.gunSelector].bullets)
 
     def __callControler(self):
         # Player dynamics

@@ -10,8 +10,8 @@ class AbstractGun():
     def __init__(self, bullet_group, mag_size, bullet_img, reload_time, rate, damage, speed, lifetime, soundFunction):
         self.bullet_group = bullet_group
         self.MAG_SIZE = mag_size
-        self.current_mag = 10000000000000000000
-        self.bullets = 100000000000000000
+        self.current_mag = mag_size
+        self.bullets = mag_size
         self.reload_time = reload_time
         self.bullet_img = bullet_img
         self.rate = rate
@@ -73,6 +73,6 @@ class Rifle(AbstractGun):
 class MachineGun(AbstractGun):
 
     def __init__(self, bullet_group):
-        super().__init__(bullet_group=bullet_group, mag_size=100, bullet_img=GR.BULLET_IMG, reload_time=100*FPS, rate=30, damage=30, speed=1500, lifetime=3*FPS, soundFunction=SC.play_ametralladora)
+        super().__init__(bullet_group=bullet_group, mag_size=75, bullet_img=GR.BULLET_IMG, reload_time=50*FPS, rate=100, damage=30, speed=1500, lifetime=3*FPS, soundFunction=SC.play_ametralladora)
     
 
