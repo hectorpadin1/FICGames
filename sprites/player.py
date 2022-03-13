@@ -35,7 +35,7 @@ class Player(Character, Observable):
             self.health = 0
         else:
             self.health = health
-        self.notify("health", health)
+        self.notify("health", self.health)
     
     def update_ammo(self, ammo):
         pass
