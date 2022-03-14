@@ -491,12 +491,12 @@
     <property name="area" type="int" value="1"/>
    </properties>
   </object>
-  <object id="111" name="mob" x="718.5" y="1727" width="29" height="22">
+  <object id="111" name="mob" x="698" y="1704" width="29" height="22">
    <properties>
     <property name="area" type="int" value="2"/>
    </properties>
   </object>
-  <object id="112" name="mob" x="926.5" y="1727" width="29" height="22">
+  <object id="112" name="mob" x="959.5" y="1707" width="29" height="22">
    <properties>
     <property name="area" type="int" value="2"/>
    </properties>
@@ -506,7 +506,7 @@
     <property name="area" type="int" value="3"/>
    </properties>
   </object>
-  <object id="114" name="mob" x="413.5" y="1743" width="29" height="22">
+  <object id="114" name="mob" x="598.5" y="1830.5" width="29" height="22">
    <properties>
     <property name="area" type="int" value="3"/>
    </properties>
@@ -518,7 +518,7 @@
   </object>
   <object id="116" name="mob" x="222.5" y="1397" width="29" height="22">
    <properties>
-    <property name="area" type="int" value="5"/>
+    <property name="area" type="int" value="4"/>
    </properties>
   </object>
   <object id="117" name="mob" x="500.5" y="745" width="29" height="22">
@@ -567,7 +567,7 @@
    </properties>
   </object>
   <object id="132" name="health" x="187.333" y="915.333" width="33.3333" height="25.3333"/>
-  <object id="133" name="health" x="579.333" y="1831.33" width="33.3333" height="25.3333"/>
+  <object id="133" name="health" x="409.333" y="1836.83" width="33.3333" height="25.3333"/>
   <object id="135" name="health" x="430" y="776.667" width="33.3333" height="25.3333"/>
   <object id="137" name="health" x="1652" y="1016" width="33.3333" height="25.3333"/>
   <object id="138" name="ammo" x="1691.67" y="1610" width="32.6667" height="20"/>
@@ -584,7 +584,7 @@
     <property name="number" type="int" value="10"/>
    </properties>
   </object>
-  <object id="152" name="area" x="832.958" y="1668.62" width="61.583" height="8.25033">
+  <object id="152" name="area" x="800.958" y="1645.62" width="97.083" height="29.2503">
    <properties>
     <property name="number" type="int" value="2"/>
    </properties>
@@ -594,14 +594,9 @@
     <property name="number" type="int" value="3"/>
    </properties>
   </object>
-  <object id="154" name="area" x="193.875" y="1668.87" width="59.9163" height="8.25033">
+  <object id="154" name="area" x="193.875" y="1523.37" width="59.9163" height="153.75">
    <properties>
     <property name="number" type="int" value="4"/>
-   </properties>
-  </object>
-  <object id="155" name="area" x="194.133" y="1522.56" width="59.9163" height="8.25033">
-   <properties>
-    <property name="number" type="int" value="5"/>
    </properties>
   </object>
   <object id="156" name="area" x="641.792" y="624.208" width="123.583" height="28.7503">

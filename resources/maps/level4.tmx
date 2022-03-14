@@ -578,7 +578,7 @@
     <property name="number" type="int" value="3"/>
    </properties>
   </object>
-  <object id="201" name="area" x="592.667" y="7" width="61.667" height="522">
+  <object id="201" name="area" x="592.667" y="7" width="141.667" height="522">
    <properties>
     <property name="number" type="int" value="4"/>
    </properties>

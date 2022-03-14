@@ -557,12 +557,12 @@
   <object id="178" name="Wall" x="15.8317" y="1905.05" width="1885.67" height="29.9"/>
   <object id="179" name="Wall" x="1811.85" y="702.173" width="34.964" height="60.987"/>
   <object id="180" name="Wall" x="265.851" y="452.84" width="45.2973" height="60.987"/>
-  <object id="181" name="mob" x="589" y="1466.5" width="37.5" height="34.5">
+  <object id="181" name="mob" x="649" y="1431.17" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="3"/>
    </properties>
   </object>
-  <object id="182" name="mob" x="715.917" y="902.083" width="37.5" height="34.5">
+  <object id="182" name="mob" x="821.917" y="970.083" width="21.5" height="20.5">
    <properties>
     <property name="area" type="int" value="4"/>
    </properties>
@@ -587,7 +587,7 @@
     <property name="area" type="int" value="5"/>
    </properties>
   </object>
-  <object id="187" name="mob" x="1016.25" y="1161.08" width="37.5" height="34.5">
+  <object id="187" name="mob" x="1114.92" y="1234.41" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="1"/>
    </properties>
