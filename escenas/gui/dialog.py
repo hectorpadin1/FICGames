@@ -1,6 +1,7 @@
 from managers.resourcemanager import ResourceManager as GR
 import pygame as pg
 from settings import *
+import sys
 
 
 class Dialog():
@@ -16,13 +17,18 @@ class Dialog():
 
         #Zones
         xbox,ybox = self.rect.topleft
-        self.__set_name("Caca",(xbox+25,ybox+20))
+        self.name_pos_x = xbox+25
+        self.name_pos_y = ybox+20        
+        self.txt_pos_x = xbox+25
+        self.txt_pos_y = ybox+45
+
+        #Atributos Propios
         self.start_palabra = 0
         self.palabra = 0
         self.lines=[]
-        self.txt_pos_x = xbox+25
-        self.txt_pos_y = ybox+45
-        self.__load_dialog("Me encanta comer mojones es mi gran pasión.")
+        self.last_time = pg.time.get_ticks()
+        self.done = False
+
 
         #Pulsa Cualquier tecla
         """
@@ -33,16 +39,48 @@ class Dialog():
         self.indicacion_rect.topright =(xbox,ybox)
         """
 
-    def __set_name(self,name,pos):
-        self.name_surface = self.font.render(name, True, (154,122,37))
+        self.__load_name()
+        self.__load_frase()
+
+
+    ################################
+    #    Operar sobre Diálogos     #
+    ################################
+
+    def next_dialog(self):
+        #
+        # POR IMPLEMENTAR
+        #
+        pass
+
+    def is_done(self):
+        return self.done
+
+    def __get_actual_name(self):
+        return "Paco"
+
+    def __get_actual_frase(self):
+        return "Me encanta comer mojones es mi gran pasión jiji xd xd xd."
+
+    def update(self,_dt):
+        now = pg.time.get_ticks()
+        if now - self.last_time > DIALOG_SPEED:
+            self.__load_name()
+            self.__load_frase()
+            self.last_time = now
+
+    ##########################
+    #  Renderizacion TEXTO   #
+    ##########################
+
+    def __load_name(self):
+        self.name_surface = self.font.render(self.__get_actual_name(), True, (154,122,37))
         self.name_rect = self.name_surface.get_rect()
-        self.name_rect.topleft = pos
+        self.name_rect.topleft = (self.name_pos_x,self.name_pos_y)
 
-
-    ## RENDERIZARLO POR PALABRAS E
-    def __load_dialog(self,frase):
+    def __load_frase(self):
         if self.palabra != -1:
-            splited = frase.split()
+            splited = self.__get_actual_frase().split()
             render_txt = ' '.join(splited[self.start_palabra:self.palabra])
             print(render_txt)
 
@@ -51,9 +89,17 @@ class Dialog():
             self.dialog_rect = rendered.get_rect()
             #Si sobrepasa creamos nueva línea
             if self.dialog_rect.size[0] > self.rect.size[0]-50:
+                #Si la palabra ocupa todo el cuadro no podemos hacer gran cosa
+                if self.palabra == self.start_palabra:
+                    print("la palabra es demasiado grande, no cabe en una línea")
+                    sys.exit()
                 render_txt = ' '.join(splited[self.start_palabra:self.palabra-1])
-                rendered = self.font.render(render_txt, True, (240,240,240))        
-                self.lines.append(rendered)
+                rendered = self.font.render(render_txt, True, (240,240,240)) 
+                
+                #Desacemos cambios en línea actual y creamos una nueva vacía     
+                self.lines[-1] = rendered
+                self.lines.append(self.font.render("", True, (154,122,37)))
+
                 self.start_palabra = self.palabra
                 print("Sobrepasa")
             else:
@@ -68,10 +114,6 @@ class Dialog():
                 self.palabra = -1
             else:
                 self.palabra = self.palabra + 1
-
-    def update(self,dt):
-        self.__load_dialog("me como mi cacota wei 1 2 3 4 5 6 7 hector feo esto van a ser mas de 2 lienas")
-        
     
     def draw(self, display):
         display.blit(self.image, self.rect)
