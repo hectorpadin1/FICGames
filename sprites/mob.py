@@ -18,6 +18,7 @@ class Mob(Character):
         self.dead = False
         self.area = area
         self.activated = False
+        self.last_change = pg.time.get_ticks()
     
     def activate(self, area):
         if self.area == area:
@@ -57,7 +58,9 @@ class MobBasico(Mob):
                 self.moving = False
                 self.numImagenPostura = 0
                 return
-            self.numImagenPostura = (self.numImagenPostura + 1)%8
+            if  pg.time.get_ticks() - self.last_change > ANIM_DELAY:
+                self.numImagenPostura = (self.numImagenPostura + 1)%8
+                self.last_change = pg.time.get_ticks()
             self.moving = True
             self.rot = (player_pos - self.pos).angle_to(Vector2(1, 0))
             if distance > MOB_ATTK_DISTANCE/2:

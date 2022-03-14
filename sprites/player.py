@@ -22,6 +22,7 @@ class Player(Character, Observable):
         self.gunSelector = 0
         self.shooting = False
         self.reloading = False
+        self.last_change = pg.time.get_ticks()
         #Notificamos a observadores inicialización
         self.notify("health", self.health)
         self.notify("gun", self.gunSelector)
@@ -65,10 +66,13 @@ class Player(Character, Observable):
         if self.vel.x!=0 and self.vel.y!=0:
             self.vel *= cos(pi/4)
         
-        if speed != self.vel:
-            self.numImagenPostura = (self.numImagenPostura + 1)%8
-        else:
-            self.numImagenPostura = 0
+        if  pg.time.get_ticks() - self.last_change > ANIM_DELAY:
+            if speed != self.vel:
+                self.numImagenPostura = (self.numImagenPostura + 1)%8
+            else:
+                self.numImagenPostura = 0
+            self.last_change = pg.time.get_ticks()
+        
         # Switch guns
         if self.controler.switchPistol():
             self.guns[self.gunSelector].cancel_reload()
