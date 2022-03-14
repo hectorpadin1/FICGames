@@ -574,7 +574,7 @@
   <object id="139" name="ammo" x="830.333" y="1734" width="32.6667" height="20"/>
   <object id="140" name="ammo" x="186.333" y="848.667" width="32.6667" height="20"/>
   <object id="141" name="ammo" x="1378.33" y="715.333" width="32.6667" height="20"/>
-  <object id="142" name="area" x="769.583" y="1284.67" width="123.583" height="8.25033">
+  <object id="142" name="area" x="769.583" y="1150.17" width="123.583" height="142.75">
    <properties>
     <property name="number" type="int" value="1"/>
    </properties>
