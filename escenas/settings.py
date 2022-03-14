@@ -71,6 +71,6 @@ class Settings(Menu):
         
     def go_back(self):
         SC.play_selection()
-        self.director.exitEscena()
+        self.director.exitEscena(updateMusic = False)
 
 

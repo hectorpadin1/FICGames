@@ -19,6 +19,7 @@ DELAY_GAMEOVER = 400
 START_MUSIC    = 'resources/music/start_background.ogg'
 MAIN_MUSIC     = 'resources/music/main_background.ogg'
 GAMEOVER_MUSIC = 'resources/music/gameover.ogg'
+VICTORY_MUSIC  = 'resources/music/victory.ogg'
 
 # Player settings
 PLAYER_HEALTH = 100

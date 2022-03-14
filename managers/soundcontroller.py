@@ -39,7 +39,12 @@ class SoundController:
         pg.mixer.music.load(GAMEOVER_MUSIC)
         self.set_music_volume(rel=1)
         pg.mixer.music.play(-1)
-        pass
+
+    @classmethod
+    def play_victory(self):
+        pg.mixer.music.load(VICTORY_MUSIC)
+        self.set_music_volume(rel=1)
+        pg.mixer.music.play(-1)
 
     @classmethod
     def set_music_volume(self,rel=-1):
@@ -87,6 +92,12 @@ class SoundController:
     def play_item(self):
         sound = GR.load_sound(GR.ITEM)
         sound.set_volume(self.sound_volume/100)
+        sound.play()
+
+    @classmethod
+    def play_no_ammo(self):
+        sound = GR.load_sound(GR.NO_AMMO)
+        sound.set_volume(self.sound_volume*2/100)
         sound.play()
 
 
