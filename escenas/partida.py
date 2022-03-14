@@ -70,7 +70,7 @@ class Partida(Escena):
         
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
-                self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle],[self.hud, self.ammo, self.health])
+                self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle],[self.hud, self.ammo, self.health], self.lvl)
             if tile_object.name == 'Wall':
                 Wall(self.walls, tile_object.x, tile_object.y, 
                         tile_object.width, tile_object.height)
@@ -88,6 +88,7 @@ class Partida(Escena):
                 Area(self.area, tile_object.x, tile_object.y, tile_object.width, tile_object.height, tile_object.number)
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
+        self.won = False
 
 
     def __bullet_hits(self):
@@ -114,6 +115,7 @@ class Partida(Escena):
                     hit.die()
                     self.mob_count -= 1
                     if self.mob_count == 0:
+                        self.won = True
                         self.won_delay = pg.time.get_ticks()
 
         # bullet hit walls
@@ -164,7 +166,7 @@ class Partida(Escena):
         if (self.player.health <= 0) and (pg.time.get_ticks() - self.player_die > DELAY_GAMEOVER):
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
             self.gameover()
-        if (self.mob_count == 0) and (pg.time.get_ticks() - self.won_delay > DELAY_GAMEOVER*4):
+        if self.won and (self.mob_count == 0) and (pg.time.get_ticks() - self.won_delay > DELAY_GAMEOVER*4):
             self.win()
 
         #REVISAR

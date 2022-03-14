@@ -42,13 +42,14 @@ class Controler(AbstractControler):
         return pg.key.get_pressed()[pg.K_r]  
 
     def switchPistol(self):
-        return pg.key.get_pressed()[pg.K_1]
-
-    def switchRiffle(self):
-        return pg.key.get_pressed()[pg.K_2]
-
-    def switchMachineGun(self):
-        return pg.key.get_pressed()[pg.K_3]
+        if pg.key.get_pressed()[pg.K_1]:
+            return 1
+        elif pg.key.get_pressed()[pg.K_2]:
+            return 2
+        elif pg.key.get_pressed()[pg.K_3]:
+            return 3
+        else:
+            return 0
 
     def isShooting(self):
         return pg.mouse.get_pressed()[0]
