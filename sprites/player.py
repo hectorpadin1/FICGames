@@ -1,3 +1,4 @@
+from matplotlib.style import available
 import pygame as pg
 from sprites.character import Character
 from pygame.math import Vector2
@@ -18,6 +19,7 @@ class Player(Character, Observable):
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
         self.mouse = pg.mouse.get_pos()
         self.controler = Controler()
+        self.avaliable = [False, False, False]
         self.guns = [Pistol(bullets), Rifle(bullets), MachineGun(bullets)]
         self.gunSelector = 0
         self.shooting = False
@@ -80,7 +82,7 @@ class Player(Character, Observable):
 
         
         # Switch guns
-        if self.controler.switchPistol():
+        if self.controler.switchPistol() and self.available[self.gunSelector]:
             self.guns[self.gunSelector].cancel_reload()
             self.gunSelector = 0
             self.notify("gun",0)
