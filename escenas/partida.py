@@ -9,6 +9,7 @@ from sprites.explosion import Explosion
 from sprites.hit import Hit
 from sprites.ammo import Ammo
 from sprites.health import HP
+from sprites.area import Area
 from tiledmap import TiledMap
 from camera import Camera
 from managers.user_config import UserConfig as UC
@@ -60,6 +61,7 @@ class Partida(Escena):
         self.hits = pg.sprite.Group()
         self.ammo = pg.sprite.Group()
         self.health = pg.sprite.Group()
+        self.area = pg.sprite.Group()
         self.mob_count = 0
 
         ########################################
@@ -80,8 +82,10 @@ class Partida(Escena):
             if tile_object.name == 'health':
                 HP(self.health, tile_object.x, tile_object.y)
             if tile_object.name == 'mob':
-                MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle])
+                MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle], tile_object.area)
                 self.mob_count += 1
+            if tile_object.name == 'area':
+                Area(self.area, tile_object.x, tile_object.y, tile_object.width, tile_object.height, tile_object.number)
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
 
@@ -122,11 +126,21 @@ class Partida(Escena):
         hits = pg.sprite.spritecollide(self.player, self.ammo, True)
         for _ in hits:
             self.player.update_ammo()#A topisimo de municion
+            SC.play_item()
 
     def __hp_collision(self):
         hits = pg.sprite.spritecollide(self.player, self.health, True)
         for _ in hits:
             self.player.update_health(PLAYER_HEALTH)#A topisimo de municion
+            SC.play_item()
+    
+    def __area_collision(self):
+        hits = pg.sprite.spritecollide(self.player, self.area, True)
+        for hit in hits:
+            areaID = hit.get_number()
+            print(areaID)
+            for mob in self.mobs:
+                mob.activate(areaID)
 
     def update(self, dt):
         # Actualizamos grupos de sprites
@@ -141,6 +155,7 @@ class Partida(Escena):
         self.__bullet_hits()
         self.__ammo_collision()
         self.__hp_collision()
+        self.__area_collision()
 
         # Posición de la cámara
         self.camera.update(self.player)

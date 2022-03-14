@@ -1,4 +1,5 @@
 import os
+from typing import ItemsView
 import pygame as pg
 import pytmx
 from pygame.locals import RLEACCEL
@@ -59,6 +60,7 @@ class ResourceManager:
     METRALLETA    = 'sound_effects/metralleta.mp3'
     AMETRALLADORA = 'sound_effects/ametralladora.mp3'
     PISTOLA       = 'sound_effects/pistola.mp3'
+    ITEM          = 'sound_effects/item.mp3'
 
     # MAPS
     LEVEL = ['maps/level0.tmx','maps/level1.tmx','maps/level2.tmx','maps/level3.tmx','maps/level4.tmx']

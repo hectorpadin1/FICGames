@@ -82,6 +82,12 @@ class SoundController:
         sound = GR.load_sound(GR.SELECTION)
         sound.set_volume(self.sound_volume/100)
         sound.play()
+    
+    @classmethod
+    def play_item(self):
+        sound = GR.load_sound(GR.ITEM)
+        sound.set_volume(self.sound_volume/100)
+        sound.play()
 
 
     #Volumen
