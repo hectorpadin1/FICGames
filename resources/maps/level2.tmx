@@ -521,7 +521,11 @@
     <property name="area" type="int" value="5"/>
    </properties>
   </object>
-  <object id="117" name="mob" x="500.5" y="745" width="29" height="22"/>
+  <object id="117" name="mob" x="500.5" y="745" width="29" height="22">
+   <properties>
+    <property name="area" type="int" value="7"/>
+   </properties>
+  </object>
   <object id="118" name="mob" x="509" y="881" width="29" height="22">
    <properties>
     <property name="area" type="int" value="7"/>
