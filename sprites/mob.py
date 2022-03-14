@@ -13,12 +13,20 @@ class Mob(Character):
         super().__init__(mob_group, image, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups, GR.MOB_POSITIONS, row, numImagenes)
         self.acc = Vector2(0, 0)
         self.gun = gun
+        self.gun.bullets = self.gun.MAG_SIZE*10
+        self.gun.current_mag = self.gun.MAG_SIZE
         self.last_shot = pg.time.get_ticks()
         self.reloading = False
         self.dead = False
         self.area = area
         self.activated = False
         self.last_change = pg.time.get_ticks()
+
+    def die(self):
+        if not self.dead:
+            self.numPostura = 1
+            self.numImagenPostura = 0
+            self.dead = True
     
     def activate(self, area):
         if self.area == area:
@@ -44,20 +52,10 @@ class MobBasico(Mob):
         gun = Pistol(bullets)
         super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 2, area, [8, 4])
 
-    def die(self):
-        if not self.dead:
-            self.numPostura = 1
-            self.numImagenPostura = 0
-            self.dead = True
-
     def update(self, player_pos, dt):
         if not self.dead:
             distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))
             if not self.moving:
-                self.numImagenPostura = 0
-                return
-            if distance > MOB_ATTK_DISTANCE*4:
-                self.moving = False
                 self.numImagenPostura = 0
                 return
             if pg.time.get_ticks() - self.last_change > ANIM_DELAY:

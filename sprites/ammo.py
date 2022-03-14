@@ -6,6 +6,6 @@ class Ammo(pg.sprite.Sprite):
 
     def __init__(self, item_group, x, y):
         pg.sprite.Sprite.__init__(self, item_group)
-        self.image = GR.load_image(GR.AMMO_IMAGE)
+        self.image = pg.transform.scale(GR.load_image(GR.AMMO_IMAGE), (0.65*SPRITE_BOX, 0.65*SPRITE_BOX))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
