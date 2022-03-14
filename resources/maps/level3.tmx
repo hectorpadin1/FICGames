@@ -572,7 +572,7 @@
     <property name="area" type="int" value="2"/>
    </properties>
   </object>
-  <object id="184" name="mob" x="730.75" y="324.75" width="37.5" height="34.5">
+  <object id="184" name="mob" x="439.75" y="409.417" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="6"/>
    </properties>
@@ -622,7 +622,7 @@
     <property name="number" type="int" value="5"/>
    </properties>
   </object>
-  <object id="213" name="area" x="544.061" y="499.5" width="98.5453" height="17.697">
+  <object id="213" name="area" x="544.061" y="499.5" width="155.212" height="44.0303">
    <properties>
     <property name="number" type="int" value="6"/>
    </properties>

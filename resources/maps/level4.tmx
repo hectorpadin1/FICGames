@@ -568,12 +568,12 @@
     <property name="number" type="int" value="1"/>
    </properties>
   </object>
-  <object id="199" name="area" x="820.667" y="726" width="292.667" height="50">
+  <object id="199" name="area" x="820.667" y="726" width="292.667" height="118">
    <properties>
     <property name="number" type="int" value="2"/>
    </properties>
   </object>
-  <object id="200" name="area" x="1154.67" y="74" width="277.667" height="580">
+  <object id="200" name="area" x="1130.67" y="74" width="301.667" height="694.667">
    <properties>
     <property name="number" type="int" value="3"/>
    </properties>
