@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="202">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="204">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="961" columns="31">
   <image source="../images-sprites/tileset.png" width="2000" height="2000"/>
  </tileset>
@@ -345,14 +345,46 @@
  </layer>
  <objectgroup id="11" name="Obstacles">
   <object id="1" name="player" x="386" y="1870" width="23" height="19"/>
-  <object id="2" name="mob" x="1043" y="1252" width="15" height="27"/>
-  <object id="3" name="mob" x="980" y="559.5" width="10" height="15.5"/>
-  <object id="4" name="mob" x="1103" y="563.5" width="13" height="19.5"/>
-  <object id="5" name="mob" x="1346.5" y="379.5" width="19" height="17.5"/>
-  <object id="6" name="mob" x="1475.5" y="376" width="28" height="24.5"/>
-  <object id="7" name="mob" x="289.333" y="118" width="18.6667" height="36"/>
-  <object id="8" name="mob" x="305.333" y="208" width="23.3333" height="35.3333"/>
-  <object id="9" name="mob" x="302.667" y="344.667" width="28" height="34"/>
+  <object id="2" name="mob" x="1052.67" y="1121" width="15" height="27">
+   <properties>
+    <property name="area" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="3" name="mob" x="980" y="559.5" width="10" height="15.5">
+   <properties>
+    <property name="area" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="4" name="mob" x="1103" y="563.5" width="13" height="19.5">
+   <properties>
+    <property name="area" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="5" name="mob" x="1346.5" y="379.5" width="19" height="17.5">
+   <properties>
+    <property name="area" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="6" name="mob" x="1475.5" y="376" width="28" height="24.5">
+   <properties>
+    <property name="area" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="7" name="mob" x="289.333" y="118" width="18.6667" height="36">
+   <properties>
+    <property name="area" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="8" name="mob" x="305.333" y="208" width="23.3333" height="35.3333">
+   <properties>
+    <property name="area" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="9" name="mob" x="302.667" y="344.667" width="28" height="34">
+   <properties>
+    <property name="area" type="int" value="4"/>
+   </properties>
+  </object>
   <object id="13" name="health" x="963.333" y="1132.83" width="33.3333" height="25.3333"/>
   <object id="16" name="health" x="1417" y="309.667" width="33.3333" height="25.3333"/>
   <object id="20" name="Wall" x="842.848" y="1093.87" width="6.66667" height="308.611"/>
@@ -531,9 +563,27 @@
   <object id="195" name="ammo" x="463.167" y="1742.5" width="32.6667" height="20"/>
   <object id="196" name="ammo" x="974.333" y="1196" width="32.6667" height="20"/>
   <object id="197" name="ammo" x="1467" y="291.333" width="32.6667" height="20"/>
-  <object id="198" name="area" x="853.667" y="1105" width="285.667" height="286"/>
-  <object id="199" name="area" x="892.667" y="446" width="322.667" height="330"/>
-  <object id="200" name="area" x="1245.67" y="226" width="344.667" height="509"/>
-  <object id="201" name="area" x="26.6665" y="20" width="627.667" height="509"/>
+  <object id="198" name="area" x="1143.12" y="1210.38" width="22.3791" height="162.212">
+   <properties>
+    <property name="number" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="199" name="area" x="820.667" y="726" width="292.667" height="50">
+   <properties>
+    <property name="number" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="200" name="area" x="1154.67" y="74" width="277.667" height="580">
+   <properties>
+    <property name="number" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="201" name="area" x="592.667" y="7" width="141.667" height="522">
+   <properties>
+    <property name="number" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="202" name="Wall" x="872.744" y="674.157" width="34.5124" height="31.6862"/>
+  <object id="203" name="Object" x="884.702" y="591.74" width="49.5967" height="34.519"/>
  </objectgroup>
 </map>
