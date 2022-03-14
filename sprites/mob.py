@@ -18,6 +18,10 @@ class Mob(Character):
         self.dead = False
         self.area = area
         self.activated = False
+    
+    def activate(self, area):
+        if self.area == area:
+            self.moving = True   
 
     def update(self):
         # Shooting
@@ -41,30 +45,24 @@ class MobBasico(Mob):
 
     def die(self):
         self.updateImage(GR.MOB_DIE)
-        self.dead = True
-    
-    def activate(self, area):
-        if self.area == area:
-            self.activated = True        
+        self.dead = True     
 
     def update(self, player_pos, dt):
         if not self.dead:
-            if self.activated:
-                distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))
-                if distance > MOB_ATTK_DISTANCE:
-                    if not self.moving:
-                        self.numImagenPostura = 0
-                        return
-                    elif distance > MOB_ATTK_DISTANCE*4:
-                        self.moving = False
-                        self.numImagenPostura = 0
-                        return
-                self.numImagenPostura = (self.numImagenPostura + 1)%8
-                self.moving = True
-                self.rot = (player_pos - self.pos).angle_to(Vector2(1, 0))
-                if distance > MOB_ATTK_DISTANCE/2:
-                    self.acc = Vector2(MOB_SPEED, 0).rotate(-self.rot)
-                    self.acc += self.vel * -1
-                    self.vel += self.acc * (dt/1000)
-                    self.pos += self.vel * (dt/1000) + 0.5 * self.acc * (dt/1000) ** 2
+            distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))
+            if not self.moving:
+                self.numImagenPostura = 0
+                return
+            if distance > MOB_ATTK_DISTANCE*4:
+                self.moving = False
+                self.numImagenPostura = 0
+                return
+            self.numImagenPostura = (self.numImagenPostura + 1)%8
+            self.moving = True
+            self.rot = (player_pos - self.pos).angle_to(Vector2(1, 0))
+            if distance > MOB_ATTK_DISTANCE/2:
+                self.acc = Vector2(MOB_SPEED, 0).rotate(-self.rot)
+                self.acc += self.vel * -1
+                self.vel += self.acc * (dt/1000)
+                self.pos += self.vel * (dt/1000) + 0.5 * self.acc * (dt/1000) ** 2
         super().update()
