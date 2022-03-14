@@ -570,7 +570,7 @@
   <object id="133" name="health" x="579.333" y="1831.33" width="33.3333" height="25.3333"/>
   <object id="135" name="health" x="430" y="776.667" width="33.3333" height="25.3333"/>
   <object id="137" name="health" x="1652" y="1016" width="33.3333" height="25.3333"/>
-  <object id="138" name="ammo" x="1767.67" y="1824.67" width="32.6667" height="20"/>
+  <object id="138" name="ammo" x="1691.67" y="1610" width="32.6667" height="20"/>
   <object id="139" name="ammo" x="830.333" y="1734" width="32.6667" height="20"/>
   <object id="140" name="ammo" x="186.333" y="848.667" width="32.6667" height="20"/>
   <object id="141" name="ammo" x="1378.33" y="715.333" width="32.6667" height="20"/>
