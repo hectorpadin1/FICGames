@@ -26,6 +26,11 @@ class Character(pg.sprite.Sprite):
                 
         self.moving = False
         self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][0])
+        self.masks = []
+        for i in range(0,len(self.coordenadasHoja)):
+            self.masks.append([])
+            for j in range(0,numImagenes[i]):
+                self.masks[i].append(pg.mask.from_surface(self.hoja.subsurface(self.coordenadasHoja[i][j])))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.hit_rect = hit_rect
@@ -70,6 +75,7 @@ class Character(pg.sprite.Sprite):
         #print(self.coordenadasHoja)
         #print(self.numPostura, self.numImagenPostura)
         self.image = pg.transform.rotate(self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura]), self.rot)
+        self.mask = self.masks[self.numPostura][self.numImagenPostura]
         self.hit_rect.centerx = self.pos.x
         for group in self.collision_groups:
             self.__collide_with_walls(self, group, 'x')
