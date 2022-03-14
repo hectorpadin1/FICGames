@@ -9,8 +9,8 @@ from managers.resourcemanager import ResourceManager as GR
 
 class Mob(Character):
 
-    def __init__(self, mob_group, x, y, image, gun, collide_groups, row, area):
-        super().__init__(mob_group, image, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups, GR.MOB_POSITIONS, row)
+    def __init__(self, mob_group, x, y, image, gun, collide_groups, row, area, numImagenes):
+        super().__init__(mob_group, image, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups, GR.MOB_POSITIONS, row, numImagenes)
         self.acc = Vector2(0, 0)
         self.gun = gun
         self.last_shot = pg.time.get_ticks()
@@ -42,10 +42,10 @@ class MobBasico(Mob):
     
     def __init__(self, mob_group, x, y, bullets, collide_groups, area):
         gun = Pistol(bullets)
-        super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 1, area)
+        super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 2, area, [8, 4])
 
     def die(self):
-        self.updateImage(GR.MOB_DIE)
+        self.numPostura = 1
         self.dead = True     
 
     def update(self, player_pos, dt):
@@ -58,7 +58,7 @@ class MobBasico(Mob):
                 self.moving = False
                 self.numImagenPostura = 0
                 return
-            if  pg.time.get_ticks() - self.last_change > ANIM_DELAY:
+            if pg.time.get_ticks() - self.last_change > ANIM_DELAY:
                 self.numImagenPostura = (self.numImagenPostura + 1)%8
                 self.last_change = pg.time.get_ticks()
             self.moving = True
@@ -68,4 +68,7 @@ class MobBasico(Mob):
                 self.acc += self.vel * -1
                 self.vel += self.acc * (dt/1000)
                 self.pos += self.vel * (dt/1000) + 0.5 * self.acc * (dt/1000) ** 2
+        elif (self.numImagenPostura < 3) and (pg.time.get_ticks() - self.last_change > ANIM_DELAY):
+            self.last_change = pg.time.get_ticks()
+            self.numImagenPostura += 1
         super().update()

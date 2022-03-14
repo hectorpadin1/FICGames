@@ -12,7 +12,7 @@ from utils.observable import Observable
 class Player(Character, Observable):
     #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
     def __init__(self, x, y, bullets, collide_groups, observers):
-        Character.__init__(self, None, GR.PLAYER, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups, GR.HERO_POSITIONS, 4)
+        Character.__init__(self, None, GR.PLAYER, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups, GR.HERO_POSITIONS, 5, [8, 8, 8, 8, 3])
         Observable.__init__(self, observers)
         self.last_shot = 0
         pg.mouse.set_pos((x+10) * SPRITE_BOX, y * SPRITE_BOX)
@@ -32,8 +32,9 @@ class Player(Character, Observable):
 
     def update_health(self, health):
         if health <= 0:
-            self.updateImage(GR.PLAYER_DIE)
             self.health = 0
+            self.numPostura = 4
+            self.numImagenPostura = 0
         else:
             self.health = health
         self.notify("health", self.health)
@@ -44,6 +45,10 @@ class Player(Character, Observable):
         self.notify("bullets", self.guns[self.gunSelector].bullets)
 
     def __callControler(self):
+        if self.health <= 0 :
+            if (self.numImagenPostura < 2) and (pg.time.get_ticks() - self.last_change > ANIM_DELAY*4):
+                self.numImagenPostura += 1
+            return
         # Player dynamics
         self.rot_speed = 0
         self.vel = Vector2(0, 0)
@@ -72,6 +77,7 @@ class Player(Character, Observable):
             else:
                 self.numImagenPostura = 0
             self.last_change = pg.time.get_ticks()
+
         
         # Switch guns
         if self.controler.switchPistol():

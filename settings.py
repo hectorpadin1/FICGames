@@ -13,6 +13,7 @@ GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
 
 ANIM_DELAY = 50
+DELAY_GAMEOVER = 100
 
 # MUSIC    
 START_MUSIC    = 'resources/music/start_background.ogg'

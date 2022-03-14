@@ -97,6 +97,8 @@ class Partida(Escena):
             self.player.update_health(self.player.health - MOB_BULLET_DAMAGE)
             Hit(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-30)
             self.player.vel = Vector2(0, 0)
+            if self.player.health <= 0:
+                self.player_die = pg.time.get_ticks()
         # bullets hit mobs
         hits = pg.sprite.groupcollide(self.mobs, self.bullets_player, False, True, pg.sprite.collide_mask)
         for hit in hits:
@@ -138,7 +140,6 @@ class Partida(Escena):
         hits = pg.sprite.spritecollide(self.player, self.area, True)
         for hit in hits:
             areaID = hit.get_number()
-            print(areaID)
             for mob in self.mobs:
                 mob.activate(areaID)
 
@@ -159,7 +160,7 @@ class Partida(Escena):
 
         # Posición de la cámara
         self.camera.update(self.player)
-        if self.player.health <= 0:
+        if (self.player.health <= 0) and (pg.time.get_ticks() - self.player_die > DELAY_GAMEOVER*4):
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
             self.gameover()
 

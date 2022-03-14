@@ -4,7 +4,7 @@ from managers.resourcemanager import ResourceManager as GR
 
 
 class Character(pg.sprite.Sprite):
-    def __init__(self, groups, img, hit_rect, x, y, health, collide_groups, pos, rows):
+    def __init__(self, groups, img, hit_rect, x, y, health, collide_groups, pos, rows, numImagenes):
         if groups is None:
             super().__init__()
         else:
@@ -16,15 +16,14 @@ class Character(pg.sprite.Sprite):
         self.numPostura = 0
         self.numImagenPostura = 0
         cont = 0
-        numImagenes = [8, 8, 8, 8]
         self.coordenadasHoja = []
         for linea in range(0, rows):
             self.coordenadasHoja.append([])
             tmp = self.coordenadasHoja[linea]
-            for postura in range(1, numImagenes[linea]+1):
+            for _ in range(1, numImagenes[linea]+1):
                 tmp.append(pg.Rect((int(data[cont]), int(data[cont+1])), (int(data[cont+2]), int(data[cont+3]))))
                 cont += 4
-
+                
         self.moving = False
         self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][0])
         self.rect = self.image.get_rect()
@@ -68,6 +67,8 @@ class Character(pg.sprite.Sprite):
     def update(self):
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
+        #print(self.coordenadasHoja)
+        #print(self.numPostura, self.numImagenPostura)
         self.image = pg.transform.rotate(self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura]), self.rot)
         self.hit_rect.centerx = self.pos.x
         for group in self.collision_groups:
