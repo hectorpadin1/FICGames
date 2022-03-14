@@ -45,8 +45,10 @@ class MobBasico(Mob):
         super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 2, area, [8, 4])
 
     def die(self):
-        self.numPostura = 1
-        self.dead = True     
+        if not self.dead:
+            self.numPostura = 1
+            self.numImagenPostura = 0
+            self.dead = True
 
     def update(self, player_pos, dt):
         if not self.dead:

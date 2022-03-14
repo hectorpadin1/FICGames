@@ -111,10 +111,10 @@ class Partida(Escena):
                 Hit(self.blood, hit.pos, 0.5, 0.5, -hit.rot-30)
                 Blood(self.blood, hit.pos, 0.5, 0.5, -hit.rot-110)
                 if not hit.dead:
-                    self.mob_count -= 1
                     hit.die()
-                if self.mob_count == 0: 
-                    self.win()
+                    self.mob_count -= 1
+                    if self.mob_count == 0:
+                        self.won_delay = pg.time.get_ticks()
 
         # bullet hit walls
         hits = pg.sprite.groupcollide(self.bullets_mobs, self.walls, True, False)
@@ -160,9 +160,12 @@ class Partida(Escena):
 
         # Posición de la cámara
         self.camera.update(self.player)
-        if (self.player.health <= 0) and (pg.time.get_ticks() - self.player_die > DELAY_GAMEOVER*4):
+
+        if (self.player.health <= 0) and (pg.time.get_ticks() - self.player_die > DELAY_GAMEOVER):
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
             self.gameover()
+        if (self.mob_count == 0) and (pg.time.get_ticks() - self.won_delay > DELAY_GAMEOVER*4):
+            self.win()
 
         #REVISAR
         self.dialog.update(dt)
