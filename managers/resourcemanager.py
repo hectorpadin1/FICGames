@@ -61,6 +61,7 @@ class ResourceManager:
     AMETRALLADORA = 'sound_effects/ametralladora.mp3'
     PISTOLA       = 'sound_effects/pistola.mp3'
     ITEM          = 'sound_effects/item.mp3'
+    NO_AMMO       = 'sound_effects/no_ammo.mp3'
 
     # MAPS
     LEVEL = ['maps/level0.tmx','maps/level1.tmx','maps/level2.tmx','maps/level3.tmx','maps/level4.tmx']

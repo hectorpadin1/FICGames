@@ -14,9 +14,9 @@ class Win(Menu):
 
         Menu.__init__(self, director, [button], False, logo=GR.VICTORY, logoy=60)
 
-    # meter musica win
+    def play_music(self):
+        SC.play_victory()
 
-    
     def go_back(self):
         SC.play_selection()
         self.director.exitEscena()

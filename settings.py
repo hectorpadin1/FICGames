@@ -11,7 +11,7 @@ FPS = 120
 SPRITE_BOX = 64
 GRIDWIDTH = WIDTH / SPRITE_BOX
 GRIDHEIGHT = HEIGHT / SPRITE_BOX
-
+DIALOG_SPEED = 30
 ANIM_DELAY = 50
 DELAY_GAMEOVER = 400
 
@@ -19,6 +19,7 @@ DELAY_GAMEOVER = 400
 START_MUSIC    = 'resources/music/start_background.ogg'
 MAIN_MUSIC     = 'resources/music/main_background.ogg'
 GAMEOVER_MUSIC = 'resources/music/gameover.ogg'
+VICTORY_MUSIC  = 'resources/music/victory.ogg'
 
 # Player settings
 PLAYER_HEALTH = 100

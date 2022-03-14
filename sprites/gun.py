@@ -31,13 +31,17 @@ class AbstractGun():
         self.reload=False
 
     def shoot(self, pos, rot):
+        now = pg.time.get_ticks()
         if not self.reload and self.current_mag != 0:
-            now = pg.time.get_ticks()
             if now - self.last_shot > self.rate:
                 self.last_shot = now
                 self.current_mag -= 1
                 Bullet(self.bullet_group, pos, rot, self.bullet_img, self.speed, self.lifetime)
                 self.soundFunction()
+        elif self.current_mag == 0:
+            if now - self.last_shot > 1000:
+                self.last_shot = now
+                SC.play_no_ammo()
     
     def update(self):
         if self.reload:
