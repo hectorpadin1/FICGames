@@ -1,6 +1,4 @@
-Anacleto(NIVEL 0):
-
-¡Ahh!... Buah dios, qué pesadilla, soñé que me robaban el código
+Anacleto | ¡Ahh!... Buah dios, qué pesadilla, soñé que me robaban el código
 
 ...Estoy muy agobiado por el proyecto, estamos apunto de resolver problemas
  NP-completos en tiempo polinómico, espero terminarlo pronto, estoy hecho polvo...
