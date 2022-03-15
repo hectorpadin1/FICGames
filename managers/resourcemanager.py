@@ -99,9 +99,10 @@ class ResourceManager:
         else:
             fullname = os.path.join(self.RESOURCE_PATH, name)
             pfile = open(fullname,'r')
-            datos = pfile.read()
+            raw_coord = pfile.read()
             pfile.close()
-            self.coord_resources[name] = datos.split()
+            datos = raw_coord.split()
+            self.coord_resources[name] = datos
             return datos
 
     @classmethod
