@@ -15,7 +15,6 @@ class Character(pg.sprite.Sprite):
         # ESTE PROCESAMIENTO PODRÍAS PONERLO EN EL GESTOR DE RECUROSOS NO?
         #
         data = GR.load_coord(pos)
-        data = data.split()
         self.numPostura = 0
         self.numImagenPostura = 0
         cont = 0

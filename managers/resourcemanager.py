@@ -101,7 +101,7 @@ class ResourceManager:
             pfile = open(fullname,'r')
             datos = pfile.read()
             pfile.close()
-            self.coord_resources[name] = datos
+            self.coord_resources[name] = datos.split()
             return datos
 
     @classmethod
