@@ -45,6 +45,9 @@ class AbstractGun():
     
     def update(self):
         if self.reload:
+            if self.MAG_SIZE == self.current_mag:
+                self.reload = False
+                return
             now = pg.time.get_ticks()
             if now - self.reload_moment > self.reload_time:
                 if self.bullets >= self.MAG_SIZE:
