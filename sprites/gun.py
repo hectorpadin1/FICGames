@@ -10,7 +10,7 @@ class AbstractGun():
     def __init__(self, bullet_group, mag_size, bullet_img, reload_time, rate, damage, speed, lifetime, soundFunction):
         self.bullet_group = bullet_group
         self.MAG_SIZE = mag_size
-        self.current_mag = 0
+        self.current_mag = mag_size
         self.bullets = 0
         self.reload_time = reload_time
         self.bullet_img = bullet_img

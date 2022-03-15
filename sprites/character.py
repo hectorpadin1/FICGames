@@ -11,6 +11,9 @@ class Character(pg.sprite.Sprite):
             super().__init__(groups)
 
         self.hoja = GR.load_image(img, colorkey=-1)
+        #
+        # ESTE PROCESAMIENTO PODRÍAS PONERLO EN EL GESTOR DE RECUROSOS NO?
+        #
         data = GR.load_coord(pos)
         data = data.split()
         self.numPostura = 0

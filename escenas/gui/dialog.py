@@ -3,12 +3,9 @@ import pygame as pg
 from settings import *
 import sys
 
-
 class Dialog():
 
-    def __init__(self,dialog_file):
-        self.dialog = [("Paco","Me como mi cacota"), ("Juan","Si asi es")]
-        self.font = GR.load_font(GR.MAIN_FONT,GUI_FONT_SIZE)
+    def __init__(self,level):
 
         #Load BG
         self.image = GR.load_image(GR.DIALOG_BG)
@@ -27,20 +24,21 @@ class Dialog():
         self.palabra = 0
         self.lines=[]
         self.last_time = pg.time.get_ticks()
-        self.done = False
+        self.dialog_list = GR.load_dialog(GR.DIALOGS[level])
+        self.dialog = 0
+        self.font = GR.load_font(GR.MAIN_FONT,GUI_FONT_SIZE)
 
-
-        #Pulsa Cualquier tecla
-        """
-        font1 = GR.load_font(GR.MAIN_FONT,14)
-        self.indicacion_surface = font1.render("(Presiona cualquier tecla)", True, (240,240,240))
+        #IndicadorPulsa Espacio
+        font1 = GR.load_font(GR.MAIN_FONT,12)
+        self.indicacion_surface = font1.render("(Presiona espacio)", True, (240,240,240))
         self.indicacion_rect = self.indicacion_surface.get_rect()
-        xbox,ybox = self.rect.topright
-        self.indicacion_rect.topright =(xbox,ybox)
-        """
+        x,y = self.rect.bottomright
+        self.indicacion_rect.bottomright =(x-7,y-22)
 
-        self.__load_name()
-        self.__load_frase()
+        #Inicializamos Texto Diálogo
+        if not self.is_done():
+            self.__load_name()
+            self.__load_frase()
 
 
     ################################
@@ -48,26 +46,29 @@ class Dialog():
     ################################
 
     def next_dialog(self):
-        #
-        # POR IMPLEMENTAR
-        #
-        pass
+        self.dialog = self.dialog + 1
+        self.start_palabra = 0
+        self.palabra = 0
+        self.lines=[]
 
     def is_done(self):
-        return self.done
+        return len(self.dialog_list) - 1 < self.dialog
 
     def __get_actual_name(self):
-        return "Paco"
+        x,_ = self.dialog_list[self.dialog]
+        return x
 
     def __get_actual_frase(self):
-        return "Me encanta comer mojones es mi gran pasión jiji xd xd xd."
+        _,x = self.dialog_list[self.dialog]
+        return x
 
     def update(self,_dt):
-        now = pg.time.get_ticks()
-        if now - self.last_time > DIALOG_SPEED:
-            self.__load_name()
-            self.__load_frase()
-            self.last_time = now
+        if not self.is_done():
+            now = pg.time.get_ticks()
+            if now - self.last_time > DIALOG_SPEED:
+                self.__load_name()
+                self.__load_frase()
+                self.last_time = now
 
     ##########################
     #  Renderizacion TEXTO   #
@@ -93,14 +94,16 @@ class Dialog():
                 if self.palabra == self.start_palabra:
                     print("la palabra es demasiado grande, no cabe en una línea")
                     sys.exit()
+
                 render_txt = ' '.join(splited[self.start_palabra:self.palabra-1])
                 rendered = self.font.render(render_txt, True, (240,240,240)) 
                 
                 #Desacemos cambios en línea actual y creamos una nueva vacía     
                 self.lines[-1] = rendered
+                self.palabra = self.palabra - 1 # decrementamos puesto que en esta iteración no se llegó a printear
+                self.start_palabra = self.palabra 
                 self.lines.append(self.font.render("", True, (154,122,37)))
 
-                self.start_palabra = self.palabra
                 print("Sobrepasa")
             else:
                 if self.lines == []:
@@ -116,10 +119,11 @@ class Dialog():
                 self.palabra = self.palabra + 1
     
     def draw(self, display):
-        display.blit(self.image, self.rect)
-        display.blit(self.name_surface, self.name_rect)
-        margin = 0
-        for line in self.lines:
-            display.blit(line, pg.Rect(self.txt_pos_x,self.txt_pos_y+margin,350,120))
-            margin = margin + 25
-        #display.blit(self.indicacion_surface, self.indicacion_rect)
+        if not self.is_done():
+            display.blit(self.image, self.rect)
+            display.blit(self.name_surface, self.name_rect)
+            margin = 0
+            for line in self.lines:
+                display.blit(line, pg.Rect(self.txt_pos_x,self.txt_pos_y+margin,350,120))
+                margin = margin + 25
+            display.blit(self.indicacion_surface, self.indicacion_rect)

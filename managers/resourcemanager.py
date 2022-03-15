@@ -12,6 +12,7 @@ class ResourceManager:
     font_resources  = {}
     sound_resources = {}
     coord_resources = {}
+    dialog_resources = {}
 
     # SPRITE IMAGES 
     PLAYER_RIFFLE       = 'images-sprites/Hero_Rifle.png'
@@ -64,7 +65,10 @@ class ResourceManager:
     NO_AMMO       = 'sound_effects/no_ammo.mp3'
 
     # MAPS
-    LEVEL = ['maps/level0.tmx','maps/level1.tmx','maps/level2.tmx','maps/level3.tmx','maps/level4.tmx']
+    LEVEL = ['maps/level0.tmx','maps/level1.tmx','maps/level2.tmx','maps/level3.tmx','maps/level4.tmx']    
+    
+    # DIALOGS
+    DIALOGS = ['dialogs/level0.txt','dialogs/level1.txt','dialogs/level2.txt','dialogs/level3.txt','dialogs/level4.txt']
 
     # PATHS
     RESOURCE_PATH = "resources"
@@ -138,3 +142,16 @@ class ResourceManager:
 
             self.sound_resources[nombre] = sound
             return sound
+
+    @classmethod
+    def load_dialog(self, name):
+        if name in self.dialog_resources:
+            return self.dialog_resources[name]
+        else:
+            fullname = os.path.join(self.RESOURCE_PATH, name)
+            dialog = open(fullname,'r')
+            raw = dialog.read()
+            dialog.close()
+            data = [ (line.split("|")[0],line.split("|")[1]) for line in raw.splitlines()]
+            self.dialog_resources[name] = data
+            return data

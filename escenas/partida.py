@@ -28,15 +28,22 @@ class Partida(Escena):
     def __init__(self,director,lvl):
         Escena.__init__(self, director)
         self.lvl = lvl
-        self.init_game()
 
-    def init_game(self):
-        #DIALOG TEMPORAL
-        #DIALOG TEMPORAL
-        #DIALOG TEMPORAL
-        #DIALOG TEMPORAL
-        #DIALOG TEMPORAL
-        self.dialog = Dialog(1)
+        # Setting level differences 
+        # 
+        # lo hacemos asi xq solo hay 2 niveles con casos particulares (primero y último)
+        # 
+        self.dialog_level = False
+        if lvl == 0:
+            self.dialog_level = True
+        if lvl == 4:
+            print("PENDIENTE DE HACER")
+
+
+
+
+
+        self.dialog = Dialog(self.lvl)
 
 
 
@@ -163,10 +170,13 @@ class Partida(Escena):
         # Posición de la cámara
         self.camera.update(self.player)
 
+        # Level Termination
         if (self.player.health <= 0) and (pg.time.get_ticks() - self.player_die > DELAY_GAMEOVER):
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
             self.gameover()
         if self.won and (self.mob_count == 0) and (pg.time.get_ticks() - self.won_delay > DELAY_GAMEOVER*4):
+            self.win()
+        if self.dialog_level and self.dialog.is_done():
             self.win()
 
         #REVISAR
@@ -220,7 +230,8 @@ class Partida(Escena):
                 if event.key == pg.K_ESCAPE or event.key == pg.K_p: #Menu Pausa
                     pause = Pause(self.director, self.lvl)
                     self.director.pushEscena(pause)
-
+                elif event.key == pg.K_SPACE:
+                    self.dialog.next_dialog()
 
     def play_music(self):
         SC.play_main()
