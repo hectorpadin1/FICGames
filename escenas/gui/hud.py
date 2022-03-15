@@ -7,7 +7,7 @@ from utils.observer import Observer
 class Hud(Observer):
     #Inicializamos el botón mostrándolo en pantalla
     def __init__(self):
-        self.gun_number = 0
+        self.gun_number = -1
         self.health= PLAYER_HEALTH
         self.ammo = 0
         self.totalammo = 0
@@ -46,6 +46,8 @@ class Hud(Observer):
             self.gun = GR.load_image(GR.SMGHUD)
         elif self.gun_number == 2:
             self.gun = GR.load_image(GR.MGHUD)
+        elif self.gun_number == -1:
+            self.gun = pg.Surface((0,0))
 
         self.gun_rect = self.gun.get_rect() 
         self.gun_rect.center = (80,HEIGHT-60)

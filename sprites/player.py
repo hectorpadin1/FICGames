@@ -26,9 +26,10 @@ class Player(Character, Observable):
         self.last_change = pg.time.get_ticks()
         #Notificamos a observadores inicialización
         self.notify("health", self.health)
-        self.notify("gun", self.gunSelector)
-        #self.notify("ammo", self.guns[self.gunSelector].current_mag)
-        #self.notify("bullets", self.guns[self.gunSelector].bullets)
+        if self.guns != []:
+            self.notify("gun", self.gunSelector)
+            self.notify("ammo", self.guns[self.gunSelector].current_mag)
+            self.notify("bullets", self.guns[self.gunSelector].bullets)
 
 
     def update_health(self, health):
