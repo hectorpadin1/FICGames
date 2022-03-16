@@ -1,5 +1,5 @@
- | Usa 'W-A-S-D' para moverte: 'W' arriba, 'A' izquierda, 'S' abajo, 'D' derecha
- | Presiona espacio para empezar la historia.
+---------Instrucciones--------- | Usa 'W-A-S-D' para moverte: 'W' arriba, 'A' izquierda, 'S' abajo, 'D' derecha
+---------Instrucciones--------- | Presiona espacio para empezar la historia.
 Anacleto | ¡OH NO!... ¡¡¡MI PRÁCTICA!!!
 Anacleto | No entiendo qué ha podido pasar ...
 Anacleto | El único que tenía mi código era mi compañero Jiang-Yang

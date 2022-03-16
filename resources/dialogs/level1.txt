@@ -3,7 +3,7 @@ Anacleto | militar, por aquí debe de estar mi código...
 Anacleto | ...
  | (Se empiezan a escuchar sirenas de alarma)
 Anacleto | Vaya, parece que voy a tener problemas...
- | Coge esa caja de munición y carga tu arma.
- | Recarga con la 'R' y utiliza el click izquierdo del ratón para disparar.
- | Hay más cajas de munición y salud por el mapa, pero ten cuidado
- | están bien vigiladas.
+---------Instrucciones---------  | Coge esa caja de munición y carga tu arma.
+---------Instrucciones---------  | Recarga con la 'R' y utiliza el click izquierdo del ratón para disparar.
+---------Instrucciones---------  | Hay más cajas de munición y salud por el mapa, pero ten cuidado
+---------Instrucciones---------  | están bien vigiladas.
