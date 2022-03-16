@@ -1,5 +1,9 @@
-Anacleto | Es increíble que tenga que venir hasta China para recuperar mi código, no se como
-Anacleto | ha podido pasar esto... ¡JIANG! habrá sido él, es el único al que se lo pasé
-Anacleto | Debo recuperarlo a toda costa, antes de que los chinos consigan descifrarlo.
-Anacleto | Click izquierdo para disparar, apunta y recarga a la 'R'.
-Anacleto | Coge esa caja de munición, acaba con ellos y vigila tu barra de salud
+Anacleto | He conseguido infiltrarme en los alrededores de una base 
+Anacleto | militar, por aquí debe de estar mi código...
+Anacleto | ...
+ | (Se empiezan a escuchar sirenas de alarma)
+Anacleto | Vaya, parece que voy a tener problemas...
+ | Coge esa caja de munición y carga tu arma.
+ | Recarga con la 'R' y utiliza el click izquierdo del ratón para disparar.
+ | Hay más cajas de munición y salud por el mapa, pero ten cuidado
+ | están bien vigiladas.
