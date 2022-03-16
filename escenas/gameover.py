@@ -20,7 +20,7 @@ class GameOver(Menu):
 
     def go_retry(self):
         SC.play_selection()
-        partida = escenas.partida.Partida(self.director,self.lvl)
+        partida = escenas.partida.Partida(self.director,self.lvl,dialog=False)
         self.director.changeEscena(partida)
     
     def go_exit(self):

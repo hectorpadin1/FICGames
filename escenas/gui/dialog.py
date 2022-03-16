@@ -5,7 +5,7 @@ import sys
 
 class Dialog():
 
-    def __init__(self,level):
+    def __init__(self,level,enable=True):
 
         #Load BG
         self.image = GR.load_image(GR.DIALOG_BG)
@@ -27,6 +27,7 @@ class Dialog():
         self.dialog_list = GR.load_dialog(GR.DIALOGS[level])
         self.dialog = 0
         self.font = GR.load_font(GR.MAIN_FONT,GUI_FONT_SIZE)
+        self.enable = enable
 
         #IndicadorPulsa Espacio
         font1 = GR.load_font(GR.MAIN_FONT,12)
@@ -52,8 +53,8 @@ class Dialog():
         self.lines=[]
 
     def is_done(self):
-        return len(self.dialog_list) - 1 < self.dialog
-
+        return (len(self.dialog_list) - 1 < self.dialog) or not self.enable
+ 
     def __get_actual_name(self):
         x,_ = self.dialog_list[self.dialog]
         return x
@@ -70,6 +71,8 @@ class Dialog():
                 self.__load_frase()
                 self.last_time = now
 
+    def set_enable(self):
+        self.enable = True
     ##########################
     #  Renderizacion TEXTO   #
     ##########################
@@ -83,7 +86,6 @@ class Dialog():
         if self.palabra != -1:
             splited = self.__get_actual_frase().split()
             render_txt = ' '.join(splited[self.start_palabra:self.palabra])
-            print(render_txt)
 
             #Creamos Nueva línea
             rendered = self.font.render(render_txt, True, (240,240,240))        
@@ -104,7 +106,6 @@ class Dialog():
                 self.start_palabra = self.palabra 
                 self.lines.append(self.font.render("", True, (154,122,37)))
 
-                print("Sobrepasa")
             else:
                 if self.lines == []:
                     self.lines.append(rendered)

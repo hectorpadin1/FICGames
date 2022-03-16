@@ -25,7 +25,7 @@ from escenas.gui.dialog import Dialog
 
 class Partida(Escena):
     
-    def __init__(self,director,lvl):
+    def __init__(self,director,lvl,dialog=True):
         Escena.__init__(self, director)
         self.lvl = lvl
 
@@ -34,16 +34,17 @@ class Partida(Escena):
         # lo hacemos asi xq solo hay 2 niveles con casos particulares (primero y último)
         # 
         self.dialog_level = False
+        self.dialog_last = False
         if lvl == 0:
             self.dialog_level = True
         if lvl == 4:
+            self.dialog_last = True
+
             print("PENDIENTE DE HACER")
 
 
-
-
-
-        self.dialog = Dialog(self.lvl)
+        
+        self.dialog = Dialog(self.lvl, enable=(dialog and not self.dialog_last))
 
 
 
@@ -174,7 +175,7 @@ class Partida(Escena):
         if (self.player.health <= 0) and (pg.time.get_ticks() - self.player_die > DELAY_GAMEOVER):
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
             self.gameover()
-        if self.won and (self.mob_count == 0) and (pg.time.get_ticks() - self.won_delay > DELAY_GAMEOVER*4):
+        if not self.dialog_level and self.won and (self.mob_count == 0) and (pg.time.get_ticks() - self.won_delay > DELAY_GAMEOVER*4):
             self.win()
         if self.dialog_level and self.dialog.is_done():
             self.win()
@@ -187,10 +188,15 @@ class Partida(Escena):
         self.director.changeEscena(gameover)
 
     def win(self):
-        win = Win(self.director)
-        self.director.changeEscena(win)
-        if UC.get("last_level")==self.lvl:
-           UC.update("last_level",self.lvl+1)
+        if self.dialog_last:
+            self.dialog_last = False
+            self.dialog_level = True
+            self.dialog.set_enable()
+        else:
+            win = Win(self.director)
+            self.director.changeEscena(win)
+            if UC.get("last_level")==self.lvl:
+                UC.update("last_level",self.lvl+1)
 
     def draw(self, display):
         
