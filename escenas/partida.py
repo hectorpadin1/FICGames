@@ -3,7 +3,7 @@ from pygame.math import Vector2
 from settings import *
 from sprites.player import Player
 from sprites.wall import Wall, Obstacle
-from sprites.mob import MobBasico
+from sprites.mob import MobBasico, MobRiffle
 from sprites.blood import Blood
 from sprites.explosion import Explosion
 from sprites.hit import Hit
@@ -20,6 +20,7 @@ from escenas.pause import Pause
 from escenas.win import Win
 from escenas.gui.hud import Hud
 from escenas.gui.dialog import Dialog
+import random
 
         
 
@@ -90,7 +91,10 @@ class Partida(Escena):
             if tile_object.name == 'health':
                 HP(self.health, tile_object.x, tile_object.y)
             if tile_object.name == 'mob':
-                MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle], tile_object.area)
+                if random.randrange(0,2)==1:
+                    MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle], tile_object.area)
+                else:
+                    MobRiffle(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle], tile_object.area)
                 self.mob_count += 1
             if tile_object.name == 'area':
                 Area(self.area, tile_object.x, tile_object.y, tile_object.width, tile_object.height, tile_object.number)

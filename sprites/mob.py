@@ -3,7 +3,7 @@ from sprites.character import Character
 from settings import *
 from math import pow, sqrt
 from pygame.math import Vector2
-from sprites.gun import Pistol
+from sprites.gun import Pistol, Rifle
 from managers.resourcemanager import ResourceManager as GR
 
 
@@ -50,6 +50,34 @@ class MobBasico(Mob):
     
     def __init__(self, mob_group, x, y, bullets, collide_groups, area):
         gun = Pistol(bullets)
+        super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 2, area, [8, 4])
+
+    def update(self, player_pos, dt):
+        if not self.dead:
+            distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))
+            if not self.moving:
+                self.numImagenPostura = 0
+                return
+            if pg.time.get_ticks() - self.last_change > ANIM_DELAY:
+                self.numImagenPostura = (self.numImagenPostura + 1)%8
+                self.last_change = pg.time.get_ticks()
+            self.moving = True
+            self.rot = (player_pos - self.pos).angle_to(Vector2(1, 0))
+            if distance > MOB_ATTK_DISTANCE/2:
+                self.acc = Vector2(MOB_SPEED, 0).rotate(-self.rot)
+                self.acc += self.vel * -1
+                self.vel += self.acc * (dt/1000)
+                self.pos += self.vel * (dt/1000) + 0.5 * self.acc * (dt/1000) ** 2
+        elif (self.numImagenPostura < 3) and (pg.time.get_ticks() - self.last_change > ANIM_DELAY):
+            self.last_change = pg.time.get_ticks()
+            self.numImagenPostura += 1
+        super().update()
+
+
+class MobRiffle(Mob):
+    
+    def __init__(self, mob_group, x, y, bullets, collide_groups, area):
+        gun = Rifle(bullets)
         super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 2, area, [8, 4])
 
     def update(self, player_pos, dt):
