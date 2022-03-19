@@ -12,24 +12,24 @@ class StartScreen(Menu):
 
     def __init__(self,director):       
         #Butones 
-        play_btn  = ClasicButton("Jugar",self.go_play)
+        play_btn  = ClasicButton("Jugar",self.__go_play)
         margin    = play_btn.get_size()[1]/2 #apañar esto
-        stngs_btn = ClasicButton("Ajustes",self.go_settings,dy=margin*3)
-        exit_btn  = ClasicButton("Salir",self.go_exit,dy=margin*6)
+        stngs_btn = ClasicButton("Ajustes",self.__go_settings,dy=margin*3)
+        exit_btn  = ClasicButton("Salir",self.__go_exit,dy=margin*6)
 
         Menu.__init__(self, director, [play_btn, stngs_btn, exit_btn], True, logo=GR.LOGO_IMG)
     
-    def go_play(self):
+    def __go_play(self):
         SC.play_selection()
         lvl_selector = LevelSelector(self.director)
         self.director.pushEscena(lvl_selector, updateMusic = False)
         
-    def go_settings(self):
+    def __go_settings(self):
         SC.play_selection()
         stg = Settings(self.director)
         self.director.pushEscena(stg, updateMusic = False)
 
-    def go_exit(self):
+    def __go_exit(self):
         pg.quit()
         sys.exit()      
     
