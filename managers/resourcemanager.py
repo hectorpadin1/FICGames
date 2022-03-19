@@ -15,18 +15,11 @@ class ResourceManager:
     dialog_resources = {}
 
     # SPRITE IMAGES 
-    PLAYER_RIFFLE       = 'images-sprites/Hero_Rifle.png'
-    PLAYER_PISTOL       = 'images-sprites/Hero_Pistol.png'
-    PLAYER_MACHINEGUN   = 'images-sprites/Hero_MachineGun.png'
-    PLAYER_RELOAD       = 'images-sprites/Hero_Reload.png'
-    PLAYER_DIE          = 'images-sprites/Hero_Die.png'
     PLAYER              = 'images-sprites/hero_sprites.png'
     BULLET_IMG          = 'images-sprites/bullet.png'
-    BULLET_LEAF         = 'images-sprites/bullet_anim.png'
     EXPLOSION_IMAGE     = 'images-sprites/explode_bullet.png'
-    MOB_IMAGE           = 'images-sprites/soldier.png'
-    MOB_DIE             = 'images-sprites/soldier_die.png'
     MOB                 = 'images-sprites/soldiers.png'
+    GUNNER              = 'images-sprites/gunners.png'
     BLOOD_IMAGE         = 'images-sprites/blood.png'
     HIT_IMAGE           = 'images-sprites/blood-splatter.png'
     AMMO_IMAGE          = 'images-sprites/ammo.png'
@@ -36,6 +29,7 @@ class ResourceManager:
     BULLET_POSITIONS = 'positions/coordBullets.txt'
     HERO_POSITIONS   = 'positions/coordHero.txt'
     MOB_POSITIONS    = 'positions/coordMobs.txt'
+    GUNNER_POSITIONS = 'positions/coordGunner.txt'
 
     # GUI IMAGES
     LOGO_IMG     = 'images-gui/logo.png'
