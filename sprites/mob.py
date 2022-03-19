@@ -9,8 +9,8 @@ from managers.resourcemanager import ResourceManager as GR
 
 class Mob(Character):
 
-    def __init__(self, mob_group, x, y, image, gun, collide_groups, row, area, numImagenes):
-        super().__init__(mob_group, image, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups, GR.MOB_POSITIONS, row, numImagenes)
+    def __init__(self, mob_group, x, y, image, gun, collide_groups, row, area, numImagenes, positions):
+        super().__init__(mob_group, image, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups, positions, row, numImagenes)
         self.acc = Vector2(0, 0)
         self.gun = gun
         self.gun.bullets = self.gun.MAG_SIZE*10
@@ -50,7 +50,7 @@ class MobBasico(Mob):
     
     def __init__(self, mob_group, x, y, bullets, collide_groups, area):
         gun = Pistol(bullets)
-        super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 2, area, [8, 4])
+        super().__init__(mob_group, x, y, GR.GUNNER, gun, collide_groups, 2, area, [8, 4], GR.GUNNER_POSITIONS)
 
     def update(self, player_pos, dt):
         if not self.dead:
@@ -78,7 +78,7 @@ class MobRiffle(Mob):
     
     def __init__(self, mob_group, x, y, bullets, collide_groups, area):
         gun = Rifle(bullets)
-        super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 2, area, [8, 4])
+        super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 2, area, [8, 4], GR.MOB_POSITIONS)
 
     def update(self, player_pos, dt):
         if not self.dead:
