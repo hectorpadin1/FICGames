@@ -91,9 +91,9 @@ class Partida(Escena):
             if tile_object.name == 'health':
                 HP(self.health, tile_object.x, tile_object.y)
             if tile_object.name == 'mob':
-                if random.randrange(0,2)==1:
+                if tile_object.gun=='pistol':
                     MobBasico(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle], tile_object.area)
-                else:
+                elif tile_object.gun=='rifle':
                     MobRiffle(self.mobs, tile_object.x, tile_object.y, self.bullets_mobs, [self.walls, self.obstacle], tile_object.area)
                 self.mob_count += 1
             if tile_object.name == 'area':
