@@ -12,7 +12,7 @@ class Menu(Escena):
         self.btn_group = pg.sprite.Group(*btns)
         self.back = back
         self.logo = logo
-        self.logoy=logoy
+        self.logoy= logoy
 
     def events(self, events):
         self.click = False
@@ -23,7 +23,7 @@ class Menu(Escena):
                 self.click = True
 
     #Dibuja Caja Centrada y Devuelve su tamaño 
-    def draw_box(self, display):
+    def __draw_box(self, display):
         bg = GR.load_image(GR.BOX_BG) 
         rect = bg.get_rect()
         rect.center = (WIDTH/2,HEIGHT/2)
@@ -31,13 +31,13 @@ class Menu(Escena):
         return rect.size
     
     #Dibuja Logo Centrado con la posibilidad de añadirle un desplazamiento
-    def draw_logo(self, display, dx=0, dy=0):
+    def __draw_logo(self, display, dx=0, dy=0):
         logo = GR.load_image(self.logo)
         rect = logo.get_rect()
         rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
         display.blit(logo, rect) 
 
-    def draw_back(self, display, dx=0, dy=0):
+    def __draw_back(self, display, dx=0, dy=0):
         logo = GR.load_image(GR.START_IMG)
         rect = logo.get_rect()
         rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
@@ -49,12 +49,12 @@ class Menu(Escena):
 
     def draw(self,display):
         if self.back:
-            self.draw_back(display, dx = 30, dy=50)
+            self.__draw_back(display, dx = 30, dy=50)
 
-        _,box_y = self.draw_box(display)
+        _,box_y = self.__draw_box(display)
 
         if self.logo is not None:
-            self.draw_logo(display,dy=-((box_y/4))+self.logoy)
+            self.__draw_logo(display,dy=-((box_y/4))+self.logoy)
 
         for btn in self.btn_group:
             btn.draw(display)

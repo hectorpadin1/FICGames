@@ -347,7 +347,7 @@
   <object id="38" name="Wall" x="1352.55" y="1482.97" width="40.9097" height="37.0667"/>
   <object id="39" name="Wall" x="1292.55" y="1347.47" width="40.9097" height="37.0667"/>
   <object id="40" name="Wall" x="1161.55" y="1285.47" width="40.9097" height="37.0667"/>
-  <object id="41" name="Wall" x="635.212" y="516.133" width="133.576" height="37.0667"/>
+  <object id="41" name="Wall" x="635.212" y="517.747" width="141.076" height="35.4531"/>
   <object id="42" name="Wall" x="488.545" y="539.467" width="137.576" height="94.0667"/>
   <object id="43" name="Wall" x="387.212" y="519.467" width="63.243" height="27.7334"/>
   <object id="44" name="Wall" x="135.878" y="514.133" width="49.9097" height="62.0667"/>
@@ -374,11 +374,11 @@
   <object id="65" name="Wall" x="1748.23" y="1395.02" width="39.5978" height="7.89087"/>
   <object id="66" name="Wall" x="1860.19" y="1394.9" width="47.9326" height="8.1463"/>
   <object id="67" name="Wall" x="778.454" y="819.554" width="883.671" height="7.01587"/>
-  <object id="68" name="Wall" x="1348.13" y="517.398" width="314.042" height="7.0213"/>
+  <object id="68" name="Wall" x="1348.13" y="517.398" width="313.998" height="7.0213"/>
   <object id="69" name="Wall" x="777.56" y="517.531" width="433.984" height="6.8963"/>
   <object id="70" name="Wall" x="777.914" y="527.739" width="8.171" height="290.226"/>
   <object id="71" name="Wall" x="1014.14" y="527.448" width="7.671" height="235.063"/>
-  <object id="72" name="Wall" x="1653.83" y="525.266" width="8.33948" height="292.961"/>
+  <object id="72" name="Wall" x="1653.83" y="524.68" width="8.33948" height="293.547"/>
   <object id="73" name="Wall" x="1418.39" y="527.599" width="7.20506" height="173.863"/>
   <object id="75" name="Wall" x="1418.27" y="770.682" width="7.65961" height="46.8739"/>
   <object id="76" name="Wall" x="1574.67" y="1797.33" width="88" height="110.667"/>
@@ -429,41 +429,49 @@
   <object id="124" name="mob" x="568" y="1206.66" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="4"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="125" name="mob" x="933.667" y="1171.33" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="3"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="126" name="mob" x="1029.34" y="1475" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="2"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="127" name="mob" x="1615.33" y="1066.67" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="5"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="128" name="mob" x="1813.33" y="1184" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="7"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="129" name="mob" x="1591.33" y="1668" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="6"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="130" name="mob" x="868" y="661.333" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="9"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="131" name="mob" x="1558.33" y="575" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="10"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="132" name="Object" x="1809.31" y="982.444" width="91.1978" height="31.8394"/>
@@ -521,6 +529,7 @@
   <object id="178" name="mob" x="543.667" y="1439.33" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="1"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
  </objectgroup>

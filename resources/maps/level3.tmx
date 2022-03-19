@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="214">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="215">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="961" columns="31">
   <image source="../images-sprites/tileset.png" width="2000" height="2000"/>
  </tileset>
@@ -379,27 +379,25 @@
  </layer>
  <objectgroup id="12" name="Obstacles">
   <object id="1" name="player" x="833.333" y="1821.67" width="22.6667" height="21.6667"/>
-  <object id="2" name="Wall" x="458.667" y="773.833" width="6.63636" height="757.123"/>
+  <object id="2" name="Wall" x="458.667" y="773.833" width="6.63636" height="756.601"/>
   <object id="3" name="Wall" x="886.765" y="773.897" width="6.63636" height="326.206"/>
-  <object id="4" name="Wall" x="1034.68" y="1285.7" width="6.63636" height="117.22"/>
-  <object id="5" name="Wall" x="1334.35" y="1286.5" width="6.63636" height="242.934"/>
+  <object id="4" name="Wall" x="1034.68" y="1285.59" width="6.63636" height="117.329"/>
+  <object id="5" name="Wall" x="1334.35" y="1285.63" width="6.63636" height="243.809"/>
   <object id="6" name="Wall" x="1034.68" y="1478.06" width="6.63636" height="52.6227"/>
-  <object id="7" name="Wall" x="694.682" y="1353.06" width="6.63636" height="177.328"/>
-  <object id="8" name="Wall" x="694.682" y="1221.81" width="6.63636" height="51.623"/>
+  <object id="7" name="Wall" x="694.682" y="1353.06" width="6.63636" height="168.953"/>
+  <object id="8" name="Wall" x="694.682" y="1221.56" width="6.63636" height="51.873"/>
   <object id="9" name="Wall" x="1334.68" y="1094.06" width="6.63636" height="54.498"/>
   <object id="10" name="Wall" x="644.057" y="1011.54" width="239.511" height="6.98664"/>
   <object id="11" name="Wall" x="467.199" y="1011.55" width="104.602" height="6.98664"/>
-  <object id="12" name="Wall" x="467.911" y="1221.51" width="224.511" height="6.98664"/>
-  <object id="14" name="Wall" x="467.744" y="1523.51" width="225.602" height="6.98664"/>
-  <object id="15" name="Wall" x="703.532" y="1523.51" width="60.2687" height="6.98664"/>
+  <object id="12" name="Wall" x="467.911" y="1221.51" width="226.386" height="6.98664"/>
+  <object id="14" name="Wall" x="465.787" y="1523.51" width="299.559" height="6.98664"/>
   <object id="16" name="Wall" x="901.275" y="1523.51" width="130.36" height="6.98664"/>
   <object id="17" name="Wall" x="1042.57" y="1523.47" width="288.61" height="6.98664"/>
   <object id="18" name="Wall" x="1042.43" y="1285.55" width="290.74" height="6.98664"/>
   <object id="19" name="Wall" x="894.88" y="1093.26" width="437.99" height="6.98664"/>
   <object id="20" name="Wall" x="394.588" y="197.423" width="434.99" height="6.98664"/>
   <object id="21" name="Wall" x="394.505" y="499.507" width="175.99" height="6.98664"/>
-  <object id="22" name="Wall" x="644.005" y="499.507" width="177.172" height="6.98664"/>
-  <object id="23" name="Wall" x="822.712" y="205.139" width="6.63636" height="301.388"/>
+  <object id="23" name="Wall" x="822.712" y="205.139" width="6.63636" height="294.035"/>
   <object id="24" name="Wall" x="394.636" y="205.261" width="6.63636" height="293.638"/>
   <object id="25" name="Wall" x="466.914" y="773.257" width="418.297" height="6.98664"/>
   <object id="26" name="Object" x="1577.52" y="481.173" width="82.297" height="22.9866"/>
@@ -464,7 +462,7 @@
   <object id="85" name="Wall" x="1839.68" y="93.0065" width="49.6307" height="56.987"/>
   <object id="86" name="Wall" x="1517.85" y="414.173" width="49.6307" height="56.987"/>
   <object id="87" name="Wall" x="616.185" y="98.2565" width="30.3807" height="34.237"/>
-  <object id="88" name="Wall" x="392.685" y="130.006" width="49.6307" height="56.987"/>
+  <object id="88" name="Wall" x="394.594" y="130.006" width="47.7216" height="56.987"/>
   <object id="89" name="Wall" x="201.268" y="641.59" width="49.6307" height="56.987"/>
   <object id="90" name="Wall" x="493.185" y="672.84" width="49.6307" height="56.987"/>
   <object id="91" name="Wall" x="649.185" y="702.84" width="49.6307" height="56.987"/>
@@ -560,36 +558,43 @@
   <object id="181" name="mob" x="649" y="1431.17" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="3"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="182" name="mob" x="821.917" y="970.083" width="21.5" height="20.5">
    <properties>
     <property name="area" type="int" value="4"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="183" name="mob" x="1083.75" y="1314.42" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="2"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="184" name="mob" x="439.75" y="409.417" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="6"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="185" name="mob" x="1576.25" y="388.25" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="5"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="186" name="mob" x="1742.25" y="397.75" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="5"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="187" name="mob" x="1114.92" y="1234.41" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="1"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="191" name="health" x="512.667" y="1388" width="33.3333" height="25.3333"/>
@@ -617,15 +622,16 @@
     <property name="number" type="int" value="4"/>
    </properties>
   </object>
-  <object id="212" name="area" x="1352.39" y="594" width="455.212" height="165">
+  <object id="212" name="area" x="1352.39" y="594" width="455.212" height="215">
    <properties>
     <property name="number" type="int" value="5"/>
    </properties>
   </object>
-  <object id="213" name="area" x="544.061" y="499.5" width="155.212" height="44.0303">
+  <object id="213" name="area" x="544.061" y="499.5" width="150.545" height="206.364">
    <properties>
     <property name="number" type="int" value="6"/>
    </properties>
   </object>
+  <object id="214" name="Wall" x="644.338" y="499.84" width="184.943" height="6.25937"/>
  </objectgroup>
 </map>
