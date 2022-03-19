@@ -19,7 +19,7 @@ class ResourceManager:
     BULLET_IMG          = 'images-sprites/bullet.png'
     EXPLOSION_IMAGE     = 'images-sprites/explode_bullet.png'
     MOB                 = 'images-sprites/soldiers.png'
-    GUNNER              = 'images-sprites/gunner.png'
+    GUNNER              = 'images-sprites/gunners.png'
     BLOOD_IMAGE         = 'images-sprites/blood.png'
     HIT_IMAGE           = 'images-sprites/blood-splatter.png'
     AMMO_IMAGE          = 'images-sprites/ammo.png'
