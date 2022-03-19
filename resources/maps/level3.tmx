@@ -558,36 +558,43 @@
   <object id="181" name="mob" x="649" y="1431.17" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="3"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="182" name="mob" x="821.917" y="970.083" width="21.5" height="20.5">
    <properties>
     <property name="area" type="int" value="4"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="183" name="mob" x="1083.75" y="1314.42" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="2"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="184" name="mob" x="439.75" y="409.417" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="6"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="185" name="mob" x="1576.25" y="388.25" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="5"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="186" name="mob" x="1742.25" y="397.75" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="5"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="187" name="mob" x="1114.92" y="1234.41" width="37.5" height="34.5">
    <properties>
     <property name="area" type="int" value="1"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="191" name="health" x="512.667" y="1388" width="33.3333" height="25.3333"/>
@@ -615,12 +622,12 @@
     <property name="number" type="int" value="4"/>
    </properties>
   </object>
-  <object id="212" name="area" x="1352.39" y="594" width="455.212" height="165">
+  <object id="212" name="area" x="1352.39" y="594" width="455.212" height="215">
    <properties>
     <property name="number" type="int" value="5"/>
    </properties>
   </object>
-  <object id="213" name="area" x="544.061" y="499.5" width="155.212" height="44.0303">
+  <object id="213" name="area" x="544.061" y="499.5" width="150.545" height="206.364">
    <properties>
     <property name="number" type="int" value="6"/>
    </properties>

@@ -489,81 +489,97 @@
   <object id="110" name="mob" x="912" y="1579" width="29" height="22">
    <properties>
     <property name="area" type="int" value="1"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="111" name="mob" x="698" y="1704" width="29" height="22">
    <properties>
     <property name="area" type="int" value="2"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="112" name="mob" x="959.5" y="1707" width="29" height="22">
    <properties>
     <property name="area" type="int" value="2"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="113" name="mob" x="582.5" y="1404" width="29" height="22">
    <properties>
     <property name="area" type="int" value="3"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="114" name="mob" x="598.5" y="1830.5" width="29" height="22">
    <properties>
     <property name="area" type="int" value="3"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="115" name="mob" x="210.5" y="1781" width="29" height="22">
    <properties>
     <property name="area" type="int" value="4"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="116" name="mob" x="222.5" y="1397" width="29" height="22">
    <properties>
     <property name="area" type="int" value="4"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="117" name="mob" x="500.5" y="745" width="29" height="22">
    <properties>
     <property name="area" type="int" value="7"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="118" name="mob" x="509" y="881" width="29" height="22">
    <properties>
     <property name="area" type="int" value="7"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="119" name="mob" x="1058.5" y="818" width="29" height="22">
    <properties>
     <property name="area" type="int" value="8"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="120" name="mob" x="1376.5" y="785" width="29" height="22">
    <properties>
     <property name="area" type="int" value="8"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="121" name="mob" x="1540.84" y="821" width="29" height="22">
    <properties>
     <property name="area" type="int" value="9"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="122" name="mob" x="1743.5" y="220" width="29" height="22">
    <properties>
     <property name="area" type="int" value="10"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="123" name="mob" x="1257.5" y="144" width="29" height="22">
    <properties>
     <property name="area" type="int" value="10"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="124" name="mob" x="1248.5" y="358" width="29" height="22">
    <properties>
     <property name="area" type="int" value="10"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="125" name="mob" x="914" y="1034.5" width="29" height="22">
    <properties>
     <property name="area" type="int" value="6"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="132" name="health" x="187.333" y="915.333" width="33.3333" height="25.3333"/>
@@ -599,7 +615,7 @@
     <property name="number" type="int" value="4"/>
    </properties>
   </object>
-  <object id="156" name="area" x="641.792" y="624.208" width="123.583" height="28.7503">
+  <object id="156" name="area" x="641.792" y="483.708" width="123.583" height="169.25">
    <properties>
     <property name="number" type="int" value="6"/>
    </properties>

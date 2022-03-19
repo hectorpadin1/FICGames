@@ -429,41 +429,49 @@
   <object id="124" name="mob" x="568" y="1206.66" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="4"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="125" name="mob" x="933.667" y="1171.33" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="3"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="126" name="mob" x="1029.34" y="1475" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="2"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="127" name="mob" x="1615.33" y="1066.67" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="5"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="128" name="mob" x="1813.33" y="1184" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="7"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="129" name="mob" x="1591.33" y="1668" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="6"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="130" name="mob" x="868" y="661.333" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="9"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="131" name="mob" x="1558.33" y="575" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="10"/>
+    <property name="gun" value="rifle"/>
    </properties>
   </object>
   <object id="132" name="Object" x="1809.31" y="982.444" width="91.1978" height="31.8394"/>
@@ -521,6 +529,7 @@
   <object id="178" name="mob" x="543.667" y="1439.33" width="42.6667" height="37.3333">
    <properties>
     <property name="area" type="int" value="1"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
  </objectgroup>
