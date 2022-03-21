@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="208">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="12" nextobjectid="209">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="961" columns="31">
   <image source="../images-sprites/tileset.png" width="2000" height="2000"/>
  </tileset>
@@ -351,13 +351,13 @@
     <property name="gun" value="pistol"/>
    </properties>
   </object>
-  <object id="3" name="mob" x="980" y="559.5" width="10" height="15.5">
+  <object id="3" name="mob" x="970" y="583.5" width="10" height="15.5">
    <properties>
     <property name="area" type="int" value="2"/>
     <property name="gun" value="rifle"/>
    </properties>
   </object>
-  <object id="4" name="mob" x="1103" y="563.5" width="13" height="19.5">
+  <object id="4" name="mob" x="1106" y="583.5" width="13" height="19.5">
    <properties>
     <property name="area" type="int" value="2"/>
     <property name="gun" value="rifle"/>
@@ -375,22 +375,16 @@
     <property name="gun" value="rifle"/>
    </properties>
   </object>
-  <object id="7" name="mob" x="289.333" y="118" width="18.6667" height="36">
-   <properties>
-    <property name="area" type="int" value="4"/>
-    <property name="gun" value="rifle"/>
-   </properties>
-  </object>
-  <object id="8" name="mob" x="305.333" y="208" width="23.3333" height="35.3333">
+  <object id="7" name="mob" x="291.333" y="154" width="18.6667" height="36">
    <properties>
     <property name="area" type="int" value="4"/>
     <property name="gun" value="pistol"/>
    </properties>
   </object>
-  <object id="9" name="mob" x="302.667" y="344.667" width="28" height="34">
+  <object id="9" name="mob" x="295.667" y="316.667" width="28" height="34">
    <properties>
     <property name="area" type="int" value="4"/>
-    <property name="gun" value="rifle"/>
+    <property name="gun" value="pistol"/>
    </properties>
   </object>
   <object id="13" name="health" x="963.333" y="1132.83" width="33.3333" height="25.3333"/>
@@ -545,7 +539,7 @@
   <object id="168" name="Object" x="1533.33" y="7.78219" width="75.3462" height="79.7689"/>
   <object id="171" name="Wall" x="1113.08" y="7.9902" width="140.512" height="55.353"/>
   <object id="172" name="Wall" x="841.744" y="7.99017" width="120.512" height="34.0197"/>
-  <object id="173" name="Wall" x="392.411" y="8.65682" width="43.8453" height="27.0197"/>
+  <object id="173" name="Wall" x="398.661" y="8.65682" width="31.5953" height="27.0197"/>
   <object id="174" name="Wall" x="8.07735" y="598.49" width="40.512" height="80.353"/>
   <object id="175" name="Wall" x="110.411" y="669.823" width="52.512" height="55.6863"/>
   <object id="176" name="Object" x="395.535" y="459.324" width="35.1796" height="33.3523"/>
@@ -553,7 +547,6 @@
   <object id="178" name="Object" x="52.7852" y="609.074" width="145.93" height="37.8523"/>
   <object id="179" name="Object" x="426.535" y="534.574" width="73.43" height="36.8523"/>
   <object id="180" name="Object" x="592.368" y="538.741" width="57.93" height="37.8523"/>
-  <object id="181" name="Object" x="783.702" y="581.741" width="54.5967" height="34.519"/>
   <object id="182" name="Object" x="914.535" y="1298.82" width="26.43" height="25.1023"/>
   <object id="183" name="Object" x="852.035" y="1235.7" width="25.18" height="25.1023"/>
   <object id="184" name="Object" x="852.41" y="1170.95" width="25.18" height="25.1023"/>
@@ -580,7 +573,7 @@
     <property name="number" type="int" value="2"/>
    </properties>
   </object>
-  <object id="200" name="area" x="988.67" y="74" width="443.667" height="697.334">
+  <object id="200" name="area" x="1066.67" y="74" width="365.667" height="651.334">
    <properties>
     <property name="number" type="int" value="3"/>
    </properties>
@@ -591,7 +584,6 @@
    </properties>
   </object>
   <object id="202" name="Wall" x="872.744" y="674.157" width="34.5124" height="31.6862"/>
-  <object id="203" name="Object" x="884.702" y="591.74" width="49.5967" height="34.519"/>
   <object id="204" name="Object" x="1093.96" y="1113.99" width="25.18" height="25.1023"/>
   <object id="205" name="Object" x="1101.91" y="1350.45" width="25.18" height="25.1023"/>
   <object id="206" name="Wall" x="1142.29" y="1348.81" width="6.66667" height="46.5917"/>
@@ -599,6 +591,11 @@
    <properties>
     <property name="area" type="int" value="1"/>
     <property name="gun" value="pistol"/>
+   </properties>
+  </object>
+  <object id="208" name="area" x="1113.67" y="725.833" width="32.917" height="45.584">
+   <properties>
+    <property name="number" type="int" value="3"/>
    </properties>
   </object>
  </objectgroup>

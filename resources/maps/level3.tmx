@@ -400,8 +400,8 @@
   <object id="23" name="Wall" x="822.712" y="205.139" width="6.63636" height="294.035"/>
   <object id="24" name="Wall" x="394.636" y="205.261" width="6.63636" height="293.638"/>
   <object id="25" name="Wall" x="466.914" y="773.257" width="418.297" height="6.98664"/>
-  <object id="26" name="Object" x="1577.52" y="481.173" width="82.297" height="22.9866"/>
-  <object id="27" name="Object" x="1706.35" y="480.84" width="81.9637" height="22.9866"/>
+  <object id="26" name="Object" x="1577.52" y="481.173" width="78.047" height="22.9866"/>
+  <object id="27" name="Object" x="1710.1" y="480.84" width="78.2137" height="22.9866"/>
   <object id="28" name="Object" x="1545.02" y="298.173" width="20.6304" height="81.6533"/>
   <object id="29" name="Wall" x="79.0182" y="820.507" width="110.964" height="103.987"/>
   <object id="30" name="Wall" x="15.518" y="533.006" width="115.964" height="103.987"/>
@@ -409,7 +409,7 @@
   <object id="32" name="Wall" x="115.518" y="100.006" width="84.964" height="77.987"/>
   <object id="33" name="Wall" x="474.518" y="21.0065" width="136.964" height="43.987"/>
   <object id="34" name="Wall" x="782.518" y="22.0065" width="110.964" height="103.987"/>
-  <object id="35" name="Wall" x="1034.52" y="51.0065" width="110.964" height="103.987"/>
+  <object id="35" name="Wall" x="1034.52" y="51.0065" width="124.297" height="103.987"/>
   <object id="36" name="Wall" x="1327.52" y="35.0065" width="89.964" height="80.987"/>
   <object id="37" name="Wall" x="1314.52" y="276.006" width="122.964" height="103.987"/>
   <object id="38" name="Wall" x="1058.52" y="273.006" width="124.964" height="103.987"/>
@@ -531,7 +531,7 @@
   <object id="154" name="Object" x="378.215" y="1702.03" width="25.2368" height="24.9341"/>
   <object id="155" name="Object" x="260.382" y="1720.87" width="63.2368" height="24.9341"/>
   <object id="156" name="Object" x="102.715" y="1774.87" width="38.5701" height="28.2674"/>
-  <object id="157" name="Object" x="411.048" y="1473.87" width="25.2368" height="24.9341"/>
+  <object id="157" name="Object" x="422.381" y="1444.54" width="33.5701" height="24.9341"/>
   <object id="158" name="Object" x="14.3816" y="1380.53" width="26.2368" height="24.9341"/>
   <object id="159" name="Object" x="92.3816" y="1408.53" width="28.2368" height="25.9341"/>
   <object id="160" name="Wall" x="216.185" y="1438.17" width="29.964" height="28.987"/>
