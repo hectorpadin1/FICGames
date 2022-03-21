@@ -137,6 +137,9 @@ class Partida(Escena):
 
     # Colisiones del jugador con cajas de armamento
     def __ammo_collision(self):
+        if self.player.guns != []:
+            if self.player.guns[self.player.gunSelector].bullets == self.player.guns[self.player.gunSelector].MAG_SIZE:
+                return
         hits = pg.sprite.spritecollide(self.player, self.ammo, True)
         for _ in hits:
             self.player.update_ammo()
@@ -145,6 +148,8 @@ class Partida(Escena):
 
     # Colisiones del jugador con cajas de vida
     def __hp_collision(self):
+        if self.player.health == PLAYER_HEALTH:
+            return
         hits = pg.sprite.spritecollide(self.player, self.health, True)
         for _ in hits:
             self.player.update_health(PLAYER_HEALTH)#A topisimo de municion
