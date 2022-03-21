@@ -1,12 +1,12 @@
 import os
-from typing import ItemsView
 import pygame as pg
 import pytmx
 from pygame.locals import RLEACCEL
 
-#DEBUGUEAR PARA COMPROBAR QUE SE ACTUALIZAN LAS LISTAS SIENDO ESTATICO
+
 
 class ResourceManager:
+
     image_resources = {}
     map_resources   = {}
     font_resources  = {}
@@ -14,7 +14,9 @@ class ResourceManager:
     coord_resources = {}
     dialog_resources = {}
 
-    # SPRITE IMAGES 
+    RESOURCE_PATH = "resources"
+
+    # Imágenes de Sprites
     PLAYER              = 'images-sprites/hero_sprites.png'
     BULLET_IMG          = 'images-sprites/bullet.png'
     EXPLOSION_IMAGE     = 'images-sprites/explode_bullet.png'
@@ -25,13 +27,12 @@ class ResourceManager:
     AMMO_IMAGE          = 'images-sprites/ammo.png'
     HP_IMAGE            = 'images-sprites/HP.png'
     
-    # SPRITE POSITIONS
-    BULLET_POSITIONS = 'positions/coordBullets.txt'
+    # Posiciones de los sprites
     HERO_POSITIONS   = 'positions/coordHero.txt'
     MOB_POSITIONS    = 'positions/coordMobs.txt'
     GUNNER_POSITIONS = 'positions/coordGunner.txt'
 
-    # GUI IMAGES
+    # Imágenes de GUI
     LOGO_IMG     = 'images-gui/logo.png'
     START_IMG    = 'images-gui/inicio.png'
     BTN_BG       = 'images-gui/btn_bg.png'
@@ -47,10 +48,10 @@ class ResourceManager:
     VICTORY      = 'images-gui/victoria.png'
     DIALOG_BG      = 'images-gui/dialog_bg.png'
 
-    # FONTS
+    # Fuentes
     MAIN_FONT = "fonts/ModernDOS9x16.ttf"
 
-    # SOUNDS
+    # Sonidos
     SELECTION     = 'sound_effects/selection.mp3'
     METRALLETA    = 'sound_effects/metralleta.mp3'
     AMETRALLADORA = 'sound_effects/ametralladora.mp3'
@@ -58,15 +59,13 @@ class ResourceManager:
     ITEM          = 'sound_effects/item.mp3'
     NO_AMMO       = 'sound_effects/no_ammo.mp3'
 
-    # MAPS
+    # Mapas
     LEVEL = ['maps/level0.tmx','maps/level1.tmx','maps/level2.tmx','maps/level3.tmx','maps/level4.tmx']    
     
-    # DIALOGS
+    # Diálogos
     DIALOGS = ['dialogs/level0.txt','dialogs/level1.txt','dialogs/level2.txt','dialogs/level3.txt','dialogs/level4.txt']
 
-    # PATHS
-    RESOURCE_PATH = "resources"
-
+    
     @classmethod
     def load_image(self, nombre, colorkey=None):
         if nombre in self.image_resources:
@@ -86,6 +85,7 @@ class ResourceManager:
             self.image_resources[nombre] = imagen
             return imagen
 
+
     @classmethod
     def load_coord(self, name):
         if name in self.coord_resources:
@@ -99,6 +99,7 @@ class ResourceManager:
             self.coord_resources[name] = datos
             return datos
 
+
     @classmethod
     def load_map(self, nombre):
         if nombre in self.map_resources:
@@ -107,6 +108,7 @@ class ResourceManager:
             tm = pytmx.load_pygame(os.path.join(self.RESOURCE_PATH, nombre), pixelalpha=True)
             self.map_resources[nombre] = tm    
             return tm
+
 
     @classmethod
     def load_font(self, nombre, size):
@@ -123,6 +125,7 @@ class ResourceManager:
             self.font_resources[(nombre,size)] = font
             return font
 
+
     @classmethod
     def load_sound(self, nombre):
         if nombre in self.sound_resources:
@@ -137,6 +140,7 @@ class ResourceManager:
 
             self.sound_resources[nombre] = sound
             return sound
+
 
     @classmethod
     def load_dialog(self, name):

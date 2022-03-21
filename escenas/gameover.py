@@ -1,5 +1,3 @@
-import pygame as pg
-import sys
 from settings import *
 from escenas.gui.buttons import ClasicButton
 from managers.resourcemanager import ResourceManager as GR
@@ -7,7 +5,10 @@ from managers.soundcontroller import SoundController as SC
 from escenas.menu import Menu
 import escenas.partida
 
+
+
 class GameOver(Menu):
+
 
     def __init__(self, director, lvl):
         self.lvl = lvl
@@ -22,10 +23,12 @@ class GameOver(Menu):
         SC.play_selection()
         partida = escenas.partida.Partida(self.director,self.lvl,dialog=False)
         self.director.changeEscena(partida)
-    
+
+
     def go_exit(self):
         SC.play_selection()
         self.director.exitEscena()
+
     
     def play_music(self):
         SC.play_gameover()

@@ -8,7 +8,7 @@ class Camera:
         self.width = width
         self.height = height
 
-    #Obtener coordeneadas relativas a la posición de la cámara
+    # Obtener coordeneadas relativas a la posición de la cámara
     def apply(self, entity):
         return entity.rect.move(self.camera.topleft)
 
@@ -16,12 +16,13 @@ class Camera:
         return rect.move(self.camera.topleft)
 
     def update(self, target):
+        # calculamos el centro
         x = -target.rect.centerx + int(WIDTH / 2)
         y = -target.rect.centery + int(HEIGHT / 2)
 
-        # limit scrolling to map size
-        x = min(0, x)  # left
-        y = min(0, y)  # top
-        x = max(-(self.width - WIDTH), x)  # right
-        y = max(-(self.height - HEIGHT), y)  # bottom
+        # limitamos scrolling al tamaño del mapa
+        x = min(0, x)  # izq
+        y = min(0, y)  # arriba
+        x = max(-(self.width - WIDTH), x)  # derecha
+        y = max(-(self.height - HEIGHT), y)  # abajo
         self.camera = pg.Rect(x, y, self.width, self.height)

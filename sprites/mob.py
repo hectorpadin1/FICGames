@@ -7,7 +7,9 @@ from sprites.gun import Pistol, Rifle
 from managers.resourcemanager import ResourceManager as GR
 
 
+
 class Mob(Character):
+
 
     def __init__(self, mob_group, x, y, image, gun, collide_groups, row, area, numImagenes, positions):
         super().__init__(mob_group, image, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups, positions, row, numImagenes)
@@ -22,19 +24,24 @@ class Mob(Character):
         self.activated = False
         self.last_change = pg.time.get_ticks()
 
+
+    # Cambiamos a animacion de muerte
     def die(self):
         if not self.dead:
             self.numPostura = 1
             self.numImagenPostura = 0
             self.dead = True
-    
+
+
+    # El Mob nos empieza a perseguir
     def activate(self, area):
         if self.area == area:
             self.moving = True   
 
+
     def update(self):
-        # Shooting
-        # provisional
+        # Comportamiento de nuestra IA de Mobs, disparar siempre y cuando
+        # no este muerto
         if not self.dead:
             if not self.reloading and self.gun.current_mag == 0:
                 self.gun.do_reload()
@@ -46,12 +53,17 @@ class Mob(Character):
         super().update()
 
 
+
 class MobBasico(Mob):
-    
+
+
     def __init__(self, mob_group, x, y, bullets, collide_groups, area):
         gun = Pistol(bullets)
+        # Pasamos hoja de Sprites y demás atributos de este mob
         super().__init__(mob_group, x, y, GR.GUNNER, gun, collide_groups, 2, area, [8, 4], GR.GUNNER_POSITIONS)
 
+
+    # Comportamiento del Mob con pistola
     def update(self, player_pos, dt):
         if not self.dead:
             distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))
@@ -74,12 +86,17 @@ class MobBasico(Mob):
         super().update()
 
 
+
 class MobRiffle(Mob):
     
+
     def __init__(self, mob_group, x, y, bullets, collide_groups, area):
         gun = Rifle(bullets)
+        # Pasamos hoja de Sprites y demás atributos de este mob
         super().__init__(mob_group, x, y, GR.MOB, gun, collide_groups, 2, area, [8, 4], GR.MOB_POSITIONS)
 
+
+    # Comportamiento del Mob con Rifle
     def update(self, player_pos, dt):
         if not self.dead:
             distance = sqrt(pow(player_pos.x - self.pos.x, 2) + pow(player_pos.x - self.pos.x, 2))

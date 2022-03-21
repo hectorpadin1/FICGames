@@ -7,6 +7,8 @@ from managers.resourcemanager import ResourceManager as GR
 
 
 class TiledMap:
+
+    
     def __init__(self, lvl):
         try:
             tm = GR.load_map(GR.LEVEL[lvl])
@@ -18,7 +20,9 @@ class TiledMap:
         self.height = tm.height * tm.tileheight
         self.tmxdata = tm
 
-    def render(self, surface):
+
+    # Vuelca los 'tiles' en una superfice, dentro del TiledMap
+    def __render(self, surface):
         ti = self.tmxdata.get_tile_image_by_gid
         for layer in self.tmxdata.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
@@ -27,9 +31,10 @@ class TiledMap:
                     if tile:
                         surface.blit(tile, (x * self.tmxdata.tilewidth, 
                                             y * self.tmxdata.tileheight))
-    
+
+
     def make_map(self):
         temp_surface = pg.Surface((self.width, self.height))
-        self.render(temp_surface)
+        self.__render(temp_surface)
         return temp_surface
 

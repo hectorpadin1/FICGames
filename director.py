@@ -2,6 +2,7 @@ import pygame as pg
 from settings import *
 from managers.user_config import UserConfig as UC
 
+
 class Director():
 
     def __init__(self):

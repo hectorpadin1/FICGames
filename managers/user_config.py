@@ -3,6 +3,8 @@ import pygame as pg
 from settings import *
 import json
 
+
+
 class UserConfig:
 
     config = {}

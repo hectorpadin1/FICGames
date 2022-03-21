@@ -1,10 +1,12 @@
 import pygame as pg
-import sys
 from settings import *
 from managers.resourcemanager import ResourceManager as GR
 from escenas.escena import Escena
 
+
+
 class Menu(Escena):
+
 
     def __init__(self,director, btns, back, logo=None, logoy=0):
         Escena.__init__(self, director)
@@ -14,6 +16,36 @@ class Menu(Escena):
         self.logo = logo
         self.logoy= logoy
 
+
+    # Dibuja Caja Centrada y Devuelve su tamaño 
+    def __draw_box(self, display):
+        bg = GR.load_image(GR.BOX_BG) 
+        rect = bg.get_rect()
+        rect.center = (WIDTH/2,HEIGHT/2)
+        display.blit(bg, rect) 
+        return rect.size
+
+
+    # Dibuja Logo Centrado con la posibilidad de añadirle un desplazamiento
+    def __draw_logo(self, display, dx=0, dy=0):
+        logo = GR.load_image(self.logo)
+        rect = logo.get_rect()
+        rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
+        display.blit(logo, rect) 
+
+
+    # Dibuja el fondo
+    def __draw_back(self, display, dx=0, dy=0):
+        logo = GR.load_image(GR.START_IMG)
+        rect = logo.get_rect()
+        rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
+        display.blit(logo, rect) 
+
+
+    def play_music(self):
+        pass
+
+
     def events(self, events):
         self.click = False
         for event in events:
@@ -22,30 +54,11 @@ class Menu(Escena):
             elif event.type == pg.MOUSEBUTTONDOWN:
                 self.click = True
 
-    #Dibuja Caja Centrada y Devuelve su tamaño 
-    def __draw_box(self, display):
-        bg = GR.load_image(GR.BOX_BG) 
-        rect = bg.get_rect()
-        rect.center = (WIDTH/2,HEIGHT/2)
-        display.blit(bg, rect) 
-        return rect.size
-    
-    #Dibuja Logo Centrado con la posibilidad de añadirle un desplazamiento
-    def __draw_logo(self, display, dx=0, dy=0):
-        logo = GR.load_image(self.logo)
-        rect = logo.get_rect()
-        rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
-        display.blit(logo, rect) 
-
-    def __draw_back(self, display, dx=0, dy=0):
-        logo = GR.load_image(GR.START_IMG)
-        rect = logo.get_rect()
-        rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
-        display.blit(logo, rect) 
 
     def update(self, _dt):
         mouse_pos = pg.mouse.get_pos()
         self.btn_group.update(mouse_pos,self.click)
+
 
     def draw(self,display):
         if self.back:
@@ -58,6 +71,3 @@ class Menu(Escena):
 
         for btn in self.btn_group:
             btn.draw(display)
-    
-    def play_music(self):
-        pass

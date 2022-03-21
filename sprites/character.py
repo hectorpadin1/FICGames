@@ -3,22 +3,26 @@ from pygame.math import Vector2
 from managers.resourcemanager import ResourceManager as GR
 
 
+
 class Character(pg.sprite.Sprite):
+
+
     def __init__(self, groups, img, hit_rect, x, y, health, collide_groups, pos, rows, numImagenes):
+
         if groups is None:
             super().__init__()
         else:
             super().__init__(groups)
 
         self.hoja = GR.load_image(img, colorkey=-1)
-        #
-        # ESTE PROCESAMIENTO PODRÍAS PONERLO EN EL GESTOR DE RECUROSOS NO?
-        #
+        
+        # Cargamos las posiciones de las imágenes de la hoja
         data = GR.load_coord(pos)
         self.numPostura = 0
         self.numImagenPostura = 0
         cont = 0
         self.coordenadasHoja = []
+        # Cargamos la hoja de sprites
         for linea in range(0, rows):
             self.coordenadasHoja.append([])
             tmp = self.coordenadasHoja[linea]
@@ -27,29 +31,28 @@ class Character(pg.sprite.Sprite):
                 cont += 4
                 
         self.moving = False
-        self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][0])
-        
-        #self.masks = []
-        #for i in range(0,len(self.coordenadasHoja)):
-        #    self.masks.append([])
-        #    for j in range(0,numImagenes[i]):
-        #        self.masks[i].append(pg.mask.from_surface(self.hoja.subsurface(self.coordenadasHoja[i][j])))
+        self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura])
+        self.mask = pg.mask.from_surface(self.image)
         
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.hit_rect = hit_rect
-        self.mask = pg.mask.from_surface(self.image)
         self.hit_rect.center = self.rect.center
+
         self.vel = Vector2(0, 0)
         self.pos = Vector2(x, y)
         self.rot = 0
+
         self.health = health
         self.collision_groups = collide_groups
-        
-    #Al final no se usan máscaras de colisión...
+
+
+    # Función de colisión
     def __collide_hit_rect(self, one, two):
         return one.hit_rect.colliderect(two.rect)
 
+
+    # Función para evitar colisionar con paredes y bugs
     def __collide_with_walls(self, sprite, group, dir):
         if dir == 'x':
             hits = pg.sprite.spritecollide(sprite, group, False, self.__collide_hit_rect)
@@ -70,20 +73,22 @@ class Character(pg.sprite.Sprite):
                 sprite.vel.y = 0
                 sprite.hit_rect.centery = sprite.pos.y
 
-    def updateImage(self, img):
-        self.image_path = img
 
     def update(self):
-        self.rect = self.image.get_rect()
-        self.rect.center = self.pos
-        #print(self.coordenadasHoja)
-        #print(self.numPostura, self.numImagenPostura)
+        
+        # rotamos la imagen y calculamos su máscara
         self.image = pg.transform.rotate(self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura]), self.rot)
         self.mask = pg.mask.from_surface(self.image)
+
+        self.rect = self.image.get_rect()
+        self.rect.center = self.pos
         self.hit_rect.centerx = self.pos.x
+        
+        # Para cada eje calculamos sus colisiones con objetos
         for group in self.collision_groups:
             self.__collide_with_walls(self, group, 'x')
         self.hit_rect.centery = self.pos.y
+        
         for group in self.collision_groups:
             self.__collide_with_walls(self, group, 'y')
         self.rect.center = self.hit_rect.center

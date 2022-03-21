@@ -3,7 +3,11 @@ from settings import *
 from pygame.math import Vector2
 from managers.resourcemanager import ResourceManager as GR
 
+
+
 class Blood(pg.sprite.Sprite):
+
+
 
     def __init__(self, blood_group, pos, sx, sy, rot) -> None:
         pg.sprite.Sprite.__init__(self, blood_group)

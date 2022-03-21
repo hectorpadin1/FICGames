@@ -1,10 +1,8 @@
 import pygame as pg
 
+
 class AbstractControler:
 
-    #abstracta control? -> yo creo k no hace falta
-    
-    #algo de este rollo
     def up(self):
         return
 
@@ -20,8 +18,12 @@ class AbstractControler:
     def reload(self):
         pass
 
+    def switchPistol(self):
+        pass
+
     def isShooting(self):
         pass
+
 
 
 class Controler(AbstractControler):
@@ -41,6 +43,10 @@ class Controler(AbstractControler):
     def reload(self):
         return pg.key.get_pressed()[pg.K_r]  
 
+    '''
+    Devuelve un entero según la tecla que presionemos, 
+    devuelve 0 si no se presiona ninguna.
+    '''
     def switchPistol(self):
         if pg.key.get_pressed()[pg.K_1]:
             return 1
@@ -51,5 +57,8 @@ class Controler(AbstractControler):
         else:
             return 0
 
+    '''
+    Click derecho.
+    '''
     def isShooting(self):
         return pg.mouse.get_pressed()[0]

@@ -2,7 +2,10 @@ import pygame as pg
 from settings import *
 from managers.resourcemanager import ResourceManager as GR
 
+
+
 class Area(pg.sprite.Sprite):
+
 
     def __init__(self, group, x, y, w, h, number):
         pg.sprite.Sprite.__init__(self, group)
@@ -13,6 +16,7 @@ class Area(pg.sprite.Sprite):
         self.rect.y = y
         self.number = number
         self.collided = False
+
     
     def get_number(self):
         return self.number

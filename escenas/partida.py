@@ -20,14 +20,14 @@ from escenas.pause import Pause
 from escenas.win import Win
 from escenas.gui.hud import Hud
 from escenas.gui.dialog import Dialog
-import random
 
-        
+
 
 class Partida(Escena):
     
-    def __init__(self,director,lvl,dialog=True):
-        Escena.__init__(self, director)
+
+    def __init__(self,director, lvl, dialog=True):
+        super().__init__(director)
         self.lvl = lvl
 
         # Setting level differences 
@@ -51,15 +51,13 @@ class Partida(Escena):
 
 
 
-        #Mapa
         self.map = TiledMap(self.lvl)
-        #Render del mapa -> REVISAR ESTO PEDRO
+        # renderizado del mapa 
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
-        #Hud
         self.hud = Hud()
 
-        #self.all_sprites = pg.sprite.Group() #ESTO ES ALJO JODIAMENTE INUTIL -> BORRAR
+        # Creación de grupos
         self.walls = pg.sprite.Group()
         self.obstacle = pg.sprite.Group()
         self.bullets_player = pg.sprite.Group()
@@ -73,10 +71,7 @@ class Partida(Escena):
         self.area = pg.sprite.Group()
         self.mob_count = 0
 
-        ########################################
-        #   Inicializamos cargando tiledmap    #
-        ########################################
-        
+        # Cargamos el tiledmap e instanciamos objetos
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
                 self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle],[self.hud, self.ammo, self.health], self.lvl)
@@ -103,8 +98,9 @@ class Partida(Escena):
         self.won = False
 
 
+    # Colisiones de las balas con otros objetos del juego
     def __bullet_hits(self):
-        # bullets hit player
+        # balas de los malos impactan con el jugador
         hits = pg.sprite.spritecollide(self.player, self.bullets_mobs, True, pg.sprite.collide_mask)
         for hit in hits:
             self.player.update_health(self.player.health - MOB_BULLET_DAMAGE)
@@ -112,7 +108,7 @@ class Partida(Escena):
             self.player.vel = Vector2(0, 0)
             if self.player.health <= 0:
                 self.player_die = pg.time.get_ticks()
-        # bullets hit mobs
+        # balas del jugador impactan con mobs
         hits = pg.sprite.groupcollide(self.mobs, self.bullets_player, False, True, pg.sprite.collide_mask)
         for hit in hits:
             if (hit.health - BULLET_DAMAGE) > 0:
@@ -130,32 +126,76 @@ class Partida(Escena):
                         self.won = True
                         self.won_delay = pg.time.get_ticks()
 
-        # bullet hit walls
+        # colisiones de balas con paredes
         hits = pg.sprite.groupcollide(self.bullets_mobs, self.walls, True, False)
         for hit in hits:
             Explosion(self.explosions, hit.pos, 0.1, 0.1)
         hits = pg.sprite.groupcollide(self.bullets_player, self.walls, True, False)
         for hit in hits:
             Explosion(self.explosions, hit.pos, 0.1, 0.1)
-    
+
+
+    # Colisiones del jugador con cajas de armamento
     def __ammo_collision(self):
         hits = pg.sprite.spritecollide(self.player, self.ammo, True)
         for _ in hits:
-            self.player.update_ammo()#A topisimo de municion
+            self.player.update_ammo()
             SC.play_item()
 
+
+    # Colisiones del jugador con cajas de vida
     def __hp_collision(self):
         hits = pg.sprite.spritecollide(self.player, self.health, True)
         for _ in hits:
             self.player.update_health(PLAYER_HEALTH)#A topisimo de municion
             SC.play_item()
     
+
+    # Colisiones del jugador con áreas de activación de Mobs
     def __area_collision(self):
         hits = pg.sprite.spritecollide(self.player, self.area, True)
         for hit in hits:
             areaID = hit.get_number()
             for mob in self.mobs:
                 mob.activate(areaID)
+
+
+    # Función para mostrar pantalla de gameover
+    def __gameover(self):
+        gameover = GameOver(self.director, self.lvl)
+        self.director.changeEscena(gameover)
+
+
+    # Función para mostrar pantalla de victoria
+    def __win(self):
+        if self.dialog_last:
+            self.dialog_last = False
+            self.dialog_level = True
+            self.dialog.set_enable()
+        else:
+            win = Win(self.director)
+            self.director.changeEscena(win)
+            if UC.get("last_level")==self.lvl:
+                UC.update("last_level",self.lvl+1)
+
+
+    def play_music(self):
+        SC.play_main()
+
+
+    def events(self, events):
+        for event in events:
+            #Salir Ventana
+            if event.type == pg.QUIT:
+                self.director.exitProgram()
+            #Pulsaciones Teclas
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE or event.key == pg.K_p: #Menu Pausa
+                    pause = Pause(self.director, self.lvl)
+                    self.director.pushEscena(pause)
+                elif event.key == pg.K_SPACE:
+                    self.dialog.next_dialog()
+
 
     def update(self, dt):
         # Actualizamos grupos de sprites
@@ -175,43 +215,33 @@ class Partida(Escena):
         # Posición de la cámara
         self.camera.update(self.player)
 
-        # Level Termination
+        # Acabamos el nivel
         if (self.player.health <= 0) and (pg.time.get_ticks() - self.player_die > DELAY_GAMEOVER):
             Blood(self.blood, self.player.pos, 0.5, 0.5, -self.player.rot-110)
-            self.gameover()
+            self.__gameover()
         if not self.dialog_level and self.won and (self.mob_count == 0) and (pg.time.get_ticks() - self.won_delay > DELAY_GAMEOVER*4):
-            self.win()
+            self.__win()
         if self.dialog_level and self.dialog.is_done():
-            self.win()
+            self.__win()
 
         #REVISAR
         self.dialog.update(dt)
 
-    def gameover(self):
-        gameover = GameOver(self.director, self.lvl)
-        self.director.changeEscena(gameover)
-
-    def win(self):
-        if self.dialog_last:
-            self.dialog_last = False
-            self.dialog_level = True
-            self.dialog.set_enable()
-        else:
-            win = Win(self.director)
-            self.director.changeEscena(win)
-            if UC.get("last_level")==self.lvl:
-                UC.update("last_level",self.lvl+1)
 
     def draw(self, display):
         
+        # Dibujamos el mapa que se ve en la cámara
         display.blit(self.map_img, self.camera.apply_rect(self.map_rect))
 
+        # Dibujamos cada sprite por profundidad (de mas lejos a mas cerca)
         for sprite in self.blood:
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.explosions:
             display.blit(sprite.image, self.camera.apply(sprite))
-        #self.bullets_mobs.draw(display)
-        #self.bullets_player.draw(display)
+        for sprite in self.ammo:
+            display.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.health:
+            display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.bullets_mobs:
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.bullets_player:
@@ -220,29 +250,8 @@ class Partida(Escena):
             display.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.mobs:
             display.blit(sprite.image, self.camera.apply(sprite))
-        for sprite in self.ammo:
-            display.blit(sprite.image, self.camera.apply(sprite))
-        for sprite in self.health:
-            display.blit(sprite.image, self.camera.apply(sprite))
         display.blit(self.player.image, self.camera.apply(self.player))
 
+        # Dibujamos el HUD y los dialogos
         self.hud.draw(display)
         self.dialog.draw(display)
-
-
-    def events(self, events):
-        for event in events:
-            #Salir Ventana
-            if event.type == pg.QUIT:
-                self.director.exitProgram()
-            #Pulsaciones Teclas
-            if event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE or event.key == pg.K_p: #Menu Pausa
-                    pause = Pause(self.director, self.lvl)
-                    self.director.pushEscena(pause)
-                elif event.key == pg.K_SPACE:
-                    self.dialog.next_dialog()
-
-    def play_music(self):
-        SC.play_main()
-

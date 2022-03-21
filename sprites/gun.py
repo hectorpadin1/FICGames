@@ -5,8 +5,13 @@ from sprites.bullet import Bullet
 from managers.soundcontroller import SoundController as SC
 
 
+'''
+Clase abstracta que implementa todo el funcionamiento básico de un arma, ya
+que sus comportamientos en nuestro caso son todos iguales
+'''
 class AbstractGun():
     
+
     def __init__(self, bullet_group, mag_size, bullet_img, reload_time, rate, damage, speed, lifetime, soundFunction):
         self.bullet_group = bullet_group
         self.MAG_SIZE = mag_size
@@ -18,17 +23,20 @@ class AbstractGun():
         self.speed = speed
         self.lifetime = lifetime
         self.last_shot = pg.time.get_ticks()
-        self.damage = damage
+        self.damage = damage    # no lo usamos, pero lo dejamos por si se quiere implementar de otra forma
         self.soundFunction = soundFunction
         self.reload=False
     
+
     def do_reload(self):
         if not self.reload or self.current_mag != self.MAG_SIZE:
             self.reload=True
             self.reload_moment = pg.time.get_ticks()
 
+
     def cancel_reload(self):
         self.reload=False
+
 
     def shoot(self, pos, rot):
         now = pg.time.get_ticks()
@@ -43,6 +51,7 @@ class AbstractGun():
                 self.last_shot = now
                 SC.play_no_ammo()
     
+
     def update(self):
         if self.reload:
             if self.MAG_SIZE == self.current_mag:
@@ -65,19 +74,25 @@ class AbstractGun():
                 self.reload=False
 
 
+
 class Pistol(AbstractGun):
+
 
     def __init__(self, bullet_group):
         super().__init__(bullet_group=bullet_group, mag_size=7, bullet_img=GR.BULLET_IMG, reload_time=15*FPS, rate=4*FPS, damage=34, speed=1500, lifetime=20*FPS, soundFunction=SC.play_pistola)
 
 
+
 class Rifle(AbstractGun):
+
 
     def __init__(self, bullet_group):
         super().__init__(bullet_group=bullet_group, mag_size=30, bullet_img=GR.BULLET_IMG, reload_time=20*FPS, rate=1*FPS, damage=40, speed=1500, lifetime=5*FPS, soundFunction=SC.play_metralleta)
 
 
+
 class MachineGun(AbstractGun):
+
 
     def __init__(self, bullet_group):
         super().__init__(bullet_group=bullet_group, mag_size=75, bullet_img=GR.BULLET_IMG, reload_time=30*FPS, rate=100, damage=30, speed=1500, lifetime=3*FPS, soundFunction=SC.play_ametralladora)

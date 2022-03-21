@@ -10,8 +10,10 @@ from managers.resourcemanager import ResourceManager as GR
 from utils.observable import Observable
 
 
+
 class Player(Character, Observable):
-    #NO ME MOLA NADA COMO SE ESTÁ ACOPLANDO TODO EL JUEGO, MIRAR DE SIMPLEMENTE DAR DE ALTA EL SPRITE
+
+
     def __init__(self, x, y, bullets, collide_groups, observers, level):
         Character.__init__(self, None, GR.PLAYER, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups, GR.HERO_POSITIONS, 5, [8, 8, 8, 8, 3])
         Observable.__init__(self, observers)
@@ -32,30 +34,20 @@ class Player(Character, Observable):
             self.notify("bullets", self.guns[self.gunSelector].bullets)
 
 
-    def update_health(self, health):
-        if health <= 0:
-            self.health = 0
-            self.numPostura = 4
-            self.numImagenPostura = 0
-        else:
-            self.health = health
-        self.notify("health", self.health)
-
-    def update_ammo(self):
-        for gun in self.guns:
-                gun.bullets = gun.MAG_SIZE 
-        self.notify("bullets", self.guns[self.gunSelector].bullets)
-
+    # Acciones según la configuración del controlador
     def __callControler(self):
+        
         if self.health <= 0 :
             if (self.numImagenPostura < 2) and (pg.time.get_ticks() - self.last_change > ANIM_DELAY*4):
                 self.numImagenPostura += 1
             return
-        # Player dynamics
+        
+        # Dinámicas del jugador
         self.rot_speed = 0
         self.vel = Vector2(0, 0)
         speed = self.vel.copy()
-        # On-Axis movements
+        
+        # Movimiento de ejes
         if self.controler.left():
             self.vel.x = -PLAYER_SPEED
         if self.controler.right():
@@ -64,15 +56,18 @@ class Player(Character, Observable):
             self.vel.y = -PLAYER_SPEED
         if self.controler.down():
             self.vel.y = PLAYER_SPEED
-        # Oposite movements
+        
+        # Movimientos opuestos los cancelamos
         if self.controler.left() and self.controler.right():
             self.vel.x = 0
         if self.controler.up() and self.controler.down():
             self.vel.y = 0
-        # Diagonal movements        
+
+        # Movimientos diagonales       
         if self.vel.x!=0 and self.vel.y!=0:
             self.vel *= cos(pi/4)
-        
+
+        # Animaciones suaves        
         if  pg.time.get_ticks() - self.last_change > ANIM_DELAY:
             if speed != self.vel:
                 self.numImagenPostura = (self.numImagenPostura + 1)%8
@@ -80,8 +75,7 @@ class Player(Character, Observable):
                 self.numImagenPostura = 0
             self.last_change = pg.time.get_ticks()
 
-        
-        # Switch guns
+        # Comprobamos is hay que cambiar de pistola (y si podemos)
         pistol = self.controler.switchPistol()
         if self.guns != []:
             if (pistol > 0) and (pistol <= len(self.guns)):
@@ -94,27 +88,43 @@ class Player(Character, Observable):
             self.reloading = True
             return
 
-        # Reload
+        # Recargar
         if (self.controler.reload()) and (self.guns[self.gunSelector].bullets > 0):
             self.guns[self.gunSelector].do_reload()
             self.reloading = True
             self.notify("ammo",-1)
 
-        # Shooting
+        # Disparar
         if self.controler.isShooting():
             self.guns[self.gunSelector].shoot(self.pos, self.rot)
             self.notify("ammo",self.guns[self.gunSelector].current_mag)
             self.notify("bullets",self.guns[self.gunSelector].bullets)
 
 
+    def update_health(self, health):
+        if health <= 0:
+            self.health = 0
+            self.numPostura = 4
+            self.numImagenPostura = 0
+        else:
+            self.health = health
+        self.notify("health", self.health)
+
+
+    # Actualizamos la munición del jugador
+    def update_ammo(self):
+        for gun in self.guns:
+                gun.bullets = gun.MAG_SIZE 
+        self.notify("bullets", self.guns[self.gunSelector].bullets)
+
 
     def update(self, camera_pos, dt):
         self.__callControler()
-        # Checks where it has to move
+        # Miramos a donde nos tenemos que mover y a donde mirar
         direction = pg.mouse.get_pos() - Vector2(camera_pos) - self.pos
         self.rot = direction.angle_to(Vector2(1, 0))
-        # Moves in time, not in pixels, independent of our frame rate
         self.pos += self.vel * (dt/1000)
+        
         if self.guns != []:
             self.guns[self.gunSelector].update()
 
@@ -122,6 +132,7 @@ class Player(Character, Observable):
             super().update()
             return
 
+        # Según si estamos recargando, o con un arma, seleccionamos una fila de la hoja u otra
         if self.reloading:
             self.numPostura = 3
             if self.guns != [] and self.guns[self.gunSelector].reload == False:

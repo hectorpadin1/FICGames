@@ -1,23 +1,26 @@
-import pygame as pg
-import sys
 from settings import *
 from escenas.gui.buttons import ClasicButton
 from managers.resourcemanager import ResourceManager as GR
 from managers.soundcontroller import SoundController as SC
 from escenas.menu import Menu
-import escenas.partida
+
+
 
 class Win(Menu):
 
+
     def __init__(self, director):
-        button = ClasicButton("Menu Principal", self.go_back, dy = 80)
+        button = ClasicButton("Menu Principal", self.__back, dy = 80)
 
         Menu.__init__(self, director, [button], False, logo=GR.VICTORY, logoy=60)
+
+
+    def __back(self):
+        SC.play_selection()
+        self.director.exitEscena()
+        
 
     def play_music(self):
         SC.play_victory()
 
-    def go_back(self):
-        SC.play_selection()
-        self.director.exitEscena()
     
