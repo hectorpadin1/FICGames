@@ -180,10 +180,12 @@ class Partida(Escena):
         else:
             win = Win(self.director)
             self.director.changeEscena(win)
-            if UC.get("last_level")==self.lvl:
+            try:
+                if UC.get("last_level")==self.lvl:
+                    UC.update("last_level",self.lvl+1)
+            except:
                 UC.update("last_level",self.lvl+1)
-
-
+            
     def play_music(self):
         SC.play_main()
 
