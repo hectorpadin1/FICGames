@@ -7,9 +7,7 @@ from escenas.menu import Menu
 import escenas.partida
 
 
-
 class Pause(Menu):
-
 
     def __init__(self, director, lvl):
         self.lvl = lvl
@@ -20,6 +18,27 @@ class Pause(Menu):
 
         Menu.__init__(self, director, [continue_btn, retry_btn, exit_btn], False, logo=GR.PAUSE_IMG)
 
+
+    def events(self, events):
+        self.click = False
+        for event in events:
+            if event.type == pg.QUIT:
+                SC.play_selection()
+            #Pulsaciones Teclas
+            elif event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE or event.key == pg.K_p:
+                    self.__go_continue()
+            elif event.type == pg.MOUSEBUTTONDOWN:
+                self.click = True
+    
+
+    def play_music(self):
+        SC.play_gameover()
+
+
+    ###############
+    #  Callbacks  #
+    ###############
 
     def __go_continue(self):
         self.director.exitEscena()
@@ -37,20 +56,3 @@ class Pause(Menu):
         SC.play_selection()
         self.director.exitEscena()
         self.director.exitEscena()
-    
-
-    def events(self, events):
-        self.click = False
-        for event in events:
-            if event.type == pg.QUIT:
-                SC.play_selection()
-            #Pulsaciones Teclas
-            elif event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE or event.key == pg.K_p:
-                    self.__go_continue()
-            elif event.type == pg.MOUSEBUTTONDOWN:
-                self.click = True
-    
-
-    def play_music(self):
-        SC.play_gameover()

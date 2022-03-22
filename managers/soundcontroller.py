@@ -7,8 +7,8 @@ from managers.user_config import UserConfig as UC
 
 class SoundController:
 
-    music_volume = 100
-    sound_volume = 100
+    music_volume = 75
+    sound_volume = 75
 
 
     @classmethod

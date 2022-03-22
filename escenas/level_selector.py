@@ -11,11 +11,10 @@ from managers.user_config import UserConfig as UC
 
 class LevelSelector(Menu):
 
-
     def __init__(self,director):
+        self.__last_check = pg.time.get_ticks()
         # Leemos el último nivel
         last_level = 0
-        self.last_check = pg.time.get_ticks()
         try:
             last_level = UC.get("last_level")
         except:
@@ -30,6 +29,22 @@ class LevelSelector(Menu):
 
         Menu.__init__(self, director, lvl_btns, True, logo=GR.LOGO_IMG)
 
+    
+    def update(self, _dt):
+        Menu.update(self,_dt)
+        now =  pg.time.get_ticks()
+        if now - self.__last_check > 1000: #Cada 1s actualizamos niveles
+            self.__init__(self.director)
+
+
+    def play_music(self):
+            SC.play_menu()
+        
+
+    ###############
+    #  Callbacks  #
+    ###############
+
 
     def __go_play(self,lvl):
         SC.play_selection()
@@ -42,12 +57,3 @@ class LevelSelector(Menu):
         self.director.exitEscena(updateMusic = False)
 
 
-    def play_music(self):
-        SC.play_menu()
-    
-    
-    def update(self, _dt):
-        Menu.update(self,_dt)
-        now =  pg.time.get_ticks()
-        if now - self.last_check > 1000: #Cada 1s actualizamos niveles
-            self.__init__(self.director)

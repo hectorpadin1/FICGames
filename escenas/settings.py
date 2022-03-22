@@ -30,7 +30,7 @@ class Settings(Menu):
         self.__add_text("Music", -margin*2.2)
         self.__add_text("Sound Effects", margin*2.7)
 
-
+    #Agrega texto renderizado y su rect de posición a draw_list
     def __add_text(self,text,dy,display=None):
         text = self.font.render(text, True, (255,255,255))
         text_rect = text.get_rect()
@@ -39,6 +39,19 @@ class Settings(Menu):
             self.draw_list.append((text,text_rect))
         else:
             display.blit(text,text_rect)   
+
+    def draw(self, display):
+        Menu.draw(self,display)
+        for (a,b) in self.draw_list:
+            display.blit(a,b)   
+        #Draw Values   
+        self.__add_text(str(SC.get_music_volume()), self.musicy_margin, display=display)
+        self.__add_text(str(SC.get_sound_volume()), self.soundy_margin, display=display)
+
+
+    ###############
+    #  Callbacks  #
+    ###############
 
 
     def __fullscreen(self):
@@ -69,12 +82,3 @@ class Settings(Menu):
     def __go_back(self):
         SC.play_selection()
         self.director.exitEscena(updateMusic = False)
-
-
-    def draw(self, display):
-        Menu.draw(self,display)
-        for (a,b) in self.draw_list:
-            display.blit(a,b)   
-        #Draw Values   
-        self.__add_text(str(SC.get_music_volume()), self.musicy_margin, display=display)
-        self.__add_text(str(SC.get_sound_volume()), self.soundy_margin, display=display)

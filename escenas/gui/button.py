@@ -4,7 +4,8 @@ from settings import *
 from managers.resourcemanager import ResourceManager as GR
 
 class Button(pg.sprite.Sprite):
-    #Inicializamos el botón mostrándolo en pantalla
+
+    #Inicializamos componentes que formarán Button
     def __init__(self, bg, text, callback, dx=0, dy=0):
         pg.sprite.Sprite.__init__(self)
 

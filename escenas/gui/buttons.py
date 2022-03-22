@@ -4,10 +4,17 @@ from settings import *
 from managers.resourcemanager import ResourceManager as GR
 from escenas.gui.button import Button
 
+#######################################
+#    Direferentes tipos de botones    #
+#######################################
+
+#Botón Clásico
 class ClasicButton(Button):
     def __init__(self, text, callback, dx=0, dy=0):
         Button.__init__(self,GR.BTN_BG, text, callback, dx=dx, dy=dy)
 
+
+#Botón de nivel (puede estar bloqueado y es cuadrado)
 class LevelButton(Button):
     def __init__(self, lvl, callback, locked=False, dx=0, dy=0):
         level=str(lvl)
@@ -24,6 +31,7 @@ class LevelButton(Button):
             self.callback(self.lvl)
         
 
+#Botón Toggle (ON/OFF)
 class ToogleButton(Button):
     def __init__(self, state, callback1, dx=0, dy=0):
         Button.__init__(self,GR.BTN_BG, "ON", callback1, dx=dx, dy=dy)

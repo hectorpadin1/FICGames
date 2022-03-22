@@ -3,10 +3,7 @@ from settings import *
 from managers.resourcemanager import ResourceManager as GR
 from escenas.escena import Escena
 
-
-
 class Menu(Escena):
-
 
     def __init__(self,director, btns, back, logo=None, logoy=0):
         Escena.__init__(self, director)
@@ -41,9 +38,18 @@ class Menu(Escena):
         rect.center = (WIDTH/2+dx, HEIGHT/2+dy)
         display.blit(logo, rect) 
 
+    # Dibuja el menú
+    def draw(self,display):
+        if self.back:
+            self.__draw_back(display, dx = 30, dy=50)
 
-    def play_music(self):
-        pass
+        _,box_y = self.__draw_box(display)
+
+        if self.logo is not None:
+            self.__draw_logo(display,dy=-((box_y/4))+self.logoy)
+
+        for btn in self.btn_group:
+            btn.draw(display)
 
 
     def events(self, events):
@@ -60,14 +66,6 @@ class Menu(Escena):
         self.btn_group.update(mouse_pos,self.click)
 
 
-    def draw(self,display):
-        if self.back:
-            self.__draw_back(display, dx = 30, dy=50)
+    def play_music(self):
+        pass
 
-        _,box_y = self.__draw_box(display)
-
-        if self.logo is not None:
-            self.__draw_logo(display,dy=-((box_y/4))+self.logoy)
-
-        for btn in self.btn_group:
-            btn.draw(display)

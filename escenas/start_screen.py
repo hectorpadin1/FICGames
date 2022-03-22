@@ -22,6 +22,14 @@ class StartScreen(Menu):
 
         Menu.__init__(self, director, [play_btn, stngs_btn, exit_btn], True, logo=GR.LOGO_IMG)
 
+    
+    def play_music(self):
+        SC.play_menu()
+
+        
+    ###############
+    #  Callbacks  #
+    ###############
 
     def __go_play(self):
         SC.play_selection()
@@ -39,6 +47,4 @@ class StartScreen(Menu):
         pg.quit()
         sys.exit()
 
-    
-    def play_music(self):
-        SC.play_menu()
+

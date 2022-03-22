@@ -32,7 +32,7 @@ class Director():
     def is_fullscreen(self):
         return self.fs
 
-    def loop(self, escena):
+    def __loop(self, escena):
         self.salir_escena = False
         pg.event.clear() 
         
@@ -52,7 +52,7 @@ class Director():
             if self.music:
                 escena.play_music()
                 escena.music = False
-            self.loop(escena)
+            self.__loop(escena)
 
 
     def exitEscena(self, updateMusic = True):
