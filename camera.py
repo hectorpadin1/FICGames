@@ -1,6 +1,9 @@
 import pygame as pg
 from settings import *
 
+"""
+Clase que nos permite gestionar una vista aerea recortada.
+"""
 class Camera:
 
     def __init__(self, width, height):
@@ -10,7 +13,7 @@ class Camera:
 
     # Obtener coordeneadas relativas a la posición de la cámara
     def apply(self, entity):
-        return entity.rect.move(self.camera.topleft)
+        return self.apply_rect(entity.rect)
 
     def apply_rect(self, rect):
         return rect.move(self.camera.topleft)

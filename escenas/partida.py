@@ -22,39 +22,27 @@ from escenas.gui.hud import Hud
 from escenas.gui.dialog import Dialog
 
 
-
+"""
+Partida (el juego en si)
+"""
 class Partida(Escena):
     
-
     def __init__(self,director, lvl, dialog=True):
         super().__init__(director)
         self.lvl = lvl
 
-        # Setting level differences 
-        # 
-        # lo hacemos asi xq solo hay 2 niveles con casos particulares (primero y último)
-        # 
+        # Diálogos
+        #    Diferenciación de niveles. 
+        #    Hardcodeado puesto que solo hay dos casos particulares (primero y último)
         self.dialog_level = False
         self.dialog_last = False
         if lvl == 0:
             self.dialog_level = True
         if lvl == 4:
             self.dialog_last = True
-
-            print("PENDIENTE DE HACER")
-
-
-        
         self.dialog = Dialog(self.lvl, enable=(dialog and not self.dialog_last))
 
-
-
-
-
-        self.map = TiledMap(self.lvl)
-        # renderizado del mapa 
-        self.map_img = self.map.make_map()
-        self.map_rect = self.map_img.get_rect()
+        # Hud
         self.hud = Hud()
 
         # Creación de grupos
@@ -71,7 +59,11 @@ class Partida(Escena):
         self.area = pg.sprite.Group()
         self.mob_count = 0
 
-        # Cargamos el tiledmap e instanciamos objetos
+        # renderizado del mapa 
+        self.map = TiledMap(self.lvl)
+        self.map_img = self.map.make_map()
+        self.map_rect = self.map_img.get_rect()
+        # instanciamos objetos
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == 'player':
                 self.player = Player(tile_object.x, tile_object.y, self.bullets_player, [self.walls, self.obstacle],[self.hud, self.ammo, self.health], self.lvl)
@@ -231,12 +223,11 @@ class Partida(Escena):
         if self.dialog_level and self.dialog.is_done():
             self.__win()
 
-        #REVISAR
+        # Diálogo
         self.dialog.update(dt)
 
 
     def draw(self, display):
-        
         # Dibujamos el mapa que se ve en la cámara
         display.blit(self.map_img, self.camera.apply_rect(self.map_rect))
 

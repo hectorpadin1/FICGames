@@ -2,14 +2,19 @@ import pygame as pg
 from settings import *
 from managers.user_config import UserConfig as UC
 
-
+"""
+Director de escena.
+Encargado del flujo de escenas.
+"""
 class Director():
 
     def __init__(self):
         # Inicializamos la pantalla
         self.display = pg.display.set_mode((WIDTH, HEIGHT))
-        self.fs = False
+        pg.display.set_caption(TITLE)
+
         #Read FS config
+        self.fs = False
         try:
             self.fs = UC.get("fullscreen")
         except:
@@ -17,7 +22,6 @@ class Director():
         if self.fs:
             pg.display.toggle_fullscreen()
 
-        pg.display.set_caption(TITLE)
         # Inicializamos Atributos
         self.pila = []
         self.salir_escena = False
@@ -81,4 +85,4 @@ class Director():
         self.music = updateMusic
         self.salir_escena = True
         self.pila.append(escena)
-
+        

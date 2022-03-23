@@ -4,7 +4,9 @@ import pytmx
 from pygame.locals import RLEACCEL
 
 
-
+"""
+Singleton destinado a gestionar diversos recursos. También se usará como índice de rutas.
+"""
 class ResourceManager:
 
     image_resources = {}

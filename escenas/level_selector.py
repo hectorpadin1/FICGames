@@ -8,7 +8,9 @@ from escenas.partida import Partida
 from managers.user_config import UserConfig as UC
 
 
-
+"""
+Menú de selección de niveles
+"""
 class LevelSelector(Menu):
 
     def __init__(self,director):

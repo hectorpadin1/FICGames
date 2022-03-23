@@ -5,9 +5,10 @@ from pygame.math import Vector2
 from managers.resourcemanager import ResourceManager as GR
 
 
-
+"""
+Sangre. Se creará cuando una bala colisione en un personaje, durará HIT_LIFETIME
+"""
 class Hit(pg.sprite.Sprite):
-
 
     def __init__(self, hit_group, pos, sx, sy, rot) -> None:
         pg.sprite.Sprite.__init__(self, hit_group)

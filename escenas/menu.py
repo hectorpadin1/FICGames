@@ -3,6 +3,9 @@ from settings import *
 from managers.resourcemanager import ResourceManager as GR
 from escenas.escena import Escena
 
+"""
+Escena que implementa comportamientos de menú
+"""
 class Menu(Escena):
 
     def __init__(self,director, btns, back, logo=None, logoy=0):

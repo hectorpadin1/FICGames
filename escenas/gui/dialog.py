@@ -73,6 +73,7 @@ class Dialog():
 
     def set_enable(self):
         self.enable = True
+        
     ##########################
     #  Renderizacion TEXTO   #
     ##########################

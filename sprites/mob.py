@@ -7,9 +7,12 @@ from sprites.gun import Pistol, Rifle
 from managers.resourcemanager import ResourceManager as GR
 
 
+############
+#   Mobs   #
+############
+
 
 class Mob(Character):
-
 
     def __init__(self, mob_group, x, y, image, gun, collide_groups, row, area, numImagenes, positions):
         super().__init__(mob_group, image, MOB_HIT_RECT.copy(), x, y, MOB_HEALTH, collide_groups, positions, row, numImagenes)
@@ -53,9 +56,8 @@ class Mob(Character):
         super().update()
 
 
-
+# Mob con pistola
 class MobBasico(Mob):
-
 
     def __init__(self, mob_group, x, y, bullets, collide_groups, area):
         gun = Pistol(bullets)
@@ -86,9 +88,8 @@ class MobBasico(Mob):
         super().update()
 
 
-
+# Mob con rifle
 class MobRiffle(Mob):
-    
 
     def __init__(self, mob_group, x, y, bullets, collide_groups, area):
         gun = Rifle(bullets)

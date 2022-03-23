@@ -6,7 +6,9 @@ from escenas.menu import Menu
 import escenas.partida
 
 
-
+"""
+Menú de Derrota
+"""
 class GameOver(Menu):
 
     def __init__(self, director, lvl):

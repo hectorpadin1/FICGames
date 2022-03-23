@@ -3,9 +3,11 @@ from pygame.math import Vector2
 from managers.resourcemanager import ResourceManager as GR
 
 
-
+"""
+Clase destinada a la herencia. 
+Implementa comportamientos comunes a los personajes como puede movimiento con animaciones, colisones con muros y vida
+"""
 class Character(pg.sprite.Sprite):
-
 
     def __init__(self, groups, img, hit_rect, x, y, health, collide_groups, pos, rows, numImagenes):
 

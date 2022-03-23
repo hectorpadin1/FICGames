@@ -5,9 +5,10 @@ from escenas.gui.buttons import ToogleButton, LevelButton, ClasicButton
 from escenas.menu import Menu
 
 
-
+"""
+Menú de Ajustes
+"""
 class Settings(Menu):
-
 
     def __init__(self,director):       
         

@@ -4,7 +4,9 @@ from settings import *
 import json
 
 
-
+"""
+Singleton destinado a gestionar la configuración de caga usuario por medio de un JSON.
+"""
 class UserConfig:
 
     config = {}
@@ -16,7 +18,7 @@ class UserConfig:
                 self.config = json.load(json_file)
         except:
             pass
-
+        
     
     @classmethod
     def update(self,key,value):

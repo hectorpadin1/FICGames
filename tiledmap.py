@@ -5,9 +5,11 @@ import sys
 from managers.resourcemanager import ResourceManager as GR
 
 
-
+"""
+Clase encargada de manejar los mapas. 
+Contien el tiledmap (tm) y nos proporciona un método para volcar los tiles a una superficie (make_map)
+"""
 class TiledMap:
-
     
     def __init__(self, lvl):
         try:
@@ -21,7 +23,7 @@ class TiledMap:
         self.tmxdata = tm
 
 
-    # Vuelca los 'tiles' en una superfice, dentro del TiledMap
+    # Vuelca los 'tiles' en una superfice
     def __render(self, surface):
         ti = self.tmxdata.get_tile_image_by_gid
         for layer in self.tmxdata.visible_layers:

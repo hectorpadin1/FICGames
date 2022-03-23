@@ -1,14 +1,17 @@
 from pygame import Rect
 
+#################################################
+#  Parámetros para el funcionamiento del juego  #
+#################################################
 
 # General game setings
 TITLE = "The Code"
-WIDTH = 1024  # 16 * 64 or 32 * 32 or 64 * 16
-HEIGHT = 768 # 16 * 48 or 32 * 24 or 64 * 12
+WIDTH = 1024  # 64 * 16
+HEIGHT = 768  # 64 * 12
 FPS = 120
 SPRITE_BOX = 64
 DIALOG_SPEED = 30
-ANIM_DELAY = 50
+ANIM_DELAY = 50  #delay entre animacioness
 DELAY_GAMEOVER = 400
 USER_CONFIG_FILE = "config.json"
 

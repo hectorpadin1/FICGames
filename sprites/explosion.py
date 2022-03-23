@@ -4,7 +4,9 @@ from pygame.math import Vector2
 from managers.resourcemanager import ResourceManager as GR
 
 
-
+"""
+Explosión. Se creará cuando una bala colisione contra un objeto, durará HIT_LIFETIME
+"""
 class Explosion(pg.sprite.Sprite):
 
 

@@ -3,9 +3,10 @@ from settings import *
 from managers.resourcemanager import ResourceManager as GR
 
 
-
+"""
+Cajas de Munición
+"""
 class Ammo(pg.sprite.Sprite):
-
 
     def __init__(self, item_group, x, y):
         pg.sprite.Sprite.__init__(self, item_group)

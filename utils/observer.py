@@ -1,3 +1,7 @@
+"""
+Observador (destinado a herencia)
+Patrón Observador
+"""
 class Observer:
 
     def update(self, type, change):

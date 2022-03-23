@@ -4,7 +4,9 @@ from managers.resourcemanager import ResourceManager as GR
 from managers.user_config import UserConfig as UC
 
 
-
+"""
+Singleton destinado a gestionar el audio. Tatno musica como sonidos.
+"""
 class SoundController:
 
     music_volume = 75

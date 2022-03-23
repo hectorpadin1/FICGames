@@ -5,9 +5,10 @@ from sprites.explosion import *
 from managers.resourcemanager import ResourceManager as GR
 
 
-
+"""
+Proyectiles
+"""
 class Bullet(pg.sprite.Sprite):
-    
 
     def __init__(self, bullet_group, pos, rot, img, speed, lifetime):
         pg.sprite.Sprite.__init__(self, bullet_group)

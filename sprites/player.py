@@ -10,9 +10,7 @@ from managers.resourcemanager import ResourceManager as GR
 from utils.observable import Observable
 
 
-
 class Player(Character, Observable):
-
 
     def __init__(self, x, y, bullets, collide_groups, observers, level):
         Character.__init__(self, None, GR.PLAYER, PLAYER_HIT_RECT, x, y, PLAYER_HEALTH, collide_groups, GR.HERO_POSITIONS, 5, [8, 8, 8, 8, 3])

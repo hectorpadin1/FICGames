@@ -1,3 +1,7 @@
+"""
+Observable (destinada a herencia).
+Patrón Observador
+"""
 class Observable:
 
     def __init__(self, observers):

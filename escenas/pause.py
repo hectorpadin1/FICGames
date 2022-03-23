@@ -7,6 +7,9 @@ from escenas.menu import Menu
 import escenas.partida
 
 
+"""
+Menú de Pausa
+"""
 class Pause(Menu):
 
     def __init__(self, director, lvl):

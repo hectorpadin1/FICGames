@@ -9,7 +9,9 @@ from escenas.level_selector import LevelSelector
 from escenas.settings import Settings
 
 
-
+"""
+Pantalla inicial
+"""
 class StartScreen(Menu):
 
 
